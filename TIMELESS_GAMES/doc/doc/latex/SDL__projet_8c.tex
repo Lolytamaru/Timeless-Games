@@ -1,0 +1,145 @@
+\hypertarget{SDL__projet_8c}{}\doxysection{Référence du fichier /info/etu/l2info/s200470/\+Timeless-\/\+Games/\+TIMELESS\+\_\+\+GAMES/src/\+SDL\+\_\+projet.c}
+\label{SDL__projet_8c}\index{/info/etu/l2info/s200470/Timeless-\/Games/TIMELESS\_GAMES/src/SDL\_projet.c@{/info/etu/l2info/s200470/Timeless-\/Games/TIMELESS\_GAMES/src/SDL\_projet.c}}
+
+
+Fichier comprenant toutes les fonctions de manipulation de SDL.  
+
+
+{\ttfamily \#include $<$all\+\_\+includes.\+h$>$}\newline
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{SDL__projet_8c_abed124ab111ee095d48f08e2a3ea4446}{SDL\+\_\+\+Exit\+With\+Error}} (const char $\ast$message)
+\begin{DoxyCompactList}\small\item\em Protocole en cas de détection d\textquotesingle{}une erreur liée à la SDL. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{SDL__projet_8c_adda3d6181058eb068550b18a4704d5a9}{afficher\+\_\+image}} (SDL\+\_\+\+Window $\ast$win, SDL\+\_\+\+Renderer $\ast$ren, char $\ast$nom\+\_\+img, int coordx, int coordy)
+\begin{DoxyCompactList}\small\item\em Fonction qui permet l\textquotesingle{}affichage d\textquotesingle{}une image à une position donnée. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{SDL__projet_8c_a1965ae769f14c0267679b435daecb808}{afficher\+\_\+texte}} (SDL\+\_\+\+Renderer $\ast$ren, char $\ast$pol, int taille\+\_\+pol, int pos\+\_\+x, int pos\+\_\+y, char $\ast$texte)
+\begin{DoxyCompactList}\small\item\em Fonction qui permet l\textquotesingle{}affichage d\textquotesingle{}un texte à une position donnée d\textquotesingle{}une certaine taille. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{SDL__projet_8c_a9ff876cda7898e399d3968da4fed72b3}{afficher\+\_\+nombre}} (SDL\+\_\+\+Renderer $\ast$ren, char $\ast$pol, int taille\+\_\+pol, int pos\+\_\+x, int pos\+\_\+y, int nombre)
+\begin{DoxyCompactList}\small\item\em Fonction qui permet l\textquotesingle{}affichage d\textquotesingle{}une nombre à une position donnée d\textquotesingle{}une certaine taille. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{SDL__projet_8c_aeb3736618c786bd9759f3d02004bd549}{nettoyer\+SDL}} (SDL\+\_\+\+Window $\ast$win, SDL\+\_\+\+Renderer $\ast$ren, SDL\+\_\+\+Texture $\ast$tex)
+\begin{DoxyCompactList}\small\item\em Fonction qui libère tout ce qui a été créé \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+Fichier comprenant toutes les fonctions de manipulation de SDL. 
+
+\begin{DoxyAuthor}{Auteur}
+Duclos Christal Brochelard Hugo Thibaut Duchesne 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+28 mars 2022 
+\end{DoxyDate}
+
+
+\doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{SDL__projet_8c_adda3d6181058eb068550b18a4704d5a9}\label{SDL__projet_8c_adda3d6181058eb068550b18a4704d5a9}} 
+\index{SDL\_projet.c@{SDL\_projet.c}!afficher\_image@{afficher\_image}}
+\index{afficher\_image@{afficher\_image}!SDL\_projet.c@{SDL\_projet.c}}
+\doxysubsubsection{\texorpdfstring{afficher\_image()}{afficher\_image()}}
+{\footnotesize\ttfamily void afficher\+\_\+image (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{win,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{ren,  }\item[{char $\ast$}]{nom\+\_\+img,  }\item[{int}]{coordx,  }\item[{int}]{coordy }\end{DoxyParamCaption})}
+
+
+
+Fonction qui permet l\textquotesingle{}affichage d\textquotesingle{}une image à une position donnée. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em win} & La fenêtre qui sera manipulée \\
+\hline
+{\em ren} & Le rendu qui sera manipulé \\
+\hline
+{\em nom\+\_\+img} & Le nom de l\textquotesingle{}image à afficher \\
+\hline
+{\em coordx} & La position en abscisse de l\textquotesingle{}image \\
+\hline
+{\em coordy} & La position en ordonnée de l\textquotesingle{}image \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{SDL__projet_8c_a9ff876cda7898e399d3968da4fed72b3}\label{SDL__projet_8c_a9ff876cda7898e399d3968da4fed72b3}} 
+\index{SDL\_projet.c@{SDL\_projet.c}!afficher\_nombre@{afficher\_nombre}}
+\index{afficher\_nombre@{afficher\_nombre}!SDL\_projet.c@{SDL\_projet.c}}
+\doxysubsubsection{\texorpdfstring{afficher\_nombre()}{afficher\_nombre()}}
+{\footnotesize\ttfamily void afficher\+\_\+nombre (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Renderer $\ast$}]{ren,  }\item[{char $\ast$}]{pol,  }\item[{int}]{taille\+\_\+pol,  }\item[{int}]{pos\+\_\+x,  }\item[{int}]{pos\+\_\+y,  }\item[{int}]{nombre }\end{DoxyParamCaption})}
+
+
+
+Fonction qui permet l\textquotesingle{}affichage d\textquotesingle{}une nombre à une position donnée d\textquotesingle{}une certaine taille. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em ren} & Le rendu qui sera manipulé \\
+\hline
+{\em pol} & La police utilisée \\
+\hline
+{\em taille\+\_\+pol} & La taille de la police \\
+\hline
+{\em pos\+\_\+x} & La position en abscisse du texte \\
+\hline
+{\em pos\+\_\+y} & La position en ordonnée du texte \\
+\hline
+{\em nombre} & le nombre a afficher \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{SDL__projet_8c_a1965ae769f14c0267679b435daecb808}\label{SDL__projet_8c_a1965ae769f14c0267679b435daecb808}} 
+\index{SDL\_projet.c@{SDL\_projet.c}!afficher\_texte@{afficher\_texte}}
+\index{afficher\_texte@{afficher\_texte}!SDL\_projet.c@{SDL\_projet.c}}
+\doxysubsubsection{\texorpdfstring{afficher\_texte()}{afficher\_texte()}}
+{\footnotesize\ttfamily void afficher\+\_\+texte (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Renderer $\ast$}]{ren,  }\item[{char $\ast$}]{pol,  }\item[{int}]{taille\+\_\+pol,  }\item[{int}]{pos\+\_\+x,  }\item[{int}]{pos\+\_\+y,  }\item[{char $\ast$}]{texte }\end{DoxyParamCaption})}
+
+
+
+Fonction qui permet l\textquotesingle{}affichage d\textquotesingle{}un texte à une position donnée d\textquotesingle{}une certaine taille. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em ren} & Le rendu qui sera manipulé \\
+\hline
+{\em pol} & La police utilisée \\
+\hline
+{\em taille\+\_\+pol} & La taille de la police \\
+\hline
+{\em pos\+\_\+x} & La position en abscisse du texte \\
+\hline
+{\em pos\+\_\+y} & La position en ordonnée du texte \\
+\hline
+{\em texte} & Le texte a afficher \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{SDL__projet_8c_aeb3736618c786bd9759f3d02004bd549}\label{SDL__projet_8c_aeb3736618c786bd9759f3d02004bd549}} 
+\index{SDL\_projet.c@{SDL\_projet.c}!nettoyerSDL@{nettoyerSDL}}
+\index{nettoyerSDL@{nettoyerSDL}!SDL\_projet.c@{SDL\_projet.c}}
+\doxysubsubsection{\texorpdfstring{nettoyerSDL()}{nettoyerSDL()}}
+{\footnotesize\ttfamily void nettoyer\+SDL (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{win,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{ren,  }\item[{SDL\+\_\+\+Texture $\ast$}]{tex }\end{DoxyParamCaption})}
+
+
+
+Fonction qui libère tout ce qui a été créé 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em win} & Un pointeur sur une fenêtre \\
+\hline
+{\em ren} & Un pointeur sur un rendu \\
+\hline
+{\em tex} & Un pointeur sur une texture \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{SDL__projet_8c_abed124ab111ee095d48f08e2a3ea4446}\label{SDL__projet_8c_abed124ab111ee095d48f08e2a3ea4446}} 
+\index{SDL\_projet.c@{SDL\_projet.c}!SDL\_ExitWithError@{SDL\_ExitWithError}}
+\index{SDL\_ExitWithError@{SDL\_ExitWithError}!SDL\_projet.c@{SDL\_projet.c}}
+\doxysubsubsection{\texorpdfstring{SDL\_ExitWithError()}{SDL\_ExitWithError()}}
+{\footnotesize\ttfamily void SDL\+\_\+\+Exit\+With\+Error (\begin{DoxyParamCaption}\item[{const char $\ast$}]{message }\end{DoxyParamCaption})}
+
+
+
+Protocole en cas de détection d\textquotesingle{}une erreur liée à la SDL. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em message} & Message d\textquotesingle{}erreur qu\textquotesingle{}on souhaite signaler \\
+\hline
+\end{DoxyParams}

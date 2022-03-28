@@ -1,0 +1,322 @@
+\hypertarget{batnav_8c}{}\doxysection{Référence du fichier /info/etu/l2info/s200470/\+Timeless-\/\+Games/\+TIMELESS\+\_\+\+GAMES/src/batnav.c}
+\label{batnav_8c}\index{/info/etu/l2info/s200470/Timeless-\/Games/TIMELESS\_GAMES/src/batnav.c@{/info/etu/l2info/s200470/Timeless-\/Games/TIMELESS\_GAMES/src/batnav.c}}
+
+
+Fichier pour le jeu de la bataille navale.  
+
+
+{\ttfamily \#include $<$all\+\_\+includes.\+h$>$}\newline
+{\ttfamily \#include $<$joueur.\+h$>$}\newline
+{\ttfamily \#include $<$batnav.\+h$>$}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{batnav_8c_a3ee479371002a0a258e5c4111cc6e54f}\label{batnav_8c_a3ee479371002a0a258e5c4111cc6e54f}} 
+\#define {\bfseries VIDE}~0
+\item 
+\mbox{\Hypertarget{batnav_8c_ac30209e82d18c3a311ccbc3e0eaf683d}\label{batnav_8c_ac30209e82d18c3a311ccbc3e0eaf683d}} 
+\#define {\bfseries NB\+\_\+\+BAT}~5
+\end{DoxyCompactItemize}
+\doxysubsection*{Énumérations}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{batnav_8c_a15bc5053b0d118940806a2f1dc1409ad}\label{batnav_8c_a15bc5053b0d118940806a2f1dc1409ad}} 
+enum {\bfseries batnav\+\_\+e} \{ \newline
+{\bfseries JOUEUR1} = 1
+, {\bfseries JOUEUR2}
+, {\bfseries ATTAQUE\+\_\+\+J1}
+, {\bfseries ATTAQUE\+\_\+\+J2}
+, \newline
+{\bfseries FIN\+\_\+\+PARTIE}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structplateau__t}{plateau\+\_\+t}} \mbox{\hyperlink{batnav_8c_abe0ad9beb7a74d9fd90798ff23be67e7}{creer\+\_\+plateau}} (int l, int c)
+\begin{DoxyCompactList}\small\item\em Fonction qui initialise les plateaux de jeu de la bataille navale. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{batnav_8c_a23ff0a4958810e90301f1fee0637e04f}{init\+\_\+bateaux}} (\mbox{\hyperlink{structplateau__t}{plateau\+\_\+t}} $\ast$plateau\+\_\+j)
+\begin{DoxyCompactList}\small\item\em Fonction qui initialise le stock de bateau du plateau d\textquotesingle{}un joueur. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{batnav_8c_ae416666500e3b936c8635a78759e20ec}{init\+\_\+etat\+\_\+plateau}} (\mbox{\hyperlink{structplateau__t}{plateau\+\_\+t}} $\ast$plateau\+\_\+j)
+\begin{DoxyCompactList}\small\item\em Fonction qui rempli le plateau de jeu d\textquotesingle{}un joueur. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{batnav_8c_a4d53920c0079ab0249bf8f72309d63a1}\label{batnav_8c_a4d53920c0079ab0249bf8f72309d63a1}} 
+void {\bfseries init\+\_\+partie\+\_\+batnav} (void)
+\begin{DoxyCompactList}\small\item\em Fonction qui initialise une partie de la bataille navale. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{batnav_8c_aeb0dabf827c3858455e0a90a287dea55}{est\+\_\+valide}} (\mbox{\hyperlink{structplateau__t}{plateau\+\_\+t}} plateau\+\_\+j, int x, int y)
+\begin{DoxyCompactList}\small\item\em Fonction qui vérifie si les coordonnées sont dans la matrice. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{batnav_8c_a5275251d8fde0b35aa8720e727a2ae19}{direction\+\_\+valide}} (\mbox{\hyperlink{structplateau__t}{plateau\+\_\+t}} plateau\+\_\+j, int x, int y, int direction, int taille\+\_\+bat)
+\begin{DoxyCompactList}\small\item\em Fonction qui regarde si les cases qui vont être occupées dans une direction sont toutes libres et valides. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{batnav_8c_acdd755afb32f2badac52da8e55d99a6b}{vider\+\_\+cargaison}} (SDL\+\_\+\+Window $\ast$win, SDL\+\_\+\+Renderer $\ast$ren, int taille\+\_\+bat, char $\ast$immatriculation)
+\begin{DoxyCompactList}\small\item\em Fonction qui s\textquotesingle{}occupe du placement des bateaux en les cachants si ils sont valides. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{batnav_8c_a7adc718f0977d2369c6073f6b01552df}{placement\+\_\+case\+\_\+bat}} (SDL\+\_\+\+Window $\ast$win, SDL\+\_\+\+Renderer $\ast$ren, int x, int y, int direction, int bat\+\_\+selec, int JOUEUR, char $\ast$couleur, \mbox{\hyperlink{structplateau__t}{plateau\+\_\+t}} $\ast$plateau\+\_\+j, \mbox{\hyperlink{structs__joueur}{t\+\_\+joueur}} $\ast$joueur1, \mbox{\hyperlink{structs__joueur}{t\+\_\+joueur}} $\ast$joueur2)
+\begin{DoxyCompactList}\small\item\em Fonction qui s\textquotesingle{}occupe du placement des bateaux si leur placement est valide. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{batnav_8c_a5b1ddcf0086e24619e521341ac05745c}{placement\+\_\+bateaux}} (SDL\+\_\+\+Window $\ast$win, SDL\+\_\+\+Renderer $\ast$ren, SDL\+\_\+\+Event event, t\+\_\+statut $\ast$etat\+\_\+win, int JOUEUR, \mbox{\hyperlink{structplateau__t}{plateau\+\_\+t}} $\ast$plateau\+\_\+j, char $\ast$couleur, \mbox{\hyperlink{structs__joueur}{t\+\_\+joueur}} $\ast$joueur1, \mbox{\hyperlink{structs__joueur}{t\+\_\+joueur}} $\ast$joueur2)
+\begin{DoxyCompactList}\small\item\em Fonction qui gère les évènements SDL liés au placement des bateaux. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{batnav_8c_a28007c62c88a204c668b49e0f51b2e33}{attaque\+\_\+case\+\_\+bat}} (SDL\+\_\+\+Window $\ast$win, SDL\+\_\+\+Renderer $\ast$ren, SDL\+\_\+\+Event event, \mbox{\hyperlink{structplateau__t}{plateau\+\_\+t}} plateau\+\_\+j, int x, int y, int $\ast$scorej1, int $\ast$scorej2)
+\begin{DoxyCompactList}\small\item\em Fonction qui s\textquotesingle{}occupe de la partie affrontement de la bataille navale. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{batnav_8c_aaa9caafcd72aa0fdfc4adadaef2f528f}{gestion\+\_\+event\+\_\+batnav}} (SDL\+\_\+\+Window $\ast$win, SDL\+\_\+\+Renderer $\ast$ren, SDL\+\_\+\+Event event, t\+\_\+statut $\ast$etat\+\_\+win, int $\ast$mode\+\_\+de\+\_\+jeu, int $\ast$etat\+\_\+joueur, \mbox{\hyperlink{structs__joueur}{t\+\_\+joueur}} $\ast$joueur1, \mbox{\hyperlink{structs__joueur}{t\+\_\+joueur}} $\ast$joueur2)
+\begin{DoxyCompactList}\small\item\em Fonction qui s\textquotesingle{}occupe des évènements d\textquotesingle{}une partie de bataille navale (joueur contre joueur) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{batnav_8c_a5890fd5865b55d02c65d367f04d94a83}\label{batnav_8c_a5890fd5865b55d02c65d367f04d94a83}} 
+int {\bfseries bat\+\_\+selec}
+\item 
+\mbox{\Hypertarget{batnav_8c_a210b3e6ffb6e047c4ae6e2c0e737ed52}\label{batnav_8c_a210b3e6ffb6e047c4ae6e2c0e737ed52}} 
+char {\bfseries direction}
+\item 
+\mbox{\Hypertarget{batnav_8c_a1ab328e529d4bfb6402c80ebf750c18e}\label{batnav_8c_a1ab328e529d4bfb6402c80ebf750c18e}} 
+\mbox{\hyperlink{structbatnav__t}{batnav\+\_\+t}} {\bfseries jeu}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+Fichier pour le jeu de la bataille navale. 
+
+\begin{DoxyAuthor}{Auteur}
+Duclos Christal Brochelard Hugo Thibaut Duchesne 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+28 mars 2022 
+\end{DoxyDate}
+
+
+\doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{batnav_8c_a28007c62c88a204c668b49e0f51b2e33}\label{batnav_8c_a28007c62c88a204c668b49e0f51b2e33}} 
+\index{batnav.c@{batnav.c}!attaque\_case\_bat@{attaque\_case\_bat}}
+\index{attaque\_case\_bat@{attaque\_case\_bat}!batnav.c@{batnav.c}}
+\doxysubsubsection{\texorpdfstring{attaque\_case\_bat()}{attaque\_case\_bat()}}
+{\footnotesize\ttfamily void attaque\+\_\+case\+\_\+bat (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{win,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{ren,  }\item[{SDL\+\_\+\+Event}]{event,  }\item[{\mbox{\hyperlink{structplateau__t}{plateau\+\_\+t}}}]{plateau\+\_\+j,  }\item[{int}]{x,  }\item[{int}]{y,  }\item[{int $\ast$}]{scorej1,  }\item[{int $\ast$}]{scorej2 }\end{DoxyParamCaption})}
+
+
+
+Fonction qui s\textquotesingle{}occupe de la partie affrontement de la bataille navale. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em win} & La fenêtre qui sera manipulée \\
+\hline
+{\em ren} & Le rendu qui sera manipulé \\
+\hline
+{\em event} & Un détecteur d\textquotesingle{}évènements \\
+\hline
+{\em plateau\+\_\+j} & Plateau de jeu du joueur  \\
+\hline
+{\em x} & Coordonnée x de la case sélectionnée  \\
+\hline
+{\em y} & Coordonnée y de la case sélectionnée \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{batnav_8c_abe0ad9beb7a74d9fd90798ff23be67e7}\label{batnav_8c_abe0ad9beb7a74d9fd90798ff23be67e7}} 
+\index{batnav.c@{batnav.c}!creer\_plateau@{creer\_plateau}}
+\index{creer\_plateau@{creer\_plateau}!batnav.c@{batnav.c}}
+\doxysubsubsection{\texorpdfstring{creer\_plateau()}{creer\_plateau()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structplateau__t}{plateau\+\_\+t}} creer\+\_\+plateau (\begin{DoxyParamCaption}\item[{int}]{l,  }\item[{int}]{c }\end{DoxyParamCaption})}
+
+
+
+Fonction qui initialise les plateaux de jeu de la bataille navale. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em l} & Nombre de lignes \\
+\hline
+{\em c} & Nombre de colonnes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Renvoie un plateau de jeu 
+\end{DoxyReturn}
+\mbox{\Hypertarget{batnav_8c_a5275251d8fde0b35aa8720e727a2ae19}\label{batnav_8c_a5275251d8fde0b35aa8720e727a2ae19}} 
+\index{batnav.c@{batnav.c}!direction\_valide@{direction\_valide}}
+\index{direction\_valide@{direction\_valide}!batnav.c@{batnav.c}}
+\doxysubsubsection{\texorpdfstring{direction\_valide()}{direction\_valide()}}
+{\footnotesize\ttfamily int direction\+\_\+valide (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structplateau__t}{plateau\+\_\+t}}}]{plateau\+\_\+j,  }\item[{int}]{x,  }\item[{int}]{y,  }\item[{int}]{direction,  }\item[{int}]{taille\+\_\+bat }\end{DoxyParamCaption})}
+
+
+
+Fonction qui regarde si les cases qui vont être occupées dans une direction sont toutes libres et valides. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em plateau\+\_\+j} & Plateau du joueur que l\textquotesingle{}on cherche à remplir  \\
+\hline
+{\em x} & Coordonnée x de la case sélectionnée  \\
+\hline
+{\em y} & Coordonnée y de la case sélectionnée \\
+\hline
+{\em taille\+\_\+bat} & Taille du bateau que l\textquotesingle{}on souhaite placer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Retourne 1 si la direction est valide, 0 sinon 
+\end{DoxyReturn}
+\mbox{\Hypertarget{batnav_8c_aeb0dabf827c3858455e0a90a287dea55}\label{batnav_8c_aeb0dabf827c3858455e0a90a287dea55}} 
+\index{batnav.c@{batnav.c}!est\_valide@{est\_valide}}
+\index{est\_valide@{est\_valide}!batnav.c@{batnav.c}}
+\doxysubsubsection{\texorpdfstring{est\_valide()}{est\_valide()}}
+{\footnotesize\ttfamily int est\+\_\+valide (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structplateau__t}{plateau\+\_\+t}}}]{plateau\+\_\+j,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+
+Fonction qui vérifie si les coordonnées sont dans la matrice. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em plateau\+\_\+j} & Le plateau du joueur  \\
+\hline
+{\em x} & Coordonnée x de la case  \\
+\hline
+{\em y} & Coordonnée y de la case \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Renvoie 1 si les coordonnées sont valides, 0 sinon 
+\end{DoxyReturn}
+\mbox{\Hypertarget{batnav_8c_aaa9caafcd72aa0fdfc4adadaef2f528f}\label{batnav_8c_aaa9caafcd72aa0fdfc4adadaef2f528f}} 
+\index{batnav.c@{batnav.c}!gestion\_event\_batnav@{gestion\_event\_batnav}}
+\index{gestion\_event\_batnav@{gestion\_event\_batnav}!batnav.c@{batnav.c}}
+\doxysubsubsection{\texorpdfstring{gestion\_event\_batnav()}{gestion\_event\_batnav()}}
+{\footnotesize\ttfamily void gestion\+\_\+event\+\_\+batnav (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{win,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{ren,  }\item[{SDL\+\_\+\+Event}]{event,  }\item[{t\+\_\+statut $\ast$}]{etat\+\_\+win,  }\item[{int $\ast$}]{mode\+\_\+de\+\_\+jeu,  }\item[{int $\ast$}]{etat\+\_\+joueur,  }\item[{\mbox{\hyperlink{structs__joueur}{t\+\_\+joueur}} $\ast$}]{joueur1,  }\item[{\mbox{\hyperlink{structs__joueur}{t\+\_\+joueur}} $\ast$}]{joueur2 }\end{DoxyParamCaption})}
+
+
+
+Fonction qui s\textquotesingle{}occupe des évènements d\textquotesingle{}une partie de bataille navale (joueur contre joueur) 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em win} & La fenêtre qui sera manipulée \\
+\hline
+{\em ren} & Le rendu qui sera manipulé \\
+\hline
+{\em event} & Un détecteur d\textquotesingle{}évènements \\
+\hline
+{\em etat\+\_\+win} & La fenêtre où on se trouve \textbackslash{}mode\+\_\+de\+\_\+jeu Joueur contre joueur ou Joueur contre IA \\
+\hline
+{\em etat\+\_\+joueur} & à qui le tour \\
+\hline
+{\em joueur1} & Structure du pseudo et du score du joueur 1 \\
+\hline
+{\em joueur2} & Structure du pseudo et du score du joueur 2 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{batnav_8c_a23ff0a4958810e90301f1fee0637e04f}\label{batnav_8c_a23ff0a4958810e90301f1fee0637e04f}} 
+\index{batnav.c@{batnav.c}!init\_bateaux@{init\_bateaux}}
+\index{init\_bateaux@{init\_bateaux}!batnav.c@{batnav.c}}
+\doxysubsubsection{\texorpdfstring{init\_bateaux()}{init\_bateaux()}}
+{\footnotesize\ttfamily void init\+\_\+bateaux (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structplateau__t}{plateau\+\_\+t}} $\ast$}]{plateau\+\_\+j }\end{DoxyParamCaption})}
+
+
+
+Fonction qui initialise le stock de bateau du plateau d\textquotesingle{}un joueur. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em plateau\+\_\+j} & Le plateau de jeu du joueur \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{batnav_8c_ae416666500e3b936c8635a78759e20ec}\label{batnav_8c_ae416666500e3b936c8635a78759e20ec}} 
+\index{batnav.c@{batnav.c}!init\_etat\_plateau@{init\_etat\_plateau}}
+\index{init\_etat\_plateau@{init\_etat\_plateau}!batnav.c@{batnav.c}}
+\doxysubsubsection{\texorpdfstring{init\_etat\_plateau()}{init\_etat\_plateau()}}
+{\footnotesize\ttfamily void init\+\_\+etat\+\_\+plateau (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structplateau__t}{plateau\+\_\+t}} $\ast$}]{plateau\+\_\+j }\end{DoxyParamCaption})}
+
+
+
+Fonction qui rempli le plateau de jeu d\textquotesingle{}un joueur. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em plateau\+\_\+j} & Le plateau du joueur qui doit être rempli \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{batnav_8c_a5b1ddcf0086e24619e521341ac05745c}\label{batnav_8c_a5b1ddcf0086e24619e521341ac05745c}} 
+\index{batnav.c@{batnav.c}!placement\_bateaux@{placement\_bateaux}}
+\index{placement\_bateaux@{placement\_bateaux}!batnav.c@{batnav.c}}
+\doxysubsubsection{\texorpdfstring{placement\_bateaux()}{placement\_bateaux()}}
+{\footnotesize\ttfamily void placement\+\_\+bateaux (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{win,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{ren,  }\item[{SDL\+\_\+\+Event}]{event,  }\item[{t\+\_\+statut $\ast$}]{etat\+\_\+win,  }\item[{int}]{JOUEUR,  }\item[{\mbox{\hyperlink{structplateau__t}{plateau\+\_\+t}} $\ast$}]{plateau\+\_\+j,  }\item[{char $\ast$}]{couleur,  }\item[{\mbox{\hyperlink{structs__joueur}{t\+\_\+joueur}} $\ast$}]{joueur1,  }\item[{\mbox{\hyperlink{structs__joueur}{t\+\_\+joueur}} $\ast$}]{joueur2 }\end{DoxyParamCaption})}
+
+
+
+Fonction qui gère les évènements SDL liés au placement des bateaux. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em win} & La fenêtre qui sera manipulée \\
+\hline
+{\em ren} & Le rendu qui sera manipulé$\ast$\\
+\hline
+{\em event} & Un détecteur d\textquotesingle{}évènements \\
+\hline
+{\em event} & Un évènement SDL \\
+\hline
+{\em etat\+\_\+win} & La fenêtre où on se trouve \\
+\hline
+{\em JOUEUR} & Joueur qui place son bateau \\
+\hline
+{\em plateau\+\_\+j} & Plateau du joueur que l\textquotesingle{}on cherche à remplir \\
+\hline
+{\em couleur} & Couleur du joueur qui place son bateau \\
+\hline
+{\em joueur1} & Structure du pseudo et du score du joueur 1 \\
+\hline
+{\em joueur2} & Structure du pseudo et du score du joueur 2 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{batnav_8c_a7adc718f0977d2369c6073f6b01552df}\label{batnav_8c_a7adc718f0977d2369c6073f6b01552df}} 
+\index{batnav.c@{batnav.c}!placement\_case\_bat@{placement\_case\_bat}}
+\index{placement\_case\_bat@{placement\_case\_bat}!batnav.c@{batnav.c}}
+\doxysubsubsection{\texorpdfstring{placement\_case\_bat()}{placement\_case\_bat()}}
+{\footnotesize\ttfamily void placement\+\_\+case\+\_\+bat (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{win,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{ren,  }\item[{int}]{x,  }\item[{int}]{y,  }\item[{int}]{direction,  }\item[{int}]{bat\+\_\+selec,  }\item[{int}]{JOUEUR,  }\item[{char $\ast$}]{couleur,  }\item[{\mbox{\hyperlink{structplateau__t}{plateau\+\_\+t}} $\ast$}]{plateau\+\_\+j,  }\item[{\mbox{\hyperlink{structs__joueur}{t\+\_\+joueur}} $\ast$}]{joueur1,  }\item[{\mbox{\hyperlink{structs__joueur}{t\+\_\+joueur}} $\ast$}]{joueur2 }\end{DoxyParamCaption})}
+
+
+
+Fonction qui s\textquotesingle{}occupe du placement des bateaux si leur placement est valide. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em win} & La fenêtre qui sera manipulée \\
+\hline
+{\em ren} & Le rendu qui sera manipulé  \\
+\hline
+{\em x} & Coordonnée x de la case sélectionnée  \\
+\hline
+{\em y} & Coordonnée y de la case sélectionnée \\
+\hline
+{\em bat\+\_\+selec} & Bateau sélectionné par le joueur pour le placer \\
+\hline
+{\em JOUEUR} & Joueur qui place son bateau \\
+\hline
+{\em couleur} & Couleur du joueur \\
+\hline
+{\em plateau\+\_\+j} & Plateau du joueur que l\textquotesingle{}on cherche à remplir \\
+\hline
+{\em joueur1} & Structure du pseudo et du score du joueur 1 \\
+\hline
+{\em joueur2} & Structure du pseudo et du score du joueur 2 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{batnav_8c_acdd755afb32f2badac52da8e55d99a6b}\label{batnav_8c_acdd755afb32f2badac52da8e55d99a6b}} 
+\index{batnav.c@{batnav.c}!vider\_cargaison@{vider\_cargaison}}
+\index{vider\_cargaison@{vider\_cargaison}!batnav.c@{batnav.c}}
+\doxysubsubsection{\texorpdfstring{vider\_cargaison()}{vider\_cargaison()}}
+{\footnotesize\ttfamily void vider\+\_\+cargaison (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{win,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{ren,  }\item[{int}]{taille\+\_\+bat,  }\item[{char $\ast$}]{immatriculation }\end{DoxyParamCaption})}
+
+
+
+Fonction qui s\textquotesingle{}occupe du placement des bateaux en les cachants si ils sont valides. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em win} & La fenêtre qui sera manipulée \\
+\hline
+{\em ren} & Le rendu qui sera manipulé \\
+\hline
+{\em taille\+\_\+bat} & Taille du bateau déjà placé \\
+\hline
+{\em immatriculation} & Nom du bateau déjà placé \\
+\hline
+\end{DoxyParams}

@@ -1,0 +1,300 @@
+\hypertarget{masterm_8c}{}\doxysection{Référence du fichier /info/etu/l2info/s200470/\+Timeless-\/\+Games/\+TIMELESS\+\_\+\+GAMES/src/masterm.c}
+\label{masterm_8c}\index{/info/etu/l2info/s200470/Timeless-\/Games/TIMELESS\_GAMES/src/masterm.c@{/info/etu/l2info/s200470/Timeless-\/Games/TIMELESS\_GAMES/src/masterm.c}}
+
+
+Fichier pour le jeu du mastermind.  
+
+
+{\ttfamily \#include $<$all\+\_\+includes.\+h$>$}\newline
+{\ttfamily \#include $<$joueur.\+h$>$}\newline
+{\ttfamily \#include $<$masterm.\+h$>$}\newline
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{masterm_8c_a3e4b22c1c2124b77f30b966644a720c7}{init\+\_\+partie\+\_\+masterm}} (int $\ast$mode\+\_\+de\+\_\+jeu)
+\begin{DoxyCompactList}\small\item\em Fonction qui initialise une partie de mastermind. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{masterm_8c_ae741a2689835a8724508102bc76bd92b}{init\+\_\+mastermind\+\_\+joueur}} (SDL\+\_\+\+Window $\ast$win, SDL\+\_\+\+Renderer $\ast$ren, SDL\+\_\+\+Event event, char $\ast$pseudo\+J1, char $\ast$pseudo\+J2, int $\ast$score\+J1, int $\ast$score\+J2)
+\begin{DoxyCompactList}\small\item\em Tour de jeu normal quand on valide la combinaison. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{masterm_8c_a792005286fb82ad20ed39df5cc3934c5}{saisir\+\_\+code\+\_\+ordi}} (char $\ast$code\+\_\+secret)
+\begin{DoxyCompactList}\small\item\em L\textquotesingle{}ordinateur initialise au hasard le code de couleurs à trouver. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{masterm_8c_a4bab990744dae1e1006015adfd36d717}{proposition\+\_\+pas\+\_\+vide}} (char $\ast$propo\+\_\+couleur)
+\begin{DoxyCompactList}\small\item\em Vérifie si le joueur a rentré une proposition complète de 4 couleurs. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{masterm_8c_ac3f9836657db8d75aaa5f54ddec08438}{nb\+\_\+bonne\+\_\+place}} (char $\ast$code, char $\ast$code\+\_\+secret)
+\begin{DoxyCompactList}\small\item\em Compte le nombre de bonnes couleurs entre le code secret et le code de jeu. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{masterm_8c_a21aba7fd0df6edf9fc2a8a1910b3bc6d}{nb\+\_\+bonne\+\_\+couleur}} (char $\ast$code, char $\ast$code\+\_\+secret, int nb\+\_\+place)
+\begin{DoxyCompactList}\small\item\em Compte le nombre de bonnes couleurs entre le code secret et le code de jeu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{masterm_8c_ad0d75aad27e1f5be08a87c8730efedf8}{affiche\+\_\+propo}} (SDL\+\_\+\+Window $\ast$win, SDL\+\_\+\+Renderer $\ast$ren, int $\ast$position, char $\ast$propo\+\_\+couleur, char couleur)
+\begin{DoxyCompactList}\small\item\em Affiche les couleurs choisies. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{masterm_8c_a20cfe7e305f1a43376e647c3a3411411}{afficher\+\_\+essai}} (SDL\+\_\+\+Window $\ast$win, SDL\+\_\+\+Renderer $\ast$ren, int bonne\+\_\+couleur, int bonne\+\_\+place, int $\ast$nb\+\_\+essais, char $\ast$propo\+\_\+couleur, char $\ast$code\+\_\+secret)
+\begin{DoxyCompactList}\small\item\em Si la combinaison n\textquotesingle{}est pas celle recherchée on l\textquotesingle{}affiche et donne des informations dessus. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{masterm_8c_ac7ae57794785a698009046c85aac441d}{afficher\+\_\+resultat}} (SDL\+\_\+\+Window $\ast$win, SDL\+\_\+\+Renderer $\ast$ren, char $\ast$code\+\_\+secret)
+\begin{DoxyCompactList}\small\item\em En cas de défaite, affiche la combinaison secrète. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{masterm_8c_a08fd290fdb2f8b25c6064a3a1739c42c}{mastermind\+\_\+tour}} (SDL\+\_\+\+Window $\ast$win, SDL\+\_\+\+Renderer $\ast$ren, int etat\+\_\+joueur, int $\ast$etat\+\_\+partie, int $\ast$score\+J1, int $\ast$score\+J2, int $\ast$nb\+\_\+essais, char $\ast$propo\+\_\+couleur, char $\ast$code\+\_\+secret, int $\ast$position)
+\begin{DoxyCompactList}\small\item\em Tour de jeu normal quand on valide la combinaison. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{masterm_8c_ab23cbdd8e1ee9742aecfb9964eb8fb43}{gestion\+\_\+event\+\_\+masterm}} (SDL\+\_\+\+Window $\ast$win, SDL\+\_\+\+Renderer $\ast$ren, SDL\+\_\+\+Event event, t\+\_\+statut $\ast$etat\+\_\+win, int $\ast$mode\+\_\+de\+\_\+jeu, int $\ast$etat\+\_\+joueur, \mbox{\hyperlink{structs__joueur}{t\+\_\+joueur}} $\ast$joueur1, \mbox{\hyperlink{structs__joueur}{t\+\_\+joueur}} $\ast$joueur2)
+\begin{DoxyCompactList}\small\item\em Si la combinaison n\textquotesingle{}est pas celle recherchée, on l\textquotesingle{}affiche et on donne des informations dessus. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+Fichier pour le jeu du mastermind. 
+
+\begin{DoxyAuthor}{Auteur}
+Duclos Christal Brochelard Hugo Thibaut Duchesne 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+2.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+28 mars 2022 
+\end{DoxyDate}
+
+
+\doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{masterm_8c_ad0d75aad27e1f5be08a87c8730efedf8}\label{masterm_8c_ad0d75aad27e1f5be08a87c8730efedf8}} 
+\index{masterm.c@{masterm.c}!affiche\_propo@{affiche\_propo}}
+\index{affiche\_propo@{affiche\_propo}!masterm.c@{masterm.c}}
+\doxysubsubsection{\texorpdfstring{affiche\_propo()}{affiche\_propo()}}
+{\footnotesize\ttfamily void affiche\+\_\+propo (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{win,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{ren,  }\item[{int $\ast$}]{position,  }\item[{char $\ast$}]{propo\+\_\+couleur,  }\item[{char}]{couleur }\end{DoxyParamCaption})}
+
+
+
+Affiche les couleurs choisies. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em win} & La fenêtre qui sera manipulée \\
+\hline
+{\em ren} & Le rendu qui sera manipulé \\
+\hline
+{\em position} & La position actuelle du prochain jeton à ajouter ou remplacer du plateau \\
+\hline
+{\em propo\+\_\+couleur} & La combinaison de couleurs proposée \\
+\hline
+{\em couleur} & La couleur du pion de couleur qu\textquotesingle{}on veut afficher \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{masterm_8c_a20cfe7e305f1a43376e647c3a3411411}\label{masterm_8c_a20cfe7e305f1a43376e647c3a3411411}} 
+\index{masterm.c@{masterm.c}!afficher\_essai@{afficher\_essai}}
+\index{afficher\_essai@{afficher\_essai}!masterm.c@{masterm.c}}
+\doxysubsubsection{\texorpdfstring{afficher\_essai()}{afficher\_essai()}}
+{\footnotesize\ttfamily void afficher\+\_\+essai (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{win,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{ren,  }\item[{int}]{bonne\+\_\+couleur,  }\item[{int}]{bonne\+\_\+place,  }\item[{int $\ast$}]{nb\+\_\+essais,  }\item[{char $\ast$}]{propo\+\_\+couleur,  }\item[{char $\ast$}]{code\+\_\+secret }\end{DoxyParamCaption})}
+
+
+
+Si la combinaison n\textquotesingle{}est pas celle recherchée on l\textquotesingle{}affiche et donne des informations dessus. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em win} & La fenêtre qui sera manipulée \\
+\hline
+{\em ren} & Le rendu qui sera manipulé \\
+\hline
+{\em bonne\+\_\+couleur} & Le nombre de bonnes couleurs mal placées dans la combinaison proposée \\
+\hline
+{\em bonne\+\_\+place} & Le nombre de bonnes couleurs bien placées dans la combinaison proposée \\
+\hline
+{\em nb\+\_\+essais} & Le nombre actuel d\textquotesingle{}essais du joueur \\
+\hline
+{\em propo\+\_\+couleur} & La combinaison de couleurs proposée \\
+\hline
+{\em code\+\_\+secret} & Le code secret qu\textquotesingle{}il faut deviner \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{masterm_8c_ac7ae57794785a698009046c85aac441d}\label{masterm_8c_ac7ae57794785a698009046c85aac441d}} 
+\index{masterm.c@{masterm.c}!afficher\_resultat@{afficher\_resultat}}
+\index{afficher\_resultat@{afficher\_resultat}!masterm.c@{masterm.c}}
+\doxysubsubsection{\texorpdfstring{afficher\_resultat()}{afficher\_resultat()}}
+{\footnotesize\ttfamily void afficher\+\_\+resultat (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{win,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{ren,  }\item[{char $\ast$}]{code\+\_\+secret }\end{DoxyParamCaption})}
+
+
+
+En cas de défaite, affiche la combinaison secrète. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em win} & La fenêtre qui sera manipulée \\
+\hline
+{\em ren} & Le rendu qui sera manipulé \\
+\hline
+{\em code\+\_\+secret} & Le code secret \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{masterm_8c_ab23cbdd8e1ee9742aecfb9964eb8fb43}\label{masterm_8c_ab23cbdd8e1ee9742aecfb9964eb8fb43}} 
+\index{masterm.c@{masterm.c}!gestion\_event\_masterm@{gestion\_event\_masterm}}
+\index{gestion\_event\_masterm@{gestion\_event\_masterm}!masterm.c@{masterm.c}}
+\doxysubsubsection{\texorpdfstring{gestion\_event\_masterm()}{gestion\_event\_masterm()}}
+{\footnotesize\ttfamily void gestion\+\_\+event\+\_\+masterm (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{win,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{ren,  }\item[{SDL\+\_\+\+Event}]{event,  }\item[{t\+\_\+statut $\ast$}]{etat\+\_\+win,  }\item[{int $\ast$}]{mode\+\_\+de\+\_\+jeu,  }\item[{int $\ast$}]{etat\+\_\+joueur,  }\item[{\mbox{\hyperlink{structs__joueur}{t\+\_\+joueur}} $\ast$}]{joueur1,  }\item[{\mbox{\hyperlink{structs__joueur}{t\+\_\+joueur}} $\ast$}]{joueur2 }\end{DoxyParamCaption})}
+
+
+
+Si la combinaison n\textquotesingle{}est pas celle recherchée, on l\textquotesingle{}affiche et on donne des informations dessus. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em win} & La fenêtre qui sera manipulée \\
+\hline
+{\em ren} & Le rendu qui sera manipulé \\
+\hline
+{\em event} & Un détecteur d\textquotesingle{}évènements \\
+\hline
+{\em etat\+\_\+win} & La fenêtre où on se trouve \\
+\hline
+{\em mode\+\_\+de\+\_\+jeu} & Soit joueur contre joueur, soit joueur contre ordi \\
+\hline
+{\em etat\+\_\+joueur} & Etat du joueur \\
+\hline
+{\em joueur1} & Structure qui contient les informations du joueur 1 \\
+\hline
+{\em joueur2} & Structure qui contient les informations du joueur 2 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{masterm_8c_ae741a2689835a8724508102bc76bd92b}\label{masterm_8c_ae741a2689835a8724508102bc76bd92b}} 
+\index{masterm.c@{masterm.c}!init\_mastermind\_joueur@{init\_mastermind\_joueur}}
+\index{init\_mastermind\_joueur@{init\_mastermind\_joueur}!masterm.c@{masterm.c}}
+\doxysubsubsection{\texorpdfstring{init\_mastermind\_joueur()}{init\_mastermind\_joueur()}}
+{\footnotesize\ttfamily void init\+\_\+mastermind\+\_\+joueur (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{win,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{ren,  }\item[{SDL\+\_\+\+Event}]{event,  }\item[{char $\ast$}]{pseudo\+J1,  }\item[{char $\ast$}]{pseudo\+J2,  }\item[{int $\ast$}]{score\+J1,  }\item[{int $\ast$}]{score\+J2 }\end{DoxyParamCaption})}
+
+
+
+Tour de jeu normal quand on valide la combinaison. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em win} & La fenêtre qui sera manipulée \\
+\hline
+{\em ren} & Le rendu qui sera manipulé \\
+\hline
+{\em event} & Un détecteur d\textquotesingle{}évènements \\
+\hline
+{\em pseudo\+J1} & Pseudo du joueur 1 \\
+\hline
+{\em pseudo\+J2} & Pseudo du joueur 2 \\
+\hline
+{\em score\+J1} & Score du joueur 1 \\
+\hline
+{\em score\+J2} & Score du joueur 2 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{masterm_8c_a3e4b22c1c2124b77f30b966644a720c7}\label{masterm_8c_a3e4b22c1c2124b77f30b966644a720c7}} 
+\index{masterm.c@{masterm.c}!init\_partie\_masterm@{init\_partie\_masterm}}
+\index{init\_partie\_masterm@{init\_partie\_masterm}!masterm.c@{masterm.c}}
+\doxysubsubsection{\texorpdfstring{init\_partie\_masterm()}{init\_partie\_masterm()}}
+{\footnotesize\ttfamily void init\+\_\+partie\+\_\+masterm (\begin{DoxyParamCaption}\item[{int $\ast$}]{mode\+\_\+de\+\_\+jeu }\end{DoxyParamCaption})}
+
+
+
+Fonction qui initialise une partie de mastermind. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em mode\+\_\+de\+\_\+jeu} & Soit joueur contre joueur, soit joueur contre ordi \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{masterm_8c_a08fd290fdb2f8b25c6064a3a1739c42c}\label{masterm_8c_a08fd290fdb2f8b25c6064a3a1739c42c}} 
+\index{masterm.c@{masterm.c}!mastermind\_tour@{mastermind\_tour}}
+\index{mastermind\_tour@{mastermind\_tour}!masterm.c@{masterm.c}}
+\doxysubsubsection{\texorpdfstring{mastermind\_tour()}{mastermind\_tour()}}
+{\footnotesize\ttfamily void mastermind\+\_\+tour (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{win,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{ren,  }\item[{int}]{etat\+\_\+joueur,  }\item[{int $\ast$}]{etat\+\_\+partie,  }\item[{int $\ast$}]{score\+J1,  }\item[{int $\ast$}]{score\+J2,  }\item[{int $\ast$}]{nb\+\_\+essais,  }\item[{char $\ast$}]{propo\+\_\+couleur,  }\item[{char $\ast$}]{code\+\_\+secret,  }\item[{int $\ast$}]{position }\end{DoxyParamCaption})}
+
+
+
+Tour de jeu normal quand on valide la combinaison. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em win} & La fenêtre qui sera manipulée \\
+\hline
+{\em ren} & Le rendu qui sera manipulé \\
+\hline
+{\em etat\+\_\+joueur} & Etat du joueur \\
+\hline
+{\em etat\+\_\+partie} & Etat de la partie \+: terminée ou non \\
+\hline
+{\em score\+J1} & Score du joueur 1 \\
+\hline
+{\em score\+J2} & Score du joueur 2 \\
+\hline
+{\em nb\+\_\+essais} & Le nombre actuel d\textquotesingle{}essais du joueur \\
+\hline
+{\em propo\+\_\+couleur} & La combinaison de couleurs proposée \\
+\hline
+{\em code\+\_\+secret} & Le code secret qu\textquotesingle{}il faut deviner \\
+\hline
+{\em position} & La position actuelle du prochain jeton à ajouter ou remplacer du plateau \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{masterm_8c_a21aba7fd0df6edf9fc2a8a1910b3bc6d}\label{masterm_8c_a21aba7fd0df6edf9fc2a8a1910b3bc6d}} 
+\index{masterm.c@{masterm.c}!nb\_bonne\_couleur@{nb\_bonne\_couleur}}
+\index{nb\_bonne\_couleur@{nb\_bonne\_couleur}!masterm.c@{masterm.c}}
+\doxysubsubsection{\texorpdfstring{nb\_bonne\_couleur()}{nb\_bonne\_couleur()}}
+{\footnotesize\ttfamily int nb\+\_\+bonne\+\_\+couleur (\begin{DoxyParamCaption}\item[{char $\ast$}]{code,  }\item[{char $\ast$}]{code\+\_\+secret,  }\item[{int}]{nb\+\_\+place }\end{DoxyParamCaption})}
+
+
+
+Compte le nombre de bonnes couleurs entre le code secret et le code de jeu. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em code} & La proposition de couleurs \\
+\hline
+{\em code\+\_\+secret} & Le code secret \\
+\hline
+{\em nb\+\_\+place} & Le nombre de pions bien placés précédemment calculés \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Renvoie le nombre de pions de bonnes couleurs mal placées 
+\end{DoxyReturn}
+\mbox{\Hypertarget{masterm_8c_ac3f9836657db8d75aaa5f54ddec08438}\label{masterm_8c_ac3f9836657db8d75aaa5f54ddec08438}} 
+\index{masterm.c@{masterm.c}!nb\_bonne\_place@{nb\_bonne\_place}}
+\index{nb\_bonne\_place@{nb\_bonne\_place}!masterm.c@{masterm.c}}
+\doxysubsubsection{\texorpdfstring{nb\_bonne\_place()}{nb\_bonne\_place()}}
+{\footnotesize\ttfamily int nb\+\_\+bonne\+\_\+place (\begin{DoxyParamCaption}\item[{char $\ast$}]{code,  }\item[{char $\ast$}]{code\+\_\+secret }\end{DoxyParamCaption})}
+
+
+
+Compte le nombre de bonnes couleurs entre le code secret et le code de jeu. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em code} & La proposition de couleurs \\
+\hline
+{\em code\+\_\+secret} & Le code secret \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Renvoie le nombre de pions bien placés 
+\end{DoxyReturn}
+\mbox{\Hypertarget{masterm_8c_a4bab990744dae1e1006015adfd36d717}\label{masterm_8c_a4bab990744dae1e1006015adfd36d717}} 
+\index{masterm.c@{masterm.c}!proposition\_pas\_vide@{proposition\_pas\_vide}}
+\index{proposition\_pas\_vide@{proposition\_pas\_vide}!masterm.c@{masterm.c}}
+\doxysubsubsection{\texorpdfstring{proposition\_pas\_vide()}{proposition\_pas\_vide()}}
+{\footnotesize\ttfamily int proposition\+\_\+pas\+\_\+vide (\begin{DoxyParamCaption}\item[{char $\ast$}]{propo\+\_\+couleur }\end{DoxyParamCaption})}
+
+
+
+Vérifie si le joueur a rentré une proposition complète de 4 couleurs. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em propo\+\_\+couleur} & La combinaison de couleurs \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Renvoie 0 si la proposition n\textquotesingle{}est pas complète, 1 si elle est complète 
+\end{DoxyReturn}
+\mbox{\Hypertarget{masterm_8c_a792005286fb82ad20ed39df5cc3934c5}\label{masterm_8c_a792005286fb82ad20ed39df5cc3934c5}} 
+\index{masterm.c@{masterm.c}!saisir\_code\_ordi@{saisir\_code\_ordi}}
+\index{saisir\_code\_ordi@{saisir\_code\_ordi}!masterm.c@{masterm.c}}
+\doxysubsubsection{\texorpdfstring{saisir\_code\_ordi()}{saisir\_code\_ordi()}}
+{\footnotesize\ttfamily void saisir\+\_\+code\+\_\+ordi (\begin{DoxyParamCaption}\item[{char $\ast$}]{code\+\_\+secret }\end{DoxyParamCaption})}
+
+
+
+L\textquotesingle{}ordinateur initialise au hasard le code de couleurs à trouver. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em code\+\_\+secret} & Le code à initialiser \\
+\hline
+\end{DoxyParams}
