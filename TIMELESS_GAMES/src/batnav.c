@@ -410,10 +410,10 @@ void attaque_case_bat(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, pla
         afficher_image("assets/batnav/pas_touche_bateau.png", x * 33 + 35, y * 33 + 159, win, ren);
 		  afficher_image("assets/batnav/tour_vert.png",462,70, win, ren);
         SDL_RenderPresent(ren);
-        jeu.etat_partie =ATTAQUE_J2;
+        jeu.etat_partie = ATTAQUE_J2;
       } else{
         plateau_j.une_case[x][y].etat = 1;
-        afficher_image("assets/batnav/pas_touche_bateau.png", x * 33 + 416, y * 33 + 159, win, ren);
+        afficher_image("assets/batnav/pas_touche_bateau.png", x * 33 + 417, y * 33 + 159, win, ren);
 		  afficher_image("assets/batnav/tour_violet.png",462,70, win, ren);
         SDL_RenderPresent(ren);
         jeu.etat_partie = ATTAQUE_J1;
