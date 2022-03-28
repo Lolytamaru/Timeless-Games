@@ -28,8 +28,8 @@ void gestion_event_accueil(SDL_Event event, t_statut * etat_win, SDL_Window * wi
       case SDL_MOUSEBUTTONUP:
          if (event.button.x < 750 && event.button.x > 0 && event.button.y < 500 && event.button.y > 0) {
             afficher_image("assets/menu_pseudo_JCJ.png", 0, 0, win, ren);
-            afficher_texte("assets/inter.ttf", 27, 497, 282, Joueur1->pseudo, ren);
-            afficher_texte("assets/inter.ttf", 27, 497, 335, Joueur2->pseudo, ren);
+            afficher_texte("assets/inter.ttf", 27, 497, 252, Joueur1->pseudo, ren);
+            afficher_texte("assets/inter.ttf", 27, 497, 338, Joueur2->pseudo, ren);
             SDL_RenderPresent(ren);
             *etat_win = PSEUDO;
             break;
@@ -63,8 +63,8 @@ int main(int argc, char** argv) {
    etat_win = ACCUEIL;
    int etat_joueur= J1;
    int mode_de_jeu= JVSJ;
-   t_joueur Joueur1={"Joueur 1",0};
-   t_joueur Joueur2={"Joueur 2",0};
+   t_joueur Joueur1={" ",0};
+   t_joueur Joueur2={" ",0};
 
 
    //etat_win = ACCUEIL;
@@ -78,7 +78,7 @@ int main(int argc, char** argv) {
          if (event.type == SDL_QUIT) {
             programme_lance = SDL_FALSE;
             break;
-         }
+         }//void gestion_event_batnav(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, t_statut * etat_win, int * mode_de_jeu, int * etat_joueur, t_joueur * joueur1, t_joueur * joueur2) {
          if (etat_win == ACCUEIL)
             gestion_event_accueil(event, &etat_win, window, renderer, &Joueur1, &Joueur2);
          else if (etat_win == PSEUDO)
@@ -88,11 +88,11 @@ int main(int argc, char** argv) {
          else if (etat_win == PENDU)
             gestion_event_pendu(event, &etat_win, &mode_de_jeu, &etat_joueur, window, renderer, &Joueur1, &Joueur2);
          else if (etat_win == MASTERMIND)
-            gestion_event_masterm(event, &etat_win, &mode_de_jeu, window, renderer, &Joueur1, &Joueur2);
+            gestion_event_masterm(event, &etat_win, &mode_de_jeu, &etat_joueur, window, renderer, &Joueur1, &Joueur2);
          else if (etat_win == BATNAV)
-            gestion_event_batnav(event, &etat_win, &mode_de_jeu, window, renderer, &Joueur1, &Joueur2);
+            gestion_event_batnav(window, renderer, event, &etat_win, &mode_de_jeu, &etat_joueur, &Joueur1, &Joueur2);
          else if (etat_win == PARAM)
-            gestion_event_param(event, &etat_win, window, renderer, &Joueur1, &Joueur2);
+            gestion_event_param(event, &etat_win, &mode_de_jeu, &etat_joueur, window, renderer, &Joueur1, &Joueur2);
       }
    }
    //Fermeture de la fenêtre

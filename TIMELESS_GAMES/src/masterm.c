@@ -30,16 +30,22 @@ t_master mastermind; // Variable globale
 /**
  * \brief Fonction qui initialise une partie de mastermind
  */
-void init_partie_master() {
+void init_partie_master(int * mode_de_jeu) {
+	int i;
 	mastermind.propo_couleur = (char*)malloc(sizeof(char)*4);
 	mastermind.code_secret = (char*)malloc(sizeof(char)*4); // Deux chaînes contenant le mot secret et le mot sur lequel on joue au pendu
 	mastermind.position = 0;
 	mastermind.nb_essais = 0;
-  	saisir_code_ordi(mastermind.code_secret);
-	mastermind.etat_partie=0;
-	int i;
+	mastermind.etat_partie= MASTERMIND_JCJ_INIT;
+	for(i=0;i<4;i++)
+		mastermind.code_secret[i]=' ';
+	if(*mode_de_jeu == JVSO){
+  		saisir_code_ordi(mastermind.code_secret);
+		mastermind.etat_partie= MASTERMINDJEU;
+	}
 	for(i=0;i<4;i++)
 		mastermind.propo_couleur[i]=' ';
+
 }
 
 /**
@@ -255,7 +261,9 @@ void afficher_essai(SDL_Window * win, SDL_Renderer * ren, int bonne_couleur, int
  * \param code_secret Le code secret qu'il faut deviner
  * \param position La position actuelle du prochain jeton à ajouter ou remplacer du plateau
  */
-void mastermind_tour(int * etat_partie, SDL_Window * win, SDL_Renderer * ren, int * nb_essais, char * propo_couleur, char * code_secret, int * position) {
+
+
+void mastermind_tour(int etat_joueur, int * scorej1, int * scorej2, int * etat_partie, SDL_Window * win, SDL_Renderer * ren, int * nb_essais, char * propo_couleur, char * code_secret, int * position) {
    // Si l'on fait une proposition fausse et qu'il reste des essais
    if ((*nb_essais) < 10 && strcmp(propo_couleur, code_secret) != 0) {
       afficher_essai(win, ren, nb_bonne_couleur(propo_couleur, code_secret, nb_bonne_place(propo_couleur, code_secret)), nb_bonne_place(propo_couleur, code_secret), nb_essais, propo_couleur, code_secret);
@@ -268,7 +276,11 @@ void mastermind_tour(int * etat_partie, SDL_Window * win, SDL_Renderer * ren, in
    if ((*nb_essais) < 10 && nb_bonne_place(propo_couleur, code_secret) == 4) {
       afficher_image("assets/mastermind/gagne_masterm.png", 10, 60, win, ren);
       afficher_image("assets/mastermind/gagne_cercle.png", 215, 440, win, ren);
-	   *etat_partie = 1;
+		if(etat_joueur == J1)
+			*scorej2=*scorej2 +1;
+		else
+			*scorej1=*scorej1 +1;
+	   *etat_partie = MASTERMINDFINI;
 		afficher_resultat(code_secret, win, ren);
       SDL_RenderPresent(ren);
    }
@@ -276,7 +288,11 @@ void mastermind_tour(int * etat_partie, SDL_Window * win, SDL_Renderer * ren, in
    if ((*nb_essais) >= 10) {
       afficher_image("assets/mastermind/perdu_masterm.png", 10, 60, win, ren);
       afficher_image("assets/mastermind/perdu_cercle.png", 215, 440, win, ren);
-   	*etat_partie = 1;
+		if(etat_joueur == J1)
+			*scorej2=*scorej2 +1;
+		else
+			*scorej1=*scorej1 +1;
+   	*etat_partie = MASTERMINDFINI;
       afficher_resultat(code_secret, win, ren);
       SDL_RenderPresent(ren);
    }
@@ -302,6 +318,105 @@ int proposition_pas_vide(char * propo_couleur){
 }
 
 
+void init_mastermind_joueur(SDL_Event event, SDL_Window * win, SDL_Renderer * ren, char * pseudoJ1, char * pseudoJ2, int * scorej1, int * scorej2){
+	if (event.button.x < 510 && event.button.x > 464 && event.button.y < 319 && event.button.y > 275) {
+		mastermind.position = 0;
+	}
+	if (event.button.x < 558 && event.button.x > 512 && event.button.y < 319 && event.button.y > 275) {
+		mastermind.position = 1;
+	}
+	if (event.button.x < 606 && event.button.x > 560 && event.button.y < 319 && event.button.y > 275) {
+		mastermind.position = 2;
+	}
+	if(event.button.x < 654 && event.button.x > 608 && event.button.y < 319 && event.button.y > 275) {
+   	mastermind.position = 3;
+	}
+	if (event.button.x < 440 && event.button.x > 387 && event.button.y < 400  && event.button.y > 347 ) {
+		mastermind.code_secret[mastermind.position] = 'R'; // Affiche la couleur rouge à la position indiquée
+		afficher_image("assets/mastermind/propositions/rouge_propo.png", 464  + (mastermind.position) * 48, 275, win, ren);
+		SDL_RenderPresent(ren);
+		if (mastermind.position >= 3)
+	      mastermind.position = 0;
+	   else
+	      mastermind.position++;
+	}
+	// Proposition de la couleur verte
+	if (event.button.x < 500 && event.button.x > 445 && event.button.y < 400  && event.button.y > 347) {
+		mastermind.code_secret[mastermind.position] = 'V'; // Affiche la couleur verte à la position indiquée
+		afficher_image("assets/mastermind/propositions/vert_propo.png", 464  + (mastermind.position) * 48, 275, win, ren);
+		SDL_RenderPresent(ren);
+		if (mastermind.position >= 3)
+			mastermind.position = 0;
+		else
+			mastermind.position++;
+	}
+	// Proposition de la couleur bleue
+	if (event.button.x < 559 && event.button.x > 507 && event.button.y < 400  && event.button.y > 347) {
+		mastermind.code_secret[mastermind.position] = 'B'; // Affiche la couleur bleue à la position indiquée
+		afficher_image("assets/mastermind/propositions/bleu_propo.png", 464  + (mastermind.position) * 48, 275, win, ren);
+		SDL_RenderPresent(ren);
+		if (mastermind.position >= 3)
+			mastermind.position = 0;
+		else
+			mastermind.position++;
+	}
+	// Proposition de la couleur jaune
+	if(event.button.x < 618 && event.button.x > 564 && event.button.y < 400  && event.button.y > 347) {
+		mastermind.code_secret[mastermind.position] = 'J'; // Affiche la couleur jaune à la position indiquée
+		afficher_image("assets/mastermind/propositions/jaune_propo.png", 464  + (mastermind.position) * 48, 275, win, ren);
+		SDL_RenderPresent(ren);
+		if (mastermind.position >= 3)
+			mastermind.position = 0;
+		else
+			mastermind.position++;
+	}
+	// Proposition de la couleur blanche
+	if (event.button.x < 679 && event.button.x > 624 && event.button.y < 400 && event.button.y > 347) {
+		mastermind.code_secret[mastermind.position] = 'W'; // Affiche la couleur blanche à la position indiquée
+		afficher_image("assets/mastermind/propositions/blanc_propo.png", 464  + (mastermind.position) * 48, 275, win, ren);
+		SDL_RenderPresent(ren);
+		if (mastermind.position >= 3)
+			mastermind.position = 0;
+		else
+			mastermind.position++;
+	}
+	// Proposition de la couleur noire
+	if (event.button.x < 743 && event.button.x > 687 && event.button.y < 400 && event.button.y > 347) {
+		mastermind.code_secret[mastermind.position] = 'N'; // Affiche la couleur noire à la position indiquée
+		afficher_image("assets/mastermind/propositions/noir_propo.png", 464  + (mastermind.position) * 48, 275, win, ren);
+		SDL_RenderPresent(ren);
+		if (mastermind.position >= 3)
+			mastermind.position = 0;
+		else
+			mastermind.position++;
+	}
+	//Valider la combinaison
+	if (event.button.x < 557 && event.button.x > 386 && event.button.y < 493 && event.button.y > 426 && proposition_pas_vide(mastermind.code_secret)==1) {
+		afficher_image("assets/mastermind/mastermind.png", 0, 0, win, ren);
+		afficher_texte("assets/inter.ttf", 19, 19, 110, pseudoJ1, ren);
+		afficher_texte("assets/inter.ttf", 19, 19, 218, pseudoJ2, ren);
+		afficher_nombre("assets/inter.ttf", 19, 26, 148, *scorej1, ren);
+		afficher_nombre("assets/inter.ttf", 19, 26, 254, *scorej2, ren);
+		afficher_image("assets/mastermind/enlever_proposition.png", 229, 448, win, ren);
+		SDL_RenderPresent(ren);
+	   mastermind.position =0;
+		mastermind.etat_partie = MASTERMINDJEU;
+	}
+	//Random combinaison
+	if (event.button.x < 740 && event.button.x > 564 && event.button.y < 493 && event.button.y > 426) {
+		afficher_image("assets/mastermind/mastermind.png", 0, 0, win, ren);
+		afficher_texte("assets/inter.ttf", 19, 19, 110, pseudoJ1, ren);
+		afficher_texte("assets/inter.ttf", 19, 19, 218, pseudoJ2, ren);
+		afficher_nombre("assets/inter.ttf", 19, 26, 148, *scorej1, ren);
+		afficher_nombre("assets/inter.ttf", 19, 26, 254, *scorej2, ren);
+		afficher_image("assets/mastermind/enlever_proposition.png", 229, 448, win, ren);
+		SDL_RenderPresent(ren);
+		saisir_code_ordi(mastermind.code_secret);
+		mastermind.position =0;
+		mastermind.etat_partie = MASTERMINDJEU;
+	}
+}
+
 /**
  * \brief Si la combinaison n'est pas celle recherchée, on l'affiche et on donne des informations dessus
  * \param event Un détecteur d'évènements
@@ -312,12 +427,18 @@ int proposition_pas_vide(char * propo_couleur){
  * \param scorej1 Le score actuel du joueur 1
  * \param scorej2 Le score actuel du joueur 2
  */
- void gestion_event_masterm(SDL_Event event, t_statut * etat_win, int * mode_de_jeu, SDL_Window * win, SDL_Renderer * ren, t_joueur * Joueur1, t_joueur * Joueur2) {
+ void gestion_event_masterm(SDL_Event event, t_statut * etat_win, int * mode_de_jeu, int * etat_joueur, SDL_Window * win, SDL_Renderer * ren, t_joueur * Joueur1, t_joueur * Joueur2) {
    switch (event.type) {
     	case SDL_MOUSEBUTTONUP: // Relâchement du clic pour la non redondance de l'évènement
      		// Bouton [QUITTER]
        	if (event.button.x < 155 && event.button.x > 0 && event.button.y < 43 && event.button.y > 0) {
-	         afficher_image("assets/menu.png", 0, 0, win, ren);
+				if(*mode_de_jeu == JVSJ && *etat_joueur == J1){
+               afficher_image("assets/menu_J1.png", 0, 0, win, ren);
+            }else if(*mode_de_jeu == JVSJ && *etat_joueur == J2){
+               afficher_image("assets/menu_J2.png", 0, 0, win, ren);
+            }else{
+               afficher_image("assets/menu.png", 0, 0, win, ren);
+            }
 				afficher_texte("assets/inter.ttf", 19, 290, 21, Joueur1->pseudo, ren);
             afficher_texte("assets/inter.ttf", 19, 530, 21, Joueur2->pseudo, ren);
 				afficher_nombre("assets/inter.ttf", 19, 400, 21, Joueur1->score, ren);
@@ -325,12 +446,15 @@ int proposition_pas_vide(char * propo_couleur){
 	         SDL_RenderPresent(ren);
 	         *etat_win = MENU;
        	}
+			if (mastermind.etat_partie == MASTERMIND_JCJ_INIT) {
+				init_mastermind_joueur(event,win,ren,Joueur1->pseudo,Joueur2->pseudo,&(Joueur1->score),&(Joueur2->score));
+			}
  			// Partie en cours
-       	if (mastermind.etat_partie == 0) {
+       	if (mastermind.etat_partie == MASTERMINDJEU) {
        		// Bouton VALIDER COMBINAISON
 				if(proposition_pas_vide(mastermind.propo_couleur)==1){
        			if (event.button.x < 148 && event.button.x > 9 && event.button.y < 392 && event.button.y > 326) {
-         			mastermind_tour(&(mastermind.etat_partie), win, ren, &(mastermind.nb_essais), mastermind.propo_couleur, mastermind.code_secret, &(mastermind.position));
+         			mastermind_tour(*etat_joueur, &(Joueur1->score),  &(Joueur2->score),&(mastermind.etat_partie), win, ren, &(mastermind.nb_essais), mastermind.propo_couleur, mastermind.code_secret, &(mastermind.position));
        			}
 				}
        		// Sélection de l'endroit pour la couleur à placer

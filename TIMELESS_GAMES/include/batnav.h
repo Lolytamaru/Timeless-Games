@@ -21,7 +21,7 @@ typedef struct s_case {
 } case_t;
 
 /**
- * \struct mat_t Structure qui contient un plateau
+ * \struct plateau_t Structure qui contient un plateau
  */
 typedef struct s_plateau {
    case_t **une_case;
@@ -46,8 +46,9 @@ int est_valide(int i, int j, plateau_t plateau_j);
 int direction_valide(plateau_t plateau_j, int x, int y, int direction, int taille_bat);
 void placement_case_bat(SDL_Window * win, SDL_Renderer * ren, int x, int y, int direction, int bat_selec, int JOUEUR, char * couleur, plateau_t * plateau_j, t_joueur * joueur1, t_joueur * joueur2);
 void placement_bateaux(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, t_statut * etat_win, int JOUEUR, plateau_t * plateau_j, char * couleur, t_joueur * joueur1, t_joueur * joueur2);
-void attaque_case_bat(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, plateau_t plateau_j, int x, int y);
-void gestion_event_batnav(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, t_statut * etat_win, int * mode_de_jeu,  t_joueur * joueur1, t_joueur * joueur2);
+void attaque_case_bat(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, plateau_t plateau_j, int x, int y, int * scorej1, int * scorej2);
+void gestion_event_batnav(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, t_statut * etat_win, int * mode_de_jeu, int * etat_joueur,  t_joueur * joueur1, t_joueur * joueur2);
+void vider_cargaison(int taille_bat, char * immatriculation, SDL_Window * win, SDL_Renderer * ren);
 
 
 #endif

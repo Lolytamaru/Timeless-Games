@@ -6,7 +6,7 @@ void initialiser_mot_ordi(char *secret, char *pendu, SDL_Window * win, SDL_Rende
 int valider_mot(char * secret, char *pendu);
 int saisie(char entree, char * alphabet);
 int valider_lettre(char lettre, char * secret, char *pendu, int *erreurs, SDL_Window * win, SDL_Renderer * ren);
-void pendu_tour(int * etat_partie, int * scorej1, int * scorej2, char lettre, char* alphabet, char * pendu, char * secret, int *erreurs, SDL_Window * win, SDL_Renderer * ren);
+void pendu_tour(int etat_joueur, int * etat_partie, int * scorej1, int * scorej2, char lettre, char* alphabet, char * pendu, char * secret, int *erreurs, SDL_Window * win, SDL_Renderer * ren);
 void gestion_event_pendu(SDL_Event event, t_statut * etat_win, int * mode_de_jeu, int * etat_joueur, SDL_Window * window, SDL_Renderer * renderer, t_joueur * Joueur1, t_joueur * Joueur2);
-void init_partie_pendu(int * mode_de_jeu, SDL_Window * win, SDL_Renderer * ren, char * pseudoJ1, char * pseudoJ2);
-void initialiser_mot_joueur(int * etat_partie, int etat_joueur, SDL_Event event, SDL_Window * win, SDL_Renderer * ren, char * secret_ecrit, char * secret, char * pendu, char * pseudoJ1, char * pseudoJ2);
+void init_partie_pendu(int * mode_de_jeu, SDL_Window * win, SDL_Renderer * ren, char * pseudoJ1, char * pseudoJ2, int * scorej1, int * scorej2);
+void initialiser_mot_joueur(int * etat_partie, int etat_joueur, SDL_Event event, SDL_Window * win, SDL_Renderer * ren, char * secret_ecrit, char * secret, char * pendu, char * pseudoJ1, char * pseudoJ2,  int * scorej1, int * scorej2);

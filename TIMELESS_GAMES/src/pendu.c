@@ -35,7 +35,7 @@ int tab_y_lettre[26] = {28, 28, 28, 79, 79, 79, 130, 130, 130, 181, 181, 181, 23
  * \param win La fenêtre qui sera manipulée
  * \param ren Le rendu qui sera manipulé
  */
-void init_partie_pendu(int * mode_de_jeu, SDL_Window * win, SDL_Renderer * ren, char * pseudoJ1, char * pseudoJ2) {
+void init_partie_pendu(int * mode_de_jeu, SDL_Window * win, SDL_Renderer * ren, char * pseudoJ1, char * pseudoJ2, int * scorej1, int * scorej2) {
 	char i;
 	pendu.pendu = (char*)malloc(sizeof(char));
 	pendu.secret = (char*)malloc(sizeof(char)); // Deux chaînes contenant le mot secret et le mot sur lequel on joue au pendu
@@ -47,6 +47,8 @@ void init_partie_pendu(int * mode_de_jeu, SDL_Window * win, SDL_Renderer * ren, 
 		afficher_image("assets/pendu/pendu.png", 0, 0, win, ren);
 		afficher_texte("assets/inter.ttf", 19, 15, 110, pseudoJ1, ren);
 		afficher_texte("assets/inter.ttf", 19, 15, 232, pseudoJ2, ren);
+		afficher_nombre("assets/inter.ttf", 19, 26, 148, *scorej1, ren);
+		afficher_nombre("assets/inter.ttf", 19, 26, 269, *scorej2, ren);
 		SDL_RenderPresent(ren);
 		initialiser_mot_ordi(pendu.secret, pendu.pendu, win, ren);
 		pendu.etat_partie = PENDUJEU;
@@ -212,7 +214,7 @@ int valider_lettre(char lettre, char * secret, char * pendu, int * erreurs, SDL_
  * \param win La fenêtre qui sera manipulée
  * \param ren Le rendu qui sera manipulé
  */
-void pendu_tour( int * etat_partie, int * scorej1, int * scorej2, char lettre, char * alphabet, char * pendu, char * secret, int * erreurs, SDL_Window * win, SDL_Renderer * ren) {
+void pendu_tour(int etat_joueur, int * etat_partie, int * scorej1, int * scorej2, char lettre, char * alphabet, char * pendu, char * secret, int * erreurs, SDL_Window * win, SDL_Renderer * ren) {
 	int i;
 	if ((*erreurs) <= 10 && (valider_mot(secret, pendu) == PAS_OK)) {
 		// Vérification si on est dans une situation de fin de jeu
@@ -225,6 +227,10 @@ void pendu_tour( int * etat_partie, int * scorej1, int * scorej2, char lettre, c
   	if ((valider_mot(secret, pendu) == 1)) { // Si le joueur a découvert toutes les lettres (a gagné)
    	afficher_image("assets/pendu/gagne_pendu.png", 247, 7, win, ren);
     	*etat_partie = PENDUFINI;
+		if(etat_joueur == J1)
+			*scorej2=*scorej2 +1;
+		else
+			*scorej1=*scorej1 +1;
 		SDL_RenderPresent(ren);
 	}
    if ((*erreurs) >= 10) { // Si le joueur est pendu (a perdu)
@@ -232,6 +238,10 @@ void pendu_tour( int * etat_partie, int * scorej1, int * scorej2, char lettre, c
 		for (i = 0; secret[i]; i++) // Affichage du mot caché
 			affiche_lettre(secret[i], i, win, ren);
 		*etat_partie = PENDUFINI;
+		if(etat_joueur == J1)
+			*scorej1=*scorej1 +1;
+		else
+			*scorej2=*scorej2 +1;
 		SDL_RenderPresent(ren);
 	}
    // Met à jour l'affichage selon les manipulations précédentes
@@ -247,7 +257,7 @@ void pendu_tour( int * etat_partie, int * scorej1, int * scorej2, char lettre, c
  * \param win La fenêtre qui sera manipulée
  * \param ren Le rendu qui sera manipulé
  */
-void initialiser_mot_joueur(int * etat_partie, int etat_joueur, SDL_Event event, SDL_Window * win, SDL_Renderer * ren, char * secret_ecrit, char * secret, char * pendu, char * pseudoJ1, char * pseudoJ2) {
+void initialiser_mot_joueur(int * etat_partie, int etat_joueur, SDL_Event event, SDL_Window * win, SDL_Renderer * ren, char * secret_ecrit, char * secret, char * pendu, char * pseudoJ1, char * pseudoJ2, int * scorej1, int * scorej2) {
 	switch(event.type) {
 		case SDL_KEYUP:
 			if (event.key.keysym.sym == SDLK_BACKSPACE) {
@@ -263,14 +273,16 @@ void initialiser_mot_joueur(int * etat_partie, int etat_joueur, SDL_Event event,
 				SDL_SetRenderDrawColor(ren, 255, 255, 255, 255);
 				SDL_RenderClear(ren);
 				afficher_image("assets/pendu/pendujcj.png", 0, 0, win, ren);
-				if(etat_joueur ==J1)
-					afficher_texte("assets/inter.ttf", 27, 520, 80, pseudoJ1, ren);
-				else{
-					afficher_texte("assets/inter.ttf", 27, 520, 80, pseudoJ2, ren);
+				if(etat_joueur ==J1){
+					afficher_texte("assets/inter.ttf", 27, 510, 80, pseudoJ1, ren);
+					afficher_texte("assets/inter.ttf", 27, 510, 222, pseudoJ2, ren);
+				}else{
+					afficher_texte("assets/inter.ttf", 27, 510, 80, pseudoJ2, ren);
+					afficher_texte("assets/inter.ttf", 27, 510, 222, pseudoJ1, ren);
 				}
 				texte = TTF_RenderUTF8_Blended(police, secret_ecrit, couleur_police);
 				txtDestRect.x = 520;
-				txtDestRect.y = 305;
+				txtDestRect.y = 315;
 				SDL_Texture *texte_tex = SDL_CreateTextureFromSurface(ren, texte);
 				SDL_FreeSurface(texte);
 				SDL_QueryTexture(texte_tex, NULL, NULL, &(txtDestRect.w), &(txtDestRect.h));
@@ -280,8 +292,7 @@ void initialiser_mot_joueur(int * etat_partie, int etat_joueur, SDL_Event event,
 			}
 			if (event.key.keysym.sym >= SDLK_a && event.key.keysym.sym <= SDLK_z) {
 				int l = strlen(secret_ecrit);
-				printf("%d\n",l);
-				if (l <= 9)
+				if (l <7)
 					sprintf(secret_ecrit,"%s%c",secret_ecrit,event.key.keysym.sym);
 				SDL_Rect txtDestRect;
 				TTF_Font *police;
@@ -292,14 +303,16 @@ void initialiser_mot_joueur(int * etat_partie, int etat_joueur, SDL_Event event,
 				SDL_SetRenderDrawColor(ren, 255, 255, 255, 255);
 				SDL_RenderClear(ren);
 				afficher_image("assets/pendu/pendujcj.png", 0, 0, win, ren);
-				if(etat_joueur ==J1)
-					afficher_texte("assets/inter.ttf", 27, 520, 80, pseudoJ1, ren);
-				else{
-					afficher_texte("assets/inter.ttf", 27, 520, 80, pseudoJ2, ren);
+				if(etat_joueur ==J1){
+					afficher_texte("assets/inter.ttf", 27, 510, 80, pseudoJ1, ren);
+					afficher_texte("assets/inter.ttf", 27, 510, 222, pseudoJ2, ren);
+				}else{
+					afficher_texte("assets/inter.ttf", 27, 510, 80, pseudoJ2, ren);
+					afficher_texte("assets/inter.ttf", 27, 510, 222, pseudoJ1, ren);
 				}
 				texte = TTF_RenderUTF8_Blended(police,secret_ecrit, couleur_police);
 				txtDestRect.x = 520;
-				txtDestRect.y = 305;
+				txtDestRect.y = 315;
 				SDL_Texture *texte_tex = SDL_CreateTextureFromSurface(ren, texte);
 				SDL_FreeSurface(texte);
 				SDL_QueryTexture(texte_tex, NULL, NULL, &(txtDestRect.w), &(txtDestRect.h));
@@ -313,6 +326,8 @@ void initialiser_mot_joueur(int * etat_partie, int etat_joueur, SDL_Event event,
 					////si clique sur valider
 					sprintf(secret,secret_ecrit);
 					int i;
+					for (i = 0; i<secret[i]; i++)
+				  		secret_ecrit[i] = '\0';
 					// Boucle qui initialise le 2ème mot pendu utilisé pour le jeu (ex : _ _ _ _)
 				   for (i = 0; i<secret[i]; i++)
 				  		pendu[i] = '_';
@@ -320,6 +335,8 @@ void initialiser_mot_joueur(int * etat_partie, int etat_joueur, SDL_Event event,
 					afficher_image("assets/pendu/pendu.png", 0, 0, win, ren);
 					afficher_texte("assets/inter.ttf", 19, 15, 110, pseudoJ1, ren);
 					afficher_texte("assets/inter.ttf", 19, 15, 232, pseudoJ2, ren);
+					afficher_nombre("assets/inter.ttf", 19, 26, 148, *scorej1, ren);
+					afficher_nombre("assets/inter.ttf", 19, 26, 269, *scorej2, ren);
 					SDL_RenderPresent(ren);
 				   afficher_mystere(i-1, win, ren);
 					SDL_RenderPresent(ren);
@@ -329,6 +346,8 @@ void initialiser_mot_joueur(int * etat_partie, int etat_joueur, SDL_Event event,
 					afficher_image("assets/pendu/pendu.png", 0, 0, win, ren);
 					afficher_texte("assets/inter.ttf", 19, 15, 110, pseudoJ1, ren);
 					afficher_texte("assets/inter.ttf", 19, 15, 232, pseudoJ2, ren);
+					afficher_nombre("assets/inter.ttf", 19, 26, 148, *scorej1, ren);
+					afficher_nombre("assets/inter.ttf", 19, 26, 269, *scorej2, ren);
 					SDL_RenderPresent(ren);
 					initialiser_mot_ordi(secret, pendu, win, ren);
 					*etat_partie = PENDUJEU;
@@ -356,8 +375,14 @@ void gestion_event_pendu(SDL_Event event, t_statut * etat_win, int * mode_de_jeu
 	switch(event.type) {
 		case SDL_MOUSEBUTTONUP: // Relâchement du clic pour la non redondance de l'évènement
 			// Bouton [QUITTER]
-			if (event.button.x < 150 && event.button.x > 0 && event.button.y < 40 && event.button.y > 0) {
-				afficher_image("assets/menu.png", 0, 0, win, ren);
+			if (event.button.x < 155 && event.button.x > 0 && event.button.y < 43 && event.button.y > 0) {
+				if(*mode_de_jeu == JVSJ && *etat_joueur == J1){
+               afficher_image("assets/menu_J1.png", 0, 0, win, ren);
+            }else if(*mode_de_jeu == JVSJ && *etat_joueur == J2){
+               afficher_image("assets/menu_J2.png", 0, 0, win, ren);
+            }else{
+               afficher_image("assets/menu.png", 0, 0, win, ren);
+            }
 				afficher_texte("assets/inter.ttf", 19, 290, 21, Joueur1->pseudo, ren);
 				afficher_texte("assets/inter.ttf", 19, 530, 21, Joueur2->pseudo, ren);
 				afficher_nombre("assets/inter.ttf", 19, 400, 21, Joueur1->score, ren);
@@ -370,62 +395,62 @@ void gestion_event_pendu(SDL_Event event, t_statut * etat_win, int * mode_de_jeu
 			// Les lettres à proposer
 			// Une zone définie correspondant à une lettre et réalisant un tour de jeu avec celle qui correspond
 				if (event.button.x < 603 && event.button.x > 535 && event.button.y < 69 && event.button.y > 28)
-					pendu_tour(&(pendu.etat_partie),  &(Joueur1->score),  &(Joueur2->score), 'a', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(*etat_joueur, &(pendu.etat_partie),  &(Joueur1->score),  &(Joueur2->score), 'a', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
 				if (event.button.x < 675 && event.button.x > 607 && event.button.y < 69 && event.button.y > 28)
-					pendu_tour(&(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'b', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'b', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
 				if (event.button.x < 747 && event.button.x > 679 && event.button.y < 69 && event.button.y > 28)
-					pendu_tour(&(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'c', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'c', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
 				if (event.button.x < 603 && event.button.x > 535 && event.button.y < 120 && event.button.y > 79)
-					pendu_tour(&(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'd', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'd', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
 				if (event.button.x < 675 && event.button.x > 607 && event.button.y < 120 && event.button.y > 79)
-					pendu_tour(&(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'e', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'e', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
 				if (event.button.x < 747 && event.button.x > 679 && event.button.y < 120 && event.button.y > 79)
-					pendu_tour(&(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'f', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'f', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
 				if (event.button.x < 603 && event.button.x > 535 && event.button.y < 171 && event.button.y > 130)
-					pendu_tour(&(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'g', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'g', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
 				if (event.button.x < 675 && event.button.x > 607 && event.button.y < 171 && event.button.y > 130)
-					 pendu_tour(&(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'h', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					 pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'h', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
 				if (event.button.x < 747 && event.button.x > 679 && event.button.y < 171 && event.button.y > 130)
-					pendu_tour(&(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'i', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'i', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
 				if (event.button.x < 603 && event.button.x > 535 && event.button.y < 222 && event.button.y > 181)
-					pendu_tour(&(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'j', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'j', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
 				if (event.button.x < 675 && event.button.x > 607 && event.button.y < 222 && event.button.y > 181)
-					pendu_tour(&(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'k', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'k', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
 				if (event.button.x < 747 && event.button.x > 679 && event.button.y < 222 && event.button.y > 181)
-					pendu_tour(&(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'l', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'l', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
 				if (event.button.x < 603 && event.button.x > 535 && event.button.y < 273 && event.button.y > 232)
-					pendu_tour(&(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'm', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'm', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
 				if (event.button.x < 675 && event.button.x > 607 && event.button.y < 273 && event.button.y > 232)
-					pendu_tour(&(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'n', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'n', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
 				if (event.button.x < 747 && event.button.x > 679 && event.button.y < 273 && event.button.y > 232)
-					pendu_tour(&(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'o', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'o', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
 				if (event.button.x < 603 && event.button.x > 535 && event.button.y < 324 && event.button.y > 283)
-					pendu_tour(&(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'p', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'p', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
 				if (event.button.x < 675 && event.button.x > 607 && event.button.y < 324 && event.button.y > 283)
-					pendu_tour(&(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'q', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'q', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
 				if (event.button.x < 747 && event.button.x > 679 && event.button.y < 324 && event.button.y > 283)
-					pendu_tour(&(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'r', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'r', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
 				if (event.button.x < 603 && event.button.x > 535 && event.button.y < 375 && event.button.y > 334)
-					pendu_tour(&(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 's', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 's', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
 				if (event.button.x < 675 && event.button.x > 607 && event.button.y < 375 && event.button.y > 334)
-					pendu_tour(&(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 't', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 't', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
 				if (event.button.x < 747 && event.button.x > 679 && event.button.y < 375 && event.button.y > 334)
-					pendu_tour(&(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'u', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'u', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
 				if (event.button.x < 603 && event.button.x > 535 && event.button.y < 426 && event.button.y > 385)
-					pendu_tour(&(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'v', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'v', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
 				if (event.button.x < 675 && event.button.x > 607 && event.button.y < 426 && event.button.y > 385)
-					pendu_tour(&(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'w', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'w', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
 				if (event.button.x < 747 && event.button.x > 679 && event.button.y < 426 && event.button.y > 385)
-					pendu_tour(&(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'x', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'x', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
 				if (event.button.x < 639 && event.button.x >571 && event.button.y < 477 && event.button.y > 436)
-					pendu_tour(&(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'y', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'y', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
 				if (event.button.x < 715 && event.button.x >647 && event.button.y < 477 && event.button.y > 436)
-					pendu_tour(&(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'z', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'z', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
 			}
 			break;
 		default: break;
 	}
 	if(pendu.etat_partie == PENDU_JCJ_INIT){
-		initialiser_mot_joueur(&(pendu.etat_partie),*etat_joueur,event, win, ren,pendu.secret_ecrit,pendu.secret, pendu.pendu, Joueur1->pseudo, Joueur2->pseudo);
+		initialiser_mot_joueur(&(pendu.etat_partie),*etat_joueur,event, win, ren,pendu.secret_ecrit,pendu.secret, pendu.pendu, Joueur1->pseudo, Joueur2->pseudo,&(Joueur1->score),  &(Joueur2->score));
 	}
 }
