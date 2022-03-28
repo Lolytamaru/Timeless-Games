@@ -1,0 +1,20 @@
+- Bosser sur la copie locale, qui ne modifiera pas le Git.
+- 
+
+Commande principales GIT :
+
+git clone [nom_du_dépo] : cloner le GitHub en récupérant une copie locale pour bosser dessus 
+
+git status : quels sont les fichiers modifiés qui ne sont pas encore dans le git ? les affiche
+git log : pour monitorer
+
+git add [fichier/rep] : ajoute localement soit un fichier soit un répertoire pour être prêt à être envoyé
+git rm [fichier/rep] : supprimer de la surveillance
+
+git commit -m 'message de description de l'ensemble des modifications' : enregistrement des modifications localement 
+
+git push : pour envoyer la version locale sur GitHub
+git pull : mettre à jour la version locale avec celle du serveur
+
+git checkout [fichier] : on revient à la dernière version enregistrée dans le git
+/!\ Messages d'avertissements si un fichier est modifié en même temps à deux endroits 

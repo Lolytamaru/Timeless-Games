@@ -1,0 +1,172 @@
+s200470@ic2s120-06:~$ ls -als //Affiche tous les fichiers du dossier
+
+
+
+s200470@ic2s120-06:~/Documents$ git clone [adresse du github] //Clone le github dans le dossier courant
+Clonage dans 'Timeless-Games'...
+remote: Enumerating objects: 17, done.
+remote: Counting objects: 100% (17/17), done.
+remote: Compressing objects: 100% (7/7), done.
+remote: Total 17 (delta 0), reused 0 (delta 0), pack-reused 0
+Dépaquetage des objets: 100% (17/17), 4.19 Kio | 85.00 Kio/s, fait.
+
+
+s200470@ic2s120-06:~/Documents/Timeless-Games$ git status // Regarde le status des fichiers actuels du dossier en fonction du git
+Sur la branche Projet
+Votre branche est à jour avec 'origin/Projet'.
+
+Modifications qui ne seront pas validées :
+  (utilisez "git add <fichier>..." pour mettre à jour ce qui sera validé)
+  (utilisez "git restore <fichier>..." pour annuler les modifications dans le répertoire de travail)
+	modifié :         README.md
+aucune modification n'a été ajoutée à la validation (utilisez "git add" ou "git commit -a")
+
+
+s200470@ic2s120-06:~/Documents/Timeless-Games$ git add README.md // Ajoute le fichier dans le git (en attente d'envoie) 
+s200470@ic2s120-06:~/Documents/Timeless-Games$ git status // Affiche le statut
+Sur la branche Projet
+Votre branche est à jour avec 'origin/Projet'.
+
+Modifications qui seront validées :
+  (utilisez "git restore --staged <fichier>..." pour désindexer)
+	modifié :         README.md
+
+
+s200470@ic2s120-06:~/Documents/Timeless-Games$ git config --global --edit //Créer l'identité locale
+s200470@ic2s120-06:~/Documents/Timeless-Games$ git commit --amend --reset-author //Suite ^
+[Projet dc4a512] test modif readme
+
+Votre nom et votre adresse courriel ont été configurés automatiquement en se fondant
+sur votre nom d'utilisateur et le nom de votre machine. Veuillez vérifier qu'ils sont corrects.
+Vous pouvez supprimer ce message en les paramétrant explicitement :
+
+    git config --global user.name "Votre Nom"
+    git config --global user.email vous@exemple.com
+
+Après ceci, vous pouvez corriger l'identité utilisée pour ce commit avec :
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+)
+
+s200470@ic2s120-06:~/Documents/Timeless-Games$ git commit -m 'test modif readme' //Commit (envoie prêt à github)
+Sur la branche Projet
+Votre branche est en avance sur 'origin/Projet' de 1 commit.
+  (utilisez "git push" pour publier vos commits locaux)
+rien à valider, la copie de travail est propre
+
+s200470@ic2s120-06:~/Documents/Timeless-Games$ git push //Envoi et modifications des dossiers et fichiers de GitHub (nécessite le pseudo et le token personnel, à générer dans les paramtres)
+
+Énumération des objets: 5, fait.
+Décompte des objets: 100% (5/5), fait.
+Compression par delta en utilisant jusqu'à 8 fils d'exécution
+Compression des objets: 100% (2/2), fait.
+Écriture des objets: 100% (3/3), 319 octets | 319.00 Kio/s, fait.
+Total 3 (delta 0), réutilisés 0 (delta 0)
+To [adresse du github]
+   bdd745c..dc4a512  Projet -> Projet
+
+s200470@ic2s120-06:~/Documents/Timeless-Games$ git config --global credential.helper cache
+
+s200470@ic2s120-06:~/Documents/Timeless-Games$ cat README.md // cat affiche le contenu d'un fichier
+# Timeless-Games
+Projet de L2 Informatique
+Coucou le monde
+
+s200470@ic2s120-06:~/Documents/Timeless-Games$ git pull //Récupère les modifications et fichiers sur le GitHub pour les mettre en local sur l'ordi
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Dépaquetage des objets: 100% (3/3), 729 octets | 56.00 Kio/s, fait.
+Depuis [adresse du github]
+   dc4a512..386c173  Projet     -> origin/Projet
+Mise à jour dc4a512..386c173
+Fast-forward
+ README.md | 1 +
+ 1 file changed, 1 insertion(+)
+
+s200470@ic2s120-06:~/Documents/Timeless-Games$ cat README.md 
+# Timeless-Games
+Projet de L2 Informatique
+Coucou le monde
+Arrete d'écrire des bétises ici !!
+
+s200470@ic2s120-06:~/Documents/Timeless-Games$ vim planning.txt // Modification d'un fichier avec l'éditeur de notre choix
+s200470@ic2s120-06:~/Documents/Timeless-Games$ git status // Affiche le statut du git
+Sur la branche Projet
+Votre branche est à jour avec 'origin/Projet'.
+
+Fichiers non suivis:
+  (utilisez "git add <fichier>..." pour inclure dans ce qui sera validé)
+	planning.txt
+
+aucune modification ajoutée à la validation mais des fichiers non suivis sont présents (utilisez "git add" pour les suivre)
+
+s200470@ic2s120-06:~/Documents/Timeless-Games$ git add planning.txt 
+
+s200470@ic2s120-06:~/Documents/Timeless-Games$ git commit -m 'ajout des taches dans le planning'
+
+[Projet 3640f55] ajout des taches dans le planning
+
+Votre nom et votre adresse courriel ont été configurés automatiquement en se fondant
+sur votre nom d'utilisateur et le nom de votre machine. Veuillez vérifier qu'ils sont corrects.
+Vous pouvez supprimer ce message en les paramétrant explicitement :
+
+    git config --global user.name "Votre Nom"
+    git config --global user.email vous@exemple.com
+
+Après ceci, vous pouvez corriger l'identité utilisée pour ce commit avec :
+
+    git commit --amend --reset-author
+
+ 1 file changed, 11 insertions(+)
+ create mode 100644 planning.txt
+
+s200470@ic2s120-06:~/Documents/Timeless-Games$  git config --global user.name "[ici pseudo]" // Mettre son pseudo pour config auto
+s200470@ic2s120-06:~/Documents/Timeless-Games$ git config --global user.email [mail] // Mettre son mail pour config auto
+
+s200470@ic2s120-06:~/Documents/Timeless-Games$ git commit -m 'ajout des taches dans le planning' // Mettre un message informatif entre ' ' pour informer les autres
+Sur la branche Projet
+Votre branche est en avance sur 'origin/Projet' de 1 commit.
+  (utilisez "git push" pour publier vos commits locaux)
+
+rien à valider, la copie de travail est propre
+
+s200470@ic2s120-06:~/Documents/Timeless-Games$ git config --global credential.helper manager-core //Jsp là
+
+s200470@ic2s120-06:~/Documents/Timeless-Games$ git log // Affiche les logs des modifications de fichiers et dossiers
+
+s200470@ic2s120-06:~/Documents/Timeless-Games$ mkdir code //Créer un dossier
+
+s200470@ic2s120-06:~/Documents/Timeless-Games$ git add code
+
+s200470@ic2s120-06:~/Documents/Timeless-Games$ git commit -m "un rep pour le code"
+
+Sur la branche Projet
+Votre branche est à jour avec 'origin/Projet'.
+
+rien à valider, la copie de travail est propre
+
+s200470@ic2s120-06:~/Documents/Timeless-Games/code$ vim matrice.c matrice.h -p
+2 fichiers à éditer
+
+s200470@ic2s120-06:~/Documents/Timeless-Games/code$ git add matrice.*
+
+s200470@ic2s120-06:~/Documents/Timeless-Games/code$ git commit -m "init module matrice"
+[Projet f26111a] init module matrice
+ 2 files changed, 2 insertions(+)
+ create mode 100644 code/matrice.c
+ create mode 100644 code/matrice.h
+
+s200470@ic2s120-06:~/Documents/Timeless-Games/code$ git push
+Énumération des objets: 6, fait.
+Décompte des objets: 100% (6/6), fait.
+Compression par delta en utilisant jusqu'à 8 fils d'exécution
+Compression des objets: 100% (3/3), fait.
+Écriture des objets: 100% (5/5), 473 octets | 157.00 Kio/s, fait.
+Total 5 (delta 0), réutilisés 0 (delta 0)
+To [adresse du github]
+   3640f55..f26111a  Projet -> Projet
+s200470@ic2s120-06:~/Documents/Timeless-Games/code$ ^C
+s200470@ic2s120-06:~/Documents/Timeless-Games/code$ 

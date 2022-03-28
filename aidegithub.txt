@@ -1,0 +1,21 @@
+AIDE GITHUB:
+
+git clone +lien du projet 
+git status 
+git add fichier.txt: ajouter un fichier
+git commit -m “J’ai fait l'affichage des personnages” //explication à quoi correspond le fichier
+
+git push //Envoyer les modifications au github / si on veut envoyé un dossier il faut qu’il soit non vide
+Utilisateur: Thibauttd
+Mdp: copier le lien du toker mais pour le mdp mettre entrée
+
+//pour avoir le lien du token:
+Développer Setting -> Personal access token -> cocher repo + mettre un nom -> mettre dans un fichier texte le lien : permet d’accéder au dépôt/au contrôle complet
+
+git config –global credential helper cache //à revoir pour enregistrer nos comptes en terminal
+
+git pull //Recupérer les fichiers présents dans le github
+//Et les modif avec Visual Code/Atom
+
+git log : versions précédentes/listes de toutes les modifs
+git show +id du comit //voir le code de la version précédente que l’on veut
