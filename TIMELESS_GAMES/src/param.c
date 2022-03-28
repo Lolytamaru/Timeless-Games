@@ -42,9 +42,9 @@ void gestion_event_param( SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
          }
          if (event.button.x < 490 && event.button.x > 200 && event.button.y < 170 && event.button.y > 109) {
             if (*mode_de_jeu == JVSJ)
-               afficher_image(win, ren, "assets/menu_pseudo_JCJ.png", 0, 0);
+               afficher_image(win, ren, "assets/parametres/menu_pseudo_JCJ.png", 0, 0);
             else
-               afficher_image(win, ren, "assets/menu_pseudo_JCO.png", 0, 0);
+               afficher_image(win, ren, "assets/parametres/menu_pseudo_JCO.png", 0, 0);
             afficher_texte(ren, "assets/inter.ttf", 27, 497, 252, joueur1->pseudo);
             afficher_texte(ren, "assets/inter.ttf", 27, 497, 338, joueur2->pseudo);
             SDL_RenderPresent(ren);

@@ -33,7 +33,7 @@ void gestion_event_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
             *mode_de_jeu = JVSO;
             *etat_joueur = J1;
             sprintf(joueur2->pseudo, "Ordi");
-            afficher_image(win, ren, "assets/menu_pseudo_JCO.png", 0, 0);
+            afficher_image(win, ren, "assets/parametres/menu_pseudo_JCO.png", 0, 0);
             afficher_texte(ren, "assets/inter.ttf", 27, 497, 252, joueur1->pseudo);
             afficher_texte(ren, "assets/inter.ttf", 27, 497, 338, joueur2->pseudo);
             SDL_RenderPresent(ren);
@@ -41,7 +41,7 @@ void gestion_event_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
          if (event.button.x < 568 && event.button.x > 415 && event.button.y < 172 && event.button.y > 121) {
             *mode_de_jeu = JVSJ;
             sprintf(joueur2->pseudo, " ");
-            afficher_image(win, ren, "assets/menu_pseudo_JCJ.png", 0, 0);
+            afficher_image(win, ren, "assets/parametres/menu_pseudo_JCJ.png", 0, 0);
             afficher_texte(ren, "assets/inter.ttf", 27, 497, 252, joueur1->pseudo);
             afficher_texte(ren, "assets/inter.ttf", 27, 497, 338, joueur2->pseudo);
             SDL_RenderPresent(ren);
@@ -83,9 +83,9 @@ void gestion_event_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
             SDL_SetRenderDrawColor(ren, 255, 255, 255, 255);
             SDL_RenderClear(ren);
             if(*mode_de_jeu == JVSJ)
-               afficher_image(win, ren, "assets/menu_pseudo_JCJ.png", 0, 0);
+               afficher_image(win, ren, "assets/parametres/menu_pseudo_JCJ.png", 0, 0);
             else
-               afficher_image(win, ren, "assets/menu_pseudo_JCO.png", 0, 0);
+               afficher_image(win, ren, "assets/parametres/menu_pseudo_JCO.png", 0, 0);
             if (*etat_joueur == J1) {
                texte = TTF_RenderUTF8_Blended(police, joueur1->pseudo, couleur_police);
                afficher_texte(ren, "assets/inter.ttf", 27, 497, 338, joueur2->pseudo);
@@ -119,9 +119,9 @@ void gestion_event_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
             SDL_SetRenderDrawColor(ren, 255, 255, 255, 255);
             SDL_RenderClear(ren);
             if(*mode_de_jeu == JVSJ)
-               afficher_image(win, ren, "assets/menu_pseudo_JCJ.png", 0, 0);
+               afficher_image(win, ren, "assets/parametres/menu_pseudo_JCJ.png", 0, 0);
             else
-               afficher_image(win, ren, "assets/menu_pseudo_JCO.png", 0, 0);
+               afficher_image(win, ren, "assets/parametres/menu_pseudo_JCO.png", 0, 0);
             if (*etat_joueur == J1) {
                texte = TTF_RenderUTF8_Blended(police, joueur1->pseudo, couleur_police);
                afficher_texte(ren, "assets/inter.ttf", 27, 497, 338, joueur2->pseudo);

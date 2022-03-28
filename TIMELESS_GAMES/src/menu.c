@@ -101,7 +101,7 @@ void gestion_event_menu(SDL_Window *win, SDL_Renderer *ren, SDL_Event event, t_s
             }
          }
          else if (event.button.x < 684 && event.button.x > 455 && event.button.y < 473 && event.button.y > 283) {
-            afficher_image(win, ren, "assets/parametres.png", 0, 0);
+            afficher_image(win, ren, "assets/parametres/parametres.png", 0, 0);
             SDL_RenderPresent(ren);
             *etat_win = PARAM;
          }

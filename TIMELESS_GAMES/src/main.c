@@ -27,7 +27,7 @@ void gestion_event_accueil(SDL_Window * win, SDL_Renderer * ren, SDL_Event event
    switch(event.type) {
       case SDL_MOUSEBUTTONUP:
          if (event.button.x < 750 && event.button.x > 0 && event.button.y < 500 && event.button.y > 0) {
-            afficher_image(win, ren, "assets/menu_pseudo_JCJ.png", 0, 0);
+            afficher_image(win, ren, "assets/parametres/menu_pseudo_JCJ.png", 0, 0);
             afficher_texte(ren, "assets/inter.ttf", 27, 497, 252, joueur1->pseudo);
             afficher_texte(ren, "assets/inter.ttf", 27, 497, 338, joueur2->pseudo);
             SDL_RenderPresent(ren);
