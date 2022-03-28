@@ -1,0 +1,10 @@
+char enMajuscule(char c);
+int estLettre(char c);
+void initialiserMotJoueur(char *secret, char *pendu);
+void initialiserMotOrdi(char *secret, char *pendu);
+void afficherMot(char *mot);
+void afficherPendu(int erreurs);
+char *saisie(char *secret, char *pendu, char *alphabet, int erreurs);
+void validerLettre(char lettre, char *secret, char *pendu, int *erreurs);
+int validerMot(char *secret, char *pendu);
+void jeuPendu(void);
