@@ -1,11 +1,13 @@
 var searchData=
 [
-  ['affiche_5flettre_58',['affiche_lettre',['../pendu_8c.html#a434fe140c8cceabfe6460caf683b485f',1,'pendu.c']]],
-  ['affiche_5fpropo_59',['affiche_propo',['../masterm_8c.html#ad0d75aad27e1f5be08a87c8730efedf8',1,'masterm.c']]],
-  ['afficher_5ferreur_60',['afficher_erreur',['../pendu_8c.html#a8fde717ed86c5c43d22b9db759304bf0',1,'pendu.c']]],
-  ['afficher_5fessai_61',['afficher_essai',['../masterm_8c.html#a20cfe7e305f1a43376e647c3a3411411',1,'masterm.c']]],
-  ['afficher_5fimage_62',['afficher_image',['../SDL__projet_8c.html#a611a115a1c71eedbbbbaa19c27c5a708',1,'SDL_projet.c']]],
-  ['afficher_5fmystere_63',['afficher_mystere',['../pendu_8c.html#a6de50ee45eb928a807800421a1c7343e',1,'pendu.c']]],
-  ['afficher_5fresultat_64',['afficher_resultat',['../masterm_8c.html#a2740ecd4c6d90525329d2779571169b5',1,'masterm.c']]],
-  ['afficher_5ftexte_65',['afficher_texte',['../SDL__projet_8c.html#a6146461836d62acc98941053a08f03fc',1,'SDL_projet.c']]]
+  ['affiche_5flettre_98',['affiche_lettre',['../pendu_8c.html#a5ff68a9d81ec83bf0206916dce0f5c05',1,'affiche_lettre(SDL_Window *win, SDL_Renderer *ren, char c, int position):&#160;pendu.c'],['../pendu_8h.html#a5ff68a9d81ec83bf0206916dce0f5c05',1,'affiche_lettre(SDL_Window *win, SDL_Renderer *ren, char c, int position):&#160;pendu.c']]],
+  ['affiche_5fpropo_99',['affiche_propo',['../masterm_8h.html#ad0d75aad27e1f5be08a87c8730efedf8',1,'affiche_propo(SDL_Window *win, SDL_Renderer *ren, int *position, char *propo_couleur, char couleur):&#160;masterm.c'],['../masterm_8c.html#ad0d75aad27e1f5be08a87c8730efedf8',1,'affiche_propo(SDL_Window *win, SDL_Renderer *ren, int *position, char *propo_couleur, char couleur):&#160;masterm.c']]],
+  ['afficher_5ferreur_100',['afficher_erreur',['../pendu_8h.html#aac7532d9a6dbe840b57b38424ad82505',1,'afficher_erreur(SDL_Window *win, SDL_Renderer *ren, int nb_erreur):&#160;pendu.c'],['../pendu_8c.html#aac7532d9a6dbe840b57b38424ad82505',1,'afficher_erreur(SDL_Window *win, SDL_Renderer *ren, int nb_erreur):&#160;pendu.c']]],
+  ['afficher_5fessai_101',['afficher_essai',['../masterm_8h.html#a20cfe7e305f1a43376e647c3a3411411',1,'afficher_essai(SDL_Window *win, SDL_Renderer *ren, int bonne_couleur, int bonne_place, int *nb_essais, char *propo_couleur, char *code_secret):&#160;masterm.c'],['../masterm_8c.html#a20cfe7e305f1a43376e647c3a3411411',1,'afficher_essai(SDL_Window *win, SDL_Renderer *ren, int bonne_couleur, int bonne_place, int *nb_essais, char *propo_couleur, char *code_secret):&#160;masterm.c']]],
+  ['afficher_5fimage_102',['afficher_image',['../SDL__projet_8c.html#adda3d6181058eb068550b18a4704d5a9',1,'SDL_projet.c']]],
+  ['afficher_5fmystere_103',['afficher_mystere',['../pendu_8h.html#a9971f52897d1e241d110c2ff89442b89',1,'afficher_mystere(SDL_Window *win, SDL_Renderer *ren, int longueur_mot):&#160;pendu.c'],['../pendu_8c.html#a9971f52897d1e241d110c2ff89442b89',1,'afficher_mystere(SDL_Window *win, SDL_Renderer *ren, int longueur_mot):&#160;pendu.c']]],
+  ['afficher_5fnombre_104',['afficher_nombre',['../SDL__projet_8c.html#a9ff876cda7898e399d3968da4fed72b3',1,'SDL_projet.c']]],
+  ['afficher_5fresultat_105',['afficher_resultat',['../masterm_8h.html#ac7ae57794785a698009046c85aac441d',1,'afficher_resultat(SDL_Window *win, SDL_Renderer *ren, char *code_secret):&#160;masterm.c'],['../masterm_8c.html#ac7ae57794785a698009046c85aac441d',1,'afficher_resultat(SDL_Window *win, SDL_Renderer *ren, char *code_secret):&#160;masterm.c']]],
+  ['afficher_5ftexte_106',['afficher_texte',['../SDL__projet_8c.html#a1965ae769f14c0267679b435daecb808',1,'SDL_projet.c']]],
+  ['attaque_5fcase_5fbat_107',['attaque_case_bat',['../batnav_8h.html#a28007c62c88a204c668b49e0f51b2e33',1,'attaque_case_bat(SDL_Window *win, SDL_Renderer *ren, SDL_Event event, plateau_t plateau_j, int x, int y, int *scorej1, int *scorej2):&#160;batnav.c'],['../batnav_8c.html#a28007c62c88a204c668b49e0f51b2e33',1,'attaque_case_bat(SDL_Window *win, SDL_Renderer *ren, SDL_Event event, plateau_t plateau_j, int x, int y, int *scorej1, int *scorej2):&#160;batnav.c']]]
 ];

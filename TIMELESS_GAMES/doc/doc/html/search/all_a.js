@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['valider_5flettre_42',['valider_lettre',['../pendu_8c.html#ad19b6f444dd8902b86fa18d41c3834a7',1,'pendu.c']]],
-  ['valider_5fmot_43',['valider_mot',['../pendu_8c.html#aa13a88d2a916add9f12230126cb886b5',1,'pendu.c']]]
+  ['nb_5fbonne_5fcouleur_43',['nb_bonne_couleur',['../masterm_8h.html#a21aba7fd0df6edf9fc2a8a1910b3bc6d',1,'nb_bonne_couleur(char *code, char *code_secret, int nb_place):&#160;masterm.c'],['../masterm_8c.html#a21aba7fd0df6edf9fc2a8a1910b3bc6d',1,'nb_bonne_couleur(char *code, char *code_secret, int nb_place):&#160;masterm.c']]],
+  ['nb_5fbonne_5fplace_44',['nb_bonne_place',['../masterm_8h.html#ac3f9836657db8d75aaa5f54ddec08438',1,'nb_bonne_place(char *code, char *code_secret):&#160;masterm.c'],['../masterm_8c.html#ac3f9836657db8d75aaa5f54ddec08438',1,'nb_bonne_place(char *code, char *code_secret):&#160;masterm.c']]],
+  ['nettoyersdl_45',['nettoyerSDL',['../SDL__projet_8c.html#aeb3736618c786bd9759f3d02004bd549',1,'SDL_projet.c']]]
 ];

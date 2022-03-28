@@ -3,29 +3,12 @@
  * \brief Fichier pour le jeu du pendu
  * \author Duclos Christal Brochelard Hugo Thibaut Duchesne
  * \version 2.0
- * \date 21 mars 2022
+ * \date 28 mars 2022
  */
 
 #include <all_includes.h>
 #include <joueur.h>
 #include <pendu.h>
-
-#define OK 1
-#define PAS_OK 0
-
-/**
- * \struct t_pendu Structure qui contient les variables propres au jeu du pendu
- */
-typedef struct s_pendu {
-	char *pendu;
-	char *secret;
-	char secret_ecrit[100];
-	char alphabet[26];
-	int erreurs;
-	int etat_partie;
-} t_pendu;
-
-t_pendu pendu;
 
 int tab_x_lettre[26] = {535, 607, 679, 535, 607, 679, 535, 607, 679, 535, 607, 679, 535, 607, 679, 535, 607, 679, 535, 607, 679, 535, 607, 679, 571, 647};
 int tab_y_lettre[26] = {28, 28, 28, 79, 79, 79, 130, 130, 130, 181, 181, 181, 232, 232, 232, 283, 283, 283, 334, 334, 334, 385, 385, 385, 436, 436};
@@ -34,67 +17,215 @@ int tab_y_lettre[26] = {28, 28, 28, 79, 79, 79, 130, 130, 130, 181, 181, 181, 23
  * \brief Fonction qui initialise une partie de pendu
  * \param win La fenêtre qui sera manipulée
  * \param ren Le rendu qui sera manipulé
+ * \param mode_de_jeu Soit joueur contre joueur, soit joueur contre ordi
+ * \param pseudoJ1 Pseudo du joueur 1
+ * \param pseudoJ2 Pseudo du joueur 2
+ * \param scoreJ1 Score du joueur 1
+ * \param scoreJ2 Score du joueur 2
  */
-void init_partie_pendu(int * mode_de_jeu, SDL_Window * win, SDL_Renderer * ren, char * pseudoJ1, char * pseudoJ2, int * scorej1, int * scorej2) {
+void init_partie_pendu(SDL_Window * win, SDL_Renderer * ren, int * mode_de_jeu, char * pseudoJ1, char * pseudoJ2, int * scoreJ1, int * scoreJ2) {
 	char i;
-	pendu.pendu = (char*)malloc(sizeof(char));
-	pendu.secret = (char*)malloc(sizeof(char)); // Deux chaînes contenant le mot secret et le mot sur lequel on joue au pendu
+	pendu.pendu = (char*)malloc(sizeof(char)); // Contient le mot sur lequel on joue au pendu
+	pendu.secret = (char*)malloc(sizeof(char)); // Contient le mot secret
 	for (i = 'a'; i <= 'z'; i++)
 		pendu.alphabet[i-'a'] = i;
 	pendu.erreurs = 0;
 	pendu.etat_partie = PENDU_JCJ_INIT;
-	if(*mode_de_jeu == JVSO){
-		afficher_image("assets/pendu/pendu.png", 0, 0, win, ren);
-		afficher_texte("assets/inter.ttf", 19, 15, 110, pseudoJ1, ren);
-		afficher_texte("assets/inter.ttf", 19, 15, 232, pseudoJ2, ren);
-		afficher_nombre("assets/inter.ttf", 19, 26, 148, *scorej1, ren);
-		afficher_nombre("assets/inter.ttf", 19, 26, 269, *scorej2, ren);
+	if (*mode_de_jeu == JVSO) {
+		afficher_image(win, ren, "assets/pendu/pendu.png", 0, 0);
+		afficher_texte(ren, "assets/inter.ttf", 19, 15, 110, pseudoJ1);
+		afficher_texte(ren, "assets/inter.ttf", 19, 15, 232, pseudoJ2);
+		afficher_nombre(ren, "assets/inter.ttf", 19, 26, 148, *scoreJ1);
+		afficher_nombre(ren, "assets/inter.ttf", 19, 26, 269, *scoreJ2);
 		SDL_RenderPresent(ren);
-		initialiser_mot_ordi(pendu.secret, pendu.pendu, win, ren);
+		initialiser_mot_ordi(win, ren, pendu.secret, pendu.pendu);
 		pendu.etat_partie = PENDUJEU;
 		SDL_RenderPresent(ren);
 	}
 }
 
 /**
+ * \brief Initilise le mot à deviner en l'écrivant ou avec une banque de mots
+ * \param win La fenêtre qui sera manipulée
+ * \param ren Le rendu qui sera manipulé
+ * \param event L'évènement détecté
+ * \param etat_joueur Etat du joueur
+ * \param etat_partie Etat de la partie : terminée ou non
+ * \param secret_ecrit Le mot entré au clavier
+ * \param secret Le mot à deviner
+ * \param pendu Le mot sur lequel on joue au pendu composé au début de _ _
+ * \param pseudoJ1 Le pseudo actuel du joueur 1
+ * \param pseudoJ2 Le pseudo actuel du joueur 2
+ * \param scoreJ1 Le score actuel du joueur 1
+ * \param scoreJ2 Le score actuel du joueur 2
+ */
+void initialiser_mot_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, int * etat_joueur, int * etat_partie, char * secret_ecrit, char * secret, char * pendu, char * pseudoJ1, char * pseudoJ2, int * scoreJ1, int * scoreJ2) {
+	int l;
+	SDL_Rect txtDestRect;
+	TTF_Font *police;
+	SDL_Surface *texte = NULL;
+	SDL_Color couleur_police = {0, 0, 0};
+	SDL_Texture *texte_tex;
+	switch(event.type) {
+		// Gestion des appuis au clavier
+		case SDL_KEYUP:
+			// Si on appuie sur entrée au clavier
+			if (event.key.keysym.sym == SDLK_BACKSPACE) {
+				l = strlen(secret_ecrit);
+				if (l > 0)
+						secret_ecrit[l-1] = '\0';
+				police = TTF_OpenFont("assets/inter.ttf", 27);
+				TTF_SetFontStyle(police,TTF_STYLE_BOLD);
+				SDL_SetRenderDrawColor(ren, 255, 255, 255, 255);
+				SDL_RenderClear(ren);
+				afficher_image(win, ren, "assets/pendu/pendujcj.png", 0, 0);
+				if (*etat_joueur == J1) {
+					afficher_texte(ren, "assets/inter.ttf", 27, 510, 80, pseudoJ1);
+					afficher_texte(ren, "assets/inter.ttf", 27, 510, 222, pseudoJ2);
+				} else {
+					afficher_texte(ren, "assets/inter.ttf", 27, 510, 80, pseudoJ2);
+					afficher_texte(ren, "assets/inter.ttf", 27, 510, 222, pseudoJ1);
+				}
+				texte = TTF_RenderUTF8_Blended(police, secret_ecrit, couleur_police);
+				txtDestRect.x = 520;
+				txtDestRect.y = 315;
+ 				texte_tex = SDL_CreateTextureFromSurface(ren, texte);
+				SDL_FreeSurface(texte);
+				SDL_QueryTexture(texte_tex, NULL, NULL, &(txtDestRect.w), &(txtDestRect.h));
+				SDL_RenderCopy(ren, texte_tex, NULL, &txtDestRect);
+				TTF_CloseFont(police);
+				SDL_RenderPresent(ren);
+			}
+			// Si on appuie sur une lettre de l'alphabet avec le clavier
+			if (event.key.keysym.sym >= SDLK_a && event.key.keysym.sym <= SDLK_z) {
+				l = strlen(secret_ecrit);
+				if (l < 7)
+					sprintf(secret_ecrit, "%s%c", secret_ecrit, event.key.keysym.sym);
+				police = TTF_OpenFont("assets/inter.ttf", 27);
+				TTF_SetFontStyle(police, TTF_STYLE_BOLD);
+				SDL_SetRenderDrawColor(ren, 255, 255, 255, 255);
+				SDL_RenderClear(ren);
+				afficher_image(win, ren, "assets/pendu/pendujcj.png", 0, 0);
+				if (*etat_joueur == J1) {
+					afficher_texte(ren, "assets/inter.ttf", 27, 510, 80, pseudoJ1);
+					afficher_texte(ren, "assets/inter.ttf", 27, 510, 222, pseudoJ2);
+				} else {
+					afficher_texte(ren, "assets/inter.ttf", 27, 510, 80, pseudoJ2);
+					afficher_texte(ren, "assets/inter.ttf", 27, 510, 222, pseudoJ1);
+				}
+				texte = TTF_RenderUTF8_Blended(police, secret_ecrit, couleur_police);
+				txtDestRect.x = 520;
+				txtDestRect.y = 315;
+				texte_tex = SDL_CreateTextureFromSurface(ren, texte);
+				SDL_FreeSurface(texte);
+				SDL_QueryTexture(texte_tex, NULL, NULL, &(txtDestRect.w), &(txtDestRect.h));
+				SDL_RenderCopy(ren, texte_tex, NULL, &txtDestRect);
+				TTF_CloseFont(police);
+				SDL_RenderPresent(ren);
+			}
+			break;
+		case SDL_MOUSEBUTTONUP:
+			// Si on clique sur le bouton valider avec la souris
+			if (event.button.x < 557 && event.button.x > 386 && event.button.y < 443 && event.button.y > 375 && strlen(secret_ecrit) >= 4) {
+				sprintf(secret, secret_ecrit);
+				int i;
+				for (i = 0; i < secret[i]; i++)
+			  		secret_ecrit[i] = '\0';
+				// Boucle qui initialise le 2ème mot pendu utilisé pour le jeu (ex : _ _ _ _)
+			   for (i = 0; i < secret[i]; i++)
+			  		pendu[i] = '_';
+			   //Affichage SDL des _ _ _
+				afficher_image(win, ren, "assets/pendu/pendu.png", 0, 0);
+				afficher_texte(ren, "assets/inter.ttf", 19, 15, 110, pseudoJ1);
+				afficher_texte(ren, "assets/inter.ttf", 19, 15, 232, pseudoJ2);
+				afficher_nombre(ren, "assets/inter.ttf", 19, 26, 148, *scoreJ1);
+				afficher_nombre(ren, "assets/inter.ttf", 19, 26, 269, *scoreJ2);
+				SDL_RenderPresent(ren);
+			   afficher_mystere(win, ren, i - 1);
+				SDL_RenderPresent(ren);
+				*etat_partie = PENDUJEU;
+			}
+			// Si on clique sur le bouton mot aléatoire
+			if (event.button.x < 739 && event.button.x > 565 && event.button.y < 443 && event.button.y > 375) {
+				afficher_image(win, ren, "assets/pendu/pendu.png", 0, 0);
+				afficher_texte(ren, "assets/inter.ttf", 19, 15, 110, pseudoJ1);
+				afficher_texte(ren, "assets/inter.ttf", 19, 15, 232, pseudoJ2);
+				afficher_nombre(ren, "assets/inter.ttf", 19, 26, 148, *scoreJ1);
+				afficher_nombre(ren, "assets/inter.ttf", 19, 26, 269, *scoreJ2);
+				SDL_RenderPresent(ren);
+				initialiser_mot_ordi(win, ren, secret, pendu);
+				*etat_partie = PENDUJEU;
+				SDL_RenderPresent(ren);
+			}
+			break;
+		default: break;
+	}
+}
+
+/**
+ * \brief Initilise au hasard le mot à deviner avec une banque de mots
+ * \param win La fenêtre qui sera manipulée
+ * \param ren Le rendu qui sera manipulé
+ * \param secret Le mot à deviner
+ * \param pendu Le mot sur lequel on joue au pendu composé au début de _ _
+ */
+void initialiser_mot_ordi(SDL_Window * win, SDL_Renderer * ren, char * secret, char * pendu) {
+   int i, nb_rand;
+   FILE *listeMots = fopen("assets/pendu/mots.txt", "r");
+   srand(time(NULL)); // Initialisation du hasard
+   nb_rand = rand() % (598 + 1 - 1); // Génération d'un nombre entre 1 et 598, soit le nombre de mots dans le fichier txt
+   // Boucle pour accéder au mot à la ligne nb_rand du fichier
+   for (i = 1; i <= nb_rand; i++)
+      fscanf(listeMots, "%s", secret);
+   fclose(listeMots);
+   // Boucle qui initialise le 2ème mot pendu utilisé pour le jeu (ex : _ _ _ _)
+   for (i = 0; i < secret[i]; i++)
+  		pendu[i] = '_';
+ 	pendu[i] = '\0';
+   //Affichage SDL des _ _ _
+   afficher_mystere(win, ren, i-1);
+}
+
+/**
  * \brief Fonction qui établi une indication si la lettre utilisée est présente ou non dans le mot graphiquement
+ * \param win La fenêtre qui sera manipulée
+ * \param ren Le rendu qui sera manipulé
  * \param lettre La lettre entrée par le joueur
  * \param presence Vaut OK si la lettre appartient au mot caché
- * \param win Une fenêtre qui sera manipulée
- * \param ren Un rendu qui sera manipulé
  */
-void lettre_utilisee(char lettre, int presence, SDL_Window * win, SDL_Renderer * ren) {
+void lettre_utilisee(SDL_Window * win, SDL_Renderer * ren, char lettre, int presence) {
 	// Si la lettre est présente dans le mot, on affiche une case verte, sinon rouge
 	int i = lettre - 'a';
 	if (presence == OK)
-		afficher_image("assets/pendu/case_verte.png", tab_x_lettre[i], tab_y_lettre[i], win, ren);
+		afficher_image(win, ren, "assets/pendu/case_verte.png", tab_x_lettre[i], tab_y_lettre[i]);
 	else
-		afficher_image("assets/pendu/case_rouge.png", tab_x_lettre[i], tab_y_lettre[i], win, ren);
+		afficher_image(win, ren, "assets/pendu/case_rouge.png", tab_x_lettre[i], tab_y_lettre[i]);
 }
 
 /**
  * \brief Fonction qui permet d'afficher la lettre désignée à une position donnée de l'écran
- * \param lettre La lettre à afficher
- * \param position La position de la lettre qu'on souhaite afficher dans le mot
  * \param win La fenêtre qui sera manipulée
  * \param ren Le rendu qui sera manipulé
+ * \param lettre La lettre à afficher
+ * \param position La position de la lettre qu'on souhaite afficher dans le mot
  */
-void affiche_lettre(char c, int position, SDL_Window * win, SDL_Renderer * ren) {
+void affiche_lettre(SDL_Window * win, SDL_Renderer * ren, char c, int position) {
 	char temp[255];
 	sprintf(temp, "assets/pendu/lettres_pendu/%c.png", c);
- 	afficher_image(temp, (95 + (position) * 47), 391, win, ren);
+ 	afficher_image(win, ren, temp, (95 + (position) * 47), 391);
 }
 
 /**
  * \brief Fonction qui indique au joueur graphiquement le nombre de lettres du mot caché
- * \param longueur_mot Le nombre de lettres dans le mot
  * \param win La fenêtre qui sera manipulée
  * \param ren Le rendu qui sera manipulé
+ * \param longueur_mot Le nombre de lettres dans le mot
  */
-void afficher_mystere(int longueur_mot, SDL_Window * win, SDL_Renderer * ren) {
+void afficher_mystere(SDL_Window * win, SDL_Renderer * ren, int longueur_mot) {
 	int i = 0, position_x = 95, position_y = 467;
-	for (i = 0; i <= longueur_mot; i++) { // Affiche un trait pour chaque lettre du mot à trouver
-		afficher_image("assets/pendu/trait_noir.png", position_x, position_y, win, ren);
+	// Affiche un trait pour chaque lettre du mot à trouver
+	for (i = 0; i <= longueur_mot; i++) {
+		afficher_image(win, ren, "assets/pendu/trait_noir.png", position_x, position_y);
 		position_x += 47;
 	}
 }
@@ -105,35 +236,10 @@ void afficher_mystere(int longueur_mot, SDL_Window * win, SDL_Renderer * ren) {
  * \param win La fenêtre qui sera manipulée
  * \param ren Le rendu qui sera manipulé
  */
-void afficher_erreur(int nb_erreur, SDL_Window * win, SDL_Renderer * ren) {
+void afficher_erreur(SDL_Window * win, SDL_Renderer * ren, int nb_erreur) {
 	char temp[255];
 	sprintf(temp, "assets/pendu/phases_pendu/phase%i.png", nb_erreur - 1);
-	afficher_image(temp, 186, 75, win, ren);
-
-}
-
-/**
- * \brief Initilise au hasard le mot à deviner avec une banque de mots
- * \param secret Le mot à deviner
- * \param pendu Le mot sur lequel on joue au pendu composé au début de _ _
- * \param win La fenêtre qui sera manipulée
- * \param ren Le rendu qui sera manipulé
- */
-void initialiser_mot_ordi(char * secret, char * pendu, SDL_Window * win, SDL_Renderer * ren) {
-   int i, nb_rand;
-   FILE *listeMots = fopen("assets/pendu/mots.txt", "r");
-   srand(time(NULL)); // Initialisation du hasard
-   nb_rand = rand() % (598 + 1 - 1); // Génération d'un nombre entre 1 et 598, soit le nombre de mots dans le fichier txt
-   // Boucle pour accéder au mot à la ligne nb_rand du fichier
-   for (i = 1; i <= nb_rand; i++)
-      fscanf(listeMots, "%s", secret);
-   fclose(listeMots);
-   // Boucle qui initialise le 2ème mot pendu utilisé pour le jeu (ex : _ _ _ _)
-   for (i = 0; i<secret[i]; i++)
-  		pendu[i] = '_';
- 	pendu[i] = '\0';
-   //Affichage SDL des _ _ _
-   afficher_mystere(i-1, win, ren);
+	afficher_image(win, ren, temp, 186, 75);
 }
 
 /**
@@ -174,28 +280,29 @@ int saisie(char entree, char * alphabet) {
 
 /**
  * \brief Regarde si la lettre entrée est dans le mot secret ou non
+ * \param win La fenêtre qui sera manipulée
+ * \param ren Le rendu qui sera manipulé
  * \param lettre La lettre choisie par le joueur
  * \param secret Le mot à deviner
  * \param pendu Le mot sur lequel on joue au pendu composé au début de _ _
  * \param erreurs Le nombre total actuel d'erreurs
- * \param win La fenêtre qui sera manipulée
- * \param ren Le rendu qui sera manipulé
- * \return bonne ou mauvaise lettre
+ * \return 1 si bonne lettre, 0 si mauvaise lettre
  */
-int valider_lettre(char lettre, char * secret, char * pendu, int * erreurs, SDL_Window * win, SDL_Renderer * ren) {
+int valider_lettre(SDL_Window * win, SDL_Renderer * ren, char lettre, char * secret, char * pendu, int * erreurs) {
    int i, check = PAS_OK;
    for (i = 0; secret[i]; i++) {
-      if (secret[i] == lettre) { // Si la lettre fait partie du mot
-         affiche_lettre(lettre, i, win, ren);
+	    // Si la lettre fait partie du mot
+      if (secret[i] == lettre) {
+         affiche_lettre(win, ren, lettre, i);
          pendu[i] = secret[i];
          check = OK;
       }
    }
    if (check == OK){ // Si la lettre est présente au moins une fois dans le mot
-      lettre_utilisee(lettre, OK, win, ren);
+      lettre_utilisee(win, ren, lettre, OK);
 		return 1;
  	} else { // Si elle n'est pas présente, cela cause une erreur supplémentaire
-      lettre_utilisee(lettre, 0, win, ren);
+      lettre_utilisee(win, ren, lettre, 0);
       (*erreurs)++;
 		return 0;
    }
@@ -203,190 +310,82 @@ int valider_lettre(char lettre, char * secret, char * pendu, int * erreurs, SDL_
 
 /**
  * \brief Fonction qui s'occupe d'exécuter un tour de jeu dès que le joueur choisi une lettre en vérifiant si la partie est terminiée
+ * \param win La fenêtre qui sera manipulée
+ * \param ren Le rendu qui sera manipulé
+ * \param etat_joueur Etat du joueur
  * \param etat_partie Etat de la partie : terminée ou non
- * \param scorej1 Le score actuel du joueur 1
- * \param scorej2 Le score actuel du joueur 2
+ * \param scoreJ1 Le score actuel du joueur 1
+ * \param scoreJ2 Le score actuel du joueur 2
  * \param lettre La lettre choisie par le joueur
  * \param alphabet Les lettres utilisées et non utilisées
  * \param pendu Le mot sur lequel on joue au pendu composé au début de _ _
  * \param secret Le mot à deviner
  * \param erreurs Le nombre total actuel d'erreurs
- * \param win La fenêtre qui sera manipulée
- * \param ren Le rendu qui sera manipulé
  */
-void pendu_tour(int etat_joueur, int * etat_partie, int * scorej1, int * scorej2, char lettre, char * alphabet, char * pendu, char * secret, int * erreurs, SDL_Window * win, SDL_Renderer * ren) {
+void pendu_tour(SDL_Window * win, SDL_Renderer * ren, int etat_joueur, int * etat_partie, int * scoreJ1, int * scoreJ2, char lettre, char * alphabet, char * pendu, char * secret, int * erreurs) {
 	int i;
+	// Vérification si on est dans une situation de fin de jeu
 	if ((*erreurs) <= 10 && (valider_mot(secret, pendu) == PAS_OK)) {
-		// Vérification si on est dans une situation de fin de jeu
-      if (saisie(lettre, alphabet) == OK) { // Si la lettre n'a pas encore été utilisée
-     		if (valider_lettre(lettre, secret, pendu, erreurs, win, ren) == 0)
- 				afficher_erreur(*erreurs, win, ren);
+      // Si la lettre n'a pas encore été utilisée
+		if (saisie(lettre, alphabet) == OK) {
+     		if (valider_lettre(win, ren, lettre, secret, pendu, erreurs) == 0)
+ 				afficher_erreur(win, ren, *erreurs);
 			SDL_RenderPresent(ren);
     	}
    }
-  	if ((valider_mot(secret, pendu) == 1)) { // Si le joueur a découvert toutes les lettres (a gagné)
-   	afficher_image("assets/pendu/gagne_pendu.png", 247, 7, win, ren);
+	// Si le joueur a découvert toutes les lettres (a gagné)
+  	if ((valider_mot(secret, pendu) == 1)) {
+   	afficher_image(win, ren, "assets/pendu/gagne_pendu.png", 247, 7);
     	*etat_partie = PENDUFINI;
-		if(etat_joueur == J1)
-			*scorej2=*scorej2 +1;
+		if (etat_joueur == J1)
+			*scoreJ2 = *scoreJ2 + 1;
 		else
-			*scorej1=*scorej1 +1;
+			*scoreJ1 = *scoreJ1 + 1;
 		SDL_RenderPresent(ren);
 	}
-   if ((*erreurs) >= 10) { // Si le joueur est pendu (a perdu)
-	 	afficher_image("assets/pendu/perdu_pendu.png", 247, 7, win, ren);
+	// Si le joueur est pendu (a perdu)
+   if ((*erreurs) >= 10) {
+	 	afficher_image(win, ren, "assets/pendu/perdu_pendu.png", 247, 7);
 		for (i = 0; secret[i]; i++) // Affichage du mot caché
-			affiche_lettre(secret[i], i, win, ren);
+			affiche_lettre(win, ren, secret[i], i);
 		*etat_partie = PENDUFINI;
-		if(etat_joueur == J1)
-			*scorej1=*scorej1 +1;
+		if (etat_joueur == J1)
+			*scoreJ1 = *scoreJ1 + 1;
 		else
-			*scorej2=*scorej2 +1;
+			*scoreJ2 = *scoreJ2 + 1;
 		SDL_RenderPresent(ren);
 	}
    // Met à jour l'affichage selon les manipulations précédentes
    SDL_UpdateWindowSurface(win);
 }
 
-
-
-/**
- * \brief Initilise au hasard le mot à deviner avec une banque de mots
- * \param secret Le mot à deviner
- * \param pendu Le mot sur lequel on joue au pendu composé au début de _ _
- * \param win La fenêtre qui sera manipulée
- * \param ren Le rendu qui sera manipulé
- */
-void initialiser_mot_joueur(int * etat_partie, int etat_joueur, SDL_Event event, SDL_Window * win, SDL_Renderer * ren, char * secret_ecrit, char * secret, char * pendu, char * pseudoJ1, char * pseudoJ2, int * scorej1, int * scorej2) {
-	switch(event.type) {
-		case SDL_KEYUP:
-			if (event.key.keysym.sym == SDLK_BACKSPACE) {
-				int l = strlen(secret_ecrit);
-				if (l > 0)
-						secret_ecrit[l-1] = '\0';
-				SDL_Rect txtDestRect;
-				TTF_Font *police;
-				SDL_Surface *texte = NULL;
-				SDL_Color couleur_police = {0, 0, 0};
-				police = TTF_OpenFont("assets/inter.ttf", 27);
-				TTF_SetFontStyle(police,TTF_STYLE_BOLD);
-				SDL_SetRenderDrawColor(ren, 255, 255, 255, 255);
-				SDL_RenderClear(ren);
-				afficher_image("assets/pendu/pendujcj.png", 0, 0, win, ren);
-				if(etat_joueur ==J1){
-					afficher_texte("assets/inter.ttf", 27, 510, 80, pseudoJ1, ren);
-					afficher_texte("assets/inter.ttf", 27, 510, 222, pseudoJ2, ren);
-				}else{
-					afficher_texte("assets/inter.ttf", 27, 510, 80, pseudoJ2, ren);
-					afficher_texte("assets/inter.ttf", 27, 510, 222, pseudoJ1, ren);
-				}
-				texte = TTF_RenderUTF8_Blended(police, secret_ecrit, couleur_police);
-				txtDestRect.x = 520;
-				txtDestRect.y = 315;
-				SDL_Texture *texte_tex = SDL_CreateTextureFromSurface(ren, texte);
-				SDL_FreeSurface(texte);
-				SDL_QueryTexture(texte_tex, NULL, NULL, &(txtDestRect.w), &(txtDestRect.h));
-				SDL_RenderCopy(ren, texte_tex, NULL, &txtDestRect);
-				TTF_CloseFont(police);
-				SDL_RenderPresent(ren);
-			}
-			if (event.key.keysym.sym >= SDLK_a && event.key.keysym.sym <= SDLK_z) {
-				int l = strlen(secret_ecrit);
-				if (l <7)
-					sprintf(secret_ecrit,"%s%c",secret_ecrit,event.key.keysym.sym);
-				SDL_Rect txtDestRect;
-				TTF_Font *police;
-				SDL_Surface *texte = NULL;
-				SDL_Color couleur_police = {0, 0, 0};
-				police = TTF_OpenFont("assets/inter.ttf", 27);
-				TTF_SetFontStyle(police,TTF_STYLE_BOLD);
-				SDL_SetRenderDrawColor(ren, 255, 255, 255, 255);
-				SDL_RenderClear(ren);
-				afficher_image("assets/pendu/pendujcj.png", 0, 0, win, ren);
-				if(etat_joueur ==J1){
-					afficher_texte("assets/inter.ttf", 27, 510, 80, pseudoJ1, ren);
-					afficher_texte("assets/inter.ttf", 27, 510, 222, pseudoJ2, ren);
-				}else{
-					afficher_texte("assets/inter.ttf", 27, 510, 80, pseudoJ2, ren);
-					afficher_texte("assets/inter.ttf", 27, 510, 222, pseudoJ1, ren);
-				}
-				texte = TTF_RenderUTF8_Blended(police,secret_ecrit, couleur_police);
-				txtDestRect.x = 520;
-				txtDestRect.y = 315;
-				SDL_Texture *texte_tex = SDL_CreateTextureFromSurface(ren, texte);
-				SDL_FreeSurface(texte);
-				SDL_QueryTexture(texte_tex, NULL, NULL, &(txtDestRect.w), &(txtDestRect.h));
-				SDL_RenderCopy(ren, texte_tex, NULL, &txtDestRect);
-				TTF_CloseFont(police);
-				SDL_RenderPresent(ren);
-			}
-			break;
-		case SDL_MOUSEBUTTONUP:
-				if (event.button.x < 557 && event.button.x > 386 && event.button.y < 443 && event.button.y > 375 && strlen(secret_ecrit)>=4){
-					////si clique sur valider
-					sprintf(secret,secret_ecrit);
-					int i;
-					for (i = 0; i<secret[i]; i++)
-				  		secret_ecrit[i] = '\0';
-					// Boucle qui initialise le 2ème mot pendu utilisé pour le jeu (ex : _ _ _ _)
-				   for (i = 0; i<secret[i]; i++)
-				  		pendu[i] = '_';
-				   //Affichage SDL des _ _ _
-					afficher_image("assets/pendu/pendu.png", 0, 0, win, ren);
-					afficher_texte("assets/inter.ttf", 19, 15, 110, pseudoJ1, ren);
-					afficher_texte("assets/inter.ttf", 19, 15, 232, pseudoJ2, ren);
-					afficher_nombre("assets/inter.ttf", 19, 26, 148, *scorej1, ren);
-					afficher_nombre("assets/inter.ttf", 19, 26, 269, *scorej2, ren);
-					SDL_RenderPresent(ren);
-				   afficher_mystere(i-1, win, ren);
-					SDL_RenderPresent(ren);
-					*etat_partie = PENDUJEU;
-				}
-				if (event.button.x < 739 && event.button.x > 565 && event.button.y < 443 && event.button.y > 375){
-					afficher_image("assets/pendu/pendu.png", 0, 0, win, ren);
-					afficher_texte("assets/inter.ttf", 19, 15, 110, pseudoJ1, ren);
-					afficher_texte("assets/inter.ttf", 19, 15, 232, pseudoJ2, ren);
-					afficher_nombre("assets/inter.ttf", 19, 26, 148, *scorej1, ren);
-					afficher_nombre("assets/inter.ttf", 19, 26, 269, *scorej2, ren);
-					SDL_RenderPresent(ren);
-					initialiser_mot_ordi(secret, pendu, win, ren);
-					*etat_partie = PENDUJEU;
-					SDL_RenderPresent(ren);
-				}
-				break;
-			default: break;
-}
-
-}
-
-
 /**
  * \brief Fonction qui s'occupe d'exécuter un tour de jeu dès que le joueur choisit une lettre, en vérifiant si la partie est terminée
- * \param event L'évènement détecté
- * \param etat_win La fenêtre où on se trouve
- * \param mode_de_jeu Joueur contre Joueur ou Joueur contre ordi
  * \param win La fenêtre qui sera manipulée
  * \param ren Le rendu qui sera manipulé
- * \param scorej1 Le score actuel du joueur 1
- * \param scorej2 Le score actuel du joueur 2
+ * \param event L'évènement détecté
+ * \param etat_win La fenêtre où on se trouve
+ * \param mode_de_jeu Soit joueur contre joueur, soit joueur contre ordi
+ * \param joueur1 Structure qui contient les informations du joueur 1
+ * \param joueur2 Structure qui contient les informations du joueur 2
  */
 
-void gestion_event_pendu(SDL_Event event, t_statut * etat_win, int * mode_de_jeu, int * etat_joueur, SDL_Window * win, SDL_Renderer * ren, t_joueur * Joueur1, t_joueur * Joueur2) {
+void gestion_event_pendu(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, t_statut * etat_win, int * mode_de_jeu, int * etat_joueur, t_joueur * joueur1, t_joueur * joueur2) {
 	switch(event.type) {
 		case SDL_MOUSEBUTTONUP: // Relâchement du clic pour la non redondance de l'évènement
 			// Bouton [QUITTER]
 			if (event.button.x < 155 && event.button.x > 0 && event.button.y < 43 && event.button.y > 0) {
-				if(*mode_de_jeu == JVSJ && *etat_joueur == J1){
-               afficher_image("assets/menu_J1.png", 0, 0, win, ren);
-            }else if(*mode_de_jeu == JVSJ && *etat_joueur == J2){
-               afficher_image("assets/menu_J2.png", 0, 0, win, ren);
-            }else{
-               afficher_image("assets/menu.png", 0, 0, win, ren);
+				if(*mode_de_jeu == JVSJ && *etat_joueur == J1) {
+               afficher_image(win, ren, "assets/menu_J1.png", 0, 0);
+            } else if (*mode_de_jeu == JVSJ && *etat_joueur == J2){
+               afficher_image(win, ren, "assets/menu_J2.png", 0, 0);
+            } else {
+               afficher_image(win, ren, "assets/menu.png", 0, 0);
             }
-				afficher_texte("assets/inter.ttf", 19, 290, 21, Joueur1->pseudo, ren);
-				afficher_texte("assets/inter.ttf", 19, 530, 21, Joueur2->pseudo, ren);
-				afficher_nombre("assets/inter.ttf", 19, 400, 21, Joueur1->score, ren);
-            afficher_nombre("assets/inter.ttf", 19, 635, 21, Joueur2->score, ren);
+				afficher_texte(ren, "assets/inter.ttf", 19, 290, 21, joueur1->pseudo);
+				afficher_texte(ren, "assets/inter.ttf", 19, 530, 21, joueur1->pseudo);
+				afficher_nombre(ren, "assets/inter.ttf", 19, 400, 21, joueur1->score);
+            afficher_nombre(ren, "assets/inter.ttf", 19, 635, 21, joueur2->score);
 				SDL_RenderPresent(ren);
 				*etat_win = MENU;
 			}
@@ -395,62 +394,62 @@ void gestion_event_pendu(SDL_Event event, t_statut * etat_win, int * mode_de_jeu
 			// Les lettres à proposer
 			// Une zone définie correspondant à une lettre et réalisant un tour de jeu avec celle qui correspond
 				if (event.button.x < 603 && event.button.x > 535 && event.button.y < 69 && event.button.y > 28)
-					pendu_tour(*etat_joueur, &(pendu.etat_partie),  &(Joueur1->score),  &(Joueur2->score), 'a', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie),  &(joueur1->score),  &(joueur2->score), 'a', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 675 && event.button.x > 607 && event.button.y < 69 && event.button.y > 28)
-					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'b', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'b', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 747 && event.button.x > 679 && event.button.y < 69 && event.button.y > 28)
-					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'c', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'c', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 603 && event.button.x > 535 && event.button.y < 120 && event.button.y > 79)
-					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'd', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'd', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 675 && event.button.x > 607 && event.button.y < 120 && event.button.y > 79)
-					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'e', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'e', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 747 && event.button.x > 679 && event.button.y < 120 && event.button.y > 79)
-					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'f', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'f', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 603 && event.button.x > 535 && event.button.y < 171 && event.button.y > 130)
-					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'g', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'g', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 675 && event.button.x > 607 && event.button.y < 171 && event.button.y > 130)
-					 pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'h', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'h', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 747 && event.button.x > 679 && event.button.y < 171 && event.button.y > 130)
-					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'i', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'i', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 603 && event.button.x > 535 && event.button.y < 222 && event.button.y > 181)
-					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'j', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'j', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 675 && event.button.x > 607 && event.button.y < 222 && event.button.y > 181)
-					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'k', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'k', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 747 && event.button.x > 679 && event.button.y < 222 && event.button.y > 181)
-					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'l', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'l', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 603 && event.button.x > 535 && event.button.y < 273 && event.button.y > 232)
-					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'm', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'm', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 675 && event.button.x > 607 && event.button.y < 273 && event.button.y > 232)
-					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'n', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'n', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 747 && event.button.x > 679 && event.button.y < 273 && event.button.y > 232)
-					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'o', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'o', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 603 && event.button.x > 535 && event.button.y < 324 && event.button.y > 283)
-					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'p', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'p', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 675 && event.button.x > 607 && event.button.y < 324 && event.button.y > 283)
-					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'q', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'q', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 747 && event.button.x > 679 && event.button.y < 324 && event.button.y > 283)
-					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'r', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'r', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 603 && event.button.x > 535 && event.button.y < 375 && event.button.y > 334)
-					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 's', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 's', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 675 && event.button.x > 607 && event.button.y < 375 && event.button.y > 334)
-					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 't', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 't', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 747 && event.button.x > 679 && event.button.y < 375 && event.button.y > 334)
-					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'u', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'u', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 603 && event.button.x > 535 && event.button.y < 426 && event.button.y > 385)
-					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'v', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'v', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 675 && event.button.x > 607 && event.button.y < 426 && event.button.y > 385)
-					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'w', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'w', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 747 && event.button.x > 679 && event.button.y < 426 && event.button.y > 385)
-					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'x', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'x', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 639 && event.button.x >571 && event.button.y < 477 && event.button.y > 436)
-					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'y', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'y', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 715 && event.button.x >647 && event.button.y < 477 && event.button.y > 436)
-					pendu_tour(*etat_joueur, &(pendu.etat_partie), &(Joueur1->score),  &(Joueur2->score), 'z', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs), win, ren);
+					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'z', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 			}
 			break;
 		default: break;
 	}
-	if(pendu.etat_partie == PENDU_JCJ_INIT){
-		initialiser_mot_joueur(&(pendu.etat_partie),*etat_joueur,event, win, ren,pendu.secret_ecrit,pendu.secret, pendu.pendu, Joueur1->pseudo, Joueur2->pseudo,&(Joueur1->score),  &(Joueur2->score));
+	if (pendu.etat_partie == PENDU_JCJ_INIT) {
+		initialiser_mot_joueur(win, ren, event, &(pendu.etat_partie),*etat_joueur, pendu.secret_ecrit, pendu.secret, pendu.pendu, joueur1->pseudo, joueur2->pseudo, &(joueur1->score), &(joueur2->score));
 	}
 }

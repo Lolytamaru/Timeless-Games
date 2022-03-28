@@ -73,29 +73,31 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>fichier secondaire qui gère le menu de Timeless Games  
+<p>Fichier secondaire qui gère le menu de Timeless Games.  
 <a href="#details">Plus de détails...</a></p>
-<div class="textblock"><code>#include &lt;all_includes.h&gt;</code><br />
-<code>#include &lt;menu.h&gt;</code><br />
-<code>#include &lt;pendu.h&gt;</code><br />
-<code>#include &lt;param.h&gt;</code><br />
-<code>#include &lt;masterm.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="all__includes_8h_source.html">all_includes.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="joueur_8h_source.html">joueur.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="pendu_8h_source.html">pendu.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="param_8h_source.html">param.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="masterm_8h_source.html">masterm.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="menu_8h_source.html">menu.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="batnav_8h_source.html">batnav.h</a>&gt;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Fonctions</h2></td></tr>
-<tr class="memitem:a1ae4a3f29291f75be073883b57eaf383"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="menu_8c.html#a1ae4a3f29291f75be073883b57eaf383">gestion_event_menu</a> (SDL_Event event, int *etat_win, SDL_Window *win, SDL_Renderer *ren, int *scorej1, int *scorej2)</td></tr>
-<tr class="memdesc:a1ae4a3f29291f75be073883b57eaf383"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui permet de gérer les actions à faire sur la fenêtre du menu.  <a href="menu_8c.html#a1ae4a3f29291f75be073883b57eaf383">Plus de détails...</a><br /></td></tr>
-<tr class="separator:a1ae4a3f29291f75be073883b57eaf383"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00406864aa50b034e34ca8494d03bd73"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="menu_8c.html#a00406864aa50b034e34ca8494d03bd73">gestion_event_menu</a> (SDL_Window *win, SDL_Renderer *ren, SDL_Event event, t_statut *etat_win, int *mode_de_jeu, int *etat_joueur, <a class="el" href="structs__joueur.html">t_joueur</a> *joueur1, <a class="el" href="structs__joueur.html">t_joueur</a> *joueur2)</td></tr>
+<tr class="memdesc:a00406864aa50b034e34ca8494d03bd73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui permet de gérer les actions à faire sur la fenêtre du menu.  <a href="menu_8c.html#a00406864aa50b034e34ca8494d03bd73">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a00406864aa50b034e34ca8494d03bd73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
-<div class="textblock"><p >fichier secondaire qui gère le menu de Timeless Games </p>
+<div class="textblock"><p >Fichier secondaire qui gère le menu de Timeless Games. </p>
 <p >fichier secondaire qui gère le menu paramètres de Timeless Games</p>
 <dl class="section author"><dt>Auteur</dt><dd>Christal Duclos Hugo Brochelard Thibaut Duchesne </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>21 mars 2022 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>28 mars 2022 </dd></dl>
 </div><h2 class="groupheader">Documentation des fonctions</h2>
-<a id="a1ae4a3f29291f75be073883b57eaf383"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1ae4a3f29291f75be073883b57eaf383">&#9670;&nbsp;</a></span>gestion_event_menu()</h2>
+<a id="a00406864aa50b034e34ca8494d03bd73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00406864aa50b034e34ca8494d03bd73">&#9670;&nbsp;</a></span>gestion_event_menu()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -103,18 +105,6 @@ Fonctions</h2></td></tr>
         <tr>
           <td class="memname">void gestion_event_menu </td>
           <td>(</td>
-          <td class="paramtype">SDL_Event&#160;</td>
-          <td class="paramname"><em>event</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>etat_win</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">SDL_Window *&#160;</td>
           <td class="paramname"><em>win</em>, </td>
         </tr>
@@ -127,14 +117,38 @@ Fonctions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>scorej1</em>, </td>
+          <td class="paramtype">SDL_Event&#160;</td>
+          <td class="paramname"><em>event</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">t_statut *&#160;</td>
+          <td class="paramname"><em>etat_win</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>scorej2</em>&#160;</td>
+          <td class="paramname"><em>mode_de_jeu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>etat_joueur</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structs__joueur.html">t_joueur</a> *&#160;</td>
+          <td class="paramname"><em>joueur1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structs__joueur.html">t_joueur</a> *&#160;</td>
+          <td class="paramname"><em>joueur2</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -147,12 +161,14 @@ Fonctions</h2></td></tr>
 <p>Fonction qui permet de gérer les actions à faire sur la fenêtre du menu. </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
-    <tr><td class="paramname">event</td><td>Un détecteur d'évènements </td></tr>
-    <tr><td class="paramname">etat_win</td><td>La fenêtre où l'on se trouve </td></tr>
     <tr><td class="paramname">win</td><td>La fenêtre qui sera manipulée </td></tr>
     <tr><td class="paramname">ren</td><td>Le rendu qui sera manipulé </td></tr>
-    <tr><td class="paramname">scorej1</td><td>Le score actuel du joueur 1 </td></tr>
-    <tr><td class="paramname">scorej2</td><td>Le score actuel du joueur 2 </td></tr>
+    <tr><td class="paramname">event</td><td>Un détecteur d'évènements </td></tr>
+    <tr><td class="paramname">etat_win</td><td>La fenêtre où l'on se trouve </td></tr>
+    <tr><td class="paramname">mode_de_jeu</td><td>Joueur contre Joueur ou Joueur contre ordi </td></tr>
+    <tr><td class="paramname">etat_joueur</td><td>Etat du joueur </td></tr>
+    <tr><td class="paramname">joueur1</td><td>Structure qui contient les informations du joueur 1 </td></tr>
+    <tr><td class="paramname">joueur2</td><td>Structure qui contient les informations du joueur 2 </td></tr>
   </table>
   </dd>
 </dl>
@@ -162,7 +178,7 @@ Fonctions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Généré le Lundi 21 Mars 2022 17:18:40 pour Timeless Games par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2
+Généré le Lundi 28 Mars 2022 18:14:55 pour Timeless Games par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2
 </small></address>
 </body>
 </html>

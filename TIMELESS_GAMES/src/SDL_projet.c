@@ -3,7 +3,7 @@
  * \brief Fichier comprenant toutes les fonctions de manipulation de SDL
  * \author Duclos Christal Brochelard Hugo Thibaut Duchesne
  * \version 1.0
- * \date 21 mars 2022
+ * \date 28 mars 2022
  */
 
 #include <all_includes.h>
@@ -20,13 +20,13 @@ void SDL_ExitWithError(const char *message) {
 
 /**
  * \brief Fonction qui permet l'affichage d'une image à une position donnée
+ * \param win La fenêtre qui sera manipulée
+ * \param ren Le rendu qui sera manipulé
  * \param nom_img  Le nom de l'image à afficher
  * \param coordx La position en abscisse de l'image
  * \param coordy La position en ordonnée de l'image
- * \param win La fenêtre qui sera manipulée
- * \param ren Le rendu qui sera manipulé
  */
-void afficher_image(char * nom_img, int coordx, int coordy, SDL_Window * win, SDL_Renderer * ren) {
+void afficher_image(SDL_Window * win, SDL_Renderer * ren, char * nom_img, int coordx, int coordy) {
    SDL_Surface *image = NULL;
    SDL_Texture *texture = NULL;
 
@@ -60,14 +60,14 @@ void afficher_image(char * nom_img, int coordx, int coordy, SDL_Window * win, SD
 
 /**
  * \brief Fonction qui permet l'affichage d'un texte à une position donnée d'une certaine taille
+ * \param ren Le rendu qui sera manipulé
  * \param pol La police utilisée
  * \param taille_pol La taille de la police
  * \param pos_x La position en abscisse du texte
  * \param pos_y La position en ordonnée du texte
  * \param texte Le texte a afficher
- * \param ren Le rendu qui sera manipulé
  */
-void afficher_texte(char * pol, int taille_pol, int pos_x, int pos_y, char * texte, SDL_Renderer * ren) {
+void afficher_texte(SDL_Renderer * ren, char * pol, int taille_pol, int pos_x, int pos_y, char * texte) {
    TTF_Font *police;
    SDL_Rect position_txt;
    position_txt.x = pos_x;
@@ -85,14 +85,14 @@ void afficher_texte(char * pol, int taille_pol, int pos_x, int pos_y, char * tex
 
 /**
  * \brief Fonction qui permet l'affichage d'une nombre à une position donnée d'une certaine taille
+ * \param ren Le rendu qui sera manipulé
  * \param pol La police utilisée
  * \param taille_pol La taille de la police
  * \param pos_x La position en abscisse du texte
  * \param pos_y La position en ordonnée du texte
  * \param nombre le nombre a afficher
- * \param ren Le rendu qui sera manipulé
  */
-void afficher_nombre(char * pol,int taille_pol, int pos_x, int pos_y, int nombre, SDL_Renderer * ren){
+void afficher_nombre(SDL_Renderer * ren, char * pol, int taille_pol, int pos_x, int pos_y, int nombre) {
    TTF_Font *police;
    SDL_Rect position_txt;
    position_txt.x = pos_x;
@@ -111,15 +111,15 @@ void afficher_nombre(char * pol,int taille_pol, int pos_x, int pos_y, int nombre
 }
 /**
  * \brief Fonction qui libère tout ce qui a été créé
- * \param w Un pointeur sur une fenêtre
- * \param r Un pointeur sur un rendu
- * \param t Un pointeur sur une texture
+ * \param win Un pointeur sur une fenêtre
+ * \param ren Un pointeur sur un rendu
+ * \param tex Un pointeur sur une texture
  */
-void nettoyerSDL(SDL_Window * w, SDL_Renderer * r, SDL_Texture * t) {
-   if (t != NULL)
-      SDL_DestroyTexture(t);
-   if (r != NULL)
-      SDL_DestroyRenderer(r);
-   if (w != NULL)
-      SDL_DestroyWindow(w);
+void nettoyerSDL(SDL_Window * win, SDL_Renderer * ren, SDL_Texture * tex) {
+   if (tex != NULL)
+      SDL_DestroyTexture(tex);
+   if (ren != NULL)
+      SDL_DestroyRenderer(ren);
+   if (win != NULL)
+      SDL_DestroyWindow(win);
 }

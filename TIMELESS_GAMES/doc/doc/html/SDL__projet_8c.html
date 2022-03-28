@@ -75,31 +75,34 @@ $(function() {
 
 <p>Fichier comprenant toutes les fonctions de manipulation de SDL.  
 <a href="#details">Plus de détails...</a></p>
-<div class="textblock"><code>#include &lt;all_includes.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="all__includes_8h_source.html">all_includes.h</a>&gt;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Fonctions</h2></td></tr>
 <tr class="memitem:abed124ab111ee095d48f08e2a3ea4446"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SDL__projet_8c.html#abed124ab111ee095d48f08e2a3ea4446">SDL_ExitWithError</a> (const char *message)</td></tr>
 <tr class="memdesc:abed124ab111ee095d48f08e2a3ea4446"><td class="mdescLeft">&#160;</td><td class="mdescRight">Protocole en cas de détection d'une erreur liée à la SDL.  <a href="SDL__projet_8c.html#abed124ab111ee095d48f08e2a3ea4446">Plus de détails...</a><br /></td></tr>
 <tr class="separator:abed124ab111ee095d48f08e2a3ea4446"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a611a115a1c71eedbbbbaa19c27c5a708"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SDL__projet_8c.html#a611a115a1c71eedbbbbaa19c27c5a708">afficher_image</a> (char *nom_img, int coordx, int coordy, SDL_Window *win, SDL_Renderer *ren)</td></tr>
-<tr class="memdesc:a611a115a1c71eedbbbbaa19c27c5a708"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui permet l'affichage d'une image à une position donnée.  <a href="SDL__projet_8c.html#a611a115a1c71eedbbbbaa19c27c5a708">Plus de détails...</a><br /></td></tr>
-<tr class="separator:a611a115a1c71eedbbbbaa19c27c5a708"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6146461836d62acc98941053a08f03fc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SDL__projet_8c.html#a6146461836d62acc98941053a08f03fc">afficher_texte</a> (char *pol, int taille_pol, int pos_x, int pos_y, char *texte, SDL_Renderer *ren)</td></tr>
-<tr class="memdesc:a6146461836d62acc98941053a08f03fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui permet l'affichage d'un texte à une position donnée d'une certaine taille.  <a href="SDL__projet_8c.html#a6146461836d62acc98941053a08f03fc">Plus de détails...</a><br /></td></tr>
-<tr class="separator:a6146461836d62acc98941053a08f03fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2dbc50e24518d12a26f17279bf5ba4cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SDL__projet_8c.html#a2dbc50e24518d12a26f17279bf5ba4cd">nettoyerSDL</a> (SDL_Window *w, SDL_Renderer *r, SDL_Texture *t)</td></tr>
-<tr class="memdesc:a2dbc50e24518d12a26f17279bf5ba4cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui libère tout ce qui a été créé  <a href="SDL__projet_8c.html#a2dbc50e24518d12a26f17279bf5ba4cd">Plus de détails...</a><br /></td></tr>
-<tr class="separator:a2dbc50e24518d12a26f17279bf5ba4cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adda3d6181058eb068550b18a4704d5a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SDL__projet_8c.html#adda3d6181058eb068550b18a4704d5a9">afficher_image</a> (SDL_Window *win, SDL_Renderer *ren, char *nom_img, int coordx, int coordy)</td></tr>
+<tr class="memdesc:adda3d6181058eb068550b18a4704d5a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui permet l'affichage d'une image à une position donnée.  <a href="SDL__projet_8c.html#adda3d6181058eb068550b18a4704d5a9">Plus de détails...</a><br /></td></tr>
+<tr class="separator:adda3d6181058eb068550b18a4704d5a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1965ae769f14c0267679b435daecb808"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SDL__projet_8c.html#a1965ae769f14c0267679b435daecb808">afficher_texte</a> (SDL_Renderer *ren, char *pol, int taille_pol, int pos_x, int pos_y, char *texte)</td></tr>
+<tr class="memdesc:a1965ae769f14c0267679b435daecb808"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui permet l'affichage d'un texte à une position donnée d'une certaine taille.  <a href="SDL__projet_8c.html#a1965ae769f14c0267679b435daecb808">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a1965ae769f14c0267679b435daecb808"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ff876cda7898e399d3968da4fed72b3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SDL__projet_8c.html#a9ff876cda7898e399d3968da4fed72b3">afficher_nombre</a> (SDL_Renderer *ren, char *pol, int taille_pol, int pos_x, int pos_y, int nombre)</td></tr>
+<tr class="memdesc:a9ff876cda7898e399d3968da4fed72b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui permet l'affichage d'une nombre à une position donnée d'une certaine taille.  <a href="SDL__projet_8c.html#a9ff876cda7898e399d3968da4fed72b3">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a9ff876cda7898e399d3968da4fed72b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb3736618c786bd9759f3d02004bd549"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SDL__projet_8c.html#aeb3736618c786bd9759f3d02004bd549">nettoyerSDL</a> (SDL_Window *win, SDL_Renderer *ren, SDL_Texture *tex)</td></tr>
+<tr class="memdesc:aeb3736618c786bd9759f3d02004bd549"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui libère tout ce qui a été créé  <a href="SDL__projet_8c.html#aeb3736618c786bd9759f3d02004bd549">Plus de détails...</a><br /></td></tr>
+<tr class="separator:aeb3736618c786bd9759f3d02004bd549"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
 <div class="textblock"><p >Fichier comprenant toutes les fonctions de manipulation de SDL. </p>
 <dl class="section author"><dt>Auteur</dt><dd>Duclos Christal Brochelard Hugo Thibaut Duchesne </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>21 mars 2022 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>28 mars 2022 </dd></dl>
 </div><h2 class="groupheader">Documentation des fonctions</h2>
-<a id="a611a115a1c71eedbbbbaa19c27c5a708"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a611a115a1c71eedbbbbaa19c27c5a708">&#9670;&nbsp;</a></span>afficher_image()</h2>
+<a id="adda3d6181058eb068550b18a4704d5a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adda3d6181058eb068550b18a4704d5a9">&#9670;&nbsp;</a></span>afficher_image()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -107,6 +110,18 @@ Fonctions</h2></td></tr>
         <tr>
           <td class="memname">void afficher_image </td>
           <td>(</td>
+          <td class="paramtype">SDL_Window *&#160;</td>
+          <td class="paramname"><em>win</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>ren</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">char *&#160;</td>
           <td class="paramname"><em>nom_img</em>, </td>
         </tr>
@@ -120,19 +135,7 @@ Fonctions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>coordy</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">SDL_Window *&#160;</td>
-          <td class="paramname"><em>win</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">SDL_Renderer *&#160;</td>
-          <td class="paramname"><em>ren</em>&#160;</td>
+          <td class="paramname"><em>coordy</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -145,19 +148,84 @@ Fonctions</h2></td></tr>
 <p>Fonction qui permet l'affichage d'une image à une position donnée. </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
+    <tr><td class="paramname">win</td><td>La fenêtre qui sera manipulée </td></tr>
+    <tr><td class="paramname">ren</td><td>Le rendu qui sera manipulé </td></tr>
     <tr><td class="paramname">nom_img</td><td>Le nom de l'image à afficher </td></tr>
     <tr><td class="paramname">coordx</td><td>La position en abscisse de l'image </td></tr>
     <tr><td class="paramname">coordy</td><td>La position en ordonnée de l'image </td></tr>
-    <tr><td class="paramname">win</td><td>La fenêtre qui sera manipulée </td></tr>
-    <tr><td class="paramname">ren</td><td>Le rendu qui sera manipulé </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a6146461836d62acc98941053a08f03fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6146461836d62acc98941053a08f03fc">&#9670;&nbsp;</a></span>afficher_texte()</h2>
+<a id="a9ff876cda7898e399d3968da4fed72b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ff876cda7898e399d3968da4fed72b3">&#9670;&nbsp;</a></span>afficher_nombre()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void afficher_nombre </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>ren</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>pol</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>taille_pol</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pos_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pos_y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nombre</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui permet l'affichage d'une nombre à une position donnée d'une certaine taille. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ren</td><td>Le rendu qui sera manipulé </td></tr>
+    <tr><td class="paramname">pol</td><td>La police utilisée </td></tr>
+    <tr><td class="paramname">taille_pol</td><td>La taille de la police </td></tr>
+    <tr><td class="paramname">pos_x</td><td>La position en abscisse du texte </td></tr>
+    <tr><td class="paramname">pos_y</td><td>La position en ordonnée du texte </td></tr>
+    <tr><td class="paramname">nombre</td><td>le nombre a afficher </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1965ae769f14c0267679b435daecb808"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1965ae769f14c0267679b435daecb808">&#9670;&nbsp;</a></span>afficher_texte()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -165,6 +233,12 @@ Fonctions</h2></td></tr>
         <tr>
           <td class="memname">void afficher_texte </td>
           <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>ren</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">char *&#160;</td>
           <td class="paramname"><em>pol</em>, </td>
         </tr>
@@ -190,13 +264,7 @@ Fonctions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>texte</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">SDL_Renderer *&#160;</td>
-          <td class="paramname"><em>ren</em>&#160;</td>
+          <td class="paramname"><em>texte</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -209,22 +277,20 @@ Fonctions</h2></td></tr>
 <p>Fonction qui permet l'affichage d'un texte à une position donnée d'une certaine taille. </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
+    <tr><td class="paramname">ren</td><td>Le rendu qui sera manipulé </td></tr>
     <tr><td class="paramname">pol</td><td>La police utilisée </td></tr>
     <tr><td class="paramname">taille_pol</td><td>La taille de la police </td></tr>
     <tr><td class="paramname">pos_x</td><td>La position en abscisse du texte </td></tr>
     <tr><td class="paramname">pos_y</td><td>La position en ordonnée du texte </td></tr>
-    <tr><td class="paramname">pos_w</td><td>La largeur de l'image </td></tr>
-    <tr><td class="paramname">pos_h</td><td>La hauteur de l'image </td></tr>
-    <tr><td class="paramname">win</td><td>La fenêtre qui sera manipulée </td></tr>
-    <tr><td class="paramname">ren</td><td>Le rendu qui sera manipulé </td></tr>
+    <tr><td class="paramname">texte</td><td>Le texte a afficher </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a2dbc50e24518d12a26f17279bf5ba4cd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2dbc50e24518d12a26f17279bf5ba4cd">&#9670;&nbsp;</a></span>nettoyerSDL()</h2>
+<a id="aeb3736618c786bd9759f3d02004bd549"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb3736618c786bd9759f3d02004bd549">&#9670;&nbsp;</a></span>nettoyerSDL()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -233,19 +299,19 @@ Fonctions</h2></td></tr>
           <td class="memname">void nettoyerSDL </td>
           <td>(</td>
           <td class="paramtype">SDL_Window *&#160;</td>
-          <td class="paramname"><em>w</em>, </td>
+          <td class="paramname"><em>win</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">SDL_Renderer *&#160;</td>
-          <td class="paramname"><em>r</em>, </td>
+          <td class="paramname"><em>ren</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">SDL_Texture *&#160;</td>
-          <td class="paramname"><em>t</em>&#160;</td>
+          <td class="paramname"><em>tex</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -258,9 +324,9 @@ Fonctions</h2></td></tr>
 <p>Fonction qui libère tout ce qui a été créé </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
-    <tr><td class="paramname">w</td><td>Un pointeur sur une fenêtre </td></tr>
-    <tr><td class="paramname">r</td><td>Un pointeur sur un rendu </td></tr>
-    <tr><td class="paramname">t</td><td>Un pointeur sur une texture </td></tr>
+    <tr><td class="paramname">win</td><td>Un pointeur sur une fenêtre </td></tr>
+    <tr><td class="paramname">ren</td><td>Un pointeur sur un rendu </td></tr>
+    <tr><td class="paramname">tex</td><td>Un pointeur sur une texture </td></tr>
   </table>
   </dd>
 </dl>
@@ -296,7 +362,7 @@ Fonctions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Généré le Lundi 21 Mars 2022 17:18:40 pour Timeless Games par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2
+Généré le Lundi 28 Mars 2022 18:14:55 pour Timeless Games par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2
 </small></address>
 </body>
 </html>

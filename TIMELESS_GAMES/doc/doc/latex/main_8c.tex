@@ -6,27 +6,16 @@ fichier principal de Timeless Games
 
 
 {\ttfamily \#include $<$all\+\_\+includes.\+h$>$}\newline
+{\ttfamily \#include $<$joueur.\+h$>$}\newline
 {\ttfamily \#include $<$menu.\+h$>$}\newline
 {\ttfamily \#include $<$pendu.\+h$>$}\newline
 {\ttfamily \#include $<$param.\+h$>$}\newline
 {\ttfamily \#include $<$masterm.\+h$>$}\newline
-{\ttfamily \#include $<$pseudo.\+h$>$}\newline
 {\ttfamily \#include $<$batnav.\+h$>$}\newline
-\doxysubsection*{Classes}
-\begin{DoxyCompactItemize}
-\item 
-struct \mbox{\hyperlink{structs__joueur}{s\+\_\+joueur}}
-\end{DoxyCompactItemize}
-\doxysubsection*{Définitions de type}
-\begin{DoxyCompactItemize}
-\item 
-\mbox{\Hypertarget{main_8c_a562df2301504c40a35596ed45f41f2b2}\label{main_8c_a562df2301504c40a35596ed45f41f2b2}} 
-typedef struct \mbox{\hyperlink{structs__joueur}{s\+\_\+joueur}} {\bfseries t\+\_\+joueur}
-\end{DoxyCompactItemize}
 \doxysubsection*{Fonctions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{main_8c_ad805d58f4ff60fd9d7d0672292c6a096}{gestion\+\_\+event\+\_\+accueil}} (SDL\+\_\+\+Event event, int $\ast$etat\+\_\+win, SDL\+\_\+\+Window $\ast$win, SDL\+\_\+\+Renderer $\ast$ren)
+void \mbox{\hyperlink{main_8c_a8ec58dd297215c79a6fefda0461c2899}{gestion\+\_\+event\+\_\+accueil}} (SDL\+\_\+\+Window $\ast$win, SDL\+\_\+\+Renderer $\ast$ren, SDL\+\_\+\+Event event, t\+\_\+statut $\ast$etat\+\_\+win, \mbox{\hyperlink{structs__joueur}{t\+\_\+joueur}} $\ast$joueur1, \mbox{\hyperlink{structs__joueur}{t\+\_\+joueur}} $\ast$joueur2)
 \begin{DoxyCompactList}\small\item\em Fonction qui permet de gérer les actions à faire sur la fenêtre d\textquotesingle{}accueil. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{main_8c_a3c04138a5bfe5d72780bb7e82a18e627}\label{main_8c_a3c04138a5bfe5d72780bb7e82a18e627}} 
 int {\bfseries main} (int argc, char $\ast$$\ast$argv)
@@ -43,16 +32,16 @@ Christal Duclos Hugo Brochelard Thibaut Duchesne
 2.\+0 
 \end{DoxyVersion}
 \begin{DoxyDate}{Date}
-21 mars 2022 
+28 mars 2022 
 \end{DoxyDate}
 
 
 \doxysubsection{Documentation des fonctions}
-\mbox{\Hypertarget{main_8c_ad805d58f4ff60fd9d7d0672292c6a096}\label{main_8c_ad805d58f4ff60fd9d7d0672292c6a096}} 
+\mbox{\Hypertarget{main_8c_a8ec58dd297215c79a6fefda0461c2899}\label{main_8c_a8ec58dd297215c79a6fefda0461c2899}} 
 \index{main.c@{main.c}!gestion\_event\_accueil@{gestion\_event\_accueil}}
 \index{gestion\_event\_accueil@{gestion\_event\_accueil}!main.c@{main.c}}
 \doxysubsubsection{\texorpdfstring{gestion\_event\_accueil()}{gestion\_event\_accueil()}}
-{\footnotesize\ttfamily void gestion\+\_\+event\+\_\+accueil (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Event}]{event,  }\item[{int $\ast$}]{etat\+\_\+win,  }\item[{SDL\+\_\+\+Window $\ast$}]{win,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{ren }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void gestion\+\_\+event\+\_\+accueil (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{win,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{ren,  }\item[{SDL\+\_\+\+Event}]{event,  }\item[{t\+\_\+statut $\ast$}]{etat\+\_\+win,  }\item[{\mbox{\hyperlink{structs__joueur}{t\+\_\+joueur}} $\ast$}]{joueur1,  }\item[{\mbox{\hyperlink{structs__joueur}{t\+\_\+joueur}} $\ast$}]{joueur2 }\end{DoxyParamCaption})}
 
 
 
@@ -60,10 +49,16 @@ Fonction qui permet de gérer les actions à faire sur la fenêtre d\textquotesi
 
 
 \begin{DoxyParams}{Paramètres}
-{\em event} & Un détecteur d\textquotesingle{}évènements \\
-\hline
 {\em win} & La fenêtre qui sera manipulée \\
 \hline
 {\em ren} & Le rendu qui sera manipulé \\
+\hline
+{\em event} & Un détecteur d\textquotesingle{}évènements \\
+\hline
+{\em etat\+\_\+win} & La fenêtre où l\textquotesingle{}on se trouve \\
+\hline
+{\em joueur1} & Structure qui contient les informations du joueur 1 \\
+\hline
+{\em joueur2} & Structure qui contient les informations du joueur 2 \\
 \hline
 \end{DoxyParams}

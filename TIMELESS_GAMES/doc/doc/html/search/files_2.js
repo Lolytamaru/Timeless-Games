@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['pendu_2ec_55',['pendu.c',['../pendu_8c.html',1,'']]],
-  ['pseudo_2ec_56',['pseudo.c',['../pseudo_8c.html',1,'']]]
+  ['joueur_2ec_87',['joueur.c',['../joueur_8c.html',1,'']]],
+  ['joueur_2eh_88',['joueur.h',['../joueur_8h.html',1,'']]]
 ];
