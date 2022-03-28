@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Timeless Games:  Fichier source de /info/etu/l2info/s200470/Timeless-Games/TIMELESS_GAMES/include/batnav.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Timeless Games<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Timeless Games est une platforme graphique multi-jeux contenant des mini-jeux à deux joueurs. Sur la platforme, il sera possible de jouer à certains jeux comme le jeu du Pendu, le Mastermind ou encore la Bataille Navale. Un système de scores sera mis en place pour enregistrer les scores des joueurs, jeux après jeux. Il sera possible de jouer à 2 ou contre l&#39;ordinateur.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">batnav.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="batnav_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#ifndef __BATNAV_H__</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define __BATNAV_H__</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="structs__bateau.html">   15</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structs__bateau.html">s_bateau</a> {</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;   <span class="keywordtype">char</span> * nom;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;   <span class="keywordtype">int</span> taille; <span class="comment">// Entre 2 et 5 cases</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;   <span class="keywordtype">int</span> engage; <span class="comment">// Ne peut avoir que deux valeurs : 1 pour placé, 0 pour non placé</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;   <span class="keywordtype">char</span> direction; <span class="comment">// Ne peut avoir que deux valeurs : h pour horizontal ou v pour vertical</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;} <a class="code" href="structbateau__t.html">bateau_t</a>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="structs__case.html">   25</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structs__case.html">s_case</a> {</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;   <span class="keywordtype">char</span> * num_bat;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;   <span class="keywordtype">int</span> etat; <span class="comment">// Ne peut avoir que deux valeurs : 0 = case non touchée ou 1 = case touchée</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;   <span class="keywordtype">int</span> occupe; <span class="comment">// Si un bateau occupe la case ou non</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;} <a class="code" href="structcase__t.html">case_t</a>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="structs__plateau.html">   34</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structs__plateau.html">s_plateau</a> {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;   <a class="code" href="structcase__t.html">case_t</a> **une_case; <span class="comment">// Structure pour une case</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;   <span class="keywordtype">int</span> nb_col, nb_lig; <span class="comment">// Taille du plateau lignes/colonnes</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;   <a class="code" href="structbateau__t.html">bateau_t</a> liste_bat[10]; <span class="comment">// Liste des 5 bateaux disponibles, x2 pour chaque direction</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;} <a class="code" href="structplateau__t.html">plateau_t</a>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="structs__batnav.html">   43</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structs__batnav.html">s_batnav</a> {</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="structplateau__t.html">plateau_t</a> joueur1; <span class="comment">// Plateau du joueur 1 */</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;   <a class="code" href="structplateau__t.html">plateau_t</a> joueur2; <span class="comment">// Plateau du joueur 2 */</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">int</span> etat_partie; <span class="comment">// 1 = placements du joueur 1, 2 = placements du joueur 2, 3 = tour du joueur 1, 4 = tour du joueur 2, 5 = fin du jeu</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;} <a class="code" href="structbatnav__t.html">batnav_t</a>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<a class="code" href="structplateau__t.html">plateau_t</a> <a class="code" href="batnav_8h.html#abe0ad9beb7a74d9fd90798ff23be67e7">creer_plateau</a>(<span class="keywordtype">int</span> l, <span class="keywordtype">int</span> c);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keywordtype">void</span> <a class="code" href="batnav_8h.html#a23ff0a4958810e90301f1fee0637e04f">init_bateaux</a>(<a class="code" href="structplateau__t.html">plateau_t</a> * plateau_j);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keywordtype">void</span> <a class="code" href="batnav_8h.html#ae416666500e3b936c8635a78759e20ec">init_etat_plateau</a>(<a class="code" href="structplateau__t.html">plateau_t</a> * plateau_j);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keywordtype">void</span> <a class="code" href="batnav_8h.html#a4d53920c0079ab0249bf8f72309d63a1">init_partie_batnav</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keywordtype">int</span> <a class="code" href="batnav_8h.html#aeb0dabf827c3858455e0a90a287dea55">est_valide</a>(<a class="code" href="structplateau__t.html">plateau_t</a> plateau_j, <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keywordtype">int</span> <a class="code" href="batnav_8h.html#a5275251d8fde0b35aa8720e727a2ae19">direction_valide</a>(<a class="code" href="structplateau__t.html">plateau_t</a> plateau_j, <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">int</span> direction, <span class="keywordtype">int</span> taille_bat);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keywordtype">void</span> <a class="code" href="batnav_8h.html#acdd755afb32f2badac52da8e55d99a6b">vider_cargaison</a>(SDL_Window * win, SDL_Renderer * ren, <span class="keywordtype">int</span> taille_bat, <span class="keywordtype">char</span> * immatriculation);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keywordtype">void</span> <a class="code" href="batnav_8h.html#a7adc718f0977d2369c6073f6b01552df">placement_case_bat</a>(SDL_Window * win, SDL_Renderer * ren, <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">int</span> direction, <span class="keywordtype">int</span> bat_selec, <span class="keywordtype">int</span> JOUEUR, <span class="keywordtype">char</span> * couleur, <a class="code" href="structplateau__t.html">plateau_t</a> * plateau_j, <a class="code" href="structs__joueur.html">t_joueur</a> * joueur1, <a class="code" href="structs__joueur.html">t_joueur</a> * joueur2);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keywordtype">void</span> <a class="code" href="batnav_8h.html#a5b1ddcf0086e24619e521341ac05745c">placement_bateaux</a>(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, t_statut * etat_win, <span class="keywordtype">int</span> JOUEUR, <a class="code" href="structplateau__t.html">plateau_t</a> * plateau_j, <span class="keywordtype">char</span> * couleur, <a class="code" href="structs__joueur.html">t_joueur</a> * joueur1, <a class="code" href="structs__joueur.html">t_joueur</a> * joueur2);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keywordtype">void</span> <a class="code" href="batnav_8h.html#a28007c62c88a204c668b49e0f51b2e33">attaque_case_bat</a>(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, <a class="code" href="structplateau__t.html">plateau_t</a> plateau_j, <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">int</span> * scorej1, <span class="keywordtype">int</span> * scorej2);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keywordtype">void</span> <a class="code" href="batnav_8h.html#aaa9caafcd72aa0fdfc4adadaef2f528f">gestion_event_batnav</a>(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, t_statut * etat_win, <span class="keywordtype">int</span> * mode_de_jeu, <span class="keywordtype">int</span> * etat_joueur, <a class="code" href="structs__joueur.html">t_joueur</a> * joueur1, <a class="code" href="structs__joueur.html">t_joueur</a> * joueur2);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="abatnav_8h_html_a23ff0a4958810e90301f1fee0637e04f"><div class="ttname"><a href="batnav_8h.html#a23ff0a4958810e90301f1fee0637e04f">init_bateaux</a></div><div class="ttdeci">void init_bateaux(plateau_t *plateau_j)</div><div class="ttdoc">Fonction qui initialise le stock de bateau du plateau d'un joueur.</div><div class="ttdef"><b>Definition:</b> batnav.c:42</div></div>
+<div class="ttc" id="abatnav_8h_html_a28007c62c88a204c668b49e0f51b2e33"><div class="ttname"><a href="batnav_8h.html#a28007c62c88a204c668b49e0f51b2e33">attaque_case_bat</a></div><div class="ttdeci">void attaque_case_bat(SDL_Window *win, SDL_Renderer *ren, SDL_Event event, plateau_t plateau_j, int x, int y, int *scorej1, int *scorej2)</div><div class="ttdoc">Fonction qui s'occupe de la partie affrontement de la bataille navale.</div><div class="ttdef"><b>Definition:</b> batnav.c:390</div></div>
+<div class="ttc" id="abatnav_8h_html_a4d53920c0079ab0249bf8f72309d63a1"><div class="ttname"><a href="batnav_8h.html#a4d53920c0079ab0249bf8f72309d63a1">init_partie_batnav</a></div><div class="ttdeci">void init_partie_batnav(void)</div><div class="ttdoc">Fonction qui initialise une partie de la bataille navale.</div><div class="ttdef"><b>Definition:</b> batnav.c:112</div></div>
+<div class="ttc" id="abatnav_8h_html_a5275251d8fde0b35aa8720e727a2ae19"><div class="ttname"><a href="batnav_8h.html#a5275251d8fde0b35aa8720e727a2ae19">direction_valide</a></div><div class="ttdeci">int direction_valide(plateau_t plateau_j, int x, int y, int direction, int taille_bat)</div><div class="ttdoc">Fonction qui regarde si les cases qui vont être occupées dans une direction sont toutes libres et val...</div><div class="ttdef"><b>Definition:</b> batnav.c:141</div></div>
+<div class="ttc" id="abatnav_8h_html_a5b1ddcf0086e24619e521341ac05745c"><div class="ttname"><a href="batnav_8h.html#a5b1ddcf0086e24619e521341ac05745c">placement_bateaux</a></div><div class="ttdeci">void placement_bateaux(SDL_Window *win, SDL_Renderer *ren, SDL_Event event, t_statut *etat_win, int JOUEUR, plateau_t *plateau_j, char *couleur, t_joueur *joueur1, t_joueur *joueur2)</div><div class="ttdoc">Fonction qui gère les évènements SDL liés au placement des bateaux.</div><div class="ttdef"><b>Definition:</b> batnav.c:300</div></div>
+<div class="ttc" id="abatnav_8h_html_a7adc718f0977d2369c6073f6b01552df"><div class="ttname"><a href="batnav_8h.html#a7adc718f0977d2369c6073f6b01552df">placement_case_bat</a></div><div class="ttdeci">void placement_case_bat(SDL_Window *win, SDL_Renderer *ren, int x, int y, int direction, int bat_selec, int JOUEUR, char *couleur, plateau_t *plateau_j, t_joueur *joueur1, t_joueur *joueur2)</div><div class="ttdoc">Fonction qui s'occupe du placement des bateaux si leur placement est valide.</div><div class="ttdef"><b>Definition:</b> batnav.c:229</div></div>
+<div class="ttc" id="abatnav_8h_html_aaa9caafcd72aa0fdfc4adadaef2f528f"><div class="ttname"><a href="batnav_8h.html#aaa9caafcd72aa0fdfc4adadaef2f528f">gestion_event_batnav</a></div><div class="ttdeci">void gestion_event_batnav(SDL_Window *win, SDL_Renderer *ren, SDL_Event event, t_statut *etat_win, int *mode_de_jeu, int *etat_joueur, t_joueur *joueur1, t_joueur *joueur2)</div><div class="ttdoc">Fonction qui s'occupe des évènements d'une partie de bataille navale (joueur contre joueur)</div><div class="ttdef"><b>Definition:</b> batnav.c:453</div></div>
+<div class="ttc" id="abatnav_8h_html_abe0ad9beb7a74d9fd90798ff23be67e7"><div class="ttname"><a href="batnav_8h.html#abe0ad9beb7a74d9fd90798ff23be67e7">creer_plateau</a></div><div class="ttdeci">plateau_t creer_plateau(int l, int c)</div><div class="ttdoc">Fonction qui initialise les plateaux de jeu de la bataille navale.</div><div class="ttdef"><b>Definition:</b> batnav.c:26</div></div>
+<div class="ttc" id="abatnav_8h_html_acdd755afb32f2badac52da8e55d99a6b"><div class="ttname"><a href="batnav_8h.html#acdd755afb32f2badac52da8e55d99a6b">vider_cargaison</a></div><div class="ttdeci">void vider_cargaison(SDL_Window *win, SDL_Renderer *ren, int taille_bat, char *immatriculation)</div><div class="ttdoc">Fonction qui s'occupe du placement des bateaux en les cachants si ils sont valides.</div><div class="ttdef"><b>Definition:</b> batnav.c:188</div></div>
+<div class="ttc" id="abatnav_8h_html_ae416666500e3b936c8635a78759e20ec"><div class="ttname"><a href="batnav_8h.html#ae416666500e3b936c8635a78759e20ec">init_etat_plateau</a></div><div class="ttdeci">void init_etat_plateau(plateau_t *plateau_j)</div><div class="ttdoc">Fonction qui rempli le plateau de jeu d'un joueur.</div><div class="ttdef"><b>Definition:</b> batnav.c:100</div></div>
+<div class="ttc" id="abatnav_8h_html_aeb0dabf827c3858455e0a90a287dea55"><div class="ttname"><a href="batnav_8h.html#aeb0dabf827c3858455e0a90a287dea55">est_valide</a></div><div class="ttdeci">int est_valide(plateau_t plateau_j, int x, int y)</div><div class="ttdoc">Fonction qui vérifie si les coordonnées sont dans la matrice.</div><div class="ttdef"><b>Definition:</b> batnav.c:129</div></div>
+<div class="ttc" id="astructbateau__t_html"><div class="ttname"><a href="structbateau__t.html">bateau_t</a></div><div class="ttdoc">contient les caractéristiques d'un bateau</div></div>
+<div class="ttc" id="astructbatnav__t_html"><div class="ttname"><a href="structbatnav__t.html">batnav_t</a></div><div class="ttdoc">contient les variables pour la bataille navale</div></div>
+<div class="ttc" id="astructcase__t_html"><div class="ttname"><a href="structcase__t.html">case_t</a></div><div class="ttdoc">chaque case d'un plateau</div></div>
+<div class="ttc" id="astructplateau__t_html"><div class="ttname"><a href="structplateau__t.html">plateau_t</a></div><div class="ttdoc">contient un plateau</div></div>
+<div class="ttc" id="astructs__bateau_html"><div class="ttname"><a href="structs__bateau.html">s_bateau</a></div><div class="ttdef"><b>Definition:</b> batnav.h:15</div></div>
+<div class="ttc" id="astructs__batnav_html"><div class="ttname"><a href="structs__batnav.html">s_batnav</a></div><div class="ttdef"><b>Definition:</b> batnav.h:43</div></div>
+<div class="ttc" id="astructs__case_html"><div class="ttname"><a href="structs__case.html">s_case</a></div><div class="ttdef"><b>Definition:</b> batnav.h:25</div></div>
+<div class="ttc" id="astructs__joueur_html"><div class="ttname"><a href="structs__joueur.html">s_joueur</a></div><div class="ttdef"><b>Definition:</b> joueur.h:15</div></div>
+<div class="ttc" id="astructs__plateau_html"><div class="ttname"><a href="structs__plateau.html">s_plateau</a></div><div class="ttdef"><b>Definition:</b> batnav.h:34</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré le Lundi 28 Mars 2022 18:14:55 pour Timeless Games par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2
+</small></address>
+</body>
+</html>

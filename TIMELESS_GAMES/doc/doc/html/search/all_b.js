@@ -1,0 +1,11 @@
+var searchData=
+[
+  ['param_2eh_46',['param.h',['../param_8h.html',1,'']]],
+  ['pendu_2ec_47',['pendu.c',['../pendu_8c.html',1,'']]],
+  ['pendu_2eh_48',['pendu.h',['../pendu_8h.html',1,'']]],
+  ['pendu_5ftour_49',['pendu_tour',['../pendu_8h.html#af0d39d701f59280f671a7d3dbf083796',1,'pendu_tour(SDL_Window *win, SDL_Renderer *ren, int etat_joueur, int *etat_partie, int *scoreJ1, int *scoreJ2, char lettre, char *alphabet, char *pendu, char *secret, int *erreurs):&#160;pendu.c'],['../pendu_8c.html#af0d39d701f59280f671a7d3dbf083796',1,'pendu_tour(SDL_Window *win, SDL_Renderer *ren, int etat_joueur, int *etat_partie, int *scoreJ1, int *scoreJ2, char lettre, char *alphabet, char *pendu, char *secret, int *erreurs):&#160;pendu.c']]],
+  ['placement_5fbateaux_50',['placement_bateaux',['../batnav_8h.html#a5b1ddcf0086e24619e521341ac05745c',1,'placement_bateaux(SDL_Window *win, SDL_Renderer *ren, SDL_Event event, t_statut *etat_win, int JOUEUR, plateau_t *plateau_j, char *couleur, t_joueur *joueur1, t_joueur *joueur2):&#160;batnav.c'],['../batnav_8c.html#a5b1ddcf0086e24619e521341ac05745c',1,'placement_bateaux(SDL_Window *win, SDL_Renderer *ren, SDL_Event event, t_statut *etat_win, int JOUEUR, plateau_t *plateau_j, char *couleur, t_joueur *joueur1, t_joueur *joueur2):&#160;batnav.c']]],
+  ['placement_5fcase_5fbat_51',['placement_case_bat',['../batnav_8h.html#a7adc718f0977d2369c6073f6b01552df',1,'placement_case_bat(SDL_Window *win, SDL_Renderer *ren, int x, int y, int direction, int bat_selec, int JOUEUR, char *couleur, plateau_t *plateau_j, t_joueur *joueur1, t_joueur *joueur2):&#160;batnav.c'],['../batnav_8c.html#a7adc718f0977d2369c6073f6b01552df',1,'placement_case_bat(SDL_Window *win, SDL_Renderer *ren, int x, int y, int direction, int bat_selec, int JOUEUR, char *couleur, plateau_t *plateau_j, t_joueur *joueur1, t_joueur *joueur2):&#160;batnav.c']]],
+  ['plateau_5ft_52',['plateau_t',['../structplateau__t.html',1,'']]],
+  ['proposition_5fpas_5fvide_53',['proposition_pas_vide',['../masterm_8h.html#a4bab990744dae1e1006015adfd36d717',1,'proposition_pas_vide(char *propo_couleur):&#160;masterm.c'],['../masterm_8c.html#a4bab990744dae1e1006015adfd36d717',1,'proposition_pas_vide(char *propo_couleur):&#160;masterm.c']]]
+];

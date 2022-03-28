@@ -1,0 +1,41 @@
+implémenter les primitives de piles
+initialiser la pile à vide
+
+Début fonction tour ordi
+   0 => indicateur de validation de case petée
+   SI la pile est vide
+      choiSIr une case au hasard sur le plateau qui n'est pas déjà touchée et qui est dans la matrice
+      peter cette case
+      empiler cette case
+   SINON SI la pile n'est pas vide
+      TANT QUE l'indicateur de validateur de case petée est égal à 0 et que la pile n'est pas vide
+         lire la case la plus haute de la pile
+         SI la case contenait un bateau (a été touchée en gros)
+            SI la case au dessus n'est pas touchée et est dans la matrice
+               peter la case
+               1=>indicateur de validation de case petée
+               empiler cette case
+            SINON SI la case a droite n'est pas touchée et est dans la matrice
+               peter la case
+               1=>indicateur de validation de case petée
+               empiler cette case
+            SINON SI la case en dessous n'est pas touchée et est dans la matrice
+               peter la case
+               1=>indicateur de validation de case petée
+               empiler cette case
+            SINON SI la case a gauche n'est pas touchée et est dans la matrice
+               peter la case
+               1=>indicateur de validation de case petée
+               empiler cette case
+            SINON
+               depiler la case qui contenait un bout de bateau
+         SINON
+            depiler la case qui ne contenait pas de bout de bateau
+      FIN TANT QUE
+      SI la pile est vide
+         choiSIr une case au hasard sur le plateau qui n'est pas déjà touchée et qui est dans la matrice
+         peter cette case
+         empiler cette case
+      FIN SI
+   FIN SINON
+FIN
