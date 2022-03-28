@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Timeless Games:  Fichier source de /info/etu/l2info/s200470/Timeless-Games/TIMELESS_GAMES/include/masterm.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Timeless Games<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Timeless Games est une platforme graphique multi-jeux contenant des mini-jeux à deux joueurs. Sur la platforme, il sera possible de jouer à certains jeux comme le jeu du Pendu, le Mastermind ou encore la Bataille Navale. Un système de scores sera mis en place pour enregistrer les scores des joueurs, jeux après jeux. Il sera possible de jouer à 2 ou contre l&#39;ordinateur.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">masterm.h</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="keywordtype">void</span> <a class="code" href="masterm_8c.html#a792005286fb82ad20ed39df5cc3934c5">saisir_code_ordi</a>(<span class="keywordtype">char</span> * code_secret);</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="keywordtype">int</span> <a class="code" href="masterm_8c.html#ac3f9836657db8d75aaa5f54ddec08438">nb_bonne_place</a>(<span class="keywordtype">char</span> * code, <span class="keywordtype">char</span> * code_secret);</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keywordtype">int</span> <a class="code" href="masterm_8c.html#a21aba7fd0df6edf9fc2a8a1910b3bc6d">nb_bonne_couleur</a>(<span class="keywordtype">char</span> * code, <span class="keywordtype">char</span> * code_secret, <span class="keywordtype">int</span> nb_place);</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keywordtype">void</span> <a class="code" href="masterm_8c.html#a2740ecd4c6d90525329d2779571169b5">afficher_resultat</a>(<span class="keywordtype">char</span> * code_secret, SDL_Window * win, SDL_Renderer * ren);</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keywordtype">void</span> <a class="code" href="masterm_8c.html#ad0d75aad27e1f5be08a87c8730efedf8">affiche_propo</a>(SDL_Window * win, SDL_Renderer * ren, <span class="keywordtype">int</span> * position, <span class="keywordtype">char</span> * propo_couleur, <span class="keywordtype">char</span> couleur);</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keywordtype">void</span> <a class="code" href="masterm_8c.html#a20cfe7e305f1a43376e647c3a3411411">afficher_essai</a>(SDL_Window * win, SDL_Renderer * ren, <span class="keywordtype">int</span> nb_bonne_color, <span class="keywordtype">int</span> nb_bon_plc, <span class="keywordtype">int</span> * nb_essais, <span class="keywordtype">char</span> * propo_couleur, <span class="keywordtype">char</span> * code_secret);</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keywordtype">void</span> <a class="code" href="masterm_8c.html#abd5fa7a71bd45002922959abb8370c85">mastermind_tour</a>(<span class="keywordtype">int</span> * etat_partie, SDL_Window * win, SDL_Renderer * ren, <span class="keywordtype">int</span> * nb_essais, <span class="keywordtype">char</span> * propo_couleur, <span class="keywordtype">char</span> * code_secret, <span class="keywordtype">int</span> * position);</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keywordtype">void</span> <a class="code" href="masterm_8c.html#aef83f29f2895c59e46350536e634f504">gestion_event_masterm</a>(SDL_Event event, <span class="keywordtype">int</span> * etat_win, SDL_Window * win, SDL_Renderer * ren, <span class="keywordtype">int</span> * scorej1, <span class="keywordtype">int</span> * scorej2);</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keywordtype">void</span> <a class="code" href="masterm_8c.html#a81faa62f62804a82542b4f2c2411176f">init_partie_master</a>();</div>
+<div class="ttc" id="amasterm_8c_html_a20cfe7e305f1a43376e647c3a3411411"><div class="ttname"><a href="masterm_8c.html#a20cfe7e305f1a43376e647c3a3411411">afficher_essai</a></div><div class="ttdeci">void afficher_essai(SDL_Window *win, SDL_Renderer *ren, int bonne_couleur, int bonne_place, int *nb_essais, char *propo_couleur, char *code_secret)</div><div class="ttdoc">Si la combinaison n'est pas celle recherchée on l'affiche et donne des informations dessus.</div><div class="ttdef"><b>Definition:</b> masterm.c:210</div></div>
+<div class="ttc" id="amasterm_8c_html_a21aba7fd0df6edf9fc2a8a1910b3bc6d"><div class="ttname"><a href="masterm_8c.html#a21aba7fd0df6edf9fc2a8a1910b3bc6d">nb_bonne_couleur</a></div><div class="ttdeci">int nb_bonne_couleur(char *code, char *code_secret, int nb_place)</div><div class="ttdoc">Compte le nombre de bonnes couleurs entre le code secret et le code de jeu.</div><div class="ttdef"><b>Definition:</b> masterm.c:75</div></div>
+<div class="ttc" id="amasterm_8c_html_a2740ecd4c6d90525329d2779571169b5"><div class="ttname"><a href="masterm_8c.html#a2740ecd4c6d90525329d2779571169b5">afficher_resultat</a></div><div class="ttdeci">void afficher_resultat(char *code_secret, SDL_Window *win, SDL_Renderer *ren)</div><div class="ttdoc">En cas de défaite, affiche la combinaison secrète.</div><div class="ttdef"><b>Definition:</b> masterm.c:136</div></div>
+<div class="ttc" id="amasterm_8c_html_a792005286fb82ad20ed39df5cc3934c5"><div class="ttname"><a href="masterm_8c.html#a792005286fb82ad20ed39df5cc3934c5">saisir_code_ordi</a></div><div class="ttdeci">void saisir_code_ordi(char *code_secret)</div><div class="ttdoc">\br16ief L'ordinateur initialise au hasard le code de couleurs à trouver</div><div class="ttdef"><b>Definition:</b> masterm.c:44</div></div>
+<div class="ttc" id="amasterm_8c_html_a81faa62f62804a82542b4f2c2411176f"><div class="ttname"><a href="masterm_8c.html#a81faa62f62804a82542b4f2c2411176f">init_partie_master</a></div><div class="ttdeci">void init_partie_master()</div><div class="ttdoc">Fonction qui initialise une partie de mastermind.</div><div class="ttdef"><b>Definition:</b> masterm.c:31</div></div>
+<div class="ttc" id="amasterm_8c_html_abd5fa7a71bd45002922959abb8370c85"><div class="ttname"><a href="masterm_8c.html#abd5fa7a71bd45002922959abb8370c85">mastermind_tour</a></div><div class="ttdeci">void mastermind_tour(int *etat_partie, SDL_Window *win, SDL_Renderer *ren, int *nb_essais, char *propo_couleur, char *code_secret, int *position)</div><div class="ttdoc">Tour de jeu normal quand on valide la combinaison.</div><div class="ttdef"><b>Definition:</b> masterm.c:250</div></div>
+<div class="ttc" id="amasterm_8c_html_ac3f9836657db8d75aaa5f54ddec08438"><div class="ttname"><a href="masterm_8c.html#ac3f9836657db8d75aaa5f54ddec08438">nb_bonne_place</a></div><div class="ttdeci">int nb_bonne_place(char *code, char *code_secret)</div><div class="ttdoc">Compte le nombre de bonnes couleurs entre le code secret et le code de jeu.</div><div class="ttdef"><b>Definition:</b> masterm.c:60</div></div>
+<div class="ttc" id="amasterm_8c_html_ad0d75aad27e1f5be08a87c8730efedf8"><div class="ttname"><a href="masterm_8c.html#ad0d75aad27e1f5be08a87c8730efedf8">affiche_propo</a></div><div class="ttdeci">void affiche_propo(SDL_Window *win, SDL_Renderer *ren, int *position, char *propo_couleur, char couleur)</div><div class="ttdoc">En cas de défaite, affiche la combinaison secrète.</div><div class="ttdef"><b>Definition:</b> masterm.c:165</div></div>
+<div class="ttc" id="amasterm_8c_html_aef83f29f2895c59e46350536e634f504"><div class="ttname"><a href="masterm_8c.html#aef83f29f2895c59e46350536e634f504">gestion_event_masterm</a></div><div class="ttdeci">void gestion_event_masterm(SDL_Event event, int *etat_win, SDL_Window *win, SDL_Renderer *ren, int *scorej1, int *scorej2)</div><div class="ttdoc">Si la combinaison n'est pas celle recherchée, on l'affiche et on donne des informations dessus.</div><div class="ttdef"><b>Definition:</b> masterm.c:286</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré le Lundi 21 Mars 2022 17:18:40 pour Timeless Games par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2
+</small></address>
+</body>
+</html>

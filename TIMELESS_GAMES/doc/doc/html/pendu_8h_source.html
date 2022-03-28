@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Timeless Games:  Fichier source de /info/etu/l2info/s200470/Timeless-Games/TIMELESS_GAMES/include/pendu.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Timeless Games<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Timeless Games est une platforme graphique multi-jeux contenant des mini-jeux à deux joueurs. Sur la platforme, il sera possible de jouer à certains jeux comme le jeu du Pendu, le Mastermind ou encore la Bataille Navale. Un système de scores sera mis en place pour enregistrer les scores des joueurs, jeux après jeux. Il sera possible de jouer à 2 ou contre l&#39;ordinateur.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">pendu.h</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pendu_8c.html#adc66ad8b43ee579e404838a700819184">lettre_utilisee</a>(<span class="keywordtype">char</span> lettre, <span class="keywordtype">int</span> presence, SDL_Window * win, SDL_Renderer * ren);</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pendu_8c.html#a434fe140c8cceabfe6460caf683b485f">affiche_lettre</a>(<span class="keywordtype">char</span> c, <span class="keywordtype">int</span> position, SDL_Window * win, SDL_Renderer * ren);</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pendu_8c.html#a6de50ee45eb928a807800421a1c7343e">afficher_mystere</a>(<span class="keywordtype">int</span> longueur_mot, SDL_Window * win, SDL_Renderer * ren);</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pendu_8c.html#a8fde717ed86c5c43d22b9db759304bf0">afficher_erreur</a>(<span class="keywordtype">int</span> nb_erreur, SDL_Window * win, SDL_Renderer * ren);</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pendu_8c.html#a340561aa5b8d301e487a7dbc05bf9ddb">initialiser_mot_ordi</a>(<span class="keywordtype">char</span> *secret, <span class="keywordtype">char</span> *pendu, SDL_Window * win, SDL_Renderer * ren);</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keywordtype">int</span> <a class="code" href="pendu_8c.html#aa13a88d2a916add9f12230126cb886b5">valider_mot</a>(<span class="keywordtype">char</span> * secret, <span class="keywordtype">char</span> *pendu);</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keywordtype">int</span> <a class="code" href="pendu_8c.html#a133a14e0771b6734cf99760fb1014f59">saisie</a>(<span class="keywordtype">char</span> entree, <span class="keywordtype">char</span> * alphabet);</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keywordtype">int</span> <a class="code" href="pendu_8c.html#ad19b6f444dd8902b86fa18d41c3834a7">valider_lettre</a>(<span class="keywordtype">char</span> lettre, <span class="keywordtype">char</span> * secret, <span class="keywordtype">char</span> *pendu, <span class="keywordtype">int</span> *erreurs, SDL_Window * win, SDL_Renderer * ren);</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pendu_8c.html#a4a83a31ed67380291eb0e23389180a4f">pendu_tour</a>(<span class="keywordtype">int</span> * etat_partie, <span class="keywordtype">int</span> * scorej1, <span class="keywordtype">int</span> * scorej2, <span class="keywordtype">char</span> lettre, <span class="keywordtype">char</span>* alphabet, <span class="keywordtype">char</span> * pendu, <span class="keywordtype">char</span> * secret, <span class="keywordtype">int</span> *erreurs, SDL_Window * win, SDL_Renderer * ren);</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pendu_8c.html#ae83a8baa4f6714538464083565145e5d">gestion_event_pendu</a>(SDL_Event event, <span class="keywordtype">int</span> * etat_win, SDL_Window * window, SDL_Renderer * renderer, <span class="keywordtype">int</span> * scorej1, <span class="keywordtype">int</span> * scorej2);</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pendu_8c.html#a11dab03c7b197a509cc3d50293bb023a">init_partie_pendu</a>(SDL_Window * win, SDL_Renderer * ren);</div>
+<div class="ttc" id="apendu_8c_html_a11dab03c7b197a509cc3d50293bb023a"><div class="ttname"><a href="pendu_8c.html#a11dab03c7b197a509cc3d50293bb023a">init_partie_pendu</a></div><div class="ttdeci">void init_partie_pendu(SDL_Window *win, SDL_Renderer *ren)</div><div class="ttdoc">Fonction qui initialise une partie de pendu.</div><div class="ttdef"><b>Definition:</b> pendu.c:33</div></div>
+<div class="ttc" id="apendu_8c_html_a133a14e0771b6734cf99760fb1014f59"><div class="ttname"><a href="pendu_8c.html#a133a14e0771b6734cf99760fb1014f59">saisie</a></div><div class="ttdeci">int saisie(char entree, char *alphabet)</div><div class="ttdoc">Vérifie la lettre selectionnée par le joueur.</div><div class="ttdef"><b>Definition:</b> pendu.c:146</div></div>
+<div class="ttc" id="apendu_8c_html_a340561aa5b8d301e487a7dbc05bf9ddb"><div class="ttname"><a href="pendu_8c.html#a340561aa5b8d301e487a7dbc05bf9ddb">initialiser_mot_ordi</a></div><div class="ttdeci">void initialiser_mot_ordi(char *secret, char *pendu, SDL_Window *win, SDL_Renderer *ren)</div><div class="ttdoc">Initilise au hasard le mot à deviner avec une banque de mots.</div><div class="ttdef"><b>Definition:</b> pendu.c:107</div></div>
+<div class="ttc" id="apendu_8c_html_a434fe140c8cceabfe6460caf683b485f"><div class="ttname"><a href="pendu_8c.html#a434fe140c8cceabfe6460caf683b485f">affiche_lettre</a></div><div class="ttdeci">void affiche_lettre(char c, int position, SDL_Window *win, SDL_Renderer *ren)</div><div class="ttdoc">Fonction qui permet d'afficher la lettre désignée à une position donnée de l'écran.</div><div class="ttdef"><b>Definition:</b> pendu.c:67</div></div>
+<div class="ttc" id="apendu_8c_html_a4a83a31ed67380291eb0e23389180a4f"><div class="ttname"><a href="pendu_8c.html#a4a83a31ed67380291eb0e23389180a4f">pendu_tour</a></div><div class="ttdeci">void pendu_tour(int *etat_partie, int *scorej1, int *scorej2, char lettre, char *alphabet, char *pendu, char *secret, int *erreurs, SDL_Window *win, SDL_Renderer *ren)</div><div class="ttdoc">Fonction qui s'occupe d'exécuter un tour de jeu dès que le joueur choisi une lettre en vérifiant si l...</div><div class="ttdef"><b>Definition:</b> pendu.c:202</div></div>
+<div class="ttc" id="apendu_8c_html_a6de50ee45eb928a807800421a1c7343e"><div class="ttname"><a href="pendu_8c.html#a6de50ee45eb928a807800421a1c7343e">afficher_mystere</a></div><div class="ttdeci">void afficher_mystere(int longueur_mot, SDL_Window *win, SDL_Renderer *ren)</div><div class="ttdoc">Fonction qui indique au joueur graphiquement le nombre de lettres du mot caché</div><div class="ttdef"><b>Definition:</b> pendu.c:79</div></div>
+<div class="ttc" id="apendu_8c_html_a8fde717ed86c5c43d22b9db759304bf0"><div class="ttname"><a href="pendu_8c.html#a8fde717ed86c5c43d22b9db759304bf0">afficher_erreur</a></div><div class="ttdeci">void afficher_erreur(int nb_erreur, SDL_Window *win, SDL_Renderer *ren)</div><div class="ttdoc">Affiche un visuel de l'avancement du pendu selon le nombre d'erreurs.</div><div class="ttdef"><b>Definition:</b> pendu.c:93</div></div>
+<div class="ttc" id="apendu_8c_html_aa13a88d2a916add9f12230126cb886b5"><div class="ttname"><a href="pendu_8c.html#aa13a88d2a916add9f12230126cb886b5">valider_mot</a></div><div class="ttdeci">int valider_mot(char *secret, char *pendu)</div><div class="ttdoc">Regarde si le mot essayé est correct.</div><div class="ttdef"><b>Definition:</b> pendu.c:130</div></div>
+<div class="ttc" id="apendu_8c_html_ad19b6f444dd8902b86fa18d41c3834a7"><div class="ttname"><a href="pendu_8c.html#ad19b6f444dd8902b86fa18d41c3834a7">valider_lettre</a></div><div class="ttdeci">int valider_lettre(char lettre, char *secret, char *pendu, int *erreurs, SDL_Window *win, SDL_Renderer *ren)</div><div class="ttdoc">Regarde si la lettre entrée est dans le mot secret ou non.</div><div class="ttdef"><b>Definition:</b> pendu.c:170</div></div>
+<div class="ttc" id="apendu_8c_html_adc66ad8b43ee579e404838a700819184"><div class="ttname"><a href="pendu_8c.html#adc66ad8b43ee579e404838a700819184">lettre_utilisee</a></div><div class="ttdeci">void lettre_utilisee(char lettre, int presence, SDL_Window *win, SDL_Renderer *ren)</div><div class="ttdoc">Fonction qui établi une indication si la lettre utilisée est présente ou non dans le mot graphiquemen...</div><div class="ttdef"><b>Definition:</b> pendu.c:51</div></div>
+<div class="ttc" id="apendu_8c_html_ae83a8baa4f6714538464083565145e5d"><div class="ttname"><a href="pendu_8c.html#ae83a8baa4f6714538464083565145e5d">gestion_event_pendu</a></div><div class="ttdeci">void gestion_event_pendu(SDL_Event event, int *etat_win, SDL_Window *win, SDL_Renderer *ren, int *scorej1, int *scorej2)</div><div class="ttdoc">Fonction qui s'occupe d'exécuter un tour de jeu dès que le joueur choisit une lettre,...</div><div class="ttdef"><b>Definition:</b> pendu.c:238</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré le Lundi 21 Mars 2022 17:18:40 pour Timeless Games par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2
+</small></address>
+</body>
+</html>

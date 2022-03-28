@@ -1,0 +1,10 @@
+void saisir_code_ordi(char * code_secret);
+int nb_bonne_place(char * code, char * code_secret);
+int nb_bonne_couleur(char * code, char * code_secret, int nb_place);
+void afficher_resultat(char * code_secret, SDL_Window * win, SDL_Renderer * ren);
+void affiche_propo(SDL_Window * win, SDL_Renderer * ren, int * position, char * propo_couleur, char couleur);
+void afficher_essai(SDL_Window * win, SDL_Renderer * ren, int nb_bonne_color, int nb_bon_plc, int * nb_essais, char * propo_couleur, char * code_secret);
+void mastermind_tour(int * etat_partie, SDL_Window * win, SDL_Renderer * ren, int * nb_essais, char * propo_couleur, char * code_secret, int * position);
+void gestion_event_masterm(SDL_Event event, t_statut * etat_win, int * mode_de_jeu, SDL_Window * win, SDL_Renderer * ren, t_joueur * Joueur1, t_joueur * Joueur2);
+void init_partie_master();
+int proposition_pas_vide(char * propo_couleur);

@@ -1,0 +1,136 @@
+_____________________________________________________________________
+                  DESCRIPTION DE TIMELESS GAMES
+_____________________________________________________________________
+
+   --> Voir notre README.md
+
+_____________________________________________________________________
+         GESTION DE LA SDL (Chef d'implémentation : Hugo)
+_____________________________________________________________________
+*Écran d'accueil : écran cliquable pour accéder à notre jeu.
+
+*Page intermédiaire de saisie des pseudos et du choix d'un mode J1 VS J2 ou J1 VS Ordi.
+
+*Affichage du menu principal :
+   - zones pour chacun de nos 3 mini-jeux
+   - zone pour les paramètres de Timeless Games
+   - zone pour le logo de notre jeu pour retourner à l'accueil
+   - les noms des joueurs ainsi que les scores actuels
+   - (fond de couleur changeable dans le futur ?)
+
+_____________________________________________________________________
+  MINI-JEU 1 : LE PENDU (Chef d'implémentation : Christal)
+_____________________________________________________________________
+
+*Règles du jeu :
+L'objectif du jeu est de découvrir un mot en devinant les lettres le composant.
+Un joueur doit choisir un mot et l'autre joueur doit le deviner.
+Le joueur qui devine choisit une lettre de l'alphabet qu'il estime pouvant faire partie du mot à deviner.
+Au cas où le mot contienne cette lettre, celle-ci sera montrée et placée à sa position dans la composition du mot.
+Mais, si la lettre choisie ne fait pas partie du mot, un croquis représentant un corps humain sera peu à peu formé.
+Dès que les 10 parties de ce croquis seront terminées et que le mot n'est pas deviné, le joueur aura perdu. Dans l'autre cas, il gagne.
+
+*Façons de jouer :
+Il est possible de soit cliquer sur la lettre voulue pour la tester, soit entrer au clavier une lettre.
+Il n'est évidemment pas possible de réutiliser une lettre déjà utilisée.
+
+*Implémentation :
+   **Saisie du mot (version J1 VS J2) :
+     - Vérification si la saisie d'un caractère est valide ou non
+     - Vérification que le mot saisit ne dépasse pas le nombre de caractères maximum autorisé
+   **Initialisation du mot au hasard pris dans un fichier txt remplis de 500 mots variés (version J1 VS Ordi)
+   **Initialisation du pendu avec l'affichage de la zone de lettres à trouver
+   **Gestion des lettres disponibles cliquables
+     - Si la lettre choisie est dans le mot, on la remplace par un cadre vert
+     - Si la lettre choisie n'est pas dans le mot, on la remplace par un cadre rouge
+   **Gestion de la saisie d'une lettre
+   **Affichage lettre correcte dans la zone du mot à deviner
+   **Affichage progressif des erreurs en forme de croquis de pendu
+   **Vérification constante si le mot est complètement deviné
+   **Fonction qui fait dérouler le jeu
+
+*Mode ordi IA (bonus de programmation)
+   **Prends un mot au hasard dans un fichier remplis de beaucoup de mots
+   **Fréquence d'apparition de chaque lettre
+   **Il commence avec les plus probables (ex : https://fr.wikipedia.org/wiki/Fr%C3%A9quence_d%27apparition_des_lettres_en_fran%C3%A7ais)
+
+_____________________________________________________________________
+  MINI-JEU 2 : LE MASTERMIND (Chef d'implémentation : Christal)
+_____________________________________________________________________
+
+*Règles du jeu :
+Il y a un codificateur et un décodeur. Le but est de deviner, par déductions successives, la couleur et la position des 4 pions cachés.
+Le codificateur choisit 4 pions. Rien ne l'empêche d'en choisir plusieurs d'une même couleur.
+Son adversaire, le décodeur, est chargé de déchiffrer ce code secret. Il doit le faire en 10 coups au plus.
+Il place 4 pions dans les trous de la première rangée :
+   - Si l'un des pions correspond par sa position et sa couleur à un pion caché, le codificateur l'indique en incrémentant de 1 le nombre de pions BP (bien placés).
+   - Si l'un des pions correspond uniquement par sa couleur, le codificateur l'indique en incrémentant le nombre BC (bonne couleur).
+Quand il est arrivé, au bout d'un certain nombre de coups, à placer les 4 pions qui correspondent exactement par la couleur et la position à ceux du code, le décodeur a gagné.
+Si la combinaison de couleur n'a pas été trouvée avant les 10 coups, le décodeur a perdu et le codificateur a gagné.
+
+*Implémentation :
+   **Saisie du code de couleurs (version J1 VS J2) :
+      - Couleurs cliquables pour le joueur qui initialise le code
+      - Vérification que le code de couleurs comporte bien 4 pions
+   **Initialisation du code de couleurs au hasard (version J1 VS Ordi)
+   **Initialisation du mastermind avec l'affichage de la grille de jeu vide
+   **Gestion des couleurs disponibles cliquables
+      - Possibilité de cliquer sur les cercles où se placent les couleurs pour modifier la couleur voulue
+      - Attente d'une validation du code de couleur pour tester cette combinaison
+   **Test de la combinaison actuelle
+      - Comptage du nombre de pions bien placés ET de bonne couleur (BP)
+      - Comptage du nombre de pions de bonne couleur en excluant les bien placés (BC)
+        __ __ __ __ __ __
+      | P1 P2 P3 P4 BP BC |
+      | __ __ __ __ __ __ |
+   **Affichage de la combinaison proposée dans la grille et des deux entiers BP et BC suite au comptage
+   **...
+   **Fonction qui fait dérouler le jeu
+
+__
+ - condition d'arrêt dans le main : soit il a gagné, soit il a dépassé les 12 essais
+ - fonction qui affiche le gagnant et mets à jour les points sur le menu principal
+__
+
+_____________________________________________________________________
+  MINI-JEU 3 : LA BATAILLE NAVALE (Chef d'implémentation : Thibaut)
+_____________________________________________________________________
+
+____Description____
+ - 2 matrices (une pour chaque joueur) de taille N * M (N et M au choix)
+ - 2 matrices de sauvegardes pour sauvegarder le placement des bateaux et comparer les choix des joueurs avec cette matrice
+ - Taille de bateaux différentes, par exemple un bateau de taille de 2 cases, ou de 3 cases, sous forme d'image de bateaux
+ - Règles du jeu : chaque joueur place un certain nombre de bateaux fixe dans une matrice (matrice représentant de l'eau). Chacun son tour, un joueur choisit une case de la matrice sur laquelle tirer et espérer toucher une partie d'un bateau adverse. Le but étant de faire couler tous les bateaux en entier du joueur adverse.
+
+____Fonctions____
+   - fonction qui initialise toutes les matrices à vide
+   - fonction qui permet à un joueur de placer ses bateaux dans la matrice
+   - petite fonction qui vérifie en continu si on ne sort pas de la matrice
+   - fonction qui permet de jouer son tour, fonction qui affiche "Touché !" ou "Raté !" en comparant les deux matrices
+   - fonction qui prévient si on a coulé un bateau adverse
+   - fonction qui supprime une partie de bateau lorsque c'est touché
+   - fonction qui vérifie s'il reste des morceaux de bateaux vivants
+   - fonction qui affiche le gagnant et mets à jour les points sur le menu principal
+
+____SDL____
+   - début du jeu : affichage d'une matrice vide pour placer les bateaux des joueurs, chacun leur tour (/!\ sans regarder l'autre car pas en réseau)
+   - fonction qui affiche les 2 plateaux verticalement
+   - fonction qui efface l'affichage
+
+____Mode ordi IA____ (bonus aléatoire)
+    - il place les bateaux aléatoirement
+    - il choisit une case au hasard
+    - et s'il touche, il vise une des 4 cases qui l'entoure
+    - s'il touche une deuxième fois, il continue sur la même ligne
+
+_____________________________________________________________________
+                     LIBRAIRIES UTILISÉES
+_____________________________________________________________________
+   *Librairies standards en C :
+stdio.h, stdlib.h, string.h, ctype.h, unistd.h, time.h
+
+   *Librairies standards en SDL :
+SDL.h, SDL_ttf.h, SDL_image.h, SDL_keycode.h
+
+   *Librairies personnelles (inclusion de fichiers) :
+SDL_projet.h, all_includes.h, pseudo.h, menu.h, pendu.h, masterm.h, batnav.h, param.h
