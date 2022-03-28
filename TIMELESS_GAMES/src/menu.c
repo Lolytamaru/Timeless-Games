@@ -28,24 +28,6 @@
 void gestion_event_menu(SDL_Window *win, SDL_Renderer *ren, SDL_Event event, t_statut * etat_win, int * mode_de_jeu, int * etat_joueur, t_joueur * joueur1, t_joueur * joueur2) {
    switch(event.type) {
       case SDL_MOUSEBUTTONUP:
-         if (event.button.x < 392 && event.button.x > 341 && event.button.y < 280 && event.button.y > 229 && *mode_de_jeu == JVSJ && *etat_joueur == J2) {
-               afficher_image(win, ren, "assets/menu_J1.png", 0, 0);
-               *etat_joueur = J1;
-               afficher_texte(ren, "assets/inter.ttf", 19, 290, 21, joueur1->pseudo);
-   				afficher_texte(ren, "assets/inter.ttf", 19, 530, 21, joueur2->pseudo);
-   				afficher_nombre(ren, "assets/inter.ttf", 19, 400, 21, joueur1->score);
-               afficher_nombre(ren, "assets/inter.ttf", 19, 635, 21, joueur2->score);
-   				SDL_RenderPresent(ren);
-            }
-         if(event.button.x < 446 && event.button.x > 401 && event.button.y < 280 && event.button.y > 229 && *mode_de_jeu == JVSJ && *etat_joueur == J1) {
-               afficher_image(win, ren, "assets/menu_J2.png", 0, 0);
-               *etat_joueur = J2;
-               afficher_texte(ren, "assets/inter.ttf", 19, 290, 21, joueur1->pseudo);
-   				afficher_texte(ren, "assets/inter.ttf", 19, 530, 21, joueur2->pseudo);
-   				afficher_nombre(ren, "assets/inter.ttf", 19, 400, 21, joueur1->score);
-               afficher_nombre(ren, "assets/inter.ttf", 19, 635, 21, joueur2->score);
-   				SDL_RenderPresent(ren);
-         }
  	      if (event.button.x < 337 && event.button.x > 106 && event.button.y < 272 && event.button.y > 83) {
             if(*mode_de_jeu == JVSO){
                init_partie_pendu(win, ren, mode_de_jeu, joueur1->pseudo, joueur2->pseudo, &(joueur1->score), &(joueur2->score));

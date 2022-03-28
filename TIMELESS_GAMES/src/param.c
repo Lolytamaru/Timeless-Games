@@ -26,13 +26,7 @@ void gestion_event_param( SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
    switch(event.type) {
       case SDL_MOUSEBUTTONUP:
          if (event.button.x < 155 && event.button.x > 0 && event.button.y < 43 && event.button.y > 0) {
-            if (*mode_de_jeu == JVSJ && *etat_joueur == J1) {
-               afficher_image(win, ren, "assets/menu_J1.png", 0, 0);
-            } else if (*mode_de_jeu == JVSJ && *etat_joueur == J2) {
-               afficher_image(win, ren, "assets/menu_J2.png", 0, 0);
-            } else {
-               afficher_image(win, ren, "assets/menu.png", 0, 0);
-            }
+            afficher_image(win, ren, "assets/menu.png", 0, 0);
             afficher_texte(ren, "assets/inter.ttf", 19, 290, 21, joueur1->pseudo);
             afficher_texte(ren, "assets/inter.ttf", 19, 530, 21, joueur2->pseudo);
             afficher_nombre(ren, "assets/inter.ttf", 19, 400, 21, joueur1->score);

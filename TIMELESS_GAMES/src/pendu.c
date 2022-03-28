@@ -375,13 +375,7 @@ void gestion_event_pendu(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, 
 		case SDL_MOUSEBUTTONUP: // Relâchement du clic pour la non redondance de l'évènement
 			// Bouton [QUITTER]
 			if (event.button.x < 155 && event.button.x > 0 && event.button.y < 43 && event.button.y > 0) {
-				if(*mode_de_jeu == JVSJ && *etat_joueur == J1) {
-               afficher_image(win, ren, "assets/menu_J1.png", 0, 0);
-            } else if (*mode_de_jeu == JVSJ && *etat_joueur == J2){
-               afficher_image(win, ren, "assets/menu_J2.png", 0, 0);
-            } else {
-               afficher_image(win, ren, "assets/menu.png", 0, 0);
-            }
+            afficher_image(win, ren, "assets/menu.png", 0, 0);
 				afficher_texte(ren, "assets/inter.ttf", 19, 290, 21, joueur1->pseudo);
 				afficher_texte(ren, "assets/inter.ttf", 19, 530, 21, joueur1->pseudo);
 				afficher_nombre(ren, "assets/inter.ttf", 19, 400, 21, joueur1->score);
@@ -450,6 +444,6 @@ void gestion_event_pendu(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, 
 		default: break;
 	}
 	if (pendu.etat_partie == PENDU_JCJ_INIT) {
-		initialiser_mot_joueur(win, ren, event, &(pendu.etat_partie),*etat_joueur, pendu.secret_ecrit, pendu.secret, pendu.pendu, joueur1->pseudo, joueur2->pseudo, &(joueur1->score), &(joueur2->score));
+		initialiser_mot_joueur(win, ren, event, etat_joueur, &(pendu.etat_partie), pendu.secret_ecrit, pendu.secret, pendu.pendu, joueur1->pseudo, joueur2->pseudo, &(joueur1->score), &(joueur2->score));
 	}
 }
