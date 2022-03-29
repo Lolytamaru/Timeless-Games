@@ -22,6 +22,7 @@
  */
 void gestion_event_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, t_statut * etat_win, int * mode_de_jeu, int * etat_joueur,  t_joueur * joueur1, t_joueur * joueur2) {
    int l;
+   char temp[101];
    SDL_Rect txtDestRect;
    TTF_Font *police;
    SDL_Surface *texte = NULL;
@@ -105,20 +106,24 @@ void gestion_event_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
             SDL_RenderPresent(ren);
          }
          if (event.key.keysym.sym >= SDLK_a && event.key.keysym.sym <= SDLK_z) {
-            if (*etat_joueur == J1){
+            if (*etat_joueur == J1) {
                l = strlen(joueur1->pseudo);
-               if (l <= 8)
-                  sprintf(joueur1->pseudo,"%s%c", joueur1->pseudo, event.key.keysym.sym);
+               if (l <= 8){
+                  sprintf(temp, "%s%c", joueur1->pseudo, event.key.keysym.sym);
+                  sprintf(joueur1->pseudo, "%s", temp);
+               }
             } else {
                l = strlen(joueur2->pseudo);
-               if (l <= 8)
-                  sprintf(joueur2->pseudo,"%s%c", joueur2->pseudo, event.key.keysym.sym);
+               if (l <= 8){
+                  sprintf(temp,"%s%c", joueur2->pseudo, event.key.keysym.sym);
+                  sprintf(joueur2->pseudo, "%s", temp);
+               }
             }
             police = TTF_OpenFont("assets/inter.ttf", 27);
             TTF_SetFontStyle(police,TTF_STYLE_BOLD);
             SDL_SetRenderDrawColor(ren, 255, 255, 255, 255);
             SDL_RenderClear(ren);
-            if(*mode_de_jeu == JVSJ)
+            if (*mode_de_jeu == JVSJ)
                afficher_image(win, ren, "assets/parametres/menu_pseudo_JCJ.png", 0, 0);
             else
                afficher_image(win, ren, "assets/parametres/menu_pseudo_JCO.png", 0, 0);

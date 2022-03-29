@@ -61,6 +61,7 @@ void init_partie_pendu(SDL_Window * win, SDL_Renderer * ren, int * mode_de_jeu, 
  */
 void initialiser_mot_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, int * etat_joueur, int * etat_partie, char * secret_ecrit, char * secret, char * pendu, char * pseudoJ1, char * pseudoJ2, int * scoreJ1, int * scoreJ2) {
 	int l;
+	char temp[101];
 	SDL_Rect txtDestRect;
 	TTF_Font *police;
 	SDL_Surface *texte = NULL;
@@ -99,8 +100,10 @@ void initialiser_mot_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event even
 			// Si on appuie sur une lettre de l'alphabet avec le clavier
 			if (event.key.keysym.sym >= SDLK_a && event.key.keysym.sym <= SDLK_z) {
 				l = strlen(secret_ecrit);
-				if (l < 7)
-					sprintf(secret_ecrit, "%s%c", secret_ecrit, event.key.keysym.sym);
+				if (l < 7){
+					sprintf(temp, "%s%c", secret_ecrit, event.key.keysym.sym);
+					sprintf(secret_ecrit, "%s", temp);
+				}
 				police = TTF_OpenFont("assets/inter.ttf", 27);
 				TTF_SetFontStyle(police, TTF_STYLE_BOLD);
 				SDL_SetRenderDrawColor(ren, 255, 255, 255, 255);
@@ -127,7 +130,7 @@ void initialiser_mot_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event even
 		case SDL_MOUSEBUTTONUP:
 			// Si on clique sur le bouton valider avec la souris
 			if (event.button.x < 557 && event.button.x > 386 && event.button.y < 443 && event.button.y > 375 && strlen(secret_ecrit) >= 4) {
-				sprintf(secret, secret_ecrit);
+				sprintf(secret, "%s", secret_ecrit);
 				int i;
 				for (i = 0; i < secret[i]; i++)
 			  		secret_ecrit[i] = '\0';

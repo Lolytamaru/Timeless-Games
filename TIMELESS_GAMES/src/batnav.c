@@ -439,19 +439,24 @@ void attaque_case_bat(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, pla
    }
 }
 
-/*
+
 void tour_ordi_mode_IA(void) {
 	int touche = 0;
+	coord_ordi_t coord_case;
 	initpile();
+	srand(time(NULL)); // Initialisation du hasard
 	if (pile_vide()) {
-		choisir une case au hasard sur le plateau qui n'est pas déjà touchée et qui est dans la matrice
-		péter cette case
-		empiler cette case
+		do {
+			coord_case.x = rand() % (330 + 1 - 1);
+			coord_case.y = rand() % (330 + 1 - 1);
+		} while (plateau_j.une_case[coord_case.x][coord_case.y].etat == 1);
+		attaque_case_bat(win, ren, event, plateau_o, coord_case.x / 33, coord_case.y / 33, &(joueur1->score), &(joueur2->score)); // Péter cette case
+		empiler(coord_case); // Empiler cette case
 	} else {
 		while (touche == 0 && !pile_vide()) {
-			lire la case la plus haute de la pile avec lire_sommet(valeur)
-			if (la case contenait un bateau (a été touchée en gros)) {
-				if (la case au dessus n'est pas touchée && est dans la matrice) {
+			coord_case = lire_sommet();
+			if (plateau_j.une_case[coord_case.x][coord_case.y].occupe == 1)//  (a été touchée en gros)) {
+				if (plateau_j.une_case[coord_case.x-1][coord_case.y].occupe == 1) {
 					peter la case
 					touche = 1;
 					empiler cette case
@@ -480,7 +485,7 @@ void tour_ordi_mode_IA(void) {
 			empiler cette case
 		}
 	}
-}*/
+}
 
 /**
  * \brief Fonction qui s'occupe des évènements d'une partie de bataille navale (joueur contre joueur)

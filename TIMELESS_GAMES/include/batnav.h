@@ -38,6 +38,14 @@ typedef struct s_plateau {
 } plateau_t;
 
 /**
+ * \struct coord_ordi_t Structure qui contient les coordonnées d'une case
+ */
+typedef struct s_coord_ordi {
+   int x;
+   int y;
+} coord_ordi_t;
+
+/**
  * \struct batnav_t Structure qui contient les variables pour la bataille navale
  */
 typedef struct s_batnav {
@@ -45,6 +53,9 @@ typedef struct s_batnav {
    plateau_t joueur2; // Plateau du joueur 2 */
 	int etat_partie; // 1 = placements du joueur 1, 2 = placements du joueur 2, 3 = tour du joueur 1, 4 = tour du joueur 2, 5 = fin du jeu
 } batnav_t;
+
+
+
 
 plateau_t creer_plateau(int l, int c);
 void init_bateaux(plateau_t * plateau_j);
