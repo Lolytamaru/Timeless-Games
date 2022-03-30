@@ -1,5 +1,5 @@
 # Timeless-Games
-LALALALALALALAL
+
 **Membres :**
 
 Christal, Hugo et Thibaut
