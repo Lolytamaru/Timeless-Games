@@ -385,10 +385,10 @@ void mastermind_tour(SDL_Window * win, SDL_Renderer * ren, int etat_joueur, int 
       afficher_image(win, ren, "assets/mastermind/gagne_masterm.png", 10, 60);
       afficher_image(win, ren, "assets/mastermind/gagne_cercle.png", 215, 440);
 		if (etat_joueur == J1)
-			*scoreJ2 = *scoreJ2 + 1;
+			(*scoreJ2) += 1;
 		else
-			*scoreJ1 = *scoreJ1 + 1;
-	   *etat_partie = MASTERMINDFINI;
+			(*scoreJ1) += 1;
+		*etat_partie = MASTERMINDFINI;
 		afficher_resultat(win, ren, code_secret);
       SDL_RenderPresent(ren);
    }
@@ -396,11 +396,11 @@ void mastermind_tour(SDL_Window * win, SDL_Renderer * ren, int etat_joueur, int 
    if ((*nb_essais) >= 10) {
       afficher_image(win, ren, "assets/mastermind/perdu_masterm.png", 10, 60);
       afficher_image(win, ren, "assets/mastermind/perdu_cercle.png", 215, 440);
-		if(etat_joueur == J1)
-			*scoreJ2 = *scoreJ2 + 1;
+		if (etat_joueur == J1)
+			(*scoreJ2) += 1;
 		else
-			*scoreJ1 = *scoreJ1 + 1;
-   	*etat_partie = MASTERMINDFINI;
+			(*scoreJ1) += 1;
+		*etat_partie = MASTERMINDFINI;
       afficher_resultat(win, ren, code_secret);
       SDL_RenderPresent(ren);
    }
@@ -445,7 +445,7 @@ void mastermind_tour(SDL_Window * win, SDL_Renderer * ren, int etat_joueur, int 
        		// Bouton VALIDER COMBINAISON
 				if (proposition_pas_vide(mastermind.propo_couleur) == 1){
        			if (event.button.x < 148 && event.button.x > 9 && event.button.y < 392 && event.button.y > 326) {
-         			mastermind_tour(win, ren, *etat_joueur, &(joueur1->score), &(joueur2->score), &(mastermind.etat_partie), &(mastermind.nb_essais), mastermind.propo_couleur, mastermind.code_secret, &(mastermind.position));
+         			mastermind_tour(win, ren, *etat_joueur, &(mastermind.etat_partie), &(joueur1->score), &(joueur2->score), &(mastermind.nb_essais), mastermind.propo_couleur, mastermind.code_secret, &(mastermind.position));
        			}
 				}
        		// Sélection de l'endroit pour la couleur à placer
@@ -488,7 +488,7 @@ void mastermind_tour(SDL_Window * win, SDL_Renderer * ren, int etat_joueur, int 
 		      }
 				// Proposition de la couleur noire
 		      if (event.button.x < 700 && event.button.x > 621 && event.button.y < 474 && event.button.y > 402) {
-		         affiche_propo(win, ren, &(mastermind.position), mastermind.propo_couleur, 'N');
+					affiche_propo(win, ren, &(mastermind.position), mastermind.propo_couleur, 'N');
 		         SDL_RenderPresent(ren);
 		      }
      		}

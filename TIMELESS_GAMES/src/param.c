@@ -10,6 +10,9 @@
 #include <joueur.h>
 #include <menu.h>
 
+typedef enum {PARAMETRES = 1, MENU_REGLES, REGLES_JEU} param_e;
+int param_select = PARAMETRES;
+
 /**
  * \brief Fonction qui permet de gérer les actions à faire sur la fenêtre du menu paramètres
  * \param win La fenêtre qui sera manipulée
@@ -22,42 +25,111 @@
  * \param joueur2 Structure qui contient les informations du joueur 2
 
  */
-void gestion_event_param( SDL_Window * win, SDL_Renderer * ren, SDL_Event event, t_statut * etat_win, int * mode_de_jeu, int * etat_joueur, t_joueur * joueur1, t_joueur * joueur2) {
+void gestion_event_param(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, t_statut * etat_win, int * mode_de_jeu, int * etat_joueur, t_joueur * joueur1, t_joueur * joueur2) {
    switch(event.type) {
       case SDL_MOUSEBUTTONUP:
-         if (event.button.x < 155 && event.button.x > 0 && event.button.y < 43 && event.button.y > 0) {
-            if (*mode_de_jeu == JVSJ && *etat_joueur == J1) {
-               afficher_image(win, ren, "assets/menu_J1.png", 0, 0);
-            } else if (*mode_de_jeu == JVSJ && *etat_joueur == J2) {
-               afficher_image(win, ren, "assets/menu_J2.png", 0, 0);
-            } else {
-               afficher_image(win, ren, "assets/menu.png", 0, 0);
+         if (param_select == REGLES_JEU) {
+            if (event.button.x < 750 && event.button.x > 0 && event.button.y < 500 && event.button.y > 0) {
+               param_select = MENU_REGLES;
+               afficher_image(win, ren, "assets/parametres/param_jeux.png", 0, 0);
             }
-            afficher_texte(ren, "assets/inter.ttf", 19, 290, 21, joueur1->pseudo);
-            afficher_texte(ren, "assets/inter.ttf", 19, 530, 21, joueur2->pseudo);
-            afficher_nombre(ren, "assets/inter.ttf", 19, 400, 21, joueur1->score);
-            afficher_nombre(ren, "assets/inter.ttf", 19, 635, 21, joueur2->score);
-  				SDL_RenderPresent(ren);
-  				*etat_win = MENU;
+         } else if (param_select == MENU_REGLES) {
+            if (event.button.x < 155 && event.button.x > 0 && event.button.y < 43 && event.button.y > 0) {
+               afficher_image(win, ren, "assets/parametres/parametres.png", 0, 0);
+               param_select = PARAMETRES;
+            } else if (event.button.x < 306 && event.button.x > 80 && event.button.y < 300 && event.button.y > 243) { // Pendu
+               afficher_image(win, ren, "assets/parametres/regles_pendu.png", 0, 0);
+               param_select = REGLES_JEU;
+            } else if (event.button.x < 370 && event.button.x > 80 && event.button.y < 385 && event.button.y > 330) { // Mastermind
+               afficher_image(win, ren, "assets/parametres/regles_masterm.png", 0, 0);
+               param_select = REGLES_JEU;
+            } else if (event.button.x < 430 && event.button.x > 80 && event.button.y < 470 && event.button.y > 420) { // Bataille navale
+               afficher_image(win, ren, "assets/parametres/regles_batnav.png", 0, 0);
+               param_select = REGLES_JEU;
+            }
+         } else if (param_select == PARAMETRES) {
+            // Bouton Quitter
+            if (event.button.x < 155 && event.button.x > 0 && event.button.y < 43 && event.button.y > 0) {
+               if (*mode_de_jeu == JVSJ && *etat_joueur == J1) {
+                  afficher_image(win, ren, "assets/menu_J1.png", 0, 0);
+               } else if (*mode_de_jeu == JVSJ && *etat_joueur == J2) {
+                  afficher_image(win, ren, "assets/menu_J2.png", 0, 0);
+               } else {
+                  afficher_image(win, ren, "assets/menu.png", 0, 0);
+               }
+               afficher_texte(ren, "assets/inter.ttf", 19, 290, 21, joueur1->pseudo);
+               afficher_texte(ren, "assets/inter.ttf", 19, 530, 21, joueur2->pseudo);
+               afficher_nombre(ren, "assets/inter.ttf", 19, 400, 21, joueur1->score);
+               afficher_nombre(ren, "assets/inter.ttf", 19, 635, 21, joueur2->score);
+     				SDL_RenderPresent(ren);
+     				*etat_win = MENU;
+            // Modifier les joueurs
+            } else if (event.button.x < 490 && event.button.x > 200 && event.button.y < 170 && event.button.y > 109) {
+               if (*mode_de_jeu == JVSJ)
+                  afficher_image(win, ren, "assets/parametres/menu_pseudo_JCJ.png", 0, 0);
+               else
+                  afficher_image(win, ren, "assets/parametres/menu_pseudo_JCO.png", 0, 0);
+               afficher_texte(ren, "assets/inter.ttf", 27, 497, 252, joueur1->pseudo);
+               afficher_texte(ren, "assets/inter.ttf", 27, 497, 338, joueur2->pseudo);
+               SDL_RenderPresent(ren);
+               *etat_win = PSEUDO;
+            // Réinitialisation des scores
+            } else if (event.button.x < 500 && event.button.x > 200 && event.button.y < 317 && event.button.y > 259) {
+               joueur1->score = 0;
+               joueur2->score = 0;
+               if (*mode_de_jeu == JVSJ && *etat_joueur == J1) {
+                  afficher_image(win, ren, "assets/menu_J1.png", 0, 0);
+               } else if (*mode_de_jeu == JVSJ && *etat_joueur == J2) {
+                  afficher_image(win, ren, "assets/menu_J2.png", 0, 0);
+               } else {
+                  afficher_image(win, ren, "assets/menu.png", 0, 0);
+               }
+               afficher_texte(ren, "assets/inter.ttf", 19, 290, 21, joueur1->pseudo);
+               afficher_texte(ren, "assets/inter.ttf", 19, 530, 21, joueur2->pseudo);
+               afficher_nombre(ren, "assets/inter.ttf", 19, 400, 21, joueur1->score);
+               afficher_nombre(ren, "assets/inter.ttf", 19, 635, 21, joueur2->score);
+               SDL_RenderPresent(ren);
+               *etat_win = MENU;
+            // Règles des jeux
+            } else if (event.button.x < 433 && event.button.x > 200 && event.button.y < 376 && event.button.y > 317) {
+               afficher_image(win, ren, "assets/parametres/param_jeux.png", 0, 0);
+               param_select = MENU_REGLES;
+               SDL_RenderPresent(ren);
+            // Modifier les joueurs
+            } else if (event.button.x < 490 && event.button.x > 200 && event.button.y < 170 && event.button.y > 109) {
+               if (*mode_de_jeu == JVSJ)
+                  afficher_image(win, ren, "assets/parametres/menu_pseudo_JCJ.png", 0, 0);
+               else
+                  afficher_image(win, ren, "assets/parametres/menu_pseudo_JCO.png", 0, 0);
+               afficher_texte(ren, "assets/inter.ttf", 27, 497, 252, joueur1->pseudo);
+               afficher_texte(ren, "assets/inter.ttf", 27, 497, 338, joueur2->pseudo);
+               SDL_RenderPresent(ren);
+               *etat_win = PSEUDO;
+            // Réinitialisation des scores
+            } else if (event.button.x < 500 && event.button.x > 200 && event.button.y < 317 && event.button.y > 259) {
+               joueur1->score = 0;
+               joueur2->score = 0;
+               if (*mode_de_jeu == JVSJ && *etat_joueur == J1) {
+                  afficher_image(win, ren, "assets/menu_J1.png", 0, 0);
+               } else if (*mode_de_jeu == JVSJ && *etat_joueur == J2) {
+                  afficher_image(win, ren, "assets/menu_J2.png", 0, 0);
+               } else {
+                  afficher_image(win, ren, "assets/menu.png", 0, 0);
+               }
+               afficher_texte(ren, "assets/inter.ttf", 19, 290, 21, joueur1->pseudo);
+               afficher_texte(ren, "assets/inter.ttf", 19, 530, 21, joueur2->pseudo);
+               afficher_nombre(ren, "assets/inter.ttf", 19, 400, 21, joueur1->score);
+               afficher_nombre(ren, "assets/inter.ttf", 19, 635, 21, joueur2->score);
+               SDL_RenderPresent(ren);
+               *etat_win = MENU;
+            // Règles des jeux
+            } else if (event.button.x < 433 && event.button.x > 200 && event.button.y < 376 && event.button.y > 317) {
+               afficher_image(win, ren, "assets/parametres/param_jeux.png", 0, 0);
+               SDL_RenderPresent(ren);
+            }
          }
-         if (event.button.x < 490 && event.button.x > 200 && event.button.y < 170 && event.button.y > 109) {
-            if (*mode_de_jeu == JVSJ)
-               afficher_image(win, ren, "assets/parametres/menu_pseudo_JCJ.png", 0, 0);
-            else
-               afficher_image(win, ren, "assets/parametres/menu_pseudo_JCO.png", 0, 0);
-            afficher_texte(ren, "assets/inter.ttf", 27, 497, 252, joueur1->pseudo);
-            afficher_texte(ren, "assets/inter.ttf", 27, 497, 338, joueur2->pseudo);
-            SDL_RenderPresent(ren);
-            *etat_win = PSEUDO;
-         }
-         //if (event.button.x < 551 && event.button.x > 200 && event.button.y < 242 && event.button.y > 182)
-         if (event.button.x < 500 && event.button.x > 200 && event.button.y < 317 && event.button.y > 259) {
-            joueur1->score = 0;
-            joueur2->score = 0;
-         }
-         //if (event.button.x < 433 && event.button.x > 200 && event.button.y < 387 && event.button.y > 326)
-         //if (event.button.x < 342 && event.button.x > 200 && event.button.y < 459 && event.button.y > 398)
+         SDL_RenderPresent(ren);
          break;
       default: break;
-    }
+   }
 }

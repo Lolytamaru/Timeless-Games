@@ -47,16 +47,16 @@ void gestion_event_menu(SDL_Window *win, SDL_Renderer *ren, SDL_Event event, t_s
    				SDL_RenderPresent(ren);
          }
  	      if (event.button.x < 337 && event.button.x > 106 && event.button.y < 272 && event.button.y > 83) {
-            if(*mode_de_jeu == JVSO){
+            if(*mode_de_jeu == JVSO) {
                init_partie_pendu(win, ren, mode_de_jeu, joueur1->pseudo, joueur2->pseudo, &(joueur1->score), &(joueur2->score));
                SDL_RenderPresent(ren);
-            }else{
+            } else {
                init_partie_pendu(win, ren, mode_de_jeu, joueur1->pseudo, joueur2->pseudo, &(joueur1->score), &(joueur2->score));
                afficher_image(win, ren, "assets/pendu/pendujcj.png", 0, 0);
-               if(*etat_joueur ==J1){
+               if (*etat_joueur ==J1) {
                   afficher_texte(ren, "assets/inter.ttf", 27, 510, 80, joueur1->pseudo);
                   afficher_texte(ren, "assets/inter.ttf", 27, 510, 222, joueur2->pseudo);
-               }else{
+               } else {
                   afficher_texte(ren, "assets/inter.ttf", 27, 510, 80, joueur2->pseudo);
                   afficher_texte(ren, "assets/inter.ttf", 27, 510, 222, joueur1->pseudo);
                }
@@ -89,16 +89,14 @@ void gestion_event_menu(SDL_Window *win, SDL_Renderer *ren, SDL_Event event, t_s
             *etat_win = MASTERMIND;
          }
          else if (event.button.x < 340 && event.button.x > 107 && event.button.y < 473 && event.button.y > 283) {
-            if (*mode_de_jeu == JVSJ) {
-               afficher_image(win, ren, "assets/batnav/placement_violets.png", 0, 0);
-               afficher_texte(ren, "assets/inter.ttf", 19, 290, 21, joueur1->pseudo);
-               afficher_texte(ren, "assets/inter.ttf", 19, 525, 21, joueur2->pseudo);
-               afficher_nombre(ren, "assets/inter.ttf", 19, 400, 21, joueur1->score);
-               afficher_nombre(ren, "assets/inter.ttf", 19, 635, 21, joueur2->score);
-               SDL_RenderPresent(ren);
-               init_partie_batnav();
-               *etat_win = BATNAV;
-            }
+            afficher_image(win, ren, "assets/batnav/placement_violets.png", 0, 0);
+            afficher_texte(ren, "assets/inter.ttf", 19, 290, 21, joueur1->pseudo);
+            afficher_texte(ren, "assets/inter.ttf", 19, 525, 21, joueur2->pseudo);
+            afficher_nombre(ren, "assets/inter.ttf", 19, 400, 21, joueur1->score);
+            afficher_nombre(ren, "assets/inter.ttf", 19, 635, 21, joueur2->score);
+            SDL_RenderPresent(ren);
+            init_partie_batnav();
+            *etat_win = BATNAV;
          }
          else if (event.button.x < 684 && event.button.x > 455 && event.button.y < 473 && event.button.y > 283) {
             afficher_image(win, ren, "assets/parametres/parametres.png", 0, 0);

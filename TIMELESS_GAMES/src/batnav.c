@@ -13,7 +13,7 @@
 
 #define VIDE 0
 #define NB_BAT 5
-typedef enum {JOUEUR1 = 1, JOUEUR2, ORDI, ATTAQUE_J1, ATTAQUE_J2, FIN_PARTIE} batnav_e; /* On commence l'enumération à 1 */
+typedef enum {JOUEUR1 = 1, JOUEUR2, ATTAQUE_J1, ATTAQUE_J2, FIN_PARTIE} batnav_e; /* On commence l'enumération à 1 */
 int bat_selec;
 char direction;
 batnav_t jeu;
@@ -118,6 +118,7 @@ void init_partie_batnav(void) {
    init_etat_plateau(&jeu.joueur2);
    init_bateaux(&jeu.joueur1);
    init_bateaux(&jeu.joueur2);
+	init_pile();
 }
 
 /**
@@ -127,8 +128,8 @@ void init_partie_batnav(void) {
  * \param y Coordonnée y de la case
  * \return Renvoie 1 si les coordonnées sont valides, 0 sinon
  */
-int est_valide(plateau_t plateau_j, int x, int y) {
-	return ((x + 1 >= 0 && x <= plateau_j.nb_lig) && (y + 1 >= 0 && y <= plateau_j.nb_col));
+int est_valide(plateau_t * plateau_j, int x, int y) {
+	return ((x + 1 >= 0 && x <= plateau_j->nb_lig) && (y + 1 >= 0 && y <= plateau_j->nb_col));
 }
 
 /**
@@ -139,15 +140,15 @@ int est_valide(plateau_t plateau_j, int x, int y) {
  * \param taille_bat Taille du bateau que l'on souhaite placer
  * \return Retourne 1 si la direction est valide, 0 sinon
  */
-int direction_valide(plateau_t plateau_j, int x, int y, int direction, int taille_bat) {
+int direction_valide(plateau_t * plateau_j, int x, int y, int direction, int taille_bat) {
    int max = 0, min = 0, cpt = 0;
    switch(direction) {
 		// L'utilisateur clique sur un bateau horizontal
    	case 'h':
          max = taille_bat + x - 1;
-         if (max < plateau_j.nb_col) {
+         if (max < plateau_j->nb_col) {
             while (x <= max) {
-					if (plateau_j.une_case[x][y].occupe == 0)
+					if (plateau_j->une_case[x][y].occupe == 0)
                   cpt += est_valide(plateau_j, x, y);
                x++;
             }
@@ -162,7 +163,7 @@ int direction_valide(plateau_t plateau_j, int x, int y, int direction, int taill
          min = y - taille_bat + 1;
          if (min >= 0) {
             while (y >= min) {
-					if (plateau_j.une_case[x][y].occupe == 0)
+					if (plateau_j->une_case[x][y].occupe == 0)
                   cpt += est_valide(plateau_j, x, y);
                y--;
             }
@@ -177,6 +178,48 @@ int direction_valide(plateau_t plateau_j, int x, int y, int direction, int taill
 			break;
    }
    return 0;
+}
+
+/**
+ * \brief Fonction qui s'occupe du placement des bateaux de l'ordinateur
+ * \param plateau_ordi Plateau de l'ordi que l'on cherche à remplir
+ */
+void placement_bateaux_ordi(plateau_t * plateau_ordi) {
+	int bateau_place = 0, bat_encours, x, y, i, place =0;
+	srand(time(NULL)); // Initialisation du hasard
+	x = rand() % (10 + 1 - 1);
+	y = rand() % (10 + 1 - 1);
+	do {
+		bat_encours = rand() % (10 + 1 - 1);
+		if (plateau_ordi->liste_bat[bat_encours].engage == 0) {
+			do {
+				if (direction_valide(plateau_ordi, x, y, plateau_ordi->liste_bat[bat_encours].direction, plateau_ordi->liste_bat[bat_encours].taille)) {
+					if (plateau_ordi->liste_bat[bat_encours].direction == 'h') {
+						for (i = x; i < x + plateau_ordi->liste_bat[bat_encours].taille; i++) {
+						 	plateau_ordi->une_case[i][y].num_bat = plateau_ordi->liste_bat[bat_encours].nom;
+						 	plateau_ordi->une_case[i][y].occupe = 1;
+					 	}
+						plateau_ordi->liste_bat[bat_encours].engage = 1;
+				     	plateau_ordi->liste_bat[bat_encours + NB_BAT].engage = 1;
+						place++;
+					} else {
+						for (i = y; i > y - plateau_ordi->liste_bat[bat_encours].taille; i--) {
+					 		plateau_ordi->une_case[x][i].num_bat = plateau_ordi->liste_bat[bat_encours].nom;
+						 	plateau_ordi->une_case[x][i].occupe = 1;
+						}
+						plateau_ordi->liste_bat[bat_encours].engage = 1;
+		 	         plateau_ordi->liste_bat[bat_encours - NB_BAT].engage = 1;
+						place++;
+					}
+				} else {
+						x = rand() % (10 + 1 - 1);
+						y = rand() % (10 + 1 - 1);
+				}
+			} while(place == 0);
+			place = 0;
+			bateau_place++;
+		}
+	} while(bateau_place < 5);
 }
 
 /**
@@ -232,21 +275,23 @@ void placement_case_bat(SDL_Window * win, SDL_Renderer * ren, int * mode_de_jeu,
   	char bateau[200];
   	int i, cpt = 0;
   	int taille_bat = plateau_j->liste_bat[bat_selec].taille;
-   if (jeu.etat_partie == JOUEUR && direction_valide(*plateau_j, x, y, direction, taille_bat)) {
+   if (jeu.etat_partie == JOUEUR && direction_valide(plateau_j, x, y, direction, taille_bat)) {
       sprintf(bateau, "assets/batnav/bateaux/%s/taille_%i_%c_%s.png", couleur, taille_bat, direction, couleur);
       if (direction == 'h') {
          afficher_image(win, ren, bateau, (x * 41) + 72, (y * 41) + 85);
          for (i = x; i < x + taille_bat; i++) {
-            plateau_j->une_case[i][y].num_bat = plateau_j->liste_bat[taille_bat - 2].nom;
+            plateau_j->une_case[i][y].num_bat = plateau_j->liste_bat[bat_selec].nom;
             plateau_j->une_case[i][y].occupe = 1;
+				plateau_j->une_case[i][y].direction = plateau_j->liste_bat[bat_selec].direction;
          }
          plateau_j->liste_bat[bat_selec].engage = 1;
          plateau_j->liste_bat[bat_selec + NB_BAT].engage = 1;
       } else {
          afficher_image(win, ren, bateau, (x * 41) + 72, (y * 41) + 44 - 41 *(taille_bat - 2));
          for (i = y; i > y - taille_bat; i--) {
-            plateau_j->une_case[x][i].num_bat = plateau_j->liste_bat[taille_bat + 3].nom;
+            plateau_j->une_case[x][i].num_bat = plateau_j->liste_bat[bat_selec].nom;
             plateau_j->une_case[x][i].occupe = 1;
+				plateau_j->une_case[x][i].direction = plateau_j->liste_bat[bat_selec].direction;
          }
          plateau_j->liste_bat[bat_selec].engage = 1;
          plateau_j->liste_bat[bat_selec - NB_BAT].engage = 1;
@@ -397,6 +442,23 @@ void placement_bateaux(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, t_
 }
 
 /**
+ * \brief Fonction qui s'occupe de savoir si toutes les cases d'un bateau sont coulés
+ * \param plateau_j Plateau du joueur que l'on cherche à remplir
+ * \param bat_selec Bateau sélectionné par le joueur pour le placer
+ */
+
+int bateau_est_coule(plateau_t * plateau_j, char * bat_selec) {
+   int i, j, cpt = 0;
+   for (i = 0;i < plateau_j->nb_col; i++) {
+      for (j = 0; j < plateau_j->nb_lig; j++) {
+         if (plateau_j->une_case[i][j].num_bat == bat_selec && plateau_j->une_case[i][j].etat == 1 && plateau_j->une_case[i][j].occupe == 1)
+            cpt++;
+      }
+   }
+   return cpt;
+}
+
+/**
  * \brief Fonction qui s'occupe de la partie affrontement de la bataille navale
  * \param win La fenêtre qui sera manipulée
  * \param ren Le rendu qui sera manipulé
@@ -404,51 +466,93 @@ void placement_bateaux(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, t_
  * \param plateau_j Plateau de jeu du joueur
  * \param x Coordonnée x de la case sélectionnée
  * \param y Coordonnée y de la case sélectionnée
+ * \param scoreJ1 Score du joueur 1
+ * \param scoreJ2 Score du joueur 2
+ * \param couleur Couleur du joueur
  */
-void attaque_case_bat(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, plateau_t plateau_j, int x, int y, int * scorej1, int * scorej2) {
-	int i, j, cpt = 0;
-   if (plateau_j.une_case[x][y].etat == 0 && plateau_j.une_case[x][y].occupe == 1) {
+void attaque_case_bat(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, plateau_t * plateau_j, int x, int y, int * scoreJ1, int * scoreJ2, char * couleur) {
+	char bateau[200];
+   int numero_bat = 0;
+   int nbr = 0;
+	int i, j, cpt;
+   if (plateau_j->une_case[x][y].etat == 0 && plateau_j->une_case[x][y].occupe == 1) {
       if (jeu.etat_partie == ATTAQUE_J1) {
-			plateau_j.une_case[x][y].etat = 1;
+			plateau_j->une_case[x][y].etat = 1;
 			afficher_image(win, ren, "assets/batnav/touche.png", x * 33 + 35, y * 33 + 159);
 			afficher_image(win, ren, "assets/batnav/tour_vert.png", 462, 70);
 			SDL_RenderPresent(ren);
 			jeu.etat_partie = ATTAQUE_J2;
       } else {
-			plateau_j.une_case[x][y].etat = 1;
+			plateau_j->une_case[x][y].etat = 1;
 			afficher_image(win, ren, "assets/batnav/touche.png", x * 33 + 416, y * 33 + 159);
 			afficher_image(win, ren, "assets/batnav/tour_violet.png", 462, 70);
 			SDL_RenderPresent(ren);
 			jeu.etat_partie = ATTAQUE_J1;
       }
-   } else if (plateau_j.une_case[x][y].etat == 0) {
+   } else if (plateau_j->une_case[x][y].etat == 0) {
       if (jeu.etat_partie == ATTAQUE_J1) {
-        plateau_j.une_case[x][y].etat = 1;
+        plateau_j->une_case[x][y].etat = 1;
         afficher_image(win, ren, "assets/batnav/pas_touche_bateau.png", x * 33 + 35, y * 33 + 159);
 		  afficher_image(win, ren, "assets/batnav/tour_vert.png",462,70);
         SDL_RenderPresent(ren);
         jeu.etat_partie = ATTAQUE_J2;
       } else {
-        plateau_j.une_case[x][y].etat = 1;
+        plateau_j->une_case[x][y].etat = 1;
         afficher_image(win, ren, "assets/batnav/pas_touche_bateau.png", x * 33 + 417, y * 33 + 159);
 		  afficher_image(win, ren, "assets/batnav/tour_violet.png", 462, 70);
         SDL_RenderPresent(ren);
         jeu.etat_partie = ATTAQUE_J1;
-      }
+	  }
    }
+	if (plateau_j->une_case[x][y].etat == 1 && plateau_j->une_case[x][y].occupe == 1) {
+		cpt = bateau_est_coule(plateau_j, plateau_j->une_case[x][y].num_bat);
+		for (i = 0; i < 10; i++)
+		  	if (plateau_j->une_case[x][y].num_bat == plateau_j->liste_bat[i].nom && plateau_j->une_case[x][y].direction == plateau_j->liste_bat[i].direction)
+				numero_bat = i;
+		if (cpt == plateau_j->liste_bat[numero_bat].taille) {
+			sprintf(bateau, "assets/batnav/bateaux/casses/bat%d_%c_%s_casse.png", plateau_j->liste_bat[numero_bat].taille, plateau_j->liste_bat[numero_bat].direction, couleur);
+			if (plateau_j->une_case[x][y].direction == 'h') {
+				for (j = x; j >= 0; j--) {
+					if (plateau_j->une_case[x][y].num_bat == plateau_j->une_case[j][y].num_bat && est_valide(plateau_j, j, y))
+						nbr++;
+				}
+				if (jeu.etat_partie == ATTAQUE_J2) {
+					afficher_image(win, ren, bateau, (x - nbr + 1) * 33 + 34, y * 33 + 158);
+					SDL_RenderPresent(ren);
+				} else {
+					afficher_image(win, ren, bateau, (x - nbr + 1) * 33 + 416, y * 33 + 158);
+					SDL_RenderPresent(ren);
+				}
+			}
+			if (plateau_j->une_case[x][y].direction == 'v') {
+				for (j = y; j >= 0; j--)
+					if (plateau_j->une_case[x][y].num_bat == plateau_j->une_case[x][j].num_bat && est_valide(plateau_j, x, j))
+						nbr++;
+				if (jeu.etat_partie == ATTAQUE_J2) {
+					afficher_image(win, ren, bateau, x * 33 + 34, (y - nbr + 1) * 33 + 158);
+					SDL_RenderPresent(ren);
+				} else {
+					afficher_image(win, ren, bateau, x * 33 + 416, (y - nbr + 1) * 33 + 158);
+					SDL_RenderPresent(ren);
+				}
+			}
+		}
+	}
+	cpt = 0;
    /* Fin de la partie */
-   for (i = 0; i < 10; i++)
+   for (i = 0; i < 10; i++) {
      	for (j = 0; j < 10; j++)
-      	if (plateau_j.une_case[i][j].etat == 1 && plateau_j.une_case[i][j].occupe == 1)
+      	if (plateau_j->une_case[i][j].etat == 1 && plateau_j->une_case[i][j].occupe == 1)
          	cpt++;
+	}
    if (cpt == 17) {
 		if (jeu.etat_partie == ATTAQUE_J1) {
-			*scorej1 = *scorej1 + 1;
+			*scoreJ1 = *scoreJ1 + 1;
 			afficher_image(win, ren, "assets/batnav/gagne_batnav.png", 47, 60);
 			afficher_image(win, ren, "assets/batnav/perdu_batnav.png", 563, 60);
 			SDL_RenderPresent(ren);
    	} else {
-			*scorej2=*scorej2 +1;
+			*scoreJ2 = *scoreJ2 + 1;
 			afficher_image(win, ren, "assets/batnav/gagne_batnav.png", 563, 60);
 			afficher_image(win, ren, "assets/batnav/perdu_batnav.png", 47, 60);
 			SDL_RenderPresent(ren);
@@ -457,74 +561,83 @@ void attaque_case_bat(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, pla
    }
 }
 
-
-void tour_ordi_mode_IA(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, plateau_t plateau_j, int * scorej1, int * scoreordi) {
-	int touche = 0;
+/**
+ * \brief Fonction qui s'occupe de la partie affrontement de la bataille navale
+ * \param win La fenêtre qui sera manipulée
+ * \param ren Le rendu qui sera manipulé
+ * \param event Un détecteur d'évènements
+ * \param plateau_ordi Plateau de jeu de l'ordi
+ * \param joueur1 Structure du pseudo et du score du joueur 1
+ * \param ordi Structure du pseudo et du score de l'ordi
+ */
+void tour_ordi_mode_IA(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, plateau_t * plateau_ordi, t_joueur * joueur1, t_joueur * ordi) {
+	int touche = 0, i, j, cpt;
 	coord_ordi_t coord_case;
-	initpile();
+	SDL_Delay(500);
 	srand(time(NULL)); // Initialisation du hasard
 	if (pile_vide()) {
 		do {
-			coord_case.x = rand() % (330 + 1 - 1);
-			coord_case.y = rand() % (330 + 1 - 1);
-		} while (plateau_j.une_case[coord_case.x][coord_case.y].etat == 1);
-		attaque_case_bat(win, ren, event, plateau_o, coord_case.x / 33, coord_case.y / 33, &(joueur1->score), &(joueur2->score)); // Péter cette case
-		empiler(coord_case); // Empiler cette case
+			coord_case.x = rand() % (9 + 1 - 1);
+			coord_case.y = rand() % (9 + 1 - 1);
+		} while (plateau_ordi->une_case[coord_case.x][coord_case.y].etat == 1);
+		attaque_case_bat(win, ren, event, plateau_ordi, coord_case.x, coord_case.y, &(joueur1->score), &(ordi->score), "vert");
+		empiler(coord_case);
 	} else {
 		while (touche == 0 && !pile_vide()) {
 			coord_case = lire_sommet();
-			if (plateau_j.une_case[coord_case.x][coord_case.y].occupe == 1)//  (a été touchée en gros)) {
-				if (plateau_j.une_case[coord_case.x-1][coord_case.y].etat == 0 && est_valide(plateau_j, (coord_case.x-1)/33, (coord_case.y)/33)){
-					attaque_case_bat(win, ren, event, plateau_o, (coord_case.x-1) / 33, coord_case.y / 33, &(joueur1->score), &(joueur2->score)); // Péter cette case
+			if (plateau_ordi->une_case[coord_case.x][coord_case.y].occupe == 1) {
+				if (plateau_ordi->une_case[coord_case.x-1][coord_case.y].etat == 0 && est_valide(plateau_ordi, (coord_case.x - 1), (coord_case.y))) {
+					attaque_case_bat(win, ren, event, plateau_ordi, (coord_case.x - 1), coord_case.y, &(joueur1->score), &(ordi->score), "vert");
 					touche = 1;
 					(coord_case.x)--;
-					empiler(coord_case);//Empiler cette case
-				} else if (plateau_j.une_case[coord_case.x][coord_case.y+1].etat == 0 && est_valide(plateau_j, (coord_case.x)/33, (coord_case.y+1)/33)) {
-					attaque_case_bat(win, ren, event, plateau_o, coord_case.x / 33, (coord_case.y+1) / 33, &(joueur1->score), &(joueur2->score)); // Péter cette case
+					empiler(coord_case);
+				} else if (plateau_ordi->une_case[coord_case.x][coord_case.y + 1].etat == 0 && est_valide(plateau_ordi, (coord_case.x), (coord_case.y + 1))) {
+					attaque_case_bat(win, ren, event, plateau_ordi, coord_case.x, (coord_case.y + 1), &(joueur1->score), &(ordi->score), "vert");
 					touche = 1;
 					(coord_case.y)++;
-					empiler(coord_case);//Empiler cette case
-				} else if (plateau_j.une_case[coord_case.x+1][coord_case.y].etat == 0 && est_valide(plateau_j, (coord_case.x+1)/33, (coord_case.y)/33)) {
-					attaque_case_bat(win, ren, event, plateau_o, (coord_case.x+1) / 33, coord_case.y / 33, &(joueur1->score), &(joueur2->score)); // Péter cette case
+					empiler(coord_case);
+				} else if (plateau_ordi->une_case[coord_case.x + 1][coord_case.y].etat == 0 && est_valide(plateau_ordi, (coord_case.x + 1), (coord_case.y))) {
+					attaque_case_bat(win, ren, event, plateau_ordi, (coord_case.x + 1), coord_case.y, &(joueur1->score), &(ordi->score), "vert");
 					touche = 1;
 					(coord_case.x)++;
-					empiler(coord_case);//Empiler cette case
-				} else if (plateau_j.une_case[coord_case.x][coord_case.y-1].etat == 0 && est_valide(plateau_j, (coord_case.x)/33, (coord_case.y-1)/33)) {
-					attaque_case_bat(win, ren, event, plateau_o, coord_case.x / 33, (coord_case.y-1) / 33, &(joueur1->score), &(joueur2->score)); // Péter cette case
+					empiler(coord_case);
+				} else if (plateau_ordi->une_case[coord_case.x][coord_case.y - 1].etat == 0 && est_valide(plateau_ordi, (coord_case.x), (coord_case.y - 1))) {
+					attaque_case_bat(win, ren, event, plateau_ordi, coord_case.x, (coord_case.y - 1), &(joueur1->score), &(ordi->score), "vert");
 					touche = 1;
-					empiler(coord_case); //Empiler cette case
+					empiler(coord_case);
 				} else {
-					depiler(&coord_case); // Depiler la case qui contenait un bout de bateau
+					depiler(&coord_case);
 				}
 			} else {
-				depiler(&coord_case); // Dépiler la case qui ne contenait pas de bout de bateau)
+				depiler(&coord_case);
 			}
 		}
 		if (pile_vide()) {
 			do {
-				coord_case.x = rand() % (330 + 1 - 1);
-				coord_case.y = rand() % (330 + 1 - 1);
-			} while (plateau_j.une_case[coord_case.x][coord_case.y].etat == 1);
-			attaque_case_bat(win, ren, event, plateau_o, coord_case.x / 33, coord_case.y / 33, &(joueur1->score), &(joueur2->score)); // Péter cette case
-			empiler(coord_case); // Empiler cette case
+				coord_case.x = rand() % (10 + 1 - 1);
+				coord_case.y = rand() % (10 + 1 - 1);
+			} while (plateau_ordi->une_case[coord_case.x][coord_case.y].etat == 1);
+			attaque_case_bat(win, ren, event, plateau_ordi, coord_case.x, coord_case.y, &(joueur1->score), &(ordi->score), "vert");
+			empiler(coord_case);
 		}
-		afficher_image(win, ren, "assets/batnav/pas_touche_bateau.png", coord_case.x + 417, coord_case.y + 159);
 		afficher_image(win, ren, "assets/batnav/tour_violet.png", 462, 70);
 		SDL_RenderPresent(ren);
 		jeu.etat_partie = ATTAQUE_J1;
 		/* Fin de la partie */
 	   for (i = 0; i < 10; i++)
 	     	for (j = 0; j < 10; j++)
-	      	if (plateau_j.une_case[i][j].etat == 1 && plateau_j.une_case[i][j].occupe == 1)
+	      	if (plateau_ordi->une_case[i][j].etat == 1 && plateau_ordi->une_case[i][j].occupe == 1)
 	         	cpt++;
 	   if (cpt == 17) {
+			// Le joueur a gagné
 			if (jeu.etat_partie == ATTAQUE_J1) {
-				*scorej1 = *scorej1 + 1;
+				joueur1->score += 1;
 				afficher_image(win, ren, "assets/batnav/gagne_batnav.png", 47, 60);
 				afficher_image(win, ren, "assets/batnav/perdu_batnav.png", 563, 60);
 				SDL_RenderPresent(ren);
-	   	} else {
-				*scoreordi=*scoreordi +1;
+			// L'ordinateur a gagné
+			} else {
+				ordi->score += 1;
 				afficher_image(win, ren, "assets/batnav/gagne_batnav.png", 563, 60);
 				afficher_image(win, ren, "assets/batnav/perdu_batnav.png", 47, 60);
 				SDL_RenderPresent(ren);
@@ -532,7 +645,7 @@ void tour_ordi_mode_IA(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, pl
 	   	jeu.etat_partie = FIN_PARTIE;
 	   }
 	}
-
+}
 
 /**
  * \brief Fonction qui s'occupe des évènements d'une partie de bataille navale (joueur contre joueur)
@@ -568,13 +681,13 @@ void gestion_event_batnav(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
          placement_bateaux(win, ren, event, etat_win, mode_de_jeu, JOUEUR2, &jeu.joueur2, "vert", joueur1, joueur2);
          if (jeu.etat_partie == ATTAQUE_J1)
             if (event.button.x < 364 && event.button.x > 35 && event.button.y < 488 && event.button.y > 160)
-               attaque_case_bat(win, ren, event, jeu.joueur2,(event.button.x - 35) / 33, (event.button.y - 160) / 33, &(joueur1->score), &(joueur2->score));
+               attaque_case_bat(win, ren, event, &jeu.joueur2,(event.button.x - 35) / 33, (event.button.y - 160) / 33, &(joueur1->score), &(joueur2->score), "violet");
          if (jeu.etat_partie == ATTAQUE_J2) {
 				if (*mode_de_jeu == JVSJ) {
             	if (event.button.x < 746 && event.button.x > 416 && event.button.y < 488 && event.button.y > 158)
-               	attaque_case_bat(win, ren, event, jeu.joueur1, (event.button.x - 416) / 33, (event.button.y - 158) / 33, &(joueur1->score), &(joueur2->score));
+               	attaque_case_bat(win, ren, event, &jeu.joueur1, (event.button.x - 416) / 33, (event.button.y - 158) / 33, &(joueur1->score), &(joueur2->score), "vert");
 				} else {
-					tour_ordi_mode_IA(win, ren, event, jeu.joueur1, &(joueur1->score), &(joueur2->score));
+					tour_ordi_mode_IA(win, ren, event, &jeu.joueur1, joueur1, joueur2);
 				}
 			}
 			break;

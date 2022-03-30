@@ -6,7 +6,7 @@
  * \date 28 mars 2022
  */
 
-#include <all_includes.h>
+#include <pile_batnav.h>
 
 #define TAILLE_MAX 100
 coord_ordi_t pile[TAILLE_MAX];
