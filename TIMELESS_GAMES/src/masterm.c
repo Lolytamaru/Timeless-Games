@@ -42,18 +42,19 @@ void init_partie_masterm(int * mode_de_jeu) {
  * \param scoreJ2 Score du joueur 2
  */
 void init_mastermind_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, char * pseudoJ1, char * pseudoJ2, int * scoreJ1, int * scoreJ2) {
-	if (event.button.x < 510 && event.button.x > 464 && event.button.y < 319 && event.button.y > 275) {
+	// Première case pour mettre une couleur
+	if (event.button.x < 510 && event.button.x > 464 && event.button.y < 319 && event.button.y > 275)
 		mastermind.position = 0;
-	}
-	if (event.button.x < 558 && event.button.x > 512 && event.button.y < 319 && event.button.y > 275) {
+	// Deuxième case pour mettre une couleur
+	if (event.button.x < 558 && event.button.x > 512 && event.button.y < 319 && event.button.y > 275)
 		mastermind.position = 1;
-	}
-	if (event.button.x < 606 && event.button.x > 560 && event.button.y < 319 && event.button.y > 275) {
+	// Troisième case pour mettre une couleur
+	if (event.button.x < 606 && event.button.x > 560 && event.button.y < 319 && event.button.y > 275)
 		mastermind.position = 2;
-	}
-	if(event.button.x < 654 && event.button.x > 608 && event.button.y < 319 && event.button.y > 275) {
+	// Quatrième case pour mettre une couleur
+	if (event.button.x < 654 && event.button.x > 608 && event.button.y < 319 && event.button.y > 275)
    	mastermind.position = 3;
-	}
+	// Proposition de la couleur rouge
 	if (event.button.x < 440 && event.button.x > 387 && event.button.y < 400  && event.button.y > 347 ) {
 		mastermind.code_secret[mastermind.position] = 'R'; // Affiche la couleur rouge à la position indiquée
 		afficher_image(win, ren, "assets/mastermind/propositions/rouge_propo.png", 464  + (mastermind.position) * 48, 275);
@@ -190,7 +191,7 @@ int nb_bonne_place(char * code, char * code_secret) {
  * \param code La proposition de couleurs
  * \param code_secret Le code secret
  * \param nb_place Le nombre de pions bien placés précédemment calculés
- * \return Renvoie le nombre de pions de bonnes couleurs mal placées
+ * \return Renvoie le nombre de pions de bonnes couleurs mal placés
  */
 int nb_bonne_couleur(char * code, char * code_secret, int nb_place) {
    int i, cpt = 0;
@@ -385,9 +386,9 @@ void mastermind_tour(SDL_Window * win, SDL_Renderer * ren, int etat_joueur, int 
       afficher_image(win, ren, "assets/mastermind/gagne_masterm.png", 10, 60);
       afficher_image(win, ren, "assets/mastermind/gagne_cercle.png", 215, 440);
 		if (etat_joueur == J1)
-			(*scoreJ2) += 1;
+			(*scoreJ2)++;
 		else
-			(*scoreJ1) += 1;
+			(*scoreJ1)++;
 		*etat_partie = MASTERMINDFINI;
 		afficher_resultat(win, ren, code_secret);
       SDL_RenderPresent(ren);
@@ -399,9 +400,9 @@ void mastermind_tour(SDL_Window * win, SDL_Renderer * ren, int etat_joueur, int 
       afficher_image(win, ren, "assets/mastermind/perdu_masterm.png", 10, 60);
       afficher_image(win, ren, "assets/mastermind/perdu_cercle.png", 215, 440);
 		if (etat_joueur == J1)
-			(*scoreJ2) += 1;
+			(*scoreJ2)++;
 		else
-			(*scoreJ1) += 1;
+			(*scoreJ1)++;
 		*etat_partie = MASTERMINDFINI;
       afficher_resultat(win, ren, code_secret);
       SDL_RenderPresent(ren);
@@ -428,13 +429,12 @@ void mastermind_tour(SDL_Window * win, SDL_Renderer * ren, int etat_joueur, int 
     	case SDL_MOUSEBUTTONUP: // Relâchement du clic pour la non redondance de l'évènement
      		// Bouton [QUITTER]
        	if (event.button.x < 155 && event.button.x > 0 && event.button.y < 43 && event.button.y > 0) {
-				if(*mode_de_jeu == JVSJ && *etat_joueur == J1){
+				if (*mode_de_jeu == JVSJ && *etat_joueur == J1)
                afficher_image(win, ren, "assets/menu_J1.png", 0, 0);
-            } else if (*mode_de_jeu == JVSJ && *etat_joueur == J2) {
+            else if (*mode_de_jeu == JVSJ && *etat_joueur == J2)
                afficher_image(win, ren, "assets/menu_J2.png", 0, 0);
-            } else {
+            else
                afficher_image(win, ren, "assets/menu.png", 0, 0);
-            }
 				afficher_texte(ren, "assets/inter.ttf", 19, 290, 21, joueur1->pseudo);
             afficher_texte(ren, "assets/inter.ttf", 19, 530, 21, joueur2->pseudo);
 				afficher_nombre(ren, "assets/inter.ttf", 19, 400, 21, joueur1->score);
@@ -447,7 +447,7 @@ void mastermind_tour(SDL_Window * win, SDL_Renderer * ren, int etat_joueur, int 
  			// Partie en cours
        	if (mastermind.etat_partie == MASTERMINDJEU) {
        		// Bouton VALIDER COMBINAISON
-				if (proposition_pas_vide(mastermind.propo_couleur) == 1){
+				if (proposition_pas_vide(mastermind.propo_couleur) == 1) {
        			if (event.button.x < 148 && event.button.x > 9 && event.button.y < 392 && event.button.y > 326) {
          			mastermind_tour(win, ren, *etat_joueur, &(mastermind.etat_partie), &(joueur1->score), &(joueur2->score), &(mastermind.nb_essais), mastermind.propo_couleur, mastermind.code_secret, &(mastermind.position));
        			}
