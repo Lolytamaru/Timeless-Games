@@ -10,8 +10,8 @@
 #include <joueur.h>
 #include <pendu.h>
 
-int tab_x_lettre[26] = {535, 607, 679, 535, 607, 679, 535, 607, 679, 535, 607, 679, 535, 607, 679, 535, 607, 679, 535, 607, 679, 535, 607, 679, 571, 647};
-int tab_y_lettre[26] = {28, 28, 28, 79, 79, 79, 130, 130, 130, 181, 181, 181, 232, 232, 232, 283, 283, 283, 334, 334, 334, 385, 385, 385, 436, 436};
+int tab_x_lettre[26] = {535, 607, 679, 535, 607, 679, 535, 607, 679, 535, 607, 679, 535, 607, 679, 535, 607, 679, 535, 607, 679, 535, 607, 679, 571, 647}; // Tableau contenant la coordonnée x en pixels des 26 lettres de l'alphabet
+int tab_y_lettre[26] = {28, 28, 28, 79, 79, 79, 130, 130, 130, 181, 181, 181, 232, 232, 232, 283, 283, 283, 334, 334, 334, 385, 385, 385, 436, 436}; // Tableau contenant la coordonnée y en pixels des 26 lettres de l'alphabet
 
 /**
  * \brief Fonction qui initialise une partie de pendu
@@ -27,10 +27,12 @@ void init_partie_pendu(SDL_Window * win, SDL_Renderer * ren, int * mode_de_jeu, 
 	char i;
 	pendu.pendu = (char*)malloc(sizeof(char)); // Contient le mot sur lequel on joue au pendu
 	pendu.secret = (char*)malloc(sizeof(char)); // Contient le mot secret
+	// Initialisation d'un tableau contenant toutes les lettres de l'alphabet
 	for (i = 'a'; i <= 'z'; i++)
 		pendu.alphabet[i - 'a'] = i;
 	pendu.erreurs = 0;
 	pendu.etat_partie = PENDU_JCJ_INIT;
+	// Si le mode de jeu est joueur contre ordi
 	if (*mode_de_jeu == JVSO) {
 		afficher_image(win, ren, "assets/pendu/pendu.png", 0, 0);
 		afficher_texte(ren, "assets/inter.ttf", 19, 15, 110, pseudoJ1);
@@ -60,13 +62,14 @@ void init_partie_pendu(SDL_Window * win, SDL_Renderer * ren, int * mode_de_jeu, 
  * \param scoreJ2 Le score actuel du joueur 2
  */
 void initialiser_mot_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, int * etat_joueur, int * etat_partie, char * secret_ecrit, char * secret, char * pendu, char * pseudoJ1, char * pseudoJ2, int * scoreJ1, int * scoreJ2) {
-	int l;
+	int i, l;
 	char temp[101];
 	SDL_Rect txtDestRect;
 	TTF_Font *police;
 	SDL_Surface *texte = NULL;
 	SDL_Color couleur_police = {0, 0, 0};
 	SDL_Texture *texte_tex;
+	// En fonction des évènements au clavier et à la souris
 	switch(event.type) {
 		// Gestion des appuis au clavier
 		case SDL_KEYUP:
@@ -100,7 +103,7 @@ void initialiser_mot_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event even
 			// Si on appuie sur une lettre de l'alphabet avec le clavier
 			if (event.key.keysym.sym >= SDLK_a && event.key.keysym.sym <= SDLK_z) {
 				l = strlen(secret_ecrit);
-				if (l < 9){
+				if (l < 9) {
 					sprintf(temp, "%s%c", secret_ecrit, event.key.keysym.sym);
 					sprintf(secret_ecrit, "%s", temp);
 				}
@@ -126,9 +129,8 @@ void initialiser_mot_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event even
 				TTF_CloseFont(police);
 				SDL_RenderPresent(ren);
 			}
-			if (event.key.keysym.sym == SDLK_RETURN ){
+			if (event.key.keysym.sym == SDLK_RETURN ) {
 				sprintf(secret, "%s", secret_ecrit);
-				int i;
 				for (i = 0; i < secret[i]; i++)
 			  		secret_ecrit[i] = '\0';
 				// Boucle qui initialise le 2ème mot pendu utilisé pour le jeu (ex : _ _ _ _)
@@ -150,7 +152,6 @@ void initialiser_mot_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event even
 			// Si on clique sur le bouton valider avec la souris
 			if (event.button.x < 557 && event.button.x > 386 && event.button.y < 443 && event.button.y > 375 && strlen(secret_ecrit) >= 4) {
 				sprintf(secret, "%s", secret_ecrit);
-				int i;
 				for (i = 0; i < secret[i]; i++)
 			  		secret_ecrit[i] = '\0';
 				// Boucle qui initialise le 2ème mot pendu utilisé pour le jeu (ex : _ _ _ _)
@@ -193,9 +194,9 @@ void initialiser_mot_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event even
  */
 void initialiser_mot_ordi(SDL_Window * win, SDL_Renderer * ren, char * secret, char * pendu) {
    int i, nb_rand;
-   FILE *listeMots = fopen("assets/pendu/mots.txt", "r");
+   FILE *listeMots = fopen("assets/pendu/mots.txt", "r"); // Fichier contenant 598 mots
    srand(time(NULL)); // Initialisation du hasard
-   nb_rand = rand() % (598 + 1 - 1); // Génération d'un nombre entre 1 et 598, soit le nombre de mots dans le fichier txt
+   nb_rand = rand() % (598 + 1 - 1); // Génération d'un nombre entre 1 et 598
    // Boucle pour accéder au mot à la ligne nb_rand du fichier
    for (i = 1; i <= nb_rand; i++)
       fscanf(listeMots, "%s", secret);
@@ -217,18 +218,17 @@ void initialiser_mot_ordi(SDL_Window * win, SDL_Renderer * ren, char * secret, c
  */
 void lettre_utilisee(SDL_Window * win, SDL_Renderer * ren, char lettre, int presence) {
 	// Si la lettre est présente dans le mot, on affiche une case verte, sinon rouge
-	int i = lettre - 'a';
 	if (presence == OK)
-		afficher_image(win, ren, "assets/pendu/case_verte.png", tab_x_lettre[i], tab_y_lettre[i]);
+		afficher_image(win, ren, "assets/pendu/case_verte.png", tab_x_lettre[lettre - 'a'], tab_y_lettre[lettre - 'a']);
 	else
-		afficher_image(win, ren, "assets/pendu/case_rouge.png", tab_x_lettre[i], tab_y_lettre[i]);
+		afficher_image(win, ren, "assets/pendu/case_rouge.png", tab_x_lettre[lettre - 'a'], tab_y_lettre[lettre - 'a']);
 }
 
 /**
  * \brief Fonction qui permet d'afficher la lettre désignée à une position donnée de l'écran
  * \param win La fenêtre qui sera manipulée
  * \param ren Le rendu qui sera manipulé
- * \param lettre La lettre à afficher
+ * \param c La lettre à afficher
  * \param position La position de la lettre qu'on souhaite afficher dans le mot
  */
 void affiche_lettre(SDL_Window * win, SDL_Renderer * ren, char c, int position) {
@@ -254,9 +254,9 @@ void afficher_mystere(SDL_Window * win, SDL_Renderer * ren, int longueur_mot) {
 
 /**
  * \brief Affiche un visuel de l'avancement du pendu selon le nombre d'erreurs
- * \param nb_erreur Le nombre d'erreurs actuelles du joueur
  * \param win La fenêtre qui sera manipulée
  * \param ren Le rendu qui sera manipulé
+ * \param nb_erreur Le nombre d'erreurs actuelles du joueur
  */
 void afficher_erreur(SDL_Window * win, SDL_Renderer * ren, int nb_erreur) {
 	char temp[255];
@@ -271,10 +271,7 @@ void afficher_erreur(SDL_Window * win, SDL_Renderer * ren, int nb_erreur) {
  * \return Renvoie OK si les deux mots sont identiques, PAS_OK si les deux mots ne sont pas identiques
  */
 int valider_mot(char * secret, char * pendu) {
-   int i, j;
-   for (i = 0; secret[i] && (secret[i] == pendu[i]); i++) {}
-	for (j = 0; secret[j]; j++) {}
-   if (i == j) // Si les deux mots sont identiques
+   if (strcmp(secret, pendu) == 0) // Si les deux mots sont identiques
       return OK;
    else // Sinon ils ne sont pas identiques
       return PAS_OK;
@@ -320,7 +317,7 @@ int valider_lettre(SDL_Window * win, SDL_Renderer * ren, char lettre, char * sec
          check = OK;
       }
    }
-   if (check == OK){ // Si la lettre est présente au moins une fois dans le mot
+   if (check == OK) { // Si la lettre est présente au moins une fois dans le mot
       lettre_utilisee(win, ren, lettre, OK);
 		return 1;
  	} else { // Si elle n'est pas présente, cela cause une erreur supplémentaire
@@ -360,9 +357,9 @@ void pendu_tour(SDL_Window * win, SDL_Renderer * ren, int etat_joueur, int * eta
    	afficher_image(win, ren, "assets/pendu/gagne_pendu.png", 247, 7);
     	*etat_partie = PENDUFINI;
 		if (etat_joueur == J1)
-			*scoreJ2 = *scoreJ2 + 1;
+			(*scoreJ2)++;
 		else
-			*scoreJ1 = *scoreJ1 + 1;
+			(*scoreJ1)++;
 		SDL_RenderPresent(ren);
 		free(pendu.pendu);
 		free(pendu.secret);
@@ -374,9 +371,9 @@ void pendu_tour(SDL_Window * win, SDL_Renderer * ren, int etat_joueur, int * eta
 			affiche_lettre(win, ren, secret[i], i);
 		*etat_partie = PENDUFINI;
 		if (etat_joueur == J1)
-			*scoreJ1 = *scoreJ1 + 1;
+			(*scoreJ1)++;
 		else
-			*scoreJ2 = *scoreJ2 + 1;
+			(*scoreJ2)++;
 		SDL_RenderPresent(ren);
 		free(pendu.pendu);
 		free(pendu.secret);
@@ -398,17 +395,17 @@ void pendu_tour(SDL_Window * win, SDL_Renderer * ren, int etat_joueur, int * eta
 
 void gestion_event_pendu(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, t_statut * etat_win, int * mode_de_jeu, int * etat_joueur, t_joueur * joueur1, t_joueur * joueur2) {
 	switch(event.type) {
+		// Clics à la souris
 		case SDL_MOUSEBUTTONUP: // Relâchement du clic pour la non redondance de l'évènement
 			// Bouton [QUITTER]
 			if (event.button.x < 155 && event.button.x > 0 && event.button.y < 43 && event.button.y > 0) {
-				if(*mode_de_jeu == JVSJ && *etat_joueur == J1) {
+				if (*mode_de_jeu == JVSJ && *etat_joueur == J1)
                afficher_image(win, ren, "assets/menu_J1.png", 0, 0);
-            } else if (*mode_de_jeu == JVSJ && *etat_joueur == J2){
+            else if (*mode_de_jeu == JVSJ && *etat_joueur == J2)
                afficher_image(win, ren, "assets/menu_J2.png", 0, 0);
-            } else {
+            else
                afficher_image(win, ren, "assets/menu.png", 0, 0);
-            }
-				afficher_texte(ren, "assets/inter.ttf", 19, 290, 21, joueur1->pseudo);
+            afficher_texte(ren, "assets/inter.ttf", 19, 290, 21, joueur1->pseudo);
 				afficher_texte(ren, "assets/inter.ttf", 19, 530, 21, joueur2->pseudo);
 				afficher_nombre(ren, "assets/inter.ttf", 19, 400, 21, joueur1->score);
             afficher_nombre(ren, "assets/inter.ttf", 19, 635, 21, joueur2->score);
@@ -473,8 +470,9 @@ void gestion_event_pendu(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, 
 					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'z', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 			}
 			break;
+		// Saisies au clavier
 		case SDL_KEYUP:
-            if (pendu.etat_partie == PENDUJEU) {
+         if (pendu.etat_partie == PENDUJEU) {
 				if (event.key.keysym.sym >= SDLK_a && event.key.keysym.sym <= SDLK_z)
 					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), event.key.keysym.sym, pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 			}
