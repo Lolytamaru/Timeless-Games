@@ -3,7 +3,7 @@
  * \brief Fichier pour le jeu du mastermind
  * \author Duclos Christal Brochelard Hugo Thibaut Duchesne
  * \version 2.0
- * \date 28 mars 2022
+ * \date 31 mars 2022
  */
 
 #include <all_includes.h>
@@ -391,6 +391,8 @@ void mastermind_tour(SDL_Window * win, SDL_Renderer * ren, int etat_joueur, int 
 		*etat_partie = MASTERMINDFINI;
 		afficher_resultat(win, ren, code_secret);
       SDL_RenderPresent(ren);
+		free(mastermind.propo_couleur);
+		free(mastermind.code_secret);
    }
    // Si l'on a plus d'essai disponible, on perd
    if ((*nb_essais) >= 10) {
@@ -403,6 +405,8 @@ void mastermind_tour(SDL_Window * win, SDL_Renderer * ren, int etat_joueur, int 
 		*etat_partie = MASTERMINDFINI;
       afficher_resultat(win, ren, code_secret);
       SDL_RenderPresent(ren);
+		free(mastermind.propo_couleur);
+		free(mastermind.code_secret);
    }
 	for (i = 0;i < 4; i++)
 		propo_couleur[i] = ' ';

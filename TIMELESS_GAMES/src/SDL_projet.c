@@ -3,7 +3,7 @@
  * \brief Fichier comprenant toutes les fonctions de manipulation de SDL
  * \author Duclos Christal Brochelard Hugo Thibaut Duchesne
  * \version 1.0
- * \date 28 mars 2022
+ * \date 31 mars 2022
  */
 
 #include <all_includes.h>

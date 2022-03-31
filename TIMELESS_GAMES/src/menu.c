@@ -3,7 +3,7 @@
  * \brief Fichier secondaire qui gère le menu de Timeless Games
  * \author Christal Duclos Hugo Brochelard Thibaut Duchesne
  * \version 1.0
- * \date 28 mars 2022
+ * \date 31 mars 2022
  */
 
 #include <all_includes.h>
@@ -20,14 +20,16 @@
  * \param ren Le rendu qui sera manipulé
  * \param event Un détecteur d'évènements
  * \param etat_win La fenêtre où l'on se trouve
- * \param mode_de_jeu Joueur contre Joueur ou Joueur contre ordi
+ * \param mode_de_jeu Soit joueur contre joueur, soit joueur contre ordi
  * \param etat_joueur Etat du joueur
  * \param joueur1 Structure qui contient les informations du joueur 1
  * \param joueur2 Structure qui contient les informations du joueur 2
  */
 void gestion_event_menu(SDL_Window *win, SDL_Renderer *ren, SDL_Event event, t_statut * etat_win, int * mode_de_jeu, int * etat_joueur, t_joueur * joueur1, t_joueur * joueur2) {
+   // En fonction des évènements à la souris
    switch(event.type) {
       case SDL_MOUSEBUTTONUP:
+         // Si on clique sur le carré J1, on change les rôles des deux joueurs
          if (event.button.x < 392 && event.button.x > 341 && event.button.y < 280 && event.button.y > 229 && *mode_de_jeu == JVSJ && *etat_joueur == J2) {
                afficher_image(win, ren, "assets/menu_J1.png", 0, 0);
                *etat_joueur = J1;
@@ -36,8 +38,8 @@ void gestion_event_menu(SDL_Window *win, SDL_Renderer *ren, SDL_Event event, t_s
    				afficher_nombre(ren, "assets/inter.ttf", 19, 400, 21, joueur1->score);
                afficher_nombre(ren, "assets/inter.ttf", 19, 635, 21, joueur2->score);
    				SDL_RenderPresent(ren);
-            }
-         if(event.button.x < 446 && event.button.x > 401 && event.button.y < 280 && event.button.y > 229 && *mode_de_jeu == JVSJ && *etat_joueur == J1) {
+         // Si on clique sur le carré J2, on change les rôles des deux joueurs
+         } else if (event.button.x < 446 && event.button.x > 401 && event.button.y < 280 && event.button.y > 229 && *mode_de_jeu == JVSJ && *etat_joueur == J1) {
                afficher_image(win, ren, "assets/menu_J2.png", 0, 0);
                *etat_joueur = J2;
                afficher_texte(ren, "assets/inter.ttf", 19, 290, 21, joueur1->pseudo);
@@ -45,15 +47,15 @@ void gestion_event_menu(SDL_Window *win, SDL_Renderer *ren, SDL_Event event, t_s
    				afficher_nombre(ren, "assets/inter.ttf", 19, 400, 21, joueur1->score);
                afficher_nombre(ren, "assets/inter.ttf", 19, 635, 21, joueur2->score);
    				SDL_RenderPresent(ren);
-         }
- 	      if (event.button.x < 337 && event.button.x > 106 && event.button.y < 272 && event.button.y > 83) {
-            if(*mode_de_jeu == JVSO) {
+         // Si on clique sur le carré du pendu, on lance une partie de pendu
+         } else if (event.button.x < 337 && event.button.x > 106 && event.button.y < 272 && event.button.y > 83) {
+            if (*mode_de_jeu == JVSO) {
                init_partie_pendu(win, ren, mode_de_jeu, joueur1->pseudo, joueur2->pseudo, &(joueur1->score), &(joueur2->score));
                SDL_RenderPresent(ren);
             } else {
                init_partie_pendu(win, ren, mode_de_jeu, joueur1->pseudo, joueur2->pseudo, &(joueur1->score), &(joueur2->score));
                afficher_image(win, ren, "assets/pendu/pendujcj.png", 0, 0);
-               if (*etat_joueur ==J1) {
+               if (*etat_joueur == J1) {
                   afficher_texte(ren, "assets/inter.ttf", 27, 510, 80, joueur1->pseudo);
                   afficher_texte(ren, "assets/inter.ttf", 27, 510, 222, joueur2->pseudo);
                } else {
@@ -63,8 +65,8 @@ void gestion_event_menu(SDL_Window *win, SDL_Renderer *ren, SDL_Event event, t_s
                SDL_RenderPresent(ren);
             }
             *etat_win = PENDU;
-         }
-         else if (event.button.x < 684 && event.button.x > 455 && event.button.y < 272 && event.button.y > 83) {
+         // Si on clique sur le carré du mastermind, on lance une partie de mastermind
+         } else if (event.button.x < 684 && event.button.x > 455 && event.button.y < 272 && event.button.y > 83) {
             if (*mode_de_jeu == JVSO) {
                afficher_image(win, ren, "assets/mastermind/mastermind.png", 0, 0);
                afficher_texte(ren, "assets/inter.ttf", 19, 19, 110, joueur1->pseudo);
@@ -87,8 +89,8 @@ void gestion_event_menu(SDL_Window *win, SDL_Renderer *ren, SDL_Event event, t_s
                SDL_RenderPresent(ren);
             }
             *etat_win = MASTERMIND;
-         }
-         else if (event.button.x < 340 && event.button.x > 107 && event.button.y < 473 && event.button.y > 283) {
+         // Si on clique sur le carré de la bataille navale, on lance une partie de bataille navale
+         } else if (event.button.x < 340 && event.button.x > 107 && event.button.y < 473 && event.button.y > 283) {
             afficher_image(win, ren, "assets/batnav/placement_violets.png", 0, 0);
             afficher_texte(ren, "assets/inter.ttf", 19, 290, 21, joueur1->pseudo);
             afficher_texte(ren, "assets/inter.ttf", 19, 530, 21, joueur2->pseudo);
@@ -97,13 +99,13 @@ void gestion_event_menu(SDL_Window *win, SDL_Renderer *ren, SDL_Event event, t_s
             SDL_RenderPresent(ren);
             init_partie_batnav();
             *etat_win = BATNAV;
-         }
-         else if (event.button.x < 684 && event.button.x > 455 && event.button.y < 473 && event.button.y > 283) {
+         // Si on clique sur le carré des paramètres, on lance les paramètres
+         } else if (event.button.x < 684 && event.button.x > 455 && event.button.y < 473 && event.button.y > 283) {
             afficher_image(win, ren, "assets/parametres/parametres.png", 0, 0);
             SDL_RenderPresent(ren);
             *etat_win = PARAM;
-         }
-         else if (event.button.x < 296 && event.button.x > 0 && event.button.y < 49 && event.button.y > 0) {
+         // Si on clique sur le logo de Timeless Games, on retourne à l'accueil
+         } else if (event.button.x < 296 && event.button.x > 0 && event.button.y < 49 && event.button.y > 0) {
             afficher_image(win, ren, "assets/accueil.png", 0, 0);
             SDL_RenderPresent(ren);
             *etat_win = ACCUEIL;
