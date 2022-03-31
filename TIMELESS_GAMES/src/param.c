@@ -10,7 +10,7 @@
 #include <joueur.h>
 #include <menu.h>
 
-typedef enum {PARAMETRES = 1, MENU_REGLES, REGLES_JEU} param_e;
+typedef enum {PARAMETRES = 1, MENU_REGLES, REGLES_JEU, CREDITS} param_e;
 int param_select = PARAMETRES;
 
 /**
@@ -28,7 +28,12 @@ int param_select = PARAMETRES;
 void gestion_event_param(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, t_statut * etat_win, int * mode_de_jeu, int * etat_joueur, t_joueur * joueur1, t_joueur * joueur2) {
    switch(event.type) {
       case SDL_MOUSEBUTTONUP:
-         if (param_select == REGLES_JEU) {
+         if (param_select == CREDITS){
+            if (event.button.x < 750 && event.button.x > 0 && event.button.y < 500 && event.button.y > 0) {
+               param_select = PARAMETRES;
+               afficher_image(win, ren, "assets/parametres/parametres.png", 0, 0);
+            }
+         }else if (param_select == REGLES_JEU) {
             if (event.button.x < 750 && event.button.x > 0 && event.button.y < 500 && event.button.y > 0) {
                param_select = MENU_REGLES;
                afficher_image(win, ren, "assets/parametres/param_jeux.png", 0, 0);
@@ -71,9 +76,9 @@ void gestion_event_param(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, 
                }else
                   afficher_image(win, ren, "assets/parametres/menu_pseudo_JCO.png", 0, 0);
                sprintf(joueur1->pseudo, " ");
-              
+
                afficher_texte(ren, "assets/inter.ttf", 27, 497, 252, joueur1->pseudo);
-               afficher_texte(ren, "assets/inter.ttf", 27, 497, 338, joueur2->pseudo);   
+               afficher_texte(ren, "assets/inter.ttf", 27, 497, 338, joueur2->pseudo);
                SDL_RenderPresent(ren);
                *etat_win = PSEUDO;
             // Réinitialisation des scores
@@ -125,9 +130,10 @@ void gestion_event_param(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, 
                afficher_nombre(ren, "assets/inter.ttf", 19, 635, 21, joueur2->score);
                SDL_RenderPresent(ren);
                *etat_win = MENU;
-            // Règles des jeux
-            } else if (event.button.x < 433 && event.button.x > 200 && event.button.y < 376 && event.button.y > 317) {
-               afficher_image(win, ren, "assets/parametres/param_jeux.png", 0, 0);
+            // Crédits
+         } else if (event.button.x < 328 && event.button.x > 197 && event.button.y < 460 && event.button.y > 401){
+               afficher_image(win, ren, "assets/parametres/credits.png", 0, 0);
+               param_select = CREDITS;
                SDL_RenderPresent(ren);
             }
          }
