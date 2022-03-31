@@ -450,12 +450,16 @@ void placement_bateaux(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, t_
 
 /**
  * \brief Fonction qui s'occupe de savoir si toutes les cases d'un bateau sont coulés
+ * \param win La fenêtre qui sera manipulée
+ * \param ren Le rendu qui sera manipulé
  * \param plateau_j Plateau du joueur que l'on cherche à remplir
- * \param bat_selec Bateau sélectionné par le joueur pour le placer
+ * \param x Coordonnée x de la case sélectionnée
+ * \param y Coordonnée y de la case sélectionnée
+ * \param couleur Couleur du joueur
  */
 
 void bateau_est_coule(SDL_Window * win, SDL_Renderer * ren, plateau_t * plateau_j, int x, int y, char * couleur) {
-	int i, j, cpt = 0, nbr=0, numero_bat = 0;
+	int i, j, cpt = 0, nbr = 0, numero_bat = 0;
 	char bateau[200];
 	if (plateau_j->une_case[x][y].etat == 1 && plateau_j->une_case[x][y].occupe == 1) {
 	   for (i = 0; i < plateau_j->nb_col; i++) {
@@ -503,6 +507,7 @@ void bateau_est_coule(SDL_Window * win, SDL_Renderer * ren, plateau_t * plateau_
  * \param win La fenêtre qui sera manipulée
  * \param ren Le rendu qui sera manipulé
  * \param event Un détecteur d'évènements
+ * \param mode_de_jeu Soit joueur contre joueur, soit joueur contre ordi
  * \param plateau_j Plateau de jeu du joueur
  * \param x Coordonnée x de la case sélectionnée
  * \param y Coordonnée y de la case sélectionnée
@@ -577,6 +582,7 @@ void attaque_case_bat(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, int
  * \param win La fenêtre qui sera manipulée
  * \param ren Le rendu qui sera manipulé
  * \param event Un détecteur d'évènements
+ * \param mode_de_jeu Soit joueur contre joueur, soit joueur contre ordi
  * \param plateau_ordi Plateau de jeu de l'ordi
  * \param joueur1 Structure du pseudo et du score du joueur 1
  * \param ordi Structure du pseudo et du score de l'ordi
