@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['direction_5fvalide_109',['direction_valide',['../batnav_8h.html#a5275251d8fde0b35aa8720e727a2ae19',1,'direction_valide(plateau_t plateau_j, int x, int y, int direction, int taille_bat):&#160;batnav.c'],['../batnav_8c.html#a5275251d8fde0b35aa8720e727a2ae19',1,'direction_valide(plateau_t plateau_j, int x, int y, int direction, int taille_bat):&#160;batnav.c']]]
+  ['creer_5fplateau_125',['creer_plateau',['../batnav_8h.html#abe0ad9beb7a74d9fd90798ff23be67e7',1,'creer_plateau(int l, int c):&#160;batnav.c'],['../batnav_8c.html#abe0ad9beb7a74d9fd90798ff23be67e7',1,'creer_plateau(int l, int c):&#160;batnav.c']]]
 ];

@@ -20,6 +20,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Timeless Games<span id="projectnumber">&#160;1.0</span>
    </div>
@@ -33,7 +34,7 @@
 <!-- Généré par Doxygen 1.9.2 -->
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-var searchBox = new SearchBox("searchBox", "search",'Recherche','.html');
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
 /* @license-end */
 </script>
 <script type="text/javascript" src="menudata.js"></script>
@@ -81,6 +82,7 @@ $(function() {
 <div class="textblock"><code>#include &lt;<a class="el" href="all__includes_8h_source.html">all_includes.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="joueur_8h_source.html">joueur.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="batnav_8h_source.html">batnav.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="pile__batnav_8h_source.html">pile_batnav.h</a>&gt;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
@@ -116,27 +118,39 @@ Fonctions</h2></td></tr>
 <tr class="memdesc:ae416666500e3b936c8635a78759e20ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui rempli le plateau de jeu d'un joueur.  <a href="batnav_8c.html#ae416666500e3b936c8635a78759e20ec">Plus de détails...</a><br /></td></tr>
 <tr class="separator:ae416666500e3b936c8635a78759e20ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d53920c0079ab0249bf8f72309d63a1"><td class="memItemLeft" align="right" valign="top"><a id="a4d53920c0079ab0249bf8f72309d63a1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>init_partie_batnav</b> (void)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="batnav_8c.html#a4d53920c0079ab0249bf8f72309d63a1">init_partie_batnav</a> (void)</td></tr>
 <tr class="memdesc:a4d53920c0079ab0249bf8f72309d63a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui initialise une partie de la bataille navale. <br /></td></tr>
 <tr class="separator:a4d53920c0079ab0249bf8f72309d63a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeb0dabf827c3858455e0a90a287dea55"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="batnav_8c.html#aeb0dabf827c3858455e0a90a287dea55">est_valide</a> (<a class="el" href="structplateau__t.html">plateau_t</a> plateau_j, int x, int y)</td></tr>
 <tr class="memdesc:aeb0dabf827c3858455e0a90a287dea55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui vérifie si les coordonnées sont dans la matrice.  <a href="batnav_8c.html#aeb0dabf827c3858455e0a90a287dea55">Plus de détails...</a><br /></td></tr>
 <tr class="separator:aeb0dabf827c3858455e0a90a287dea55"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5275251d8fde0b35aa8720e727a2ae19"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="batnav_8c.html#a5275251d8fde0b35aa8720e727a2ae19">direction_valide</a> (<a class="el" href="structplateau__t.html">plateau_t</a> plateau_j, int x, int y, int direction, int taille_bat)</td></tr>
-<tr class="memdesc:a5275251d8fde0b35aa8720e727a2ae19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui regarde si les cases qui vont être occupées dans une direction sont toutes libres et valides.  <a href="batnav_8c.html#a5275251d8fde0b35aa8720e727a2ae19">Plus de détails...</a><br /></td></tr>
-<tr class="separator:a5275251d8fde0b35aa8720e727a2ae19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a317e4dde8db56424625f449fa6d91285"><td class="memItemLeft" align="right" valign="top"><a id="a317e4dde8db56424625f449fa6d91285"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>est_valide_ordi</b> (<a class="el" href="structplateau__t.html">plateau_t</a> plateau_ordi, int x, int y)</td></tr>
+<tr class="separator:a317e4dde8db56424625f449fa6d91285"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19cbfc6fd956a04ca7d9823d3fe2a90e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="batnav_8c.html#a19cbfc6fd956a04ca7d9823d3fe2a90e">direction_valide</a> (<a class="el" href="structplateau__t.html">plateau_t</a> *plateau_j, int x, int y, int direction, int taille_bat)</td></tr>
+<tr class="memdesc:a19cbfc6fd956a04ca7d9823d3fe2a90e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui regarde si les cases qui vont être occupées dans une direction sont toutes libres et valides.  <a href="batnav_8c.html#a19cbfc6fd956a04ca7d9823d3fe2a90e">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a19cbfc6fd956a04ca7d9823d3fe2a90e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41424878830288681778a1ff7623f01c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="batnav_8c.html#a41424878830288681778a1ff7623f01c">placement_bateaux_ordi</a> (<a class="el" href="structplateau__t.html">plateau_t</a> *plateau_ordi)</td></tr>
+<tr class="memdesc:a41424878830288681778a1ff7623f01c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui s'occupe du placement des bateaux de l'ordinateur.  <a href="batnav_8c.html#a41424878830288681778a1ff7623f01c">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a41424878830288681778a1ff7623f01c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdd755afb32f2badac52da8e55d99a6b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="batnav_8c.html#acdd755afb32f2badac52da8e55d99a6b">vider_cargaison</a> (SDL_Window *win, SDL_Renderer *ren, int taille_bat, char *immatriculation)</td></tr>
 <tr class="memdesc:acdd755afb32f2badac52da8e55d99a6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui s'occupe du placement des bateaux en les cachants si ils sont valides.  <a href="batnav_8c.html#acdd755afb32f2badac52da8e55d99a6b">Plus de détails...</a><br /></td></tr>
 <tr class="separator:acdd755afb32f2badac52da8e55d99a6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7adc718f0977d2369c6073f6b01552df"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="batnav_8c.html#a7adc718f0977d2369c6073f6b01552df">placement_case_bat</a> (SDL_Window *win, SDL_Renderer *ren, int x, int y, int direction, int bat_selec, int JOUEUR, char *couleur, <a class="el" href="structplateau__t.html">plateau_t</a> *plateau_j, <a class="el" href="structs__joueur.html">t_joueur</a> *joueur1, <a class="el" href="structs__joueur.html">t_joueur</a> *joueur2)</td></tr>
-<tr class="memdesc:a7adc718f0977d2369c6073f6b01552df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui s'occupe du placement des bateaux si leur placement est valide.  <a href="batnav_8c.html#a7adc718f0977d2369c6073f6b01552df">Plus de détails...</a><br /></td></tr>
-<tr class="separator:a7adc718f0977d2369c6073f6b01552df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b1ddcf0086e24619e521341ac05745c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="batnav_8c.html#a5b1ddcf0086e24619e521341ac05745c">placement_bateaux</a> (SDL_Window *win, SDL_Renderer *ren, SDL_Event event, t_statut *etat_win, int JOUEUR, <a class="el" href="structplateau__t.html">plateau_t</a> *plateau_j, char *couleur, <a class="el" href="structs__joueur.html">t_joueur</a> *joueur1, <a class="el" href="structs__joueur.html">t_joueur</a> *joueur2)</td></tr>
-<tr class="memdesc:a5b1ddcf0086e24619e521341ac05745c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui gère les évènements SDL liés au placement des bateaux.  <a href="batnav_8c.html#a5b1ddcf0086e24619e521341ac05745c">Plus de détails...</a><br /></td></tr>
-<tr class="separator:a5b1ddcf0086e24619e521341ac05745c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28007c62c88a204c668b49e0f51b2e33"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="batnav_8c.html#a28007c62c88a204c668b49e0f51b2e33">attaque_case_bat</a> (SDL_Window *win, SDL_Renderer *ren, SDL_Event event, <a class="el" href="structplateau__t.html">plateau_t</a> plateau_j, int x, int y, int *scorej1, int *scorej2)</td></tr>
-<tr class="memdesc:a28007c62c88a204c668b49e0f51b2e33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui s'occupe de la partie affrontement de la bataille navale.  <a href="batnav_8c.html#a28007c62c88a204c668b49e0f51b2e33">Plus de détails...</a><br /></td></tr>
-<tr class="separator:a28007c62c88a204c668b49e0f51b2e33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ae21db78a54b0d4247723a9097617ea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="batnav_8c.html#a8ae21db78a54b0d4247723a9097617ea">placement_case_bat</a> (SDL_Window *win, SDL_Renderer *ren, int *mode_de_jeu, int x, int y, int direction, int bat_selec, int JOUEUR, char *couleur, <a class="el" href="structplateau__t.html">plateau_t</a> *plateau_j, <a class="el" href="structplateau__t.html">plateau_t</a> *plateau_ordi, <a class="el" href="structs__joueur.html">t_joueur</a> *joueur1, <a class="el" href="structs__joueur.html">t_joueur</a> *joueur2)</td></tr>
+<tr class="memdesc:a8ae21db78a54b0d4247723a9097617ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui s'occupe du placement des bateaux si leur placement est valide.  <a href="batnav_8c.html#a8ae21db78a54b0d4247723a9097617ea">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a8ae21db78a54b0d4247723a9097617ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a011bb93880244e34d1d9157bb079484f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="batnav_8c.html#a011bb93880244e34d1d9157bb079484f">placement_bateaux</a> (SDL_Window *win, SDL_Renderer *ren, SDL_Event event, t_statut *etat_win, int *mode_de_jeu, int JOUEUR, <a class="el" href="structplateau__t.html">plateau_t</a> *plateau_j, <a class="el" href="structplateau__t.html">plateau_t</a> *plateau_ordi, char *couleur, <a class="el" href="structs__joueur.html">t_joueur</a> *joueur1, <a class="el" href="structs__joueur.html">t_joueur</a> *joueur2)</td></tr>
+<tr class="memdesc:a011bb93880244e34d1d9157bb079484f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui gère les évènements SDL liés au placement des bateaux.  <a href="batnav_8c.html#a011bb93880244e34d1d9157bb079484f">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a011bb93880244e34d1d9157bb079484f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fb08a960f2050d628c7a62367ee1e4d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="batnav_8c.html#a2fb08a960f2050d628c7a62367ee1e4d">bateau_est_coule</a> (SDL_Window *win, SDL_Renderer *ren, <a class="el" href="structplateau__t.html">plateau_t</a> *plateau_j, int x, int y, char *couleur)</td></tr>
+<tr class="memdesc:a2fb08a960f2050d628c7a62367ee1e4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui s'occupe de savoir si toutes les cases d'un bateau sont coulés.  <a href="batnav_8c.html#a2fb08a960f2050d628c7a62367ee1e4d">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a2fb08a960f2050d628c7a62367ee1e4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c763a6c645f02041bb92af9ab2ee5f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="batnav_8c.html#a0c763a6c645f02041bb92af9ab2ee5f1">attaque_case_bat</a> (SDL_Window *win, SDL_Renderer *ren, SDL_Event event, int *mode_de_jeu, <a class="el" href="structplateau__t.html">plateau_t</a> *plateau_j, int x, int y, int *scoreJ1, int *scoreJ2, char *couleur)</td></tr>
+<tr class="memdesc:a0c763a6c645f02041bb92af9ab2ee5f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui s'occupe de la partie affrontement de la bataille navale.  <a href="batnav_8c.html#a0c763a6c645f02041bb92af9ab2ee5f1">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a0c763a6c645f02041bb92af9ab2ee5f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6995b1507406bc7c425ae2ae8c8bcdd1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="batnav_8c.html#a6995b1507406bc7c425ae2ae8c8bcdd1">tour_ordi_mode_IA</a> (SDL_Window *win, SDL_Renderer *ren, SDL_Event event, int *mode_de_jeu, <a class="el" href="structplateau__t.html">plateau_t</a> *plateau_ordi, <a class="el" href="structs__joueur.html">t_joueur</a> *joueur1, <a class="el" href="structs__joueur.html">t_joueur</a> *ordi, char *couleur)</td></tr>
+<tr class="memdesc:a6995b1507406bc7c425ae2ae8c8bcdd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui s'occupe de la partie affrontement de la bataille navale.  <a href="batnav_8c.html#a6995b1507406bc7c425ae2ae8c8bcdd1">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a6995b1507406bc7c425ae2ae8c8bcdd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa9caafcd72aa0fdfc4adadaef2f528f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="batnav_8c.html#aaa9caafcd72aa0fdfc4adadaef2f528f">gestion_event_batnav</a> (SDL_Window *win, SDL_Renderer *ren, SDL_Event event, t_statut *etat_win, int *mode_de_jeu, int *etat_joueur, <a class="el" href="structs__joueur.html">t_joueur</a> *joueur1, <a class="el" href="structs__joueur.html">t_joueur</a> *joueur2)</td></tr>
 <tr class="memdesc:aaa9caafcd72aa0fdfc4adadaef2f528f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui s'occupe des évènements d'une partie de bataille navale (joueur contre joueur)  <a href="batnav_8c.html#aaa9caafcd72aa0fdfc4adadaef2f528f">Plus de détails...</a><br /></td></tr>
 <tr class="separator:aaa9caafcd72aa0fdfc4adadaef2f528f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -159,8 +173,8 @@ char&#160;</td><td class="memItemRight" valign="bottom"><b>direction</b></td></t
 <dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>28 mars 2022 </dd></dl>
 </div><h2 class="groupheader">Documentation des fonctions</h2>
-<a id="a28007c62c88a204c668b49e0f51b2e33"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a28007c62c88a204c668b49e0f51b2e33">&#9670;&nbsp;</a></span>attaque_case_bat()</h2>
+<a id="a0c763a6c645f02041bb92af9ab2ee5f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c763a6c645f02041bb92af9ab2ee5f1">&#9670;&nbsp;</a></span>attaque_case_bat()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -186,7 +200,13 @@ char&#160;</td><td class="memItemRight" valign="bottom"><b>direction</b></td></t
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structplateau__t.html">plateau_t</a>&#160;</td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>mode_de_jeu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structplateau__t.html">plateau_t</a> *&#160;</td>
           <td class="paramname"><em>plateau_j</em>, </td>
         </tr>
         <tr>
@@ -205,13 +225,19 @@ char&#160;</td><td class="memItemRight" valign="bottom"><b>direction</b></td></t
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>scorej1</em>, </td>
+          <td class="paramname"><em>scoreJ1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>scorej2</em>&#160;</td>
+          <td class="paramname"><em>scoreJ2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>couleur</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -227,9 +253,78 @@ char&#160;</td><td class="memItemRight" valign="bottom"><b>direction</b></td></t
     <tr><td class="paramname">win</td><td>La fenêtre qui sera manipulée </td></tr>
     <tr><td class="paramname">ren</td><td>Le rendu qui sera manipulé </td></tr>
     <tr><td class="paramname">event</td><td>Un détecteur d'évènements </td></tr>
+    <tr><td class="paramname">mode_de_jeu</td><td>Soit joueur contre joueur, soit joueur contre ordi </td></tr>
     <tr><td class="paramname">plateau_j</td><td>Plateau de jeu du joueur  </td></tr>
     <tr><td class="paramname">x</td><td>Coordonnée x de la case sélectionnée  </td></tr>
+    <tr><td class="paramname">y</td><td>Coordonnée y de la case sélectionnée  </td></tr>
+    <tr><td class="paramname">scoreJ1</td><td>Score du joueur 1  </td></tr>
+    <tr><td class="paramname">scoreJ2</td><td>Score du joueur 2 </td></tr>
+    <tr><td class="paramname">couleur</td><td>Couleur du joueur </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2fb08a960f2050d628c7a62367ee1e4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fb08a960f2050d628c7a62367ee1e4d">&#9670;&nbsp;</a></span>bateau_est_coule()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bateau_est_coule </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window *&#160;</td>
+          <td class="paramname"><em>win</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>ren</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structplateau__t.html">plateau_t</a> *&#160;</td>
+          <td class="paramname"><em>plateau_j</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>couleur</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui s'occupe de savoir si toutes les cases d'un bateau sont coulés. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">win</td><td>La fenêtre qui sera manipulée </td></tr>
+    <tr><td class="paramname">ren</td><td>Le rendu qui sera manipulé </td></tr>
+    <tr><td class="paramname">plateau_j</td><td>Plateau du joueur que l'on cherche à remplir  </td></tr>
+    <tr><td class="paramname">x</td><td>Coordonnée x de la case sélectionnée  </td></tr>
     <tr><td class="paramname">y</td><td>Coordonnée y de la case sélectionnée </td></tr>
+    <tr><td class="paramname">couleur</td><td>Couleur du joueur </td></tr>
   </table>
   </dd>
 </dl>
@@ -274,8 +369,8 @@ char&#160;</td><td class="memItemRight" valign="bottom"><b>direction</b></td></t
 
 </div>
 </div>
-<a id="a5275251d8fde0b35aa8720e727a2ae19"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5275251d8fde0b35aa8720e727a2ae19">&#9670;&nbsp;</a></span>direction_valide()</h2>
+<a id="a19cbfc6fd956a04ca7d9823d3fe2a90e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19cbfc6fd956a04ca7d9823d3fe2a90e">&#9670;&nbsp;</a></span>direction_valide()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -283,7 +378,7 @@ char&#160;</td><td class="memItemRight" valign="bottom"><b>direction</b></td></t
         <tr>
           <td class="memname">int direction_valide </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structplateau__t.html">plateau_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="structplateau__t.html">plateau_t</a> *&#160;</td>
           <td class="paramname"><em>plateau_j</em>, </td>
         </tr>
         <tr>
@@ -445,7 +540,8 @@ char&#160;</td><td class="memItemRight" valign="bottom"><b>direction</b></td></t
     <tr><td class="paramname">win</td><td>La fenêtre qui sera manipulée </td></tr>
     <tr><td class="paramname">ren</td><td>Le rendu qui sera manipulé </td></tr>
     <tr><td class="paramname">event</td><td>Un détecteur d'évènements </td></tr>
-    <tr><td class="paramname">etat_win</td><td>La fenêtre où on se trouve \mode_de_jeu Joueur contre joueur ou Joueur contre IA </td></tr>
+    <tr><td class="paramname">etat_win</td><td>La fenêtre où on se trouve </td></tr>
+    <tr><td class="paramname">mode_de_jeu</td><td>Soit joueur contre joueur, soit joueur contre ordi </td></tr>
     <tr><td class="paramname">etat_joueur</td><td>à qui le tour </td></tr>
     <tr><td class="paramname">joueur1</td><td>Structure du pseudo et du score du joueur 1 </td></tr>
     <tr><td class="paramname">joueur2</td><td>Structure du pseudo et du score du joueur 2 </td></tr>
@@ -507,8 +603,8 @@ char&#160;</td><td class="memItemRight" valign="bottom"><b>direction</b></td></t
 
 </div>
 </div>
-<a id="a5b1ddcf0086e24619e521341ac05745c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5b1ddcf0086e24619e521341ac05745c">&#9670;&nbsp;</a></span>placement_bateaux()</h2>
+<a id="a011bb93880244e34d1d9157bb079484f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a011bb93880244e34d1d9157bb079484f">&#9670;&nbsp;</a></span>placement_bateaux()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -540,6 +636,12 @@ char&#160;</td><td class="memItemRight" valign="bottom"><b>direction</b></td></t
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>mode_de_jeu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>JOUEUR</em>, </td>
         </tr>
@@ -548,6 +650,12 @@ char&#160;</td><td class="memItemRight" valign="bottom"><b>direction</b></td></t
           <td></td>
           <td class="paramtype"><a class="el" href="structplateau__t.html">plateau_t</a> *&#160;</td>
           <td class="paramname"><em>plateau_j</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structplateau__t.html">plateau_t</a> *&#160;</td>
+          <td class="paramname"><em>plateau_ordi</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -583,6 +691,7 @@ char&#160;</td><td class="memItemRight" valign="bottom"><b>direction</b></td></t
     <tr><td class="paramname">event</td><td>Un détecteur d'évènements </td></tr>
     <tr><td class="paramname">event</td><td>Un évènement SDL </td></tr>
     <tr><td class="paramname">etat_win</td><td>La fenêtre où on se trouve </td></tr>
+    <tr><td class="paramname">mode_de_jeu</td><td>Soit joueur contre joueur, soit joueur contre ordi </td></tr>
     <tr><td class="paramname">JOUEUR</td><td>Joueur qui place son bateau </td></tr>
     <tr><td class="paramname">plateau_j</td><td>Plateau du joueur que l'on cherche à remplir </td></tr>
     <tr><td class="paramname">couleur</td><td>Couleur du joueur qui place son bateau </td></tr>
@@ -594,8 +703,34 @@ char&#160;</td><td class="memItemRight" valign="bottom"><b>direction</b></td></t
 
 </div>
 </div>
-<a id="a7adc718f0977d2369c6073f6b01552df"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7adc718f0977d2369c6073f6b01552df">&#9670;&nbsp;</a></span>placement_case_bat()</h2>
+<a id="a41424878830288681778a1ff7623f01c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41424878830288681778a1ff7623f01c">&#9670;&nbsp;</a></span>placement_bateaux_ordi()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void placement_bateaux_ordi </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structplateau__t.html">plateau_t</a> *&#160;</td>
+          <td class="paramname"><em>plateau_ordi</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui s'occupe du placement des bateaux de l'ordinateur. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">plateau_ordi</td><td>Plateau de l'ordi que l'on cherche à remplir </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8ae21db78a54b0d4247723a9097617ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ae21db78a54b0d4247723a9097617ea">&#9670;&nbsp;</a></span>placement_case_bat()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -611,6 +746,12 @@ char&#160;</td><td class="memItemRight" valign="bottom"><b>direction</b></td></t
           <td></td>
           <td class="paramtype">SDL_Renderer *&#160;</td>
           <td class="paramname"><em>ren</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>mode_de_jeu</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -657,6 +798,12 @@ char&#160;</td><td class="memItemRight" valign="bottom"><b>direction</b></td></t
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="structplateau__t.html">plateau_t</a> *&#160;</td>
+          <td class="paramname"><em>plateau_ordi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="structs__joueur.html">t_joueur</a> *&#160;</td>
           <td class="paramname"><em>joueur1</em>, </td>
         </tr>
@@ -678,7 +825,8 @@ char&#160;</td><td class="memItemRight" valign="bottom"><b>direction</b></td></t
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">win</td><td>La fenêtre qui sera manipulée </td></tr>
-    <tr><td class="paramname">ren</td><td>Le rendu qui sera manipulé  </td></tr>
+    <tr><td class="paramname">ren</td><td>Le rendu qui sera manipulé </td></tr>
+    <tr><td class="paramname">mode_de_jeu</td><td>Soit joueur contre joueur, soit joueur contre ordi  </td></tr>
     <tr><td class="paramname">x</td><td>Coordonnée x de la case sélectionnée  </td></tr>
     <tr><td class="paramname">y</td><td>Coordonnée y de la case sélectionnée </td></tr>
     <tr><td class="paramname">bat_selec</td><td>Bateau sélectionné par le joueur pour le placer </td></tr>
@@ -687,6 +835,84 @@ char&#160;</td><td class="memItemRight" valign="bottom"><b>direction</b></td></t
     <tr><td class="paramname">plateau_j</td><td>Plateau du joueur que l'on cherche à remplir </td></tr>
     <tr><td class="paramname">joueur1</td><td>Structure du pseudo et du score du joueur 1 </td></tr>
     <tr><td class="paramname">joueur2</td><td>Structure du pseudo et du score du joueur 2 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6995b1507406bc7c425ae2ae8c8bcdd1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6995b1507406bc7c425ae2ae8c8bcdd1">&#9670;&nbsp;</a></span>tour_ordi_mode_IA()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tour_ordi_mode_IA </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window *&#160;</td>
+          <td class="paramname"><em>win</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>ren</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Event&#160;</td>
+          <td class="paramname"><em>event</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>mode_de_jeu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structplateau__t.html">plateau_t</a> *&#160;</td>
+          <td class="paramname"><em>plateau_ordi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structs__joueur.html">t_joueur</a> *&#160;</td>
+          <td class="paramname"><em>joueur1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structs__joueur.html">t_joueur</a> *&#160;</td>
+          <td class="paramname"><em>ordi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>couleur</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui s'occupe de la partie affrontement de la bataille navale. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">win</td><td>La fenêtre qui sera manipulée </td></tr>
+    <tr><td class="paramname">ren</td><td>Le rendu qui sera manipulé </td></tr>
+    <tr><td class="paramname">event</td><td>Un détecteur d'évènements </td></tr>
+    <tr><td class="paramname">mode_de_jeu</td><td>Soit joueur contre joueur, soit joueur contre ordi </td></tr>
+    <tr><td class="paramname">plateau_ordi</td><td>Plateau de jeu de l'ordi </td></tr>
+    <tr><td class="paramname">joueur1</td><td>Structure du pseudo et du score du joueur 1 </td></tr>
+    <tr><td class="paramname">ordi</td><td>Structure du pseudo et du score de l'ordi </td></tr>
   </table>
   </dd>
 </dl>
@@ -747,7 +973,7 @@ char&#160;</td><td class="memItemRight" valign="bottom"><b>direction</b></td></t
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Généré le Lundi 28 Mars 2022 18:14:55 pour Timeless Games par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2
+Généré le Jeudi 31 Mars 2022 12:59:39 pour Timeless Games par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2
 </small></address>
 </body>
 </html>

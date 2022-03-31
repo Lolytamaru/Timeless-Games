@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['valider_5flettre_138',['valider_lettre',['../pendu_8h.html#aaeb88daf555aa2eb5060cc0a073e020e',1,'valider_lettre(SDL_Window *win, SDL_Renderer *ren, char lettre, char *secret, char *pendu, int *erreurs):&#160;pendu.c'],['../pendu_8c.html#aaeb88daf555aa2eb5060cc0a073e020e',1,'valider_lettre(SDL_Window *win, SDL_Renderer *ren, char lettre, char *secret, char *pendu, int *erreurs):&#160;pendu.c']]],
-  ['valider_5fmot_139',['valider_mot',['../pendu_8h.html#aa13a88d2a916add9f12230126cb886b5',1,'valider_mot(char *secret, char *pendu):&#160;pendu.c'],['../pendu_8c.html#aa13a88d2a916add9f12230126cb886b5',1,'valider_mot(char *secret, char *pendu):&#160;pendu.c']]],
-  ['vider_5fcargaison_140',['vider_cargaison',['../batnav_8h.html#acdd755afb32f2badac52da8e55d99a6b',1,'vider_cargaison(SDL_Window *win, SDL_Renderer *ren, int taille_bat, char *immatriculation):&#160;batnav.c'],['../batnav_8c.html#acdd755afb32f2badac52da8e55d99a6b',1,'vider_cargaison(SDL_Window *win, SDL_Renderer *ren, int taille_bat, char *immatriculation):&#160;batnav.c']]]
+  ['saisie_158',['saisie',['../pendu_8h.html#a133a14e0771b6734cf99760fb1014f59',1,'saisie(char entree, char *alphabet):&#160;pendu.c'],['../pendu_8c.html#a133a14e0771b6734cf99760fb1014f59',1,'saisie(char entree, char *alphabet):&#160;pendu.c']]],
+  ['saisir_5fcode_5fordi_159',['saisir_code_ordi',['../masterm_8h.html#a792005286fb82ad20ed39df5cc3934c5',1,'saisir_code_ordi(char *code_secret):&#160;masterm.c'],['../masterm_8c.html#a792005286fb82ad20ed39df5cc3934c5',1,'saisir_code_ordi(char *code_secret):&#160;masterm.c']]],
+  ['sdl_5fexitwitherror_160',['SDL_ExitWithError',['../SDL__projet_8c.html#abed124ab111ee095d48f08e2a3ea4446',1,'SDL_projet.c']]]
 ];

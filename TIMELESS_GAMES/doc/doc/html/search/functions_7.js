@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['mastermind_5ftour_127',['mastermind_tour',['../masterm_8h.html#a08fd290fdb2f8b25c6064a3a1739c42c',1,'mastermind_tour(SDL_Window *win, SDL_Renderer *ren, int etat_joueur, int *etat_partie, int *scoreJ1, int *scoreJ2, int *nb_essais, char *propo_couleur, char *code_secret, int *position):&#160;masterm.c'],['../masterm_8c.html#a08fd290fdb2f8b25c6064a3a1739c42c',1,'mastermind_tour(SDL_Window *win, SDL_Renderer *ren, int etat_joueur, int *etat_partie, int *scoreJ1, int *scoreJ2, int *nb_essais, char *propo_couleur, char *code_secret, int *position):&#160;masterm.c']]]
+  ['lettre_5futilisee_146',['lettre_utilisee',['../pendu_8h.html#a4e2a09570ceb6d06c783d0ba25a1940f',1,'lettre_utilisee(SDL_Window *win, SDL_Renderer *ren, char lettre, int presence):&#160;pendu.c'],['../pendu_8c.html#a4e2a09570ceb6d06c783d0ba25a1940f',1,'lettre_utilisee(SDL_Window *win, SDL_Renderer *ren, char lettre, int presence):&#160;pendu.c']]],
+  ['lire_5fsommet_147',['lire_sommet',['../pile__batnav_8h.html#a584e0ba58b95bb6e6787a60c0a029e4b',1,'lire_sommet(void):&#160;pile_batnav.c'],['../pile__batnav_8c.html#a584e0ba58b95bb6e6787a60c0a029e4b',1,'lire_sommet(void):&#160;pile_batnav.c']]]
 ];

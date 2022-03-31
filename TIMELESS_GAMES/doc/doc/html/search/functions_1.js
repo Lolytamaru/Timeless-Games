@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['creer_5fplateau_108',['creer_plateau',['../batnav_8h.html#abe0ad9beb7a74d9fd90798ff23be67e7',1,'creer_plateau(int l, int c):&#160;batnav.c'],['../batnav_8c.html#abe0ad9beb7a74d9fd90798ff23be67e7',1,'creer_plateau(int l, int c):&#160;batnav.c']]]
+  ['bateau_5fest_5fcoule_124',['bateau_est_coule',['../batnav_8h.html#a2fb08a960f2050d628c7a62367ee1e4d',1,'bateau_est_coule(SDL_Window *win, SDL_Renderer *ren, plateau_t *plateau_j, int x, int y, char *couleur):&#160;batnav.c'],['../batnav_8c.html#a2fb08a960f2050d628c7a62367ee1e4d',1,'bateau_est_coule(SDL_Window *win, SDL_Renderer *ren, plateau_t *plateau_j, int x, int y, char *couleur):&#160;batnav.c']]]
 ];
