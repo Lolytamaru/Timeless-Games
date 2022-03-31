@@ -55,11 +55,12 @@ int est_valide(plateau_t plateau_j, int x, int y);
 int est_valide_ordi(plateau_t plateau_ordi, int x, int y);
 int direction_valide(plateau_t * plateau_j, int x, int y, int direction, int taille_bat);
 void placement_bateaux_ordi(plateau_t * plateau_ordi);
+void bateau_est_coule(SDL_Window * win, SDL_Renderer * ren, plateau_t * plateau_j, int x, int y, char * couleur);
 void vider_cargaison(SDL_Window * win, SDL_Renderer * ren, int taille_bat, char * immatriculation);
 void placement_case_bat(SDL_Window * win, SDL_Renderer * ren, int * mode_de_jeu, int x, int y, int direction, int bat_selec, int JOUEUR, char * couleur, plateau_t * plateau_j, plateau_t * plateau_ordi, t_joueur * joueur1, t_joueur * joueur2);
 void placement_bateaux(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, t_statut * etat_win, int * mode_de_jeu, int JOUEUR, plateau_t * plateau_j,  plateau_t * plateau_ordi, char * couleur, t_joueur * joueur1, t_joueur * joueur2);
-void attaque_case_bat(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, plateau_t * plateau_j, int x, int y, int * scoreJ1, int * scoreJ2, char * couleur);
-void tour_ordi_mode_IA(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, plateau_t * plateau_ordi, t_joueur * joueur1, t_joueur * ordi,char * couleur);
+void attaque_case_bat(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, int * mode_de_jeu, plateau_t * plateau_j, int x, int y, int * scoreJ1, int * scoreJ2, char * couleur);
+void tour_ordi_mode_IA(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, int * mode_de_jeu, plateau_t * plateau_ordi, t_joueur * joueur1, t_joueur * ordi,char * couleur);
 void gestion_event_batnav(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, t_statut * etat_win, int * mode_de_jeu, int * etat_joueur, t_joueur * joueur1, t_joueur * joueur2);
 
 #endif
