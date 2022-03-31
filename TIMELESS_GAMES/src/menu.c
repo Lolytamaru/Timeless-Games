@@ -91,7 +91,7 @@ void gestion_event_menu(SDL_Window *win, SDL_Renderer *ren, SDL_Event event, t_s
          else if (event.button.x < 340 && event.button.x > 107 && event.button.y < 473 && event.button.y > 283) {
             afficher_image(win, ren, "assets/batnav/placement_violets.png", 0, 0);
             afficher_texte(ren, "assets/inter.ttf", 19, 290, 21, joueur1->pseudo);
-            afficher_texte(ren, "assets/inter.ttf", 19, 525, 21, joueur2->pseudo);
+            afficher_texte(ren, "assets/inter.ttf", 19, 530, 21, joueur2->pseudo);
             afficher_nombre(ren, "assets/inter.ttf", 19, 400, 21, joueur1->score);
             afficher_nombre(ren, "assets/inter.ttf", 19, 635, 21, joueur2->score);
             SDL_RenderPresent(ren);

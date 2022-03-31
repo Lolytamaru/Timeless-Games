@@ -33,7 +33,8 @@ void gestion_event_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
          if (event.button.x < 737 && event.button.x > 584 && event.button.y < 172 && event.button.y > 121) {
             *mode_de_jeu = JVSO;
             *etat_joueur = J1;
-            sprintf(joueur2->pseudo, "Ordi");
+            sprintf(joueur1->pseudo, " ");
+            sprintf(joueur2->pseudo, "ordi");
             afficher_image(win, ren, "assets/parametres/menu_pseudo_JCO.png", 0, 0);
             afficher_texte(ren, "assets/inter.ttf", 27, 497, 252, joueur1->pseudo);
             afficher_texte(ren, "assets/inter.ttf", 27, 497, 338, joueur2->pseudo);
@@ -41,6 +42,7 @@ void gestion_event_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
          }
          if (event.button.x < 568 && event.button.x > 415 && event.button.y < 172 && event.button.y > 121) {
             *mode_de_jeu = JVSJ;
+            sprintf(joueur1->pseudo, " ");
             sprintf(joueur2->pseudo, " ");
             afficher_image(win, ren, "assets/parametres/menu_pseudo_JCJ.png", 0, 0);
             afficher_texte(ren, "assets/inter.ttf", 27, 497, 252, joueur1->pseudo);
@@ -55,10 +57,20 @@ void gestion_event_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
          }
          if (event.button.x < 661 && event.button.x > 476 && event.button.y < 481 && event.button.y > 399) {
             if (*mode_de_jeu == JVSJ && *etat_joueur == J1){
+               if(strcmp(joueur1->pseudo," ")==0)
+                  sprintf(joueur1->pseudo,"joueur 1");
+               if(strcmp(joueur2->pseudo," ")==0)
+                  sprintf(joueur2->pseudo,"joueur 2");
                afficher_image(win, ren, "assets/menu_J1.png", 0, 0);
             } else if (*mode_de_jeu == JVSJ && *etat_joueur == J2) {
+               if(strcmp(joueur1->pseudo," ")==0)
+                  sprintf(joueur1->pseudo,"joueur 1");
+               if(strcmp(joueur2->pseudo," ")==0)
+                  sprintf(joueur2->pseudo,"joueur 2");
                afficher_image(win, ren, "assets/menu_J2.png", 0, 0);
             } else {
+               if(strcmp(joueur1->pseudo," ")==0)
+                  sprintf(joueur1->pseudo,"joueur 1");
                afficher_image(win, ren, "assets/menu.png", 0, 0);
             }
             afficher_texte(ren, "assets/inter.ttf", 19, 290, 21, joueur1->pseudo);

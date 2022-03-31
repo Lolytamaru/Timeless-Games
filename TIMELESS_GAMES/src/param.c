@@ -34,16 +34,16 @@ void gestion_event_param(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, 
                afficher_image(win, ren, "assets/parametres/param_jeux.png", 0, 0);
             }
          } else if (param_select == MENU_REGLES) {
-            if (event.button.x < 155 && event.button.x > 0 && event.button.y < 43 && event.button.y > 0) {
+            if (event.button.x < 155 && event.button.x > 0 && event.button.y < 43 && event.button.y > 0){
                afficher_image(win, ren, "assets/parametres/parametres.png", 0, 0);
                param_select = PARAMETRES;
-            } else if (event.button.x < 306 && event.button.x > 80 && event.button.y < 300 && event.button.y > 243) { // Pendu
+            } else if (event.button.x < 430 && event.button.x > 200 && event.button.y < 195 && event.button.y > 135){ // Pendu
                afficher_image(win, ren, "assets/parametres/regles_pendu.png", 0, 0);
                param_select = REGLES_JEU;
-            } else if (event.button.x < 370 && event.button.x > 80 && event.button.y < 385 && event.button.y > 330) { // Mastermind
+            } else if (event.button.x < 490 && event.button.x > 200 && event.button.y < 283 && event.button.y > 220){ // Mastermind
                afficher_image(win, ren, "assets/parametres/regles_masterm.png", 0, 0);
                param_select = REGLES_JEU;
-            } else if (event.button.x < 430 && event.button.x > 80 && event.button.y < 470 && event.button.y > 420) { // Bataille navale
+            } else if (event.button.x < 555 && event.button.x > 198 && event.button.y < 368 && event.button.y > 307){ // Bataille navale
                afficher_image(win, ren, "assets/parametres/regles_batnav.png", 0, 0);
                param_select = REGLES_JEU;
             }
@@ -64,17 +64,20 @@ void gestion_event_param(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, 
      				SDL_RenderPresent(ren);
      				*etat_win = MENU;
             // Modifier les joueurs
-            } else if (event.button.x < 490 && event.button.x > 200 && event.button.y < 170 && event.button.y > 109) {
-               if (*mode_de_jeu == JVSJ)
+            } else if (event.button.x < 490 && event.button.x > 200 && event.button.y < 200 && event.button.y > 141) {
+               if (*mode_de_jeu == JVSJ){
+                  sprintf(joueur2->pseudo, " ");
                   afficher_image(win, ren, "assets/parametres/menu_pseudo_JCJ.png", 0, 0);
-               else
+               }else
                   afficher_image(win, ren, "assets/parametres/menu_pseudo_JCO.png", 0, 0);
+               sprintf(joueur1->pseudo, " ");
+              
                afficher_texte(ren, "assets/inter.ttf", 27, 497, 252, joueur1->pseudo);
-               afficher_texte(ren, "assets/inter.ttf", 27, 497, 338, joueur2->pseudo);
+               afficher_texte(ren, "assets/inter.ttf", 27, 497, 338, joueur2->pseudo);   
                SDL_RenderPresent(ren);
                *etat_win = PSEUDO;
             // Réinitialisation des scores
-            } else if (event.button.x < 500 && event.button.x > 200 && event.button.y < 317 && event.button.y > 259) {
+            } else if (event.button.x < 500 && event.button.x > 200 && event.button.y < 290 && event.button.y > 230) {
                joueur1->score = 0;
                joueur2->score = 0;
                if (*mode_de_jeu == JVSJ && *etat_joueur == J1) {

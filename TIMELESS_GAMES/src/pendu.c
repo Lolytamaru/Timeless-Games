@@ -100,7 +100,7 @@ void initialiser_mot_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event even
 			// Si on appuie sur une lettre de l'alphabet avec le clavier
 			if (event.key.keysym.sym >= SDLK_a && event.key.keysym.sym <= SDLK_z) {
 				l = strlen(secret_ecrit);
-				if (l < 7){
+				if (l < 9){
 					sprintf(temp, "%s%c", secret_ecrit, event.key.keysym.sym);
 					sprintf(secret_ecrit, "%s", temp);
 				}
@@ -125,6 +125,25 @@ void initialiser_mot_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event even
 				SDL_RenderCopy(ren, texte_tex, NULL, &txtDestRect);
 				TTF_CloseFont(police);
 				SDL_RenderPresent(ren);
+			}
+			if (event.key.keysym.sym == SDLK_RETURN ){
+				sprintf(secret, "%s", secret_ecrit);
+				int i;
+				for (i = 0; i < secret[i]; i++)
+			  		secret_ecrit[i] = '\0';
+				// Boucle qui initialise le 2ème mot pendu utilisé pour le jeu (ex : _ _ _ _)
+			   for (i = 0; i < secret[i]; i++)
+			  		pendu[i] = '_';
+			   //Affichage SDL des _ _ _
+				afficher_image(win, ren, "assets/pendu/pendu.png", 0, 0);
+				afficher_texte(ren, "assets/inter.ttf", 19, 15, 110, pseudoJ1);
+				afficher_texte(ren, "assets/inter.ttf", 19, 15, 232, pseudoJ2);
+				afficher_nombre(ren, "assets/inter.ttf", 19, 26, 148, *scoreJ1);
+				afficher_nombre(ren, "assets/inter.ttf", 19, 26, 269, *scoreJ2);
+				SDL_RenderPresent(ren);
+			    afficher_mystere(win, ren, i - 1);
+				SDL_RenderPresent(ren);
+				*etat_partie = PENDUJEU;
 			}
 			break;
 		case SDL_MOUSEBUTTONUP:
@@ -448,6 +467,12 @@ void gestion_event_pendu(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, 
 					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'y', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 715 && event.button.x >647 && event.button.y < 477 && event.button.y > 436)
 					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'z', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
+			}
+			break;
+		case SDL_KEYUP:
+            if (pendu.etat_partie == PENDUJEU) {
+				if (event.key.keysym.sym >= SDLK_a && event.key.keysym.sym <= SDLK_z) 
+					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), event.key.keysym.sym, pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 			}
 			break;
 		default: break;

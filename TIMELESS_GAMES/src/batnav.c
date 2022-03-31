@@ -476,7 +476,7 @@ void bateau_est_coule(SDL_Window * win, SDL_Renderer * ren, plateau_t * plateau_
 					if (plateau_j->une_case[x][y].num_bat == plateau_j->une_case[j][y].num_bat && est_valide(*plateau_j, j, y))
 						nbr++;
 				}
-				if (jeu.etat_partie == ATTAQUE_J2) {
+				if (jeu.etat_partie == ATTAQUE_J1) {
 					afficher_image(win, ren, bateau, (x - nbr + 1) * 33 + 34, y * 33 + 158);
 					SDL_RenderPresent(ren);
 				} else {
@@ -488,7 +488,7 @@ void bateau_est_coule(SDL_Window * win, SDL_Renderer * ren, plateau_t * plateau_
 				for (j = y; j >= 0; j--)
 					if (plateau_j->une_case[x][y].num_bat == plateau_j->une_case[x][j].num_bat && est_valide(*plateau_j, x, j))
 						nbr++;
-				if (jeu.etat_partie == ATTAQUE_J2) {
+				if (jeu.etat_partie == ATTAQUE_J1) {
 					afficher_image(win, ren, bateau, x * 33 + 34, (y - nbr + 1) * 33 + 158);
 					SDL_RenderPresent(ren);
 				} else {
@@ -521,12 +521,14 @@ void attaque_case_bat(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, int
 			plateau_j->une_case[x][y].etat = 1;
 			afficher_image(win, ren, "assets/batnav/touche.png", x * 33 + 35, y * 33 + 159);
 			afficher_image(win, ren, "assets/batnav/tour_vert.png", 462, 70);
+			bateau_est_coule(win, ren, plateau_j, x, y, couleur);
 			SDL_RenderPresent(ren);
 			jeu.etat_partie = ATTAQUE_J2;
       } else {
 			plateau_j->une_case[x][y].etat = 1;
 			afficher_image(win, ren, "assets/batnav/touche.png", x * 33 + 416, y * 33 + 159);
 			afficher_image(win, ren, "assets/batnav/tour_violet.png", 462, 70);
+			bateau_est_coule(win, ren, plateau_j, x, y, couleur);
 			SDL_RenderPresent(ren);
 			jeu.etat_partie = ATTAQUE_J1;
       }
@@ -545,7 +547,6 @@ void attaque_case_bat(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, int
         jeu.etat_partie = ATTAQUE_J1;
 	  }
    }
-	bateau_est_coule(win, ren, plateau_j, x, y, couleur);
    /* Fin de la partie */
    for (i = 0; i < 10; i++) {
      	for (j = 0; j < 10; j++)
@@ -679,10 +680,11 @@ void gestion_event_batnav(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
                attaque_case_bat(win, ren, event, mode_de_jeu, &jeu.joueur2,(event.button.x - 35) / 33, (event.button.y - 160) / 33, &(joueur1->score), &(joueur2->score), "violet");
          if (jeu.etat_partie == ATTAQUE_J2) {
 				if (*mode_de_jeu == JVSJ) {
-            	if (event.button.x < 746 && event.button.x > 416 && event.button.y < 488 && event.button.y > 158)
-               	attaque_case_bat(win, ren, event, mode_de_jeu, &jeu.joueur1, (event.button.x - 416) / 33, (event.button.y - 158) / 33, &(joueur1->score), &(joueur2->score), "vert");
-				} else {
-					tour_ordi_mode_IA(win, ren, event, mode_de_jeu, &jeu.joueur1, joueur1, joueur2,"vert");
+            		if (event.button.x < 746 && event.button.x > 416 && event.button.y < 488 && event.button.y > 158){
+               			attaque_case_bat(win, ren, event, mode_de_jeu, &jeu.joueur1, (event.button.x - 416) / 33, (event.button.y - 158) / 33, &(joueur1->score), &(joueur2->score), "vert");
+					} 
+				}else{ 
+						tour_ordi_mode_IA(win, ren, event, mode_de_jeu, &jeu.joueur1, joueur1, joueur2,"vert");
 				}
 			}
 			break;
