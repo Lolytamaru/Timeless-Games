@@ -133,8 +133,6 @@ int est_valide(plateau_t plateau_j, int x, int y) {
 }
 
 int est_valide_ordi(plateau_t plateau_ordi, int x, int y) {
-	printf("ORDI= x=%d & y=%d\n",x,y);
-	printf("ligne=%d and colo=%d\n",plateau_ordi.nb_lig,plateau_ordi.nb_col);
 	return ((x >= 0 && x < plateau_ordi.nb_lig) && (y >= 0 && y < plateau_ordi.nb_col));
 }
 /**
