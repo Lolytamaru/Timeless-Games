@@ -28,7 +28,7 @@ void init_partie_pendu(SDL_Window * win, SDL_Renderer * ren, int * mode_de_jeu, 
 	pendu.pendu = (char*)malloc(sizeof(char)); // Contient le mot sur lequel on joue au pendu
 	pendu.secret = (char*)malloc(sizeof(char)); // Contient le mot secret
 	for (i = 'a'; i <= 'z'; i++)
-		pendu.alphabet[i-'a'] = i;
+		pendu.alphabet[i - 'a'] = i;
 	pendu.erreurs = 0;
 	pendu.etat_partie = PENDU_JCJ_INIT;
 	if (*mode_de_jeu == JVSO) {
@@ -364,6 +364,8 @@ void pendu_tour(SDL_Window * win, SDL_Renderer * ren, int etat_joueur, int * eta
 		else
 			*scoreJ1 = *scoreJ1 + 1;
 		SDL_RenderPresent(ren);
+		free(pendu.pendu);
+		free(pendu.secret);
 	}
 	// Si le joueur est pendu (a perdu)
    if ((*erreurs) >= 10) {
@@ -376,6 +378,8 @@ void pendu_tour(SDL_Window * win, SDL_Renderer * ren, int etat_joueur, int * eta
 		else
 			*scoreJ2 = *scoreJ2 + 1;
 		SDL_RenderPresent(ren);
+		free(pendu.pendu);
+		free(pendu.secret);
 	}
    // Met à jour l'affichage selon les manipulations précédentes
    SDL_UpdateWindowSurface(win);
@@ -471,7 +475,7 @@ void gestion_event_pendu(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, 
 			break;
 		case SDL_KEYUP:
             if (pendu.etat_partie == PENDUJEU) {
-				if (event.key.keysym.sym >= SDLK_a && event.key.keysym.sym <= SDLK_z) 
+				if (event.key.keysym.sym >= SDLK_a && event.key.keysym.sym <= SDLK_z)
 					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), event.key.keysym.sym, pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 			}
 			break;
