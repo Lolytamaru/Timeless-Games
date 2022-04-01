@@ -143,7 +143,7 @@ void initialiser_mot_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event even
 				afficher_nombre(ren, "assets/inter.ttf", 19, 26, 148, *scoreJ1);
 				afficher_nombre(ren, "assets/inter.ttf", 19, 26, 269, *scoreJ2);
 				SDL_RenderPresent(ren);
-			    afficher_mystere(win, ren, i - 1);
+			   afficher_mystere(win, ren, i - 1);
 				SDL_RenderPresent(ren);
 				*etat_partie = PENDUJEU;
 			}
@@ -271,7 +271,10 @@ void afficher_erreur(SDL_Window * win, SDL_Renderer * ren, int nb_erreur) {
  * \return Renvoie OK si les deux mots sont identiques, PAS_OK si les deux mots ne sont pas identiques
  */
 int valider_mot(char * secret, char * pendu) {
-   if (strcmp(secret, pendu) == 0) // Si les deux mots sont identiques
+	int i, j;
+   for (i = 0; secret[i] && (secret[i] == pendu[i]); i++) {}
+	for (j = 0; secret[j]; j++) {}
+   if (i == j) // Si les deux mots sont identiques
       return OK;
    else // Sinon ils ne sont pas identiques
       return PAS_OK;

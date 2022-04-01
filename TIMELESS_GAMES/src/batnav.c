@@ -673,8 +673,7 @@ void gestion_event_batnav(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
             *etat_win = MENU;
             break;
          }
-         placement_bateaux(win, ren, event, etat_win, mode_de_jeu, JOUEUR1, &jeu.joueur1, &jeu.joueur2, "violet", joueur1, joueur2);
-         placement_bateaux(win, ren, event, etat_win, mode_de_jeu, JOUEUR2, &jeu.joueur2, &jeu.joueur1, "vert", joueur1, joueur2);
+
          if (jeu.etat_partie == ATTAQUE_J1)
             if (event.button.x < 364 && event.button.x > 35 && event.button.y < 488 && event.button.y > 160)
                attaque_case_bat(win, ren, event, mode_de_jeu, &jeu.joueur2,(event.button.x - 35) / 33, (event.button.y - 160) / 33, &(joueur1->score), &(joueur2->score), "violet");
@@ -682,11 +681,13 @@ void gestion_event_batnav(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
 				if (*mode_de_jeu == JVSJ) {
             		if (event.button.x < 746 && event.button.x > 416 && event.button.y < 488 && event.button.y > 158){
                			attaque_case_bat(win, ren, event, mode_de_jeu, &jeu.joueur1, (event.button.x - 416) / 33, (event.button.y - 158) / 33, &(joueur1->score), &(joueur2->score), "vert");
-					} 
-				}else{ 
+					}
+				}else{
 						tour_ordi_mode_IA(win, ren, event, mode_de_jeu, &jeu.joueur1, joueur1, joueur2,"vert");
 				}
 			}
+			placement_bateaux(win, ren, event, etat_win, mode_de_jeu, JOUEUR1, &jeu.joueur1, &jeu.joueur2, "violet", joueur1, joueur2);
+			placement_bateaux(win, ren, event, etat_win, mode_de_jeu, JOUEUR2, &jeu.joueur2, &jeu.joueur1, "vert", joueur1, joueur2);
 			break;
       default: break;
    }

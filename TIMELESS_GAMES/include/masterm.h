@@ -21,6 +21,7 @@ typedef struct s_master {
 } t_master;
 
 t_master mastermind;
+
 void init_partie_masterm(int * mode_de_jeu);
 void init_mastermind_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, char * pseudoJ1, char * pseudoJ2, int * scoreJ1, int * scoreJ2);
 void saisir_code_ordi(char * code_secret);

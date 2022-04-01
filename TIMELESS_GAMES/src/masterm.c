@@ -380,6 +380,8 @@ void mastermind_tour(SDL_Window * win, SDL_Renderer * ren, int etat_joueur, int 
       SDL_RenderPresent(ren);
       (*nb_essais)++;
       (*position) = 0;
+		for (i = 0;i < 4; i++)
+			propo_couleur[i] = ' ';
    }
    // Si l'on fait une proposition correcte qu'il reste des essais (= on gagne)
    if ((*nb_essais) < 10 && nb_bonne_place(propo_couleur, code_secret) == 4) {
@@ -392,6 +394,8 @@ void mastermind_tour(SDL_Window * win, SDL_Renderer * ren, int etat_joueur, int 
 		*etat_partie = MASTERMINDFINI;
 		afficher_resultat(win, ren, code_secret);
       SDL_RenderPresent(ren);
+		for (i = 0;i < 4; i++)
+			propo_couleur[i] = ' ';
 		free(mastermind.propo_couleur);
 		free(mastermind.code_secret);
    }
@@ -406,11 +410,12 @@ void mastermind_tour(SDL_Window * win, SDL_Renderer * ren, int etat_joueur, int 
 		*etat_partie = MASTERMINDFINI;
       afficher_resultat(win, ren, code_secret);
       SDL_RenderPresent(ren);
+		for (i = 0;i < 4; i++)
+			propo_couleur[i] = ' ';
 		free(mastermind.propo_couleur);
 		free(mastermind.code_secret);
    }
-	for (i = 0;i < 4; i++)
-		propo_couleur[i] = ' ';
+
 }
 
 /**
