@@ -361,8 +361,7 @@ void pendu_tour(SDL_Window * win, SDL_Renderer * ren, int etat_joueur, int * eta
 		else
 			(*scoreJ1)++;
 		SDL_RenderPresent(ren);
-		free(pendu.pendu);
-		free(pendu.secret);
+		free(pendu);
 	}
 	// Si le joueur est pendu (a perdu)
    if ((*erreurs) >= 10) {
@@ -375,8 +374,7 @@ void pendu_tour(SDL_Window * win, SDL_Renderer * ren, int etat_joueur, int * eta
 		else
 			(*scoreJ2)++;
 		SDL_RenderPresent(ren);
-		free(pendu.pendu);
-		free(pendu.secret);
+		free(pendu);
 	}
    // Met à jour l'affichage selon les manipulations précédentes
    SDL_UpdateWindowSurface(win);
