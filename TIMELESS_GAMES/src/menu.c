@@ -108,6 +108,8 @@ void gestion_event_menu(SDL_Window *win, SDL_Renderer *ren, SDL_Event event, t_s
          } else if (event.button.x < 296 && event.button.x > 0 && event.button.y < 49 && event.button.y > 0) {
             afficher_image(win, ren, "assets/accueil.png", 0, 0);
             SDL_RenderPresent(ren);
+            sprintf(joueur1->pseudo, " ");
+            sprintf(joueur2->pseudo, " ");
             *etat_win = ACCUEIL;
          }
          break;
