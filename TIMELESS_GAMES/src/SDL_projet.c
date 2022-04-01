@@ -28,12 +28,33 @@ void SDL_ExitWithError(const char *message) {
  */
 void afficher_image(SDL_Window * win, SDL_Renderer * ren, char * nom_img, int coordx, int coordy) {
    SDL_Surface *image = NULL;
+   SDL_Texture *texture = NULL;
 
    image = IMG_Load(nom_img);
    if (image == NULL) {
       SDL_DestroyRenderer(ren);
       SDL_DestroyWindow(win);
       SDL_ExitWithError("Impossible de trouver l'image.\n");
+   }
+   texture = SDL_CreateTextureFromSurface(ren, image);
+   SDL_FreeSurface(image);
+   if (texture == NULL) {
+      SDL_DestroyRenderer(ren);
+      SDL_DestroyWindow(win);
+      SDL_ExitWithError("Impossible de créer la texture.\n");
+   }
+   SDL_Rect rectangle;
+   if (SDL_QueryTexture(texture, NULL, NULL, &rectangle.w, &rectangle.h)) {
+      SDL_DestroyRenderer(ren);
+      SDL_DestroyWindow(win);
+      SDL_ExitWithError("Impossible de charger la texture.\n");
+   }
+   rectangle.x = coordx;
+   rectangle.y = coordy;
+   if (SDL_RenderCopy(ren, texture, NULL, &rectangle)) {
+      SDL_DestroyRenderer(ren);
+      SDL_DestroyWindow(win);
+      SDL_ExitWithError("Impossible d'afficher la texture.\n");
    }
 }
 
