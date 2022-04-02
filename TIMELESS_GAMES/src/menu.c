@@ -71,7 +71,7 @@ void gestion_event_menu(SDL_Window *win, SDL_Renderer *ren, SDL_Event event, t_s
                afficher_image(win, ren, "assets/mastermind/mastermind.png", 0, 0);
                afficher_texte(ren, "assets/inter.ttf", 19, 19, 110, joueur1->pseudo);
                afficher_texte(ren, "assets/inter.ttf", 19, 19, 218, joueur2->pseudo);
-               afficher_nombre(ren, "assets/inter.ttf", 19, 26, 148, joueur2->score);
+               afficher_nombre(ren, "assets/inter.ttf", 19, 26, 148, joueur1->score);
                afficher_nombre(ren, "assets/inter.ttf", 19, 26, 254, joueur2->score);
                afficher_image(win, ren, "assets/mastermind/enlever_proposition.png", 229, 448);
                init_partie_masterm(mode_de_jeu);

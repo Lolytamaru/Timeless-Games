@@ -447,8 +447,6 @@ void mastermind_tour(SDL_Window * win, SDL_Renderer * ren, int etat_joueur, int 
 	         SDL_RenderPresent(ren);
 	         *etat_win = MENU;
        	}
-			if (mastermind.etat_partie == MASTERMIND_JCJ_INIT)
-				init_mastermind_joueur(win, ren, event, joueur1->pseudo, joueur2->pseudo, &(joueur1->score), &(joueur2->score));
  			// Partie en cours
        	if (mastermind.etat_partie == MASTERMINDJEU) {
        		// Bouton VALIDER COMBINAISON
@@ -501,6 +499,8 @@ void mastermind_tour(SDL_Window * win, SDL_Renderer * ren, int etat_joueur, int 
 		         SDL_RenderPresent(ren);
 		      }
      		}
+			if (mastermind.etat_partie == MASTERMIND_JCJ_INIT)
+				init_mastermind_joueur(win, ren, event, joueur1->pseudo, joueur2->pseudo, &(joueur1->score), &(joueur2->score));
        	break;
      	default: break;
    }

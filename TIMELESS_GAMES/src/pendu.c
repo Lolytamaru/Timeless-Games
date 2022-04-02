@@ -196,7 +196,7 @@ void initialiser_mot_ordi(SDL_Window * win, SDL_Renderer * ren, char * secret, c
    int i, nb_rand;
    FILE *listeMots = fopen("assets/pendu/mots.txt", "r"); // Fichier contenant 598 mots
    srand(time(NULL)); // Initialisation du hasard
-   nb_rand = rand() % (598 + 1 - 1); // Génération d'un nombre entre 1 et 598
+   nb_rand = rand() % (544 + 1 - 1); // Génération d'un nombre entre 1 et 598
    // Boucle pour accéder au mot à la ligne nb_rand du fichier
    for (i = 1; i <= nb_rand; i++)
       fscanf(listeMots, "%s", secret);
@@ -207,6 +207,7 @@ void initialiser_mot_ordi(SDL_Window * win, SDL_Renderer * ren, char * secret, c
  	pendu[i] = '\0';
    //Affichage SDL des _ _ _
    afficher_mystere(win, ren, i-1);
+	SDL_RenderPresent(ren);
 }
 
 /**
@@ -379,8 +380,6 @@ void pendu_tour(SDL_Window * win, SDL_Renderer * ren, int etat_joueur, int * eta
 		SDL_RenderPresent(ren);
 		free(pendu);
 	}
-   // Met à jour l'affichage selon les manipulations précédentes
-   SDL_UpdateWindowSurface(win);
 }
 
 /**
