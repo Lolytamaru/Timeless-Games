@@ -35,6 +35,8 @@ void gestion_event_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
             *etat_joueur = J1;
             sprintf(joueur1->pseudo, " ");
             sprintf(joueur2->pseudo, "ordi");
+            joueur1->score = 0;
+            joueur2->score = 0;
             afficher_image(win, ren, "assets/parametres/menu_pseudo_JCO.png", 0, 0);
             afficher_texte(ren, "assets/inter.ttf", 27, 497, 252, joueur1->pseudo);
             afficher_texte(ren, "assets/inter.ttf", 27, 497, 338, joueur2->pseudo);
@@ -44,6 +46,8 @@ void gestion_event_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
             *mode_de_jeu = JVSJ;
             sprintf(joueur1->pseudo, " ");
             sprintf(joueur2->pseudo, " ");
+            joueur1->score = 0;
+            joueur2->score = 0;
             afficher_image(win, ren, "assets/parametres/menu_pseudo_JCJ.png", 0, 0);
             afficher_texte(ren, "assets/inter.ttf", 27, 497, 252, joueur1->pseudo);
             afficher_texte(ren, "assets/inter.ttf", 27, 497, 338, joueur2->pseudo);

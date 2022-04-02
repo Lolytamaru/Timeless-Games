@@ -636,7 +636,6 @@ void tour_ordi_mode_IA(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, in
 			attaque_case_bat(win, ren, event, mode_de_jeu, plateau_ordi, coord_case.x, coord_case.y, &(joueur1->score), &(ordi->score), "vert");
 			empiler(coord_case);
 		}
-		bateau_est_coule(win, ren, plateau_ordi, coord_case.x, coord_case.y, couleur);
 		afficher_image(win, ren, "assets/batnav/tour_violet.png", 462, 70);
 		SDL_RenderPresent(ren);
 		jeu.etat_partie = ATTAQUE_J1;
