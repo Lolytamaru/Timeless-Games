@@ -3,7 +3,7 @@
  * \brief Fichier pour le jeu de la bataille navale
  * \author Duclos Christal Brochelard Hugo Thibaut Duchesne
  * \version 1.0
- * \date 28 mars 2022
+ * \date 02 avril 2022
  */
 
 #include <all_includes.h>
@@ -13,10 +13,10 @@
 
 #define VIDE 0
 #define NB_BAT 5
-typedef enum {JOUEUR1 = 1, JOUEUR2, ATTAQUE_J1, ATTAQUE_J2, FIN_PARTIE} batnav_e; /* On commence l'enumération à 1 */
-int bat_selec;
-char direction;
-batnav_t jeu;
+typedef enum {JOUEUR1 = 1, JOUEUR2, ATTAQUE_J1, ATTAQUE_J2, FIN_PARTIE} batnav_e; // On commence l'enumération à 1
+int bat_selec; // Bateau sélectionné à la souris
+char direction; // Direction verticale ou horizontale du bateau
+batnav_t jeu; // Structure qui contient les variables pour la bataille navale
 
 /**
  * \brief Fonction qui initialise les plateaux de jeu de la bataille navale
@@ -132,14 +132,23 @@ int est_valide(plateau_t plateau_j, int x, int y) {
 	return ((x + 1 >= 0 && x <= plateau_j.nb_lig) && (y + 1 >= 0 && y <= plateau_j.nb_col));
 }
 
+/**
+ * \brief Fonction qui vérifie si les coordonnées sont dans la matrice
+ * \param plateau_ordi Le plateau de l'ordi
+ * \param x Coordonnée x de la case
+ * \param y Coordonnée y de la case
+ * \return Renvoie 1 si les coordonnées sont valides, 0 sinon
+ */
 int est_valide_ordi(plateau_t plateau_ordi, int x, int y) {
 	return ((x >= 0 && x < plateau_ordi.nb_lig) && (y >= 0 && y < plateau_ordi.nb_col));
 }
+
 /**
  * \brief Fonction qui regarde si les cases qui vont être occupées dans une direction sont toutes libres et valides
  * \param plateau_j Plateau du joueur que l'on cherche à remplir
  * \param x Coordonnée x de la case sélectionnée
  * \param y Coordonnée y de la case sélectionnée
+ * \param direction La direction d'un bateau
  * \param taille_bat Taille du bateau que l'on souhaite placer
  * \return Retourne 1 si la direction est valide, 0 sinon
  */
@@ -149,7 +158,7 @@ int direction_valide(plateau_t * plateau_j, int x, int y, int direction, int tai
 		// L'utilisateur clique sur un bateau horizontal
    	case 'h':
          max = taille_bat + x - 1;
-         if (max < plateau_j->nb_col) {
+			if (max < plateau_j->nb_col) {
             while (x <= max) {
 					if (plateau_j->une_case[x][y].occupe == 0)
                   cpt += est_valide(*plateau_j, x, y);
@@ -269,6 +278,7 @@ void vider_cargaison(SDL_Window * win, SDL_Renderer * ren, int taille_bat, char 
  * \param mode_de_jeu Soit joueur contre joueur, soit joueur contre ordi
  * \param x Coordonnée x de la case sélectionnée
  * \param y Coordonnée y de la case sélectionnée
+ * \param direction La direction d'un bateau
  * \param bat_selec Bateau sélectionné par le joueur pour le placer
  * \param JOUEUR Joueur qui place son bateau
  * \param couleur Couleur du joueur
