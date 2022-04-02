@@ -1,9 +1,9 @@
 /**
  * \file pile_batnav.c
  * \brief Fichier contenant les primitives d'une pile pour le jeu de la bataille navale
- * \author Duclos Christal Brochelard Hugo Thibaut Duchesne
+ * \author Duclos Christal
  * \version 1.0
- * \date 31 mars 2022
+ * \date 02 avril 2022
  */
 
 #include <pile_batnav.h>
