@@ -373,10 +373,10 @@ void afficher_resultat(SDL_Window * win, SDL_Renderer * ren, char * code_secret)
  * \param code_secret Le code secret qu'il faut deviner
  * \param position La position actuelle du prochain jeton à ajouter ou remplacer du plateau
  */
-void mastermind_tour(SDL_Window * win, SDL_Renderer * ren, int etat_joueur, int * etat_partie, int * scoreJ1, int * scoreJ2, int * nb_essais, char * propo_couleur, char * code_secret, int * position) {
+void mastermind_tour(SDL_Window * win, SDL_Renderer * ren, int mode_de_jeu, int etat_joueur, int * etat_partie, int * scoreJ1, int * scoreJ2, int * nb_essais, char * propo_couleur, char * code_secret, int * position) {
 	int i;
 	// Si l'on fait une proposition fausse et qu'il reste des essais
-   if ((*nb_essais) < 10 && strcmp(propo_couleur, code_secret) != 0) {
+   if ((*nb_essais) < 10 && nb_bonne_place(propo_couleur, code_secret) != 4) {
       afficher_essai(win, ren, nb_bonne_couleur(propo_couleur, code_secret, nb_bonne_place(propo_couleur, code_secret)), nb_bonne_place(propo_couleur, code_secret), nb_essais, propo_couleur, code_secret);
       afficher_image(win, ren, "assets/mastermind/enlever_proposition.png", 229, 448);
       SDL_RenderPresent(ren);
@@ -389,10 +389,17 @@ void mastermind_tour(SDL_Window * win, SDL_Renderer * ren, int etat_joueur, int 
    if ((*nb_essais) < 10 && nb_bonne_place(propo_couleur, code_secret) == 4) {
       afficher_image(win, ren, "assets/mastermind/gagne_masterm.png", 10, 60);
       afficher_image(win, ren, "assets/mastermind/gagne_cercle.png", 215, 440);
-		if (etat_joueur == J1)
-			(*scoreJ2)++;
-		else
-			(*scoreJ1)++;
+		if(mode_de_jeu == JVSJ) {
+			if (etat_joueur == J1)
+				(*scoreJ2)++;
+			else
+				(*scoreJ1)++;
+		} else {
+			if (etat_joueur == J1)
+				(*scoreJ1)++;
+			else
+				(*scoreJ2)++;
+		}
 		*etat_partie = MASTERMINDFINI;
 		afficher_resultat(win, ren, code_secret);
       SDL_RenderPresent(ren);
@@ -405,10 +412,17 @@ void mastermind_tour(SDL_Window * win, SDL_Renderer * ren, int etat_joueur, int 
    if ((*nb_essais) >= 10) {
       afficher_image(win, ren, "assets/mastermind/perdu_masterm.png", 10, 60);
       afficher_image(win, ren, "assets/mastermind/perdu_cercle.png", 215, 440);
-		if (etat_joueur == J1)
-			(*scoreJ2)++;
-		else
-			(*scoreJ1)++;
+		if(mode_de_jeu == JVSJ) {
+			if (etat_joueur == J1)
+				(*scoreJ2)++;
+			else
+				(*scoreJ1)++;
+		} else {
+			if (etat_joueur == J1)
+				(*scoreJ1)++;
+			else
+				(*scoreJ2)++;
+		}
 		*etat_partie = MASTERMINDFINI;
       afficher_resultat(win, ren, code_secret);
       SDL_RenderPresent(ren);
@@ -454,7 +468,7 @@ void mastermind_tour(SDL_Window * win, SDL_Renderer * ren, int etat_joueur, int 
        		// Bouton VALIDER COMBINAISON
 				if (proposition_pas_vide(mastermind.propo_couleur) == 1) {
        			if (event.button.x < 148 && event.button.x > 9 && event.button.y < 392 && event.button.y > 326) {
-         			mastermind_tour(win, ren, *etat_joueur, &(mastermind.etat_partie), &(joueur1->score), &(joueur2->score), &(mastermind.nb_essais), mastermind.propo_couleur, mastermind.code_secret, &(mastermind.position));
+         			mastermind_tour(win, ren, *mode_de_jeu, *etat_joueur, &(mastermind.etat_partie), &(joueur1->score), &(joueur2->score), &(mastermind.nb_essais), mastermind.propo_couleur, mastermind.code_secret, &(mastermind.position));
        			}
 				}
        		// Sélection de l'endroit pour la couleur à placer

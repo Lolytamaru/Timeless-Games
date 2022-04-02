@@ -29,5 +29,5 @@ int nb_bonne_couleur(char * code, char * code_secret, int nb_place);
 void affiche_propo(SDL_Window * win, SDL_Renderer * ren, int * position, char * propo_couleur, char couleur);
 void afficher_essai(SDL_Window * win, SDL_Renderer * ren, int bonne_couleur, int bonne_place, int * nb_essais, char * propo_couleur, char * code_secret);
 void afficher_resultat(SDL_Window * win, SDL_Renderer * ren, char * code_secret);
-void mastermind_tour(SDL_Window * win, SDL_Renderer * ren, int etat_joueur, int * etat_partie, int * scoreJ1, int * scoreJ2, int * nb_essais, char * propo_couleur, char * code_secret, int * position);
+void mastermind_tour(SDL_Window * win, SDL_Renderer * ren, int mode_de_jeu, int etat_joueur, int * etat_partie, int * scoreJ1, int * scoreJ2, int * nb_essais, char * propo_couleur, char * code_secret, int * position);
 void gestion_event_masterm(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, t_statut * etat_win, int * mode_de_jeu, int * etat_joueur, t_joueur * joueur1, t_joueur * joueur2);

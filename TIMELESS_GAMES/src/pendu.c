@@ -361,7 +361,7 @@ void pendu_tour(SDL_Window * win, SDL_Renderer * ren, int mode_de_jeu, int etat_
   	if ((valider_mot(secret, pendu) == 1)) {
    	afficher_image(win, ren, "assets/pendu/gagne_pendu.png", 247, 7);
     	*etat_partie = PENDUFINI;
-		if(mode_de_jeu == JVSJ){
+		if(mode_de_jeu == JVSJ) {
 			if (etat_joueur == J1)
 				(*scoreJ2)++;
 			else
@@ -381,7 +381,7 @@ void pendu_tour(SDL_Window * win, SDL_Renderer * ren, int mode_de_jeu, int etat_
 		for (i = 0; secret[i]; i++) // Affichage du mot caché
 			affiche_lettre(win, ren, secret[i], i);
 		*etat_partie = PENDUFINI;
-		if(mode_de_jeu == JVSJ){
+		if(mode_de_jeu == JVSJ) {
 			if (etat_joueur == J1)
 				(*scoreJ1)++;
 			else
