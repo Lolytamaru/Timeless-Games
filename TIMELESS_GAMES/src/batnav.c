@@ -14,9 +14,6 @@
 #define VIDE 0
 #define NB_BAT 5
 typedef enum {JOUEUR1 = 1, JOUEUR2, ATTAQUE_J1, ATTAQUE_J2, FIN_PARTIE} batnav_e; // On commence l'enumération à 1
-int bat_selec; // Bateau sélectionné à la souris
-char direction; // Direction verticale ou horizontale du bateau
-batnav_t jeu; // Structure qui contient les variables pour la bataille navale
 
 /**
  * \brief Fonction qui initialise les plateaux de jeu de la bataille navale
