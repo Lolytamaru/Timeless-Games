@@ -15,11 +15,14 @@ CC = gcc
 CXXFLAGS = -Wall -g
 LDFLAGS = -I./include -Llib -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lm
 
-# Paramètres du makefile
-APPNAME = ./bin/accueil # Exécutable
-EXT = .c # Fichiers .c
-SRCDIR = ./src # Dossier des fichiers .c
-OBJDIR = ./obj # Dossier des fichiers .o
+# Exécutable
+APPNAME = ./bin/accueil
+# Fichiers .c
+EXT = .c
+# Dossier des fichiers .c
+SRCDIR = ./src
+# Dossier des fichiers .o
+OBJDIR = ./obj
 SRC = $(wildcard $(SRCDIR)/*$(EXT))
 OBJ = $(SRC:$(SRCDIR)/%$(EXT)=$(OBJDIR)/%.o)
 RM = rm
