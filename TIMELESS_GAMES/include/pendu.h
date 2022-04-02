@@ -21,8 +21,6 @@ typedef struct s_pendu {
  	int etat_partie;
 } t_pendu;
 
-t_pendu pendu;
-
 void init_partie_pendu(SDL_Window * win, SDL_Renderer * ren, int * mode_de_jeu, char * pseudoJ1, char * pseudoJ2, int * scoreJ1, int * scoreJ2);
 void initialiser_mot_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, int * etat_joueur, int * etat_partie, char * secret_ecrit, char * secret, char * pendu, char * pseudoJ1, char * pseudoJ2, int * scoreJ1, int * scoreJ2);
 void initialiser_mot_ordi(SDL_Window * win, SDL_Renderer * ren, char * secret, char * pendu);

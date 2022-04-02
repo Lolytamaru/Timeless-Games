@@ -13,6 +13,8 @@
 int tab_x_lettre[26] = {535, 607, 679, 535, 607, 679, 535, 607, 679, 535, 607, 679, 535, 607, 679, 535, 607, 679, 535, 607, 679, 535, 607, 679, 571, 647}; // Tableau contenant la coordonnée x en pixels des 26 lettres de l'alphabet
 int tab_y_lettre[26] = {28, 28, 28, 79, 79, 79, 130, 130, 130, 181, 181, 181, 232, 232, 232, 283, 283, 283, 334, 334, 334, 385, 385, 385, 436, 436}; // Tableau contenant la coordonnée y en pixels des 26 lettres de l'alphabet
 
+t_pendu pendu;
+
 /**
  * \brief Fonction qui initialise une partie de pendu
  * \param win La fenêtre qui sera manipulée
