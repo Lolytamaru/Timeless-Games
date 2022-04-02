@@ -148,6 +148,7 @@ int est_valide_ordi(plateau_t plateau_ordi, int x, int y) {
  * \param plateau_j Plateau du joueur que l'on cherche à remplir
  * \param x Coordonnée x de la case sélectionnée
  * \param y Coordonnée y de la case sélectionnée
+ * \param direction La direction d'un bateau
  * \param taille_bat Taille du bateau que l'on souhaite placer
  * \return Retourne 1 si la direction est valide, 0 sinon
  */
@@ -157,7 +158,7 @@ int direction_valide(plateau_t * plateau_j, int x, int y, int direction, int tai
 		// L'utilisateur clique sur un bateau horizontal
    	case 'h':
          max = taille_bat + x - 1;
-         if (max < plateau_j->nb_col) {
+			if (max < plateau_j->nb_col) {
             while (x <= max) {
 					if (plateau_j->une_case[x][y].occupe == 0)
                   cpt += est_valide(*plateau_j, x, y);
@@ -277,6 +278,7 @@ void vider_cargaison(SDL_Window * win, SDL_Renderer * ren, int taille_bat, char 
  * \param mode_de_jeu Soit joueur contre joueur, soit joueur contre ordi
  * \param x Coordonnée x de la case sélectionnée
  * \param y Coordonnée y de la case sélectionnée
+ * \param direction La direction d'un bateau
  * \param bat_selec Bateau sélectionné par le joueur pour le placer
  * \param JOUEUR Joueur qui place son bateau
  * \param couleur Couleur du joueur
