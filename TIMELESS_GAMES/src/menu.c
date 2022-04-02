@@ -3,7 +3,7 @@
  * \brief Fichier secondaire qui gère le menu de Timeless Games
  * \author Christal Duclos Hugo Brochelard Thibaut Duchesne
  * \version 1.0
- * \date 31 mars 2022
+ * \date 02 avril 2022
  */
 
 #include <all_includes.h>

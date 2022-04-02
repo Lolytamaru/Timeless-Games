@@ -3,7 +3,7 @@
  * \brief Fichier de prototypes pour le jeu de la bataille navale
  * \author Duclos Christal Brochelard Hugo Thibaut Duchesne
  * \version 1.0
- * \date 28 mars 2022
+ * \date 02 avril 2022
  */
 
 #ifndef __BATNAV_H__
@@ -46,6 +46,10 @@ typedef struct s_batnav {
    plateau_t joueur2; // Plateau du joueur 2
 	int etat_partie; // 1 = placements du joueur 1, 2 = placements du joueur 2, 3 = tour du joueur 1, 4 = tour du joueur 2, 5 = fin du jeu
 } batnav_t;
+
+int bat_selec; // Bateau sélectionné à la souris
+char direction; // Direction verticale ou horizontale du bateau
+batnav_t jeu; // Structure qui contient les variables pour la bataille navale
 
 plateau_t creer_plateau(int l, int c);
 void init_bateaux(plateau_t * plateau_j);

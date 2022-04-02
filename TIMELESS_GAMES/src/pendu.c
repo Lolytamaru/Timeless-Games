@@ -1,9 +1,9 @@
 /**
  * \file pendu.c
  * \brief Fichier pour le jeu du pendu
- * \author Duclos Christal Brochelard Hugo Thibaut Duchesne
+ * \author Duclos Christal
  * \version 2.0
- * \date 31 mars 2022
+ * \date 02 avril 2022
  */
 
 #include <all_includes.h>

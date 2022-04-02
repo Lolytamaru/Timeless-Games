@@ -3,7 +3,7 @@
  * \brief fichier principal de Timeless Games
  * \author Christal Duclos Hugo Brochelard Thibaut Duchesne
  * \version 2.0
- * \date 28 mars 2022
+ * \date 02 avril 2022
  */
 
 #include <all_includes.h>

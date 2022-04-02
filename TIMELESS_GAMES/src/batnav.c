@@ -14,9 +14,6 @@
 #define VIDE 0
 #define NB_BAT 5
 typedef enum {JOUEUR1 = 1, JOUEUR2, ATTAQUE_J1, ATTAQUE_J2, FIN_PARTIE} batnav_e; // On commence l'enumération à 1
-int bat_selec; // Bateau sélectionné à la souris
-char direction; // Direction verticale ou horizontale du bateau
-batnav_t jeu; // Structure qui contient les variables pour la bataille navale
 
 /**
  * \brief Fonction qui initialise les plateaux de jeu de la bataille navale
@@ -244,13 +241,17 @@ void placement_bateaux_ordi(plateau_t * plateau_ordi) {
  * \param immatriculation Nom du bateau déjà placé
  */
 void vider_cargaison(SDL_Window * win, SDL_Renderer * ren, int taille_bat, char * immatriculation) {
+	// En fonction de la taille du bateau
 	switch(taille_bat) {
+		// On enlève les images des bateaux de taille 2
 		case 2:
 			afficher_image(win, ren, "assets/batnav/bateaux/suppression_cargaison/taille_2_h.png", 535, 96);
 			afficher_image(win, ren, "assets/batnav/bateaux/suppression_cargaison/taille_2_v.png", 535, 286);
 			break;
+		// On enlève les images des bateaux de taille 3
 		case 3:
-			if (strcmp(immatriculation,"contre_torpilleurA") == 0) {
+			// En fonction de si l'immatriculation est A ou B
+			if (strcmp(immatriculation, "contre_torpilleurA") == 0) {
 				afficher_image(win, ren, "assets/batnav/bateaux/suppression_cargaison/taille_3_h.png", 624, 96);
 				afficher_image(win, ren, "assets/batnav/bateaux/suppression_cargaison/taille_3_v.png", 535, 373);
 			} else {
@@ -258,10 +259,12 @@ void vider_cargaison(SDL_Window * win, SDL_Renderer * ren, int taille_bat, char 
 				afficher_image(win, ren, "assets/batnav/bateaux/suppression_cargaison/taille_3_v.png", 586, 286);
 			}
 			break;
+		// On enlève les images des bateaux de taille 4
 		case 4:
 			afficher_image(win, ren, "assets/batnav/bateaux/suppression_cargaison/taille_4_h.png", 535, 187);
 			afficher_image(win, ren, "assets/batnav/bateaux/suppression_cargaison/taille_4_v.png", 643, 286);
 			break;
+		// On enlève les images des bateaux de taille 5
 		case 5:
 			afficher_image(win, ren, "assets/batnav/bateaux/suppression_cargaison/taille_5_h.png", 535, 233);
 			afficher_image(win, ren, "assets/batnav/bateaux/suppression_cargaison/taille_5_v.png", 701, 286);
@@ -322,7 +325,8 @@ void placement_case_bat(SDL_Window * win, SDL_Renderer * ren, int * mode_de_jeu,
    }
    if (cpt == 10) {
       if (jeu.etat_partie == JOUEUR1) {
-			if(*mode_de_jeu == JVSJ){
+			// Si on est dans le mode joueur contre joueur
+			if (*mode_de_jeu == JVSJ) {
          	jeu.etat_partie = JOUEUR2;
 				SDL_Delay(2000);
          	afficher_image(win, ren, "assets/batnav/placement_verts.png", 0, 0);
@@ -331,8 +335,8 @@ void placement_case_bat(SDL_Window * win, SDL_Renderer * ren, int * mode_de_jeu,
          	afficher_nombre(ren, "assets/inter.ttf", 19, 400, 21, joueur1->score);
          	afficher_nombre(ren, "assets/inter.ttf", 19, 635, 21, joueur2->score);
          	SDL_RenderPresent(ren);
-			}
-			if(*mode_de_jeu == JVSO){
+			// Si on est dans le mode joueur contre ordi
+			} else if (*mode_de_jeu == JVSO) {
 				init_bateaux(plateau_ordi);
 				placement_bateaux_ordi(plateau_ordi);
 				jeu.etat_partie = 3;
@@ -465,7 +469,6 @@ void placement_bateaux(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, t_
  * \param y Coordonnée y de la case sélectionnée
  * \param couleur Couleur du joueur
  */
-
 void bateau_est_coule(SDL_Window * win, SDL_Renderer * ren, plateau_t * plateau_j, int x, int y, char * couleur) {
 	int i, j, cpt = 0, nbr = 0, numero_bat = 0;
 	char bateau[200];
@@ -524,8 +527,7 @@ void bateau_est_coule(SDL_Window * win, SDL_Renderer * ren, plateau_t * plateau_
  * \param couleur Couleur du joueur
  */
 void attaque_case_bat(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, int * mode_de_jeu, plateau_t * plateau_j, int x, int y, int * scoreJ1, int * scoreJ2, char * couleur) {
-	int cpt=0;
-	int i,j;
+	int cpt = 0, i, j;
    if (plateau_j->une_case[x][y].etat == 0 && plateau_j->une_case[x][y].occupe == 1) {
       if (jeu.etat_partie == ATTAQUE_J1) {
 			plateau_j->une_case[x][y].etat = 1;
@@ -558,11 +560,10 @@ void attaque_case_bat(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, int
 	  }
    }
    /* Fin de la partie */
-   for (i = 0; i < 10; i++) {
+   for (i = 0; i < 10; i++)
      	for (j = 0; j < 10; j++)
       	if (plateau_j->une_case[i][j].etat == 1 && plateau_j->une_case[i][j].occupe == 1)
          	cpt++;
-	}
    if (cpt == 17) {
 		if (jeu.etat_partie == ATTAQUE_J1) {
 			*scoreJ1 = *scoreJ1 + 1;
@@ -570,12 +571,12 @@ void attaque_case_bat(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, int
 			afficher_image(win, ren, "assets/batnav/perdu_batnav.png", 563, 60);
 			SDL_RenderPresent(ren);
    	} else {
-			if(*mode_de_jeu == JVSJ){
+			if (*mode_de_jeu == JVSJ) {
 				*scoreJ2 = *scoreJ2 + 1;
 				afficher_image(win, ren, "assets/batnav/gagne_batnav.png", 563, 60);
 				afficher_image(win, ren, "assets/batnav/perdu_batnav.png", 47, 60);
 				SDL_RenderPresent(ren);
-			}else{
+			} else {
 				*scoreJ1 = *scoreJ1 + 1;
 				afficher_image(win, ren, "assets/batnav/gagne_batnav.png", 47, 60);
 				afficher_image(win, ren, "assets/batnav/perdu_batnav.png", 563, 60);
@@ -596,7 +597,7 @@ void attaque_case_bat(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, int
  * \param joueur1 Structure du pseudo et du score du joueur 1
  * \param ordi Structure du pseudo et du score de l'ordi
  */
-void tour_ordi_mode_IA(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, int * mode_de_jeu, plateau_t * plateau_ordi, t_joueur * joueur1, t_joueur * ordi,char * couleur) {
+void tour_ordi_mode_IA(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, int * mode_de_jeu, plateau_t * plateau_ordi, t_joueur * joueur1, t_joueur * ordi, char * couleur) {
 	int touche = 0;
 	coord_ordi_t coord_case;
 	SDL_Delay(500);
@@ -649,8 +650,8 @@ void tour_ordi_mode_IA(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, in
 		afficher_image(win, ren, "assets/batnav/tour_violet.png", 462, 70);
 		SDL_RenderPresent(ren);
 		jeu.etat_partie = ATTAQUE_J1;
-	   }
 	}
+}
 
 /**
  * \brief Fonction qui s'occupe des évènements d'une partie de bataille navale (joueur contre joueur)
@@ -667,13 +668,12 @@ void gestion_event_batnav(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
    switch (event.type) {
       case SDL_MOUSEBUTTONUP:
          if (event.button.x < 127 && event.button.x > 0 && event.button.y < 40 && event.button.y > 0) {
-				if (*mode_de_jeu == JVSJ && *etat_joueur == J1) {
+				if (*mode_de_jeu == JVSJ && *etat_joueur == J1)
                afficher_image(win, ren, "assets/menu_J1.png", 0, 0);
-            } else if (*mode_de_jeu == JVSJ && *etat_joueur == J2) {
+            else if (*mode_de_jeu == JVSJ && *etat_joueur == J2)
                afficher_image(win, ren, "assets/menu_J2.png", 0, 0);
-            } else {
+            else
                afficher_image(win, ren, "assets/menu.png", 0, 0);
-            }
             afficher_texte(ren, "assets/inter.ttf", 19, 290, 21, joueur1->pseudo);
             afficher_texte(ren, "assets/inter.ttf", 19, 530, 21, joueur2->pseudo);
             afficher_nombre(ren, "assets/inter.ttf", 19, 400, 21, joueur1->score);
@@ -682,17 +682,15 @@ void gestion_event_batnav(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
             *etat_win = MENU;
             break;
          }
-
          if (jeu.etat_partie == ATTAQUE_J1)
             if (event.button.x < 364 && event.button.x > 35 && event.button.y < 488 && event.button.y > 160)
                attaque_case_bat(win, ren, event, mode_de_jeu, &jeu.joueur2,(event.button.x - 35) / 33, (event.button.y - 160) / 33, &(joueur1->score), &(joueur2->score), "violet");
          if (jeu.etat_partie == ATTAQUE_J2) {
 				if (*mode_de_jeu == JVSJ) {
-            		if (event.button.x < 746 && event.button.x > 416 && event.button.y < 488 && event.button.y > 158){
-               			attaque_case_bat(win, ren, event, mode_de_jeu, &jeu.joueur1, (event.button.x - 416) / 33, (event.button.y - 158) / 33, &(joueur1->score), &(joueur2->score), "vert");
-					}
-				}else{
-						tour_ordi_mode_IA(win, ren, event, mode_de_jeu, &jeu.joueur1, joueur1, joueur2,"vert");
+            	if (event.button.x < 746 && event.button.x > 416 && event.button.y < 488 && event.button.y > 158)
+               	attaque_case_bat(win, ren, event, mode_de_jeu, &jeu.joueur1, (event.button.x - 416) / 33, (event.button.y - 158) / 33, &(joueur1->score), &(joueur2->score), "vert");
+				} else {
+						tour_ordi_mode_IA(win, ren, event, mode_de_jeu, &jeu.joueur1, joueur1, joueur2, "vert");
 				}
 			}
 			placement_bateaux(win, ren, event, etat_win, mode_de_jeu, JOUEUR1, &jeu.joueur1, &jeu.joueur2, "violet", joueur1, joueur2);
