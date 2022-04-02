@@ -570,18 +570,18 @@ void attaque_case_bat(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, int
          	cpt++;
    if (cpt == 17) {
 		if (jeu.etat_partie == ATTAQUE_J1) {
-			*scoreJ1 = *scoreJ1 + 1;
+			(*scoreJ1)++;
 			afficher_image(win, ren, "assets/batnav/gagne_batnav.png", 47, 60);
 			afficher_image(win, ren, "assets/batnav/perdu_batnav.png", 563, 60);
 			SDL_RenderPresent(ren);
    	} else {
 			if (*mode_de_jeu == JVSJ) {
-				*scoreJ2 = *scoreJ2 + 1;
+				(*scoreJ2)++;
 				afficher_image(win, ren, "assets/batnav/gagne_batnav.png", 563, 60);
 				afficher_image(win, ren, "assets/batnav/perdu_batnav.png", 47, 60);
 				SDL_RenderPresent(ren);
 			} else {
-				*scoreJ1 = *scoreJ1 + 1;
+				(*scoreJ1)++;
 				afficher_image(win, ren, "assets/batnav/gagne_batnav.png", 47, 60);
 				afficher_image(win, ren, "assets/batnav/perdu_batnav.png", 563, 60);
 				SDL_RenderPresent(ren);
@@ -653,7 +653,8 @@ void tour_ordi_mode_IA(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, in
 		}
 		afficher_image(win, ren, "assets/batnav/tour_violet.png", 462, 70);
 		SDL_RenderPresent(ren);
-		jeu.etat_partie = ATTAQUE_J1;
+		if(jeu.etat_partie != FIN_PARTIE)
+			jeu.etat_partie = ATTAQUE_J1;
 	}
 }
 

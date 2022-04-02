@@ -33,5 +33,5 @@ void afficher_erreur(SDL_Window * win, SDL_Renderer * ren, int nb_erreur);
 int valider_mot(char * secret, char * pendu);
 int saisie(char entree, char * alphabet);
 int valider_lettre(SDL_Window * win, SDL_Renderer * ren, char lettre, char * secret, char * pendu, int * erreurs);
-void pendu_tour(SDL_Window * win, SDL_Renderer * ren, int etat_joueur, int * etat_partie, int * scoreJ1, int * scoreJ2, char lettre, char * alphabet, char * pendu, char * secret, int * erreurs);
+void pendu_tour(SDL_Window * win, SDL_Renderer * ren, int mode_de_jeu, int etat_joueur, int * etat_partie, int * scoreJ1, int * scoreJ2, char lettre, char * alphabet, char * pendu, char * secret, int * erreurs);
 void gestion_event_pendu(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, t_statut * etat_win, int * mode_de_jeu, int * etat_joueur, t_joueur * joueur1, t_joueur * joueur2);

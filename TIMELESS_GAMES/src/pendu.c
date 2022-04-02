@@ -346,7 +346,7 @@ int valider_lettre(SDL_Window * win, SDL_Renderer * ren, char lettre, char * sec
  * \param secret Le mot à deviner
  * \param erreurs Le nombre total actuel d'erreurs
  */
-void pendu_tour(SDL_Window * win, SDL_Renderer * ren, int etat_joueur, int * etat_partie, int * scoreJ1, int * scoreJ2, char lettre, char * alphabet, char * pendu, char * secret, int * erreurs) {
+void pendu_tour(SDL_Window * win, SDL_Renderer * ren, int mode_de_jeu, int etat_joueur, int * etat_partie, int * scoreJ1, int * scoreJ2, char lettre, char * alphabet, char * pendu, char * secret, int * erreurs) {
 	int i;
 	// Vérification si on est dans une situation de fin de jeu
 	if ((*erreurs) <= 10 && (valider_mot(secret, pendu) == PAS_OK)) {
@@ -361,10 +361,17 @@ void pendu_tour(SDL_Window * win, SDL_Renderer * ren, int etat_joueur, int * eta
   	if ((valider_mot(secret, pendu) == 1)) {
    	afficher_image(win, ren, "assets/pendu/gagne_pendu.png", 247, 7);
     	*etat_partie = PENDUFINI;
-		if (etat_joueur == J1)
-			(*scoreJ2)++;
-		else
-			(*scoreJ1)++;
+		if(mode_de_jeu == JVSJ){
+			if (etat_joueur == J1)
+				(*scoreJ2)++;
+			else
+				(*scoreJ1)++;
+		} else {
+			if (etat_joueur == J1)
+				(*scoreJ1)++;
+			else
+				(*scoreJ2)++;
+		}
 		SDL_RenderPresent(ren);
 		free(pendu);
 	}
@@ -374,10 +381,17 @@ void pendu_tour(SDL_Window * win, SDL_Renderer * ren, int etat_joueur, int * eta
 		for (i = 0; secret[i]; i++) // Affichage du mot caché
 			affiche_lettre(win, ren, secret[i], i);
 		*etat_partie = PENDUFINI;
-		if (etat_joueur == J1)
-			(*scoreJ1)++;
-		else
-			(*scoreJ2)++;
+		if(mode_de_jeu == JVSJ){
+			if (etat_joueur == J1)
+				(*scoreJ1)++;
+			else
+				(*scoreJ2)++;
+		} else {
+			if (etat_joueur == J1)
+				(*scoreJ2)++;
+			else
+				(*scoreJ1)++;
+		}
 		SDL_RenderPresent(ren);
 		free(pendu);
 	}
@@ -420,64 +434,64 @@ void gestion_event_pendu(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, 
 			// Les lettres à proposer
 			// Une zone définie correspondant à une lettre et réalisant un tour de jeu avec celle qui correspond
 				if (event.button.x < 603 && event.button.x > 535 && event.button.y < 69 && event.button.y > 28)
-					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie),  &(joueur1->score),  &(joueur2->score), 'a', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
+					pendu_tour(win, ren, *mode_de_jeu, *etat_joueur, &(pendu.etat_partie),  &(joueur1->score),  &(joueur2->score), 'a', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 675 && event.button.x > 607 && event.button.y < 69 && event.button.y > 28)
-					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'b', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
+					pendu_tour(win, ren, *mode_de_jeu, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'b', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 747 && event.button.x > 679 && event.button.y < 69 && event.button.y > 28)
-					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'c', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
+					pendu_tour(win, ren, *mode_de_jeu, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'c', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 603 && event.button.x > 535 && event.button.y < 120 && event.button.y > 79)
-					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'd', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
+					pendu_tour(win, ren, *mode_de_jeu, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'd', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 675 && event.button.x > 607 && event.button.y < 120 && event.button.y > 79)
-					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'e', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
+					pendu_tour(win, ren, *mode_de_jeu, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'e', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 747 && event.button.x > 679 && event.button.y < 120 && event.button.y > 79)
-					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'f', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
+					pendu_tour(win, ren, *mode_de_jeu, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'f', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 603 && event.button.x > 535 && event.button.y < 171 && event.button.y > 130)
-					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'g', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
+					pendu_tour(win, ren, *mode_de_jeu, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'g', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 675 && event.button.x > 607 && event.button.y < 171 && event.button.y > 130)
-					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'h', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
+					pendu_tour(win, ren, *mode_de_jeu, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'h', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 747 && event.button.x > 679 && event.button.y < 171 && event.button.y > 130)
-					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'i', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
+					pendu_tour(win, ren, *mode_de_jeu, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'i', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 603 && event.button.x > 535 && event.button.y < 222 && event.button.y > 181)
-					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'j', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
+					pendu_tour(win, ren, *mode_de_jeu, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'j', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 675 && event.button.x > 607 && event.button.y < 222 && event.button.y > 181)
-					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'k', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
+					pendu_tour(win, ren, *mode_de_jeu, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'k', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 747 && event.button.x > 679 && event.button.y < 222 && event.button.y > 181)
-					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'l', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
+					pendu_tour(win, ren, *mode_de_jeu, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'l', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 603 && event.button.x > 535 && event.button.y < 273 && event.button.y > 232)
-					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'm', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
+					pendu_tour(win, ren, *mode_de_jeu, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'm', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 675 && event.button.x > 607 && event.button.y < 273 && event.button.y > 232)
-					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'n', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
+					pendu_tour(win, ren, *mode_de_jeu, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'n', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 747 && event.button.x > 679 && event.button.y < 273 && event.button.y > 232)
-					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'o', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
+					pendu_tour(win, ren, *mode_de_jeu, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'o', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 603 && event.button.x > 535 && event.button.y < 324 && event.button.y > 283)
-					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'p', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
+					pendu_tour(win, ren, *mode_de_jeu, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'p', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 675 && event.button.x > 607 && event.button.y < 324 && event.button.y > 283)
-					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'q', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
+					pendu_tour(win, ren, *mode_de_jeu, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'q', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 747 && event.button.x > 679 && event.button.y < 324 && event.button.y > 283)
-					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'r', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
+					pendu_tour(win, ren, *mode_de_jeu, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'r', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 603 && event.button.x > 535 && event.button.y < 375 && event.button.y > 334)
-					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 's', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
+					pendu_tour(win, ren, *mode_de_jeu, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 's', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 675 && event.button.x > 607 && event.button.y < 375 && event.button.y > 334)
-					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 't', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
+					pendu_tour(win, ren, *mode_de_jeu, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 't', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 747 && event.button.x > 679 && event.button.y < 375 && event.button.y > 334)
-					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'u', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
+					pendu_tour(win, ren, *mode_de_jeu, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'u', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 603 && event.button.x > 535 && event.button.y < 426 && event.button.y > 385)
-					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'v', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
+					pendu_tour(win, ren, *mode_de_jeu, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'v', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 675 && event.button.x > 607 && event.button.y < 426 && event.button.y > 385)
-					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'w', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
+					pendu_tour(win, ren, *mode_de_jeu, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'w', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 747 && event.button.x > 679 && event.button.y < 426 && event.button.y > 385)
-					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'x', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
+					pendu_tour(win, ren, *mode_de_jeu, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'x', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 639 && event.button.x >571 && event.button.y < 477 && event.button.y > 436)
-					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'y', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
+					pendu_tour(win, ren, *mode_de_jeu, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'y', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 				if (event.button.x < 715 && event.button.x >647 && event.button.y < 477 && event.button.y > 436)
-					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'z', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
+					pendu_tour(win, ren, *mode_de_jeu, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'z', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 			}
 			break;
 		// Saisies au clavier
 		case SDL_KEYUP:
          if (pendu.etat_partie == PENDUJEU) {
 				if (event.key.keysym.sym >= SDLK_a && event.key.keysym.sym <= SDLK_z)
-					pendu_tour(win, ren, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), event.key.keysym.sym, pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
+					pendu_tour(win, ren, *mode_de_jeu, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), event.key.keysym.sym, pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 			}
 			break;
 		default: break;
