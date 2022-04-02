@@ -1,9 +1,9 @@
 /**
  * \file pendu.c
  * \brief Fichier pour le jeu du pendu
- * \author Duclos Christal
+ * \author Duclos Christal Brochelard Hugo Thibaut Duchesne
  * \version 2.0
- * \date 02 avril 2022
+ * \date 31 mars 2022
  */
 
 #include <all_includes.h>
@@ -13,7 +13,7 @@
 int tab_x_lettre[26] = {535, 607, 679, 535, 607, 679, 535, 607, 679, 535, 607, 679, 535, 607, 679, 535, 607, 679, 535, 607, 679, 535, 607, 679, 571, 647}; // Tableau contenant la coordonnée x en pixels des 26 lettres de l'alphabet
 int tab_y_lettre[26] = {28, 28, 28, 79, 79, 79, 130, 130, 130, 181, 181, 181, 232, 232, 232, 283, 283, 283, 334, 334, 334, 385, 385, 385, 436, 436}; // Tableau contenant la coordonnée y en pixels des 26 lettres de l'alphabet
 
-t_pendu pendu;
+
 
 /**
  * \brief Fonction qui initialise une partie de pendu
@@ -198,7 +198,7 @@ void initialiser_mot_ordi(SDL_Window * win, SDL_Renderer * ren, char * secret, c
    int i, nb_rand;
    FILE *listeMots = fopen("assets/pendu/mots.txt", "r"); // Fichier contenant 598 mots
    srand(time(NULL)); // Initialisation du hasard
-   nb_rand = rand() % (544 + 1 - 1); // Génération d'un nombre entre 1 et 598
+   nb_rand = rand() % (540 + 1 - 1); // Génération d'un nombre entre 1 et 598
    // Boucle pour accéder au mot à la ligne nb_rand du fichier
    for (i = 1; i <= nb_rand; i++)
       fscanf(listeMots, "%s", secret);
@@ -381,6 +381,8 @@ void pendu_tour(SDL_Window * win, SDL_Renderer * ren, int etat_joueur, int * eta
 		SDL_RenderPresent(ren);
 		free(pendu);
 	}
+   // Met à jour l'affichage selon les manipulations précédentes
+   SDL_UpdateWindowSurface(win);
 }
 
 /**
