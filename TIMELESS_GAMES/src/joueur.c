@@ -8,6 +8,7 @@
 
 #include <all_includes.h>
 #include <joueur.h>
+
 /**
  * \brief Fonction qui permet de gérer les actions à faire sur la fenêtre des pseudos
  * \param win La fenêtre qui sera manipulée
@@ -30,6 +31,7 @@ void gestion_event_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
    SDL_Texture *texte_tex;
    switch(event.type) {
       case SDL_MOUSEBUTTONUP:
+         // Si on clique sur J1 VS Ordi
          if (event.button.x < 737 && event.button.x > 584 && event.button.y < 172 && event.button.y > 121) {
             *mode_de_jeu = JVSO;
             *etat_joueur = J1;
@@ -40,6 +42,7 @@ void gestion_event_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
             afficher_texte(ren, "assets/inter.ttf", 27, 497, 338, joueur2->pseudo);
             SDL_RenderPresent(ren);
          }
+         // Si on clique sur J1 VS J2
          if (event.button.x < 568 && event.button.x > 415 && event.button.y < 172 && event.button.y > 121) {
             *mode_de_jeu = JVSJ;
             sprintf(joueur1->pseudo, " ");
@@ -49,18 +52,20 @@ void gestion_event_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
             afficher_texte(ren, "assets/inter.ttf", 27, 497, 338, joueur2->pseudo);
             SDL_RenderPresent(ren);
          }
+         // Si on clique sur la case de saisie du pseudo du joueur 1
          if (event.button.x < 721 && event.button.x > 438 && event.button.y < 294 && event.button.y > 239)
             *etat_joueur = J1;
+         // Si on clique sur la case de saisie du pseudo du joueur 2, en étant dans le mode joueur contre joueur
          if (event.button.x < 721 && event.button.x > 438 && event.button.y < 380 && event.button.y > 324) {
             if (*mode_de_jeu == JVSJ)
                *etat_joueur = J2;
          }
          if (event.button.x < 661 && event.button.x > 476 && event.button.y < 481 && event.button.y > 399) {
-            if (*mode_de_jeu == JVSJ && *etat_joueur == J1){
-               if(strcmp(joueur1->pseudo," ")==0)
-                  sprintf(joueur1->pseudo,"joueur 1");
-               if(strcmp(joueur2->pseudo," ")==0)
-                  sprintf(joueur2->pseudo,"joueur 2");
+            if (*mode_de_jeu == JVSJ && *etat_joueur == J1) {
+               if (strcmp(joueur1->pseudo, " ") == 0)
+                  sprintf(joueur1->pseudo, "joueur 1");
+               if (strcmp(joueur2->pseudo, " ") == 0)
+                  sprintf(joueur2->pseudo, "joueur 2");
                afficher_image(win, ren, "assets/menu_J1.png", 0, 0);
             } else if (*mode_de_jeu == JVSJ && *etat_joueur == J2) {
                if(strcmp(joueur1->pseudo," ")==0)
