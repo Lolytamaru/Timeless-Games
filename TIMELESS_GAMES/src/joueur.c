@@ -40,8 +40,8 @@ void gestion_event_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
             joueur1->score = 0;
             joueur2->score = 0;
             afficher_image(win, ren, "assets/parametres/menu_pseudo_JCO.png", 0, 0);
-            afficher_texte(ren, "assets/inter.ttf", 27, 497, 252, joueur1->pseudo);
-            afficher_texte(ren, "assets/inter.ttf", 27, 497, 338, joueur2->pseudo);
+            afficher_texte(ren, "assets/inter.ttf", 27, 505, 252, joueur1->pseudo);
+            afficher_texte(ren, "assets/inter.ttf", 27, 505, 338, joueur2->pseudo);
             SDL_RenderPresent(ren);
          }
          // Si on clique sur J1 VS J2
@@ -52,8 +52,8 @@ void gestion_event_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
             joueur1->score = 0;
             joueur2->score = 0;
             afficher_image(win, ren, "assets/parametres/menu_pseudo_JCJ.png", 0, 0);
-            afficher_texte(ren, "assets/inter.ttf", 27, 497, 252, joueur1->pseudo);
-            afficher_texte(ren, "assets/inter.ttf", 27, 497, 338, joueur2->pseudo);
+            afficher_texte(ren, "assets/inter.ttf", 27, 505, 252, joueur1->pseudo);
+            afficher_texte(ren, "assets/inter.ttf", 27, 505, 338, joueur2->pseudo);
             SDL_RenderPresent(ren);
          }
          // Si on clique sur la case de saisie du pseudo du joueur 1
@@ -96,7 +96,7 @@ void gestion_event_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
                if (l > 0)
                   joueur1->pseudo[l-1] = '\0';
             } else {
-               int l = strlen(joueur2->pseudo);
+               l = strlen(joueur2->pseudo);
                if (l > 0)
                   joueur2->pseudo[l-1] = '\0';
             }
@@ -110,13 +110,13 @@ void gestion_event_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
                afficher_image(win, ren, "assets/parametres/menu_pseudo_JCO.png", 0, 0);
             if (*etat_joueur == J1) {
                texte = TTF_RenderUTF8_Blended(police, joueur1->pseudo, couleur_police);
-               afficher_texte(ren, "assets/inter.ttf", 27, 497, 338, joueur2->pseudo);
-               txtDestRect.x = 497 ;
+               afficher_texte(ren, "assets/inter.ttf", 27, 505, 338, joueur2->pseudo);
+               txtDestRect.x = 505 ;
                txtDestRect.y = 252;
             } else {
                texte = TTF_RenderUTF8_Blended(police, joueur2->pseudo, couleur_police);
-               afficher_texte(ren, "assets/inter.ttf", 27, 497, 252, joueur1->pseudo);
-               txtDestRect.x = 497 ;
+               afficher_texte(ren, "assets/inter.ttf", 27, 505, 252, joueur1->pseudo);
+               txtDestRect.x = 505 ;
                txtDestRect.y = 338;
             }
 	         texte_tex = SDL_CreateTextureFromSurface(ren, texte);
@@ -150,13 +150,13 @@ void gestion_event_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
                afficher_image(win, ren, "assets/parametres/menu_pseudo_JCO.png", 0, 0);
             if (*etat_joueur == J1) {
                texte = TTF_RenderUTF8_Blended(police, joueur1->pseudo, couleur_police);
-               afficher_texte(ren, "assets/inter.ttf", 27, 497, 338, joueur2->pseudo);
-               txtDestRect.x = 497 ;
+               afficher_texte(ren, "assets/inter.ttf", 27, 505, 338, joueur2->pseudo);
+               txtDestRect.x = 505 ;
                txtDestRect.y = 252;
             } else {
                texte = TTF_RenderUTF8_Blended(police, joueur2->pseudo, couleur_police);
-               afficher_texte(ren, "assets/inter.ttf", 27, 497, 252, joueur1->pseudo);
-               txtDestRect.x = 497 ;
+               afficher_texte(ren, "assets/inter.ttf", 27, 505, 252, joueur1->pseudo);
+               txtDestRect.x = 505 ;
                txtDestRect.y = 338;
             }
             texte_tex = SDL_CreateTextureFromSurface(ren, texte);

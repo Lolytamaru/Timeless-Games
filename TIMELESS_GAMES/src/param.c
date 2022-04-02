@@ -85,8 +85,8 @@ void gestion_event_param(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, 
                   afficher_image(win, ren, "assets/parametres/menu_pseudo_JCO.png", 0, 0);
                }
                sprintf(joueur1->pseudo, " ");
-               afficher_texte(ren, "assets/inter.ttf", 27, 497, 252, joueur1->pseudo);
-               afficher_texte(ren, "assets/inter.ttf", 27, 497, 338, joueur2->pseudo);
+               afficher_texte(ren, "assets/inter.ttf", 27, 505, 252, joueur1->pseudo);
+               afficher_texte(ren, "assets/inter.ttf", 27, 505, 338, joueur2->pseudo);
                SDL_RenderPresent(ren);
                *etat_win = PSEUDO;
             // Réinitialisation des scores
