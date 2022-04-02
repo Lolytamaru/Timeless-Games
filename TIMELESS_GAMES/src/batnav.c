@@ -3,7 +3,7 @@
  * \brief Fichier pour le jeu de la bataille navale
  * \author Duclos Christal Brochelard Hugo Thibaut Duchesne
  * \version 1.0
- * \date 28 mars 2022
+ * \date 02 avril 2022
  */
 
 #include <all_includes.h>
@@ -13,10 +13,10 @@
 
 #define VIDE 0
 #define NB_BAT 5
-typedef enum {JOUEUR1 = 1, JOUEUR2, ATTAQUE_J1, ATTAQUE_J2, FIN_PARTIE} batnav_e; /* On commence l'enumération à 1 */
-int bat_selec;
-char direction;
-batnav_t jeu;
+typedef enum {JOUEUR1 = 1, JOUEUR2, ATTAQUE_J1, ATTAQUE_J2, FIN_PARTIE} batnav_e; // On commence l'enumération à 1
+int bat_selec; // Bateau sélectionné à la souris
+char direction; // Direction verticale ou horizontale du bateau
+batnav_t jeu; // Structure qui contient les variables pour la bataille navale
 
 /**
  * \brief Fonction qui initialise les plateaux de jeu de la bataille navale
@@ -132,9 +132,17 @@ int est_valide(plateau_t plateau_j, int x, int y) {
 	return ((x + 1 >= 0 && x <= plateau_j.nb_lig) && (y + 1 >= 0 && y <= plateau_j.nb_col));
 }
 
+/**
+ * \brief Fonction qui vérifie si les coordonnées sont dans la matrice
+ * \param plateau_ordi Le plateau de l'ordi
+ * \param x Coordonnée x de la case
+ * \param y Coordonnée y de la case
+ * \return Renvoie 1 si les coordonnées sont valides, 0 sinon
+ */
 int est_valide_ordi(plateau_t plateau_ordi, int x, int y) {
 	return ((x >= 0 && x < plateau_ordi.nb_lig) && (y >= 0 && y < plateau_ordi.nb_col));
 }
+
 /**
  * \brief Fonction qui regarde si les cases qui vont être occupées dans une direction sont toutes libres et valides
  * \param plateau_j Plateau du joueur que l'on cherche à remplir
