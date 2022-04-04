@@ -335,7 +335,7 @@ void placement_case_bat(SDL_Window * win, SDL_Renderer * ren, int * mode_de_jeu,
 				SDL_Delay(2000);
          	afficher_image(win, ren, "assets/batnav/placement_verts.png", 0, 0);
          	afficher_texte(ren, "assets/inter.ttf", 19, 290, 21, joueur1->pseudo);
-         	afficher_texte(ren, "assets/inter.ttf", 19, 525, 21, joueur2->pseudo);
+         	afficher_texte(ren, "assets/inter.ttf", 19, 530, 21, joueur2->pseudo);
          	afficher_nombre(ren, "assets/inter.ttf", 19, 400, 21, joueur1->score);
          	afficher_nombre(ren, "assets/inter.ttf", 19, 635, 21, joueur2->score);
          	SDL_RenderPresent(ren);
@@ -347,7 +347,7 @@ void placement_case_bat(SDL_Window * win, SDL_Renderer * ren, int * mode_de_jeu,
 				SDL_Delay(2000);
 				afficher_image(win, ren, "assets/batnav/jeu.png", 0, 0);
 		      afficher_texte(ren, "assets/inter.ttf", 19, 290, 21, joueur1->pseudo);
-				afficher_texte(ren, "assets/inter.ttf", 19, 525, 21, joueur2->pseudo);
+				afficher_texte(ren, "assets/inter.ttf", 19, 530, 21, joueur2->pseudo);
 				afficher_nombre(ren, "assets/inter.ttf", 19, 400, 21, joueur1->score);
 				afficher_nombre(ren, "assets/inter.ttf", 19, 635, 21, joueur2->score);
 				afficher_image(win, ren, "assets/batnav/tour_violet.png", 462, 70);
@@ -360,7 +360,7 @@ void placement_case_bat(SDL_Window * win, SDL_Renderer * ren, int * mode_de_jeu,
 			SDL_Delay(2000);
 			afficher_image(win, ren, "assets/batnav/jeu.png", 0, 0);
 	      afficher_texte(ren, "assets/inter.ttf", 19, 290, 21, joueur1->pseudo);
-			afficher_texte(ren, "assets/inter.ttf", 19, 525, 21, joueur2->pseudo);
+			afficher_texte(ren, "assets/inter.ttf", 19, 530, 21, joueur2->pseudo);
 			afficher_nombre(ren, "assets/inter.ttf", 19, 400, 21, joueur1->score);
 			afficher_nombre(ren, "assets/inter.ttf", 19, 635, 21, joueur2->score);
 			afficher_image(win, ren, "assets/batnav/tour_violet.png", 462, 70);
