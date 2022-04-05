@@ -29,13 +29,14 @@ void SDL_ExitWithError(const char *message) {
 void afficher_image(SDL_Window * win, SDL_Renderer * ren, char * nom_img, int coordx, int coordy) {
    SDL_Surface *image = NULL;
    SDL_Texture *texture = NULL;
-
+   // On charge l'image souhaitée dans une surface
    image = IMG_Load(nom_img);
    if (image == NULL) {
       SDL_DestroyRenderer(ren);
       SDL_DestroyWindow(win);
       SDL_ExitWithError("Impossible de trouver l'image.\n");
    }
+   // On crée une texture à partir d'une surface contenant l'image
    texture = SDL_CreateTextureFromSurface(ren, image);
    SDL_FreeSurface(image);
    if (texture == NULL) {
@@ -43,6 +44,7 @@ void afficher_image(SDL_Window * win, SDL_Renderer * ren, char * nom_img, int co
       SDL_DestroyWindow(win);
       SDL_ExitWithError("Impossible de créer la texture.\n");
    }
+   // On délimite la zone où afficher l'image
    SDL_Rect rectangle;
    if (SDL_QueryTexture(texture, NULL, NULL, &rectangle.w, &rectangle.h)) {
       SDL_DestroyRenderer(ren);
@@ -51,6 +53,7 @@ void afficher_image(SDL_Window * win, SDL_Renderer * ren, char * nom_img, int co
    }
    rectangle.x = coordx;
    rectangle.y = coordy;
+   // On affiche la texture dans le rendu sans le mettre à jour pour ne pas faire de surplus
    if (SDL_RenderCopy(ren, texture, NULL, &rectangle)) {
       SDL_DestroyRenderer(ren);
       SDL_DestroyWindow(win);
@@ -72,20 +75,24 @@ void afficher_texte(SDL_Renderer * ren, char * pol, int taille_pol, int pos_x, i
    SDL_Rect position_txt;
    position_txt.x = pos_x;
    position_txt.y = pos_y;
+   // On ouvre la police d'écriture et défini ses paramètres
    police = TTF_OpenFont(pol, taille_pol);
    TTF_SetFontStyle(police,TTF_STYLE_BOLD);
    SDL_Color couleur_police = {0, 0, 0};
+   // On créé une surface d'écriture de texte
    SDL_Surface *surface_texte = TTF_RenderText_Blended(police, texte, couleur_police);
    if(surface_texte == NULL){
       SDL_DestroyRenderer(ren);
       SDL_ExitWithError("Impossible de crée la surface texte.\n");
    }
+   // On crée une texture à partir de la surface de texte
    SDL_Texture *texture_texte = SDL_CreateTextureFromSurface(ren, surface_texte);
    if(texture_texte == NULL){
       SDL_DestroyRenderer(ren);
       SDL_ExitWithError("Impossible de crée la texture texte.\n");
    }
    SDL_FreeSurface(surface_texte);
+   // On indique où l'on va placer le texte et on l'affiche
    SDL_QueryTexture(texture_texte, NULL, NULL, &position_txt.w, &position_txt.h);
    SDL_RenderCopy(ren, texture_texte, NULL, &position_txt);
    TTF_CloseFont(police);
@@ -107,12 +114,24 @@ void afficher_nombre(SDL_Renderer * ren, char * pol, int taille_pol, int pos_x, 
    char temp[255];
    position_txt.x = pos_x;
    position_txt.y = pos_y;
+   // On ouvre la police d'écriture et défini ses paramètres
    police = TTF_OpenFont(pol, taille_pol);
    TTF_SetFontStyle(police,TTF_STYLE_BOLD);
    sprintf(temp, "%i", nombre);
+   // On créé une surface d'écriture de texte
    SDL_Surface *surface_texte = TTF_RenderText_Blended(police, temp, couleur_police);
+   if(surface_texte == NULL){
+      SDL_DestroyRenderer(ren);
+      SDL_ExitWithError("Impossible de crée la surface texte.\n");
+   }
+   // On crée une texture à partir de la surface de texte
    SDL_Texture *texture_texte = SDL_CreateTextureFromSurface(ren, surface_texte);
+   if(texture_texte == NULL){
+      SDL_DestroyRenderer(ren);
+      SDL_ExitWithError("Impossible de crée la texture texte.\n");
+   }
    SDL_FreeSurface(surface_texte);
+   // On indique où l'on va placer le texte et on l'affiche
    SDL_QueryTexture(texture_texte, NULL, NULL, &position_txt.w, &position_txt.h);
    SDL_RenderCopy(ren, texture_texte, NULL, &position_txt);
    TTF_CloseFont(police);

@@ -35,6 +35,7 @@ void gestion_event_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
          if (event.button.x < 737 && event.button.x > 584 && event.button.y < 172 && event.button.y > 121) {
             *mode_de_jeu = JVSO;
             *etat_joueur = J1;
+            // Réinitialisation des pseudos et scores
             sprintf(joueur1->pseudo, " ");
             sprintf(joueur2->pseudo, "ordi");
             joueur1->score = 0;
@@ -47,6 +48,7 @@ void gestion_event_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
          // Si on clique sur J1 VS J2
          if (event.button.x < 568 && event.button.x > 415 && event.button.y < 172 && event.button.y > 121) {
             *mode_de_jeu = JVSJ;
+            // Réinitialisation des pseudos et scores
             sprintf(joueur1->pseudo, " ");
             sprintf(joueur2->pseudo, " ");
             joueur1->score = 0;
@@ -64,7 +66,9 @@ void gestion_event_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
             if (*mode_de_jeu == JVSJ)
                *etat_joueur = J2;
          }
+         // Si l'on clique sur le bouton valider
          if (event.button.x < 661 && event.button.x > 476 && event.button.y < 481 && event.button.y > 399) {
+            // On vérifie que chaque joueur a au moins un pseudo sinon on en met un par défaut
             if (*mode_de_jeu == JVSJ && *etat_joueur == J1) {
                if (strcmp(joueur1->pseudo, " ") == 0)
                   sprintf(joueur1->pseudo, "joueur 1");
@@ -90,29 +94,39 @@ void gestion_event_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
             *etat_win = MENU;
          }
       case SDL_KEYUP:
+         // Si on appuie sur la touche retour en arrière au clavier
          if (event.key.keysym.sym == SDLK_BACKSPACE) {
+            // Si l'on modifie le pseudo du joueur 1
             if (*etat_joueur == J1) {
                l = strlen(joueur1->pseudo);
+               // Si le pseudo n'est pas vide
                if (l > 0)
+                  // On supprime le dernier caractère du pseudo
                   joueur1->pseudo[l-1] = '\0';
+            // Si l'on modifie le pseudo du joueur 2
             } else {
                l = strlen(joueur2->pseudo);
+               // Si le pseudo n'est pas vide
                if (l > 0)
+                  // On supprime le dernier caractère du pseudo
                   joueur2->pseudo[l-1] = '\0';
             }
             police = TTF_OpenFont("assets/inter.ttf", 27);
             TTF_SetFontStyle(police, TTF_STYLE_BOLD);
             SDL_SetRenderDrawColor(ren, 255, 255, 255, 255);
             SDL_RenderClear(ren);
+            // On affiche le fond correspondant au mode de jeu
             if(*mode_de_jeu == JVSJ)
                afficher_image(win, ren, "assets/parametres/menu_pseudo_JCJ.png", 0, 0);
             else
                afficher_image(win, ren, "assets/parametres/menu_pseudo_JCO.png", 0, 0);
+            // Si l'on a modifié le pseudo du joueur 1
             if (*etat_joueur == J1) {
                texte = TTF_RenderUTF8_Blended(police, joueur1->pseudo, couleur_police);
                afficher_texte(ren, "assets/inter.ttf", 27, 505, 338, joueur2->pseudo);
                txtDestRect.x = 505 ;
                txtDestRect.y = 252;
+            // Si l'on a modifié le pseudo du joueur 2
             } else {
                texte = TTF_RenderUTF8_Blended(police, joueur2->pseudo, couleur_police);
                afficher_texte(ren, "assets/inter.ttf", 27, 505, 252, joueur1->pseudo);
@@ -126,16 +140,21 @@ void gestion_event_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
             TTF_CloseFont(police);
             SDL_RenderPresent(ren);
          }
+         // Si on appuie sur une lettre de l'alphabet avec le clavier
          if (event.key.keysym.sym >= SDLK_a && event.key.keysym.sym <= SDLK_z) {
             if (*etat_joueur == J1) {
                l = strlen(joueur1->pseudo);
+               // Si l'on ne dépasse pas la limite de 9 lettres dans le pseudo
                if (l <= 8){
+                  // On ajoute la lettre au pseudo
                   sprintf(temp, "%s%c", joueur1->pseudo, event.key.keysym.sym);
                   sprintf(joueur1->pseudo, "%s", temp);
                }
             } else {
                l = strlen(joueur2->pseudo);
+               // Si l'on ne dépasse pas la limite de 9 lettres dans le pseudo
                if (l <= 8){
+                  // On ajoute la lettre au pseudo
                   sprintf(temp,"%s%c", joueur2->pseudo, event.key.keysym.sym);
                   sprintf(joueur2->pseudo, "%s", temp);
                }
@@ -144,15 +163,18 @@ void gestion_event_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
             TTF_SetFontStyle(police,TTF_STYLE_BOLD);
             SDL_SetRenderDrawColor(ren, 255, 255, 255, 255);
             SDL_RenderClear(ren);
+            // On affiche le fond correspondant au mode de jeu
             if (*mode_de_jeu == JVSJ)
                afficher_image(win, ren, "assets/parametres/menu_pseudo_JCJ.png", 0, 0);
             else
                afficher_image(win, ren, "assets/parametres/menu_pseudo_JCO.png", 0, 0);
+            // Si l'on a modifié le pseudo du joueur 1
             if (*etat_joueur == J1) {
                texte = TTF_RenderUTF8_Blended(police, joueur1->pseudo, couleur_police);
                afficher_texte(ren, "assets/inter.ttf", 27, 505, 338, joueur2->pseudo);
                txtDestRect.x = 505 ;
                txtDestRect.y = 252;
+            // Si l'on a modifié le pseudo du joueur 2
             } else {
                texte = TTF_RenderUTF8_Blended(police, joueur2->pseudo, couleur_police);
                afficher_texte(ren, "assets/inter.ttf", 27, 505, 252, joueur1->pseudo);

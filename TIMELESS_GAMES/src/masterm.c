@@ -390,6 +390,7 @@ void mastermind_tour(SDL_Window * win, SDL_Renderer * ren, int mode_de_jeu, int 
    if ((*nb_essais) < 10 && nb_bonne_place(propo_couleur, code_secret) == 4) {
       afficher_image(win, ren, "assets/mastermind/gagne_masterm.png", 10, 60);
       afficher_image(win, ren, "assets/mastermind/gagne_cercle.png", 215, 440);
+		// Gestion des scores selon le mode de jeu
 		if(mode_de_jeu == JVSJ) {
 			if (etat_joueur == J1)
 				(*scoreJ2)++;
@@ -413,6 +414,7 @@ void mastermind_tour(SDL_Window * win, SDL_Renderer * ren, int mode_de_jeu, int 
    if ((*nb_essais) >= 10) {
       afficher_image(win, ren, "assets/mastermind/perdu_masterm.png", 10, 60);
       afficher_image(win, ren, "assets/mastermind/perdu_cercle.png", 215, 440);
+		// Gestion des scores selon le mode de jeu
 		if(mode_de_jeu == JVSJ) {
 			if (etat_joueur == J1)
 				(*scoreJ2)++;
