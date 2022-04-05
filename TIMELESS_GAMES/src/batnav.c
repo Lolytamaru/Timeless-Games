@@ -330,7 +330,7 @@ void placement_case_bat(SDL_Window * win, SDL_Renderer * ren, int * mode_de_jeu,
    if (jeu.etat_partie == JOUEUR && direction_valide(plateau_j, x, y, direction, taille_bat)) {
 		// On récupère l'image du bateau concerné
       sprintf(bateau, "assets/batnav/bateaux/%s/taille_%i_%c_%s.png", couleur, taille_bat, direction, couleur);
-		// Si le bateau a placé est horizontal
+		// Si le bateau à placer est horizontal
       if (direction == 'h') {
          afficher_image(win, ren, bateau, (x * 41) + 72, (y * 41) + 85);
 			// On attribue aux cases qui vont être occupées des informations essentielles sur le bateau et que les cases sont désormais occupées
@@ -342,7 +342,7 @@ void placement_case_bat(SDL_Window * win, SDL_Renderer * ren, int * mode_de_jeu,
 			// On engage le bateau sous ses deux formes
          plateau_j->liste_bat[bat_selec].engage = 1;
          plateau_j->liste_bat[bat_selec + NB_BAT].engage = 1;
-		// Si le bateau a placé est vertical
+		// Si le bateau à placer est vertical
       } else {
          afficher_image(win, ren, bateau, (x * 41) + 72, (y * 41) + 44 - 41 *(taille_bat - 2));
 			// On attribue aux cases qui vont être occupées des informations essentielles sur le bateau et que les cases sont désormais occupées
@@ -368,7 +368,7 @@ void placement_case_bat(SDL_Window * win, SDL_Renderer * ren, int * mode_de_jeu,
 	// Si c'est le cas
    if (cpt == 10) {
       if (jeu.etat_partie == JOUEUR1) {
-			// Si on est dans le mode joueur contre joueur on passe au joueur 2 si c'était au joueur 1
+			// Si on est dans le mode joueur contre joueur, on passe au joueur 2 si c'était au joueur 1
 			if (*mode_de_jeu == JVSJ) {
          	jeu.etat_partie = JOUEUR2;
 				SDL_Delay(2000);
@@ -378,7 +378,7 @@ void placement_case_bat(SDL_Window * win, SDL_Renderer * ren, int * mode_de_jeu,
          	afficher_nombre(ren, "assets/inter.ttf", 19, 400, 21, joueur1->score);
          	afficher_nombre(ren, "assets/inter.ttf", 19, 635, 21, joueur2->score);
          	SDL_RenderPresent(ren);
-			// Si on est dans le mode joueur contre ordi on place ses bateaux et lance la partie
+			// Si on est dans le mode joueur contre ordi, on place ses bateaux et on lance la partie
 			} else if (*mode_de_jeu == JVSO) {
 				init_bateaux(plateau_ordi);
 				placement_bateaux_ordi(plateau_ordi);
@@ -431,70 +431,70 @@ void placement_bateaux(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, t_
             bat_selec = -1;
          }
       }
-		/* Emplacement du bateau de taille 2 et de direction horizontale */
+		// Emplacement du bateau de taille 2 et de direction horizontale
 		if (event.button.x < 618 && event.button.x > 535 && event.button.y < 138 && event.button.y > 96) {
          if (plateau_j->liste_bat[0].engage == 0) {
             direction = plateau_j->liste_bat[0].direction;
             bat_selec = 0;
          }
       }
-		/* Emplacement du bateau de taille 3 et de direction horizontale */
+		// Emplacement du bateau de taille 3 et de direction horizontale
       if (event.button.x < 748 && event.button.x > 624 && event.button.y < 138 && event.button.y > 96) {
          if (plateau_j->liste_bat[1].engage == 0) {
             direction = plateau_j->liste_bat[1].direction;
             bat_selec = 1;
          }
       }
-		/* Emplacement du bateau (numéro 2) de taille 3 et de direction horizontale */
+		// Emplacement du bateau (numéro 2) de taille 3 et de direction horizontale
       if (event.button.x < 659 && event.button.x > 535 && event.button.y < 184 && event.button.y > 142) {
          if (plateau_j->liste_bat[2].engage == 0) {
             direction = plateau_j->liste_bat[2].direction;
             bat_selec = 2;
          }
       }
-		/* Emplacement du bateau de taille 4 et de direction horizontale */
+		// Emplacement du bateau de taille 4 et de direction horizontale
       if (event.button.x < 700 && event.button.x > 535 && event.button.y < 229 && event.button.y > 187) {
          if (plateau_j->liste_bat[3].engage == 0) {
           direction = plateau_j->liste_bat[3].direction;
           bat_selec = 3;
          }
       }
-		/* Emplacement du bateau de taille 5 et de direction horizontale */
+		// Emplacement du bateau de taille 5 et de direction horizontale
       if (event.button.x < 741 && event.button.x > 535 && event.button.y < 275 && event.button.y > 233) {
          if (plateau_j->liste_bat[4].engage == 0) {
             direction = plateau_j->liste_bat[4].direction;
             bat_selec = 4;
          }
       }
-		/* Emplacement du bateau de taille 2 et de direction verticale */
+		// Emplacement du bateau de taille 2 et de direction verticale
       if (event.button.x < 577 && event.button.x > 535 && event.button.y < 369 && event.button.y > 286) {
          if (plateau_j->liste_bat[5].engage == 0) {
             direction = plateau_j->liste_bat[5].direction;
             bat_selec = 5;
          }
       }
-		/* Emplacement du bateau de taille 3 et de direction verticale */
+		// Emplacement du bateau de taille 3 et de direction verticale
       if (event.button.x < 577 && event.button.x > 535 && event.button.y < 497 && event.button.y > 373) {
          if (plateau_j->liste_bat[6].engage == 0) {
             direction = plateau_j->liste_bat[6].direction;
             bat_selec = 6;
          }
       }
-		/* Emplacement du bateau de taille 3 et de direction verticale */
+		// Emplacement du bateau de taille 3 et de direction verticale
       if (event.button.x < 628 && event.button.x > 586 && event.button.y < 410 && event.button.y > 286) {
          if (plateau_j->liste_bat[7].engage == 0) {
             direction = plateau_j->liste_bat[7].direction;
             bat_selec = 7;
          }
       }
-		/* Emplacement du bateau de taille 4 et de direction verticale */
+		// Emplacement du bateau de taille 4 et de direction verticale
       if (event.button.x < 685 && event.button.x > 643 && event.button.y < 451 && event.button.y > 286) {
          if (plateau_j->liste_bat[8].engage == 0) {
             direction = plateau_j->liste_bat[8].direction;
             bat_selec = 8;
          }
       }
-		/* Emplacement du bateau de taille 5 et de direction verticale */
+		// Emplacement du bateau de taille 5 et de direction verticale
       if (event.button.x < 743 && event.button.x > 701 && event.button.y < 492 && event.button.y > 286) {
          if (plateau_j->liste_bat[9].engage == 0) {
             direction = plateau_j->liste_bat[9].direction;
@@ -521,22 +521,22 @@ void bateau_est_coule(SDL_Window * win, SDL_Renderer * ren, plateau_t * plateau_
 		// On vérifie si le bateau entier n'a plus de case non attaquée
 	   for (i = 0; i < plateau_j->nb_col; i++) {
 	      for (j = 0; j < plateau_j->nb_lig; j++) {
-				// Si la case est occupée par le bateau et déjà attaquée
+				// Si la case est occupée par le bateau est déjà attaquée
 	         if (plateau_j->une_case[i][j].num_bat == plateau_j->une_case[x][y].num_bat && plateau_j->une_case[i][j].etat == 1 && plateau_j->une_case[i][j].occupe == 1)
 	            cpt++;
 	      }
 	   }
-		// On cherche à quel bateau nous avons affaire dans la cargaison et récupère ses informations
+		// On cherche à quel bateau nous avons affaire dans la cargaison et on récupère ses informations
 		for (i = 0; i < 10; i++)
 			if (plateau_j->une_case[x][y].num_bat == plateau_j->liste_bat[i].nom && plateau_j->une_case[x][y].direction == plateau_j->liste_bat[i].direction)
 				numero_bat = i;
-		// Si le bateau est couler (il y a autant de cases détruites que sa taille)
+		// Si le bateau est coulé (il y a autant de cases détruites que sa taille)
 		if (cpt == plateau_j->liste_bat[numero_bat].taille) {
 			// On prépare le bateau détruit à afficher
 			sprintf(bateau, "assets/batnav/bateaux/casses/bat%d_%c_%s_casse.png", plateau_j->liste_bat[numero_bat].taille, plateau_j->liste_bat[numero_bat].direction, couleur);
-			// Si le bateau a détuire est horizontal
+			// Si le bateau à détuire est horizontal
 			if (plateau_j->une_case[x][y].direction == 'h') {
-			// On calcule la position où devra être placer le bateau détuit
+			// On calcule la position où devra être placé le bateau détuit
 				for (j = x; j >= 0; j--)
 					if (plateau_j->une_case[x][y].num_bat == plateau_j->une_case[j][y].num_bat && est_valide(*plateau_j, j, y))
 						nbr++;
@@ -549,9 +549,9 @@ void bateau_est_coule(SDL_Window * win, SDL_Renderer * ren, plateau_t * plateau_
 					SDL_RenderPresent(ren);
 				}
 			}
-			// Si le bateau a détuire est horizontal
+			// Si le bateau à détuire est horizontal
 			if (plateau_j->une_case[x][y].direction == 'v') {
-				// On calcule la position où devra être placer le bateau détuit
+				// On calcule la position où devra être placé le bateau détuit
 				for (j = y; j >= 0; j--)
 					if (plateau_j->une_case[x][y].num_bat == plateau_j->une_case[x][j].num_bat && est_valide(*plateau_j, x, j))
 						nbr++;
@@ -583,7 +583,7 @@ void bateau_est_coule(SDL_Window * win, SDL_Renderer * ren, plateau_t * plateau_
  */
 void attaque_case_bat(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, int * mode_de_jeu, plateau_t * plateau_j, int x, int y, int * scoreJ1, int * scoreJ2, char * couleur) {
 	int cpt = 0, i, j;
-	// Si la case attaqué ne l'est pas encore et qu'un bateau l'occupe
+	// Si la case attaquée ne l'est pas encore et qu'un bateau l'occupe
    if (plateau_j->une_case[x][y].etat == 0 && plateau_j->une_case[x][y].occupe == 1) {
 		// Si c'est au tour du joueur 1
       if (jeu.etat_partie == ATTAQUE_J1) {
@@ -682,7 +682,7 @@ void tour_ordi_mode_IA(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, in
 			coord_case.y = rand() % (9 + 1 - 1);
 		} while (plateau_ordi->une_case[coord_case.x][coord_case.y].etat == 1);
 		attaque_case_bat(win, ren, event, mode_de_jeu, plateau_ordi, coord_case.x, coord_case.y, &(joueur1->score), &(ordi->score), "vert");
-		// On stock la case attaquée
+		// On stocke la case attaquée
 		empiler(coord_case);
 	} else {
 		// Tant qu'un case n'a pas été attaquée
@@ -696,27 +696,27 @@ void tour_ordi_mode_IA(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, in
 					attaque_case_bat(win, ren, event, mode_de_jeu, plateau_ordi, (coord_case.x - 1), coord_case.y, &(joueur1->score), &(ordi->score), "vert");
 					touche = 1;
 					(coord_case.x)--;
-					// On stock la case attaquée
+					// On stocke la case attaquée
 					empiler(coord_case);
 				// Sinon si on peut on attaque la case en dessous
 				} else if (est_valide_ordi(*plateau_ordi, (coord_case.x), (coord_case.y + 1)) && plateau_ordi->une_case[coord_case.x][coord_case.y + 1].etat == 0 ) {
 					attaque_case_bat(win, ren, event, mode_de_jeu, plateau_ordi, coord_case.x, (coord_case.y + 1), &(joueur1->score), &(ordi->score), "vert");
 					touche = 1;
 					(coord_case.y)++;
-					// On stock la case attaquée
+					// On stocke la case attaquée
 					empiler(coord_case);
 				// Sinon si on peut on attaque la case à droite
 				} else if (est_valide_ordi(*plateau_ordi, (coord_case.x+1), (coord_case.y)) && plateau_ordi->une_case[coord_case.x + 1][coord_case.y].etat == 0 ) {
 					attaque_case_bat(win, ren, event, mode_de_jeu, plateau_ordi, (coord_case.x + 1), coord_case.y, &(joueur1->score), &(ordi->score), "vert");
 					touche = 1;
 					(coord_case.x)++;
-					// On stock la case attaquée
+					// On stocke la case attaquée
 					empiler(coord_case);
 				// Sinon si on peut on attaque la case au dessus
 				} else if (est_valide_ordi(*plateau_ordi, (coord_case.x), (coord_case.y - 1)) && plateau_ordi->une_case[coord_case.x][coord_case.y - 1].etat == 0 ) {
 					attaque_case_bat(win, ren, event, mode_de_jeu, plateau_ordi, coord_case.x, (coord_case.y - 1), &(joueur1->score), &(ordi->score), "vert");
 					touche = 1;
-					// On stock la case attaquée
+					// On stocke la case attaquée
 					empiler(coord_case);
 				} else {
 					// Si la case n'est plus exploitable efficacement on l'enlève
@@ -730,18 +730,18 @@ void tour_ordi_mode_IA(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, in
 		// Si plus aucune case n'est en stock
 		if (pile_vide()) {
 			do {
-				// On cherche une case vide à attaquée
+				// On cherche une case vide à attaquer
 				coord_case.x = rand() % (10 + 1 - 1);
 				coord_case.y = rand() % (10 + 1 - 1);
 			} while (plateau_ordi->une_case[coord_case.x][coord_case.y].etat == 1);
 			attaque_case_bat(win, ren, event, mode_de_jeu, plateau_ordi, coord_case.x, coord_case.y, &(joueur1->score), &(ordi->score), "vert");
-			// On stock la case attaquée
+			// On stocke la case attaquée
 			empiler(coord_case);
 		}
 		afficher_image(win, ren, "assets/batnav/tour_violet.png", 462, 70);
 		SDL_RenderPresent(ren);
-		// Si la partie n'est pas terminée , c'est au joueur 1 de jouer
-		if(jeu.etat_partie != FIN_PARTIE)
+		// Si la partie n'est pas terminée, c'est au joueur 1 de jouer
+		if (jeu.etat_partie != FIN_PARTIE)
 			jeu.etat_partie = ATTAQUE_J1;
 	}
 }
@@ -759,7 +759,7 @@ void tour_ordi_mode_IA(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, in
  */
 void gestion_event_batnav(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, t_statut * etat_win, int * mode_de_jeu, int * etat_joueur, t_joueur * joueur1, t_joueur * joueur2) {
    switch (event.type) {
-      case SDL_MOUSEBUTTONUP:// Relâchement du clic pour la non redondance de l'évènement
+      case SDL_MOUSEBUTTONUP: // Relâchement du clic pour la non redondance de l'évènement
 			// Bouton [QUITTER]
          if (event.button.x < 127 && event.button.x > 0 && event.button.y < 40 && event.button.y > 0) {
 				if (*mode_de_jeu == JVSJ && *etat_joueur == J1)
@@ -783,19 +783,19 @@ void gestion_event_batnav(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
                attaque_case_bat(win, ren, event, mode_de_jeu, &jeu.joueur2,(event.button.x - 35) / 33, (event.button.y - 160) / 33, &(joueur1->score), &(joueur2->score), "violet");
 			// Si l'on est en phase de jeu et que c'est au joueur 2 de jouer (ou l'ordinateur)
 			if (jeu.etat_partie == ATTAQUE_J2) {
-				// Si l'on est en mode Joueur contre Joueur
+				// Si l'on est en mode joueur contre joueur
 				if (*mode_de_jeu == JVSJ) {
 					// Si l'on clique dans la zone du plateau de droite
             	if (event.button.x < 746 && event.button.x > 416 && event.button.y < 488 && event.button.y > 158)
                	attaque_case_bat(win, ren, event, mode_de_jeu, &jeu.joueur1, (event.button.x - 416) / 33, (event.button.y - 158) / 33, &(joueur1->score), &(joueur2->score), "vert");
-				// Si l'on est en mode Joueur contre Ordi
+				// Si l'on est en mode joueur contre ordi
 				} else {
 						tour_ordi_mode_IA(win, ren, event, mode_de_jeu, &jeu.joueur1, joueur1, joueur2, "vert");
 				}
 			}
-			// Gestion d'evênement de la bataille navale liée au placement des bateaux pour le joueur 1
+			// Gestion d'évènements de la bataille navale liée au placement des bateaux pour le joueur 1
 			placement_bateaux(win, ren, event, etat_win, mode_de_jeu, JOUEUR1, &jeu.joueur1, &jeu.joueur2, "violet", joueur1, joueur2);
-			// Gestion d'evênement de la bataille navale liée au placement des bateaux pour le joueur 2
+			// Gestion d'évènements de la bataille navale liée au placement des bateaux pour le joueur 2
 			placement_bateaux(win, ren, event, etat_win, mode_de_jeu, JOUEUR2, &jeu.joueur2, &jeu.joueur1, "vert", joueur1, joueur2);
 			break;
       default: break;
