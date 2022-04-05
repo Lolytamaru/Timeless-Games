@@ -284,8 +284,7 @@ void placement_bateaux_ordi(plateau_t * plateau_ordi) {
  			break;
  		default: return PAS_OK; break;
  	}
- }
-
+}
 
 /**
  * \brief Fonction qui s'occupe du placement des bateaux si leur placement est valide
