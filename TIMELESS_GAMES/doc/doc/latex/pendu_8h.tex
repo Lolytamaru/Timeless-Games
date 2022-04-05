@@ -1,5 +1,5 @@
-\hypertarget{pendu_8h}{}\doxysection{Référence du fichier /info/etu/l2info/s200470/\+Timeless-\/\+Games/\+TIMELESS\+\_\+\+GAMES/include/pendu.h}
-\label{pendu_8h}\index{/info/etu/l2info/s200470/Timeless-\/Games/TIMELESS\_GAMES/include/pendu.h@{/info/etu/l2info/s200470/Timeless-\/Games/TIMELESS\_GAMES/include/pendu.h}}
+\hypertarget{pendu_8h}{}\doxysection{Référence du fichier /info/etu/l2info/s202604/\+Timeless-\/\+Games/\+TIMELESS\+\_\+\+GAMES/include/pendu.h}
+\label{pendu_8h}\index{/info/etu/l2info/s202604/Timeless-\/Games/TIMELESS\_GAMES/include/pendu.h@{/info/etu/l2info/s202604/Timeless-\/Games/TIMELESS\_GAMES/include/pendu.h}}
 
 
 Fichier de prototypes pour le jeu du pendu.  
@@ -48,16 +48,10 @@ int \mbox{\hyperlink{pendu_8h_a133a14e0771b6734cf99760fb1014f59}{saisie}} (char 
 \begin{DoxyCompactList}\small\item\em Vérifie la lettre selectionnée par le joueur. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{pendu_8h_aaeb88daf555aa2eb5060cc0a073e020e}{valider\+\_\+lettre}} (SDL\+\_\+\+Window $\ast$win, SDL\+\_\+\+Renderer $\ast$ren, char lettre, char $\ast$secret, char $\ast$pendu, int $\ast$erreurs)
 \begin{DoxyCompactList}\small\item\em Regarde si la lettre entrée est dans le mot secret ou non. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{pendu_8h_af0d39d701f59280f671a7d3dbf083796}{pendu\+\_\+tour}} (SDL\+\_\+\+Window $\ast$win, SDL\+\_\+\+Renderer $\ast$ren, int etat\+\_\+joueur, int $\ast$etat\+\_\+partie, int $\ast$score\+J1, int $\ast$score\+J2, char lettre, char $\ast$alphabet, char $\ast$pendu, char $\ast$secret, int $\ast$erreurs)
+void \mbox{\hyperlink{pendu_8h_a9863fcaed9ab02ecc52cd886d6c374ad}{pendu\+\_\+tour}} (SDL\+\_\+\+Window $\ast$win, SDL\+\_\+\+Renderer $\ast$ren, int mode\+\_\+de\+\_\+jeu, int etat\+\_\+joueur, int $\ast$etat\+\_\+partie, int $\ast$score\+J1, int $\ast$score\+J2, char lettre, char $\ast$alphabet, char $\ast$pendu, char $\ast$secret, int $\ast$erreurs)
 \begin{DoxyCompactList}\small\item\em Fonction qui s\textquotesingle{}occupe d\textquotesingle{}exécuter un tour de jeu dès que le joueur choisi une lettre en vérifiant si la partie est terminiée. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{pendu_8h_a4ba197b567b98c93a1df6c5d295f038e}{gestion\+\_\+event\+\_\+pendu}} (SDL\+\_\+\+Window $\ast$win, SDL\+\_\+\+Renderer $\ast$ren, SDL\+\_\+\+Event event, t\+\_\+statut $\ast$etat\+\_\+win, int $\ast$mode\+\_\+de\+\_\+jeu, int $\ast$etat\+\_\+joueur, \mbox{\hyperlink{structs__joueur}{t\+\_\+joueur}} $\ast$joueur1, \mbox{\hyperlink{structs__joueur}{t\+\_\+joueur}} $\ast$joueur2)
 \begin{DoxyCompactList}\small\item\em Fonction qui s\textquotesingle{}occupe d\textquotesingle{}exécuter un tour de jeu dès que le joueur choisit une lettre, en vérifiant si la partie est terminée. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Variables}
-\begin{DoxyCompactItemize}
-\item 
-\mbox{\Hypertarget{pendu_8h_a7e4ca4351227da82ad7bff6946402f7a}\label{pendu_8h_a7e4ca4351227da82ad7bff6946402f7a}} 
-\mbox{\hyperlink{structt__pendu}{t\+\_\+pendu}} {\bfseries pendu}
-\end{DoxyCompactItemize}
 
 
 \doxysubsection{Description détaillée}
@@ -70,7 +64,7 @@ Duclos Christal Brochelard Hugo Thibaut Duchesne
 1.\+0 
 \end{DoxyVersion}
 \begin{DoxyDate}{Date}
-28 mars 2022 
+05 avril 2022 
 \end{DoxyDate}
 
 
@@ -91,7 +85,7 @@ Fonction qui permet d\textquotesingle{}afficher la lettre désignée à une posi
 \hline
 {\em ren} & Le rendu qui sera manipulé \\
 \hline
-{\em lettre} & La lettre à afficher \\
+{\em c} & La lettre à afficher \\
 \hline
 {\em position} & La position de la lettre qu\textquotesingle{}on souhaite afficher dans le mot \\
 \hline
@@ -108,11 +102,11 @@ Affiche un visuel de l\textquotesingle{}avancement du pendu selon le nombre d\te
 
 
 \begin{DoxyParams}{Paramètres}
-{\em nb\+\_\+erreur} & Le nombre d\textquotesingle{}erreurs actuelles du joueur \\
-\hline
 {\em win} & La fenêtre qui sera manipulée \\
 \hline
 {\em ren} & Le rendu qui sera manipulé \\
+\hline
+{\em nb\+\_\+erreur} & Le nombre d\textquotesingle{}erreurs actuelles du joueur \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{pendu_8h_a9971f52897d1e241d110c2ff89442b89}\label{pendu_8h_a9971f52897d1e241d110c2ff89442b89}} 
@@ -267,11 +261,11 @@ Fonction qui établi une indication si la lettre utilisée est présente ou non 
 {\em presence} & Vaut OK si la lettre appartient au mot caché \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{pendu_8h_af0d39d701f59280f671a7d3dbf083796}\label{pendu_8h_af0d39d701f59280f671a7d3dbf083796}} 
+\mbox{\Hypertarget{pendu_8h_a9863fcaed9ab02ecc52cd886d6c374ad}\label{pendu_8h_a9863fcaed9ab02ecc52cd886d6c374ad}} 
 \index{pendu.h@{pendu.h}!pendu\_tour@{pendu\_tour}}
 \index{pendu\_tour@{pendu\_tour}!pendu.h@{pendu.h}}
 \doxysubsubsection{\texorpdfstring{pendu\_tour()}{pendu\_tour()}}
-{\footnotesize\ttfamily void pendu\+\_\+tour (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{win,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{ren,  }\item[{int}]{etat\+\_\+joueur,  }\item[{int $\ast$}]{etat\+\_\+partie,  }\item[{int $\ast$}]{score\+J1,  }\item[{int $\ast$}]{score\+J2,  }\item[{char}]{lettre,  }\item[{char $\ast$}]{alphabet,  }\item[{char $\ast$}]{pendu,  }\item[{char $\ast$}]{secret,  }\item[{int $\ast$}]{erreurs }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void pendu\+\_\+tour (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{win,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{ren,  }\item[{int}]{mode\+\_\+de\+\_\+jeu,  }\item[{int}]{etat\+\_\+joueur,  }\item[{int $\ast$}]{etat\+\_\+partie,  }\item[{int $\ast$}]{score\+J1,  }\item[{int $\ast$}]{score\+J2,  }\item[{char}]{lettre,  }\item[{char $\ast$}]{alphabet,  }\item[{char $\ast$}]{pendu,  }\item[{char $\ast$}]{secret,  }\item[{int $\ast$}]{erreurs }\end{DoxyParamCaption})}
 
 
 

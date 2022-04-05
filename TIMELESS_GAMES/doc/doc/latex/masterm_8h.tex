@@ -1,5 +1,5 @@
-\hypertarget{masterm_8h}{}\doxysection{Référence du fichier /info/etu/l2info/s200470/\+Timeless-\/\+Games/\+TIMELESS\+\_\+\+GAMES/include/masterm.h}
-\label{masterm_8h}\index{/info/etu/l2info/s200470/Timeless-\/Games/TIMELESS\_GAMES/include/masterm.h@{/info/etu/l2info/s200470/Timeless-\/Games/TIMELESS\_GAMES/include/masterm.h}}
+\hypertarget{masterm_8h}{}\doxysection{Référence du fichier /info/etu/l2info/s202604/\+Timeless-\/\+Games/\+TIMELESS\+\_\+\+GAMES/include/masterm.h}
+\label{masterm_8h}\index{/info/etu/l2info/s202604/Timeless-\/Games/TIMELESS\_GAMES/include/masterm.h@{/info/etu/l2info/s202604/Timeless-\/Games/TIMELESS\_GAMES/include/masterm.h}}
 
 
 Fichier de prototypes pour jeu du mastermind.  
@@ -46,16 +46,10 @@ void \mbox{\hyperlink{masterm_8h_a20cfe7e305f1a43376e647c3a3411411}{afficher\+\_
 \begin{DoxyCompactList}\small\item\em Si la combinaison n\textquotesingle{}est pas celle recherchée on l\textquotesingle{}affiche et donne des informations dessus. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{masterm_8h_ac7ae57794785a698009046c85aac441d}{afficher\+\_\+resultat}} (SDL\+\_\+\+Window $\ast$win, SDL\+\_\+\+Renderer $\ast$ren, char $\ast$code\+\_\+secret)
 \begin{DoxyCompactList}\small\item\em En cas de défaite, affiche la combinaison secrète. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{masterm_8h_a08fd290fdb2f8b25c6064a3a1739c42c}{mastermind\+\_\+tour}} (SDL\+\_\+\+Window $\ast$win, SDL\+\_\+\+Renderer $\ast$ren, int etat\+\_\+joueur, int $\ast$etat\+\_\+partie, int $\ast$score\+J1, int $\ast$score\+J2, int $\ast$nb\+\_\+essais, char $\ast$propo\+\_\+couleur, char $\ast$code\+\_\+secret, int $\ast$position)
+void \mbox{\hyperlink{masterm_8h_a9eb20b2f966b7d7486d796faf9a4cebb}{mastermind\+\_\+tour}} (SDL\+\_\+\+Window $\ast$win, SDL\+\_\+\+Renderer $\ast$ren, int mode\+\_\+de\+\_\+jeu, int etat\+\_\+joueur, int $\ast$etat\+\_\+partie, int $\ast$score\+J1, int $\ast$score\+J2, int $\ast$nb\+\_\+essais, char $\ast$propo\+\_\+couleur, char $\ast$code\+\_\+secret, int $\ast$position)
 \begin{DoxyCompactList}\small\item\em Tour de jeu normal quand on valide la combinaison. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{masterm_8h_ab23cbdd8e1ee9742aecfb9964eb8fb43}{gestion\+\_\+event\+\_\+masterm}} (SDL\+\_\+\+Window $\ast$win, SDL\+\_\+\+Renderer $\ast$ren, SDL\+\_\+\+Event event, t\+\_\+statut $\ast$etat\+\_\+win, int $\ast$mode\+\_\+de\+\_\+jeu, int $\ast$etat\+\_\+joueur, \mbox{\hyperlink{structs__joueur}{t\+\_\+joueur}} $\ast$joueur1, \mbox{\hyperlink{structs__joueur}{t\+\_\+joueur}} $\ast$joueur2)
 \begin{DoxyCompactList}\small\item\em Si la combinaison n\textquotesingle{}est pas celle recherchée, on l\textquotesingle{}affiche et on donne des informations dessus. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Variables}
-\begin{DoxyCompactItemize}
-\item 
-\mbox{\Hypertarget{masterm_8h_a945736f29497775f75ce40a980c05fbc}\label{masterm_8h_a945736f29497775f75ce40a980c05fbc}} 
-\mbox{\hyperlink{structt__master}{t\+\_\+master}} {\bfseries mastermind}
-\end{DoxyCompactItemize}
 
 
 \doxysubsection{Description détaillée}
@@ -68,7 +62,7 @@ Duclos Christal Brochelard Hugo Thibaut Duchesne
 1.\+0 
 \end{DoxyVersion}
 \begin{DoxyDate}{Date}
-28 mars 2022 
+05 avril 2022 
 \end{DoxyDate}
 
 
@@ -213,11 +207,11 @@ Fonction qui initialise une partie de mastermind.
 {\em mode\+\_\+de\+\_\+jeu} & Soit joueur contre joueur, soit joueur contre ordi \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{masterm_8h_a08fd290fdb2f8b25c6064a3a1739c42c}\label{masterm_8h_a08fd290fdb2f8b25c6064a3a1739c42c}} 
+\mbox{\Hypertarget{masterm_8h_a9eb20b2f966b7d7486d796faf9a4cebb}\label{masterm_8h_a9eb20b2f966b7d7486d796faf9a4cebb}} 
 \index{masterm.h@{masterm.h}!mastermind\_tour@{mastermind\_tour}}
 \index{mastermind\_tour@{mastermind\_tour}!masterm.h@{masterm.h}}
 \doxysubsubsection{\texorpdfstring{mastermind\_tour()}{mastermind\_tour()}}
-{\footnotesize\ttfamily void mastermind\+\_\+tour (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{win,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{ren,  }\item[{int}]{etat\+\_\+joueur,  }\item[{int $\ast$}]{etat\+\_\+partie,  }\item[{int $\ast$}]{score\+J1,  }\item[{int $\ast$}]{score\+J2,  }\item[{int $\ast$}]{nb\+\_\+essais,  }\item[{char $\ast$}]{propo\+\_\+couleur,  }\item[{char $\ast$}]{code\+\_\+secret,  }\item[{int $\ast$}]{position }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void mastermind\+\_\+tour (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{win,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{ren,  }\item[{int}]{mode\+\_\+de\+\_\+jeu,  }\item[{int}]{etat\+\_\+joueur,  }\item[{int $\ast$}]{etat\+\_\+partie,  }\item[{int $\ast$}]{score\+J1,  }\item[{int $\ast$}]{score\+J2,  }\item[{int $\ast$}]{nb\+\_\+essais,  }\item[{char $\ast$}]{propo\+\_\+couleur,  }\item[{char $\ast$}]{code\+\_\+secret,  }\item[{int $\ast$}]{position }\end{DoxyParamCaption})}
 
 
 
@@ -266,7 +260,7 @@ Compte le nombre de bonnes couleurs entre le code secret et le code de jeu.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Renvoie}
-Renvoie le nombre de pions de bonnes couleurs mal placées 
+Renvoie le nombre de pions de bonnes couleurs mal placés 
 \end{DoxyReturn}
 \mbox{\Hypertarget{masterm_8h_ac3f9836657db8d75aaa5f54ddec08438}\label{masterm_8h_ac3f9836657db8d75aaa5f54ddec08438}} 
 \index{masterm.h@{masterm.h}!nb\_bonne\_place@{nb\_bonne\_place}}

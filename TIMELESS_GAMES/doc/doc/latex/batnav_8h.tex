@@ -1,5 +1,5 @@
-\hypertarget{batnav_8h}{}\doxysection{Référence du fichier /info/etu/l2info/s200470/\+Timeless-\/\+Games/\+TIMELESS\+\_\+\+GAMES/include/batnav.h}
-\label{batnav_8h}\index{/info/etu/l2info/s200470/Timeless-\/Games/TIMELESS\_GAMES/include/batnav.h@{/info/etu/l2info/s200470/Timeless-\/Games/TIMELESS\_GAMES/include/batnav.h}}
+\hypertarget{batnav_8h}{}\doxysection{Référence du fichier /info/etu/l2info/s202604/\+Timeless-\/\+Games/\+TIMELESS\+\_\+\+GAMES/include/batnav.h}
+\label{batnav_8h}\index{/info/etu/l2info/s202604/Timeless-\/Games/TIMELESS\_GAMES/include/batnav.h@{/info/etu/l2info/s202604/Timeless-\/Games/TIMELESS\_GAMES/include/batnav.h}}
 
 
 Fichier de prototypes pour le jeu de la bataille navale.  
@@ -15,6 +15,15 @@ struct \mbox{\hyperlink{structs__case}{s\+\_\+case}}
 struct \mbox{\hyperlink{structs__plateau}{s\+\_\+plateau}}
 \item 
 struct \mbox{\hyperlink{structs__batnav}{s\+\_\+batnav}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{batnav_8h_aba51915c87d64af47fb1cc59348961c9}\label{batnav_8h_aba51915c87d64af47fb1cc59348961c9}} 
+\#define {\bfseries OK}~1
+\item 
+\mbox{\Hypertarget{batnav_8h_a9811500fc61aa922f1aa7cdd01fa2794}\label{batnav_8h_a9811500fc61aa922f1aa7cdd01fa2794}} 
+\#define {\bfseries PAS\+\_\+\+OK}~0
 \end{DoxyCompactItemize}
 \doxysubsection*{Définitions de type}
 \begin{DoxyCompactItemize}
@@ -45,16 +54,15 @@ void \mbox{\hyperlink{batnav_8h_a4d53920c0079ab0249bf8f72309d63a1}{init\+\_\+par
 \begin{DoxyCompactList}\small\item\em Fonction qui initialise une partie de la bataille navale. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{batnav_8h_aeb0dabf827c3858455e0a90a287dea55}{est\+\_\+valide}} (\mbox{\hyperlink{structplateau__t}{plateau\+\_\+t}} plateau\+\_\+j, int x, int y)
 \begin{DoxyCompactList}\small\item\em Fonction qui vérifie si les coordonnées sont dans la matrice. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{batnav_8h_a317e4dde8db56424625f449fa6d91285}\label{batnav_8h_a317e4dde8db56424625f449fa6d91285}} 
-int {\bfseries est\+\_\+valide\+\_\+ordi} (\mbox{\hyperlink{structplateau__t}{plateau\+\_\+t}} plateau\+\_\+ordi, int x, int y)
-\item 
+int \mbox{\hyperlink{batnav_8h_a317e4dde8db56424625f449fa6d91285}{est\+\_\+valide\+\_\+ordi}} (\mbox{\hyperlink{structplateau__t}{plateau\+\_\+t}} plateau\+\_\+ordi, int x, int y)
+\begin{DoxyCompactList}\small\item\em Fonction qui vérifie si les coordonnées sont dans la matrice. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{batnav_8h_a19cbfc6fd956a04ca7d9823d3fe2a90e}{direction\+\_\+valide}} (\mbox{\hyperlink{structplateau__t}{plateau\+\_\+t}} $\ast$plateau\+\_\+j, int x, int y, int direction, int taille\+\_\+bat)
 \begin{DoxyCompactList}\small\item\em Fonction qui regarde si les cases qui vont être occupées dans une direction sont toutes libres et valides. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{batnav_8h_a41424878830288681778a1ff7623f01c}{placement\+\_\+bateaux\+\_\+ordi}} (\mbox{\hyperlink{structplateau__t}{plateau\+\_\+t}} $\ast$plateau\+\_\+ordi)
 \begin{DoxyCompactList}\small\item\em Fonction qui s\textquotesingle{}occupe du placement des bateaux de l\textquotesingle{}ordinateur. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{batnav_8h_a2fb08a960f2050d628c7a62367ee1e4d}{bateau\+\_\+est\+\_\+coule}} (SDL\+\_\+\+Window $\ast$win, SDL\+\_\+\+Renderer $\ast$ren, \mbox{\hyperlink{structplateau__t}{plateau\+\_\+t}} $\ast$plateau\+\_\+j, int x, int y, char $\ast$couleur)
 \begin{DoxyCompactList}\small\item\em Fonction qui s\textquotesingle{}occupe de savoir si toutes les cases d\textquotesingle{}un bateau sont coulés. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{batnav_8h_acdd755afb32f2badac52da8e55d99a6b}{vider\+\_\+cargaison}} (SDL\+\_\+\+Window $\ast$win, SDL\+\_\+\+Renderer $\ast$ren, int taille\+\_\+bat, char $\ast$immatriculation)
+int \mbox{\hyperlink{batnav_8h_a5ea71bde2277199c3c35c41761bd1589}{vider\+\_\+cargaison}} (SDL\+\_\+\+Window $\ast$win, SDL\+\_\+\+Renderer $\ast$ren, int taille\+\_\+bat, char $\ast$immatriculation)
 \begin{DoxyCompactList}\small\item\em Fonction qui s\textquotesingle{}occupe du placement des bateaux en les cachants si ils sont valides. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{batnav_8h_a8ae21db78a54b0d4247723a9097617ea}{placement\+\_\+case\+\_\+bat}} (SDL\+\_\+\+Window $\ast$win, SDL\+\_\+\+Renderer $\ast$ren, int $\ast$mode\+\_\+de\+\_\+jeu, int x, int y, int direction, int bat\+\_\+selec, int JOUEUR, char $\ast$couleur, \mbox{\hyperlink{structplateau__t}{plateau\+\_\+t}} $\ast$plateau\+\_\+j, \mbox{\hyperlink{structplateau__t}{plateau\+\_\+t}} $\ast$plateau\+\_\+ordi, \mbox{\hyperlink{structs__joueur}{t\+\_\+joueur}} $\ast$joueur1, \mbox{\hyperlink{structs__joueur}{t\+\_\+joueur}} $\ast$joueur2)
 \begin{DoxyCompactList}\small\item\em Fonction qui s\textquotesingle{}occupe du placement des bateaux si leur placement est valide. \end{DoxyCompactList}\item 
@@ -78,7 +86,7 @@ Duclos Christal Brochelard Hugo Thibaut Duchesne
 1.\+0 
 \end{DoxyVersion}
 \begin{DoxyDate}{Date}
-28 mars 2022 
+05 avril 2022 
 \end{DoxyDate}
 
 
@@ -179,6 +187,8 @@ Fonction qui regarde si les cases qui vont être occupées dans une direction so
 \hline
 {\em y} & Coordonnée y de la case sélectionnée \\
 \hline
+{\em direction} & La direction d\textquotesingle{}un bateau \\
+\hline
 {\em taille\+\_\+bat} & Taille du bateau que l\textquotesingle{}on souhaite placer \\
 \hline
 \end{DoxyParams}
@@ -198,6 +208,28 @@ Fonction qui vérifie si les coordonnées sont dans la matrice.
 
 \begin{DoxyParams}{Paramètres}
 {\em plateau\+\_\+j} & Le plateau du joueur  \\
+\hline
+{\em x} & Coordonnée x de la case  \\
+\hline
+{\em y} & Coordonnée y de la case \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Renvoie 1 si les coordonnées sont valides, 0 sinon 
+\end{DoxyReturn}
+\mbox{\Hypertarget{batnav_8h_a317e4dde8db56424625f449fa6d91285}\label{batnav_8h_a317e4dde8db56424625f449fa6d91285}} 
+\index{batnav.h@{batnav.h}!est\_valide\_ordi@{est\_valide\_ordi}}
+\index{est\_valide\_ordi@{est\_valide\_ordi}!batnav.h@{batnav.h}}
+\doxysubsubsection{\texorpdfstring{est\_valide\_ordi()}{est\_valide\_ordi()}}
+{\footnotesize\ttfamily int est\+\_\+valide\+\_\+ordi (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structplateau__t}{plateau\+\_\+t}}}]{plateau\+\_\+ordi,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+
+Fonction qui vérifie si les coordonnées sont dans la matrice. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em plateau\+\_\+ordi} & Le plateau de l\textquotesingle{}ordi  \\
 \hline
 {\em x} & Coordonnée x de la case  \\
 \hline
@@ -338,6 +370,8 @@ Fonction qui s\textquotesingle{}occupe du placement des bateaux si leur placemen
 \hline
 {\em y} & Coordonnée y de la case sélectionnée \\
 \hline
+{\em direction} & La direction d\textquotesingle{}un bateau \\
+\hline
 {\em bat\+\_\+selec} & Bateau sélectionné par le joueur pour le placer \\
 \hline
 {\em JOUEUR} & Joueur qui place son bateau \\
@@ -378,11 +412,11 @@ Fonction qui s\textquotesingle{}occupe de la partie affrontement de la bataille 
 {\em ordi} & Structure du pseudo et du score de l\textquotesingle{}ordi \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{batnav_8h_acdd755afb32f2badac52da8e55d99a6b}\label{batnav_8h_acdd755afb32f2badac52da8e55d99a6b}} 
+\mbox{\Hypertarget{batnav_8h_a5ea71bde2277199c3c35c41761bd1589}\label{batnav_8h_a5ea71bde2277199c3c35c41761bd1589}} 
 \index{batnav.h@{batnav.h}!vider\_cargaison@{vider\_cargaison}}
 \index{vider\_cargaison@{vider\_cargaison}!batnav.h@{batnav.h}}
 \doxysubsubsection{\texorpdfstring{vider\_cargaison()}{vider\_cargaison()}}
-{\footnotesize\ttfamily void vider\+\_\+cargaison (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{win,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{ren,  }\item[{int}]{taille\+\_\+bat,  }\item[{char $\ast$}]{immatriculation }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int vider\+\_\+cargaison (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{win,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{ren,  }\item[{int}]{taille\+\_\+bat,  }\item[{char $\ast$}]{immatriculation }\end{DoxyParamCaption})}
 
 
 
@@ -399,3 +433,6 @@ Fonction qui s\textquotesingle{}occupe du placement des bateaux en les cachants 
 {\em immatriculation} & Nom du bateau déjà placé \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+1 si vider 0 si pas vider 
+\end{DoxyReturn}
