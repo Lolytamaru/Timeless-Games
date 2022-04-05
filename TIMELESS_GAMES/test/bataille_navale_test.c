@@ -1,16 +1,16 @@
+/**
+ * \file bataille_navale_test.c
+ * \brief Test unitaire sur la fonction vider_cargaison
+ * \author Duclos Christal Brochelard Hugo Duchesne Thibaut
+ * \version 1.0
+ * \date 05 avril 2022
+ */
+
 #include <all_includes.h>
 #include <joueur.h>
 #include <batnav.h>
 
-/**
- * \file main.c
- * \brief Test unitaire sur la fonction vider_cargaison
- * \author Duclos Christal Brochelard Hugo Duchesne Thibaut
- * \version 1.0
- * \date 04 avril 2022
- */
-
-int main(){
+int main() {
    // Initialisation de la fenêtre
    SDL_Window *win = NULL;
    SDL_Renderer *ren = NULL;
@@ -28,23 +28,22 @@ int main(){
       SDL_ExitWithError("Effacement du rendu échoué.\n");
     init_partie_batnav();
 
-   printf("\n---------Test 1: Bon bateau: Torpilleur de taille 2---------\n");
-   if(vider_cargaison(win,ren,2,"Torpilleur"))
+   printf("\n--------- Test 1 : Bon bateau : Torpilleur de taille 2 ---------\n");
+   if (vider_cargaison(win, ren, 2, "Torpilleur"))
       printf("Bateau vidé\n");
    else
       printf("Bateau inexistant\n");
 
-   printf("\n---------Test 2: Mauvaise taille de bateau: Torpilleur de taille 11---------\n");
-   if(vider_cargaison(win,ren,11,"Torpilleur"))
-      printf("Bateau vidé\n");
-   else
-      printf("Bateau inexistant\n");
-   
-   printf("\n---------Test 3: Mauvaise taille de bateau: Torpilleur de taille 0---------\n");
-   if(vider_cargaison(win,ren,0,"Torpilleur"))
+   printf("\n--------- Test 2 : Mauvaise taille de bateau : Torpilleur de taille 11 ---------\n");
+   if (vider_cargaison(win, ren, 11, "Torpilleur"))
       printf("Bateau vidé\n");
    else
       printf("Bateau inexistant\n");
 
+   printf("\n--------- Test 3 : Mauvaise taille de bateau : Torpilleur de taille 0 ---------\n");
+   if (vider_cargaison(win, ren, 0, "Torpilleur"))
+      printf("Bateau vidé\n");
+   else
+      printf("Bateau inexistant\n");
    return 0;
- }
+}
