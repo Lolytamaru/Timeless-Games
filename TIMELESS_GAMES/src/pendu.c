@@ -3,7 +3,7 @@
  * \brief Fichier pour le jeu du pendu
  * \author Duclos Christal Brochelard Hugo Thibaut Duchesne
  * \version 2.0
- * \date 31 mars 2022
+ * \date 05 avril 2022
  */
 
 #include <all_includes.h>
@@ -391,7 +391,7 @@ void pendu_tour(SDL_Window * win, SDL_Renderer * ren, int mode_de_jeu, int etat_
 			affiche_lettre(win, ren, secret[i], i);
 		*etat_partie = PENDUFINI;
 		// Incrémentation des scores selon le mode de jeu et de quel joueur joue
-		if(mode_de_jeu == JVSJ) {
+		if (mode_de_jeu == JVSJ) {
 			if (etat_joueur == J1)
 				(*scoreJ1)++;
 			else

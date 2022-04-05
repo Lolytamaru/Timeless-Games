@@ -43,6 +43,7 @@ int main(int argc, char** argv) {
    // Initialisation de la fenêtre
    SDL_Window *win = NULL;
    SDL_Renderer *ren = NULL;
+   SDL_Surface *icon = NULL;
    // Lancement de la SDL
    if (SDL_Init(SDL_INIT_VIDEO) != 0)
       SDL_ExitWithError("Initialisation SDL");
@@ -59,6 +60,8 @@ int main(int argc, char** argv) {
    afficher_image(win, ren, "assets/accueil.png", 0, 0);
    SDL_RenderPresent(ren);
    SDL_RenderClear(ren);
+   icon = IMG_Load("assets/icone.ico");
+   SDL_SetWindowIcon(win, icon);
    // L'état de la fenêtre pour savoir sur laquelle on se trouve pour les évènements, les pseudos et scores des joueurs
    t_statut etat_win = ACCUEIL;
    int etat_joueur = J1;
@@ -95,6 +98,7 @@ int main(int argc, char** argv) {
    // Fermeture de la fenêtre
    SDL_DestroyRenderer(ren);
    SDL_DestroyWindow(win);
+   SDL_FreeSurface(icon);
    TTF_Quit();
    SDL_Quit();
    return 0;
