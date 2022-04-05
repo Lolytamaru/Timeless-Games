@@ -13,7 +13,7 @@
 # Paramètres de la compilation
 CC = gcc
 CXXFLAGS = -Wall -g
-LDFLAGS = -I./include -Llib -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lm
+LDFLAGS = -I./include -Llib -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lm
 
 # Exécutable
 APPNAME = ./bin/accueil
