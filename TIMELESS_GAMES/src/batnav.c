@@ -102,7 +102,7 @@ void init_bateaux(plateau_t * plateau_j) {
  */
 void init_etat_plateau(plateau_t * plateau_j) {
    int i, j;
-	// Initialisation des colonnes et case du plateau à vide
+	// Initialisation des colonnes et cases du plateau à vide
    for (i = 0; i < plateau_j->nb_lig; i++)
       for (j = 0; j < plateau_j->nb_col; j++) {
          plateau_j->une_case[i][j].occupe = 0;
@@ -174,7 +174,7 @@ int direction_valide(plateau_t * plateau_j, int x, int y, int direction, int tai
          } else {
             return 0;
 			}
-			// Si la taille du batteau est conforme au nombre de cases disponibles
+			// Si la taille du bateau est conforme au nombre de cases disponibles
          if (cpt == taille_bat)
             return 1;
          break;
@@ -191,7 +191,7 @@ int direction_valide(plateau_t * plateau_j, int x, int y, int direction, int tai
          } else {
             return 0;
 			}
-			// Si la taille du batteau est conforme au nombre de cases disponibles
+			// Si la taille du bateau est conforme au nombre de cases disponibles
          if (cpt == taille_bat)
             return 1;
          break;
@@ -212,14 +212,14 @@ void placement_bateaux_ordi(plateau_t * plateau_ordi) {
 	x = rand() % (10 + 1 - 1);
 	y = rand() % (10 + 1 - 1);
 	do {
-		// Selection d'un bateau au hasard dans la cargaison
+		// Sélection d'un bateau au hasard dans la cargaison
 		bat_encours = rand() % (10 + 1 - 1);
-		// Si le bateau n'est pas déjà engager
+		// Si le bateau n'est pas déjà engagé
 		if (plateau_ordi->liste_bat[bat_encours].engage == 0) {
 			do {
-				// Si le bateau peut être placer on le place
+				// Si le bateau peut être placé, alors on le place
 				if (direction_valide(plateau_ordi, x, y, plateau_ordi->liste_bat[bat_encours].direction, plateau_ordi->liste_bat[bat_encours].taille)) {
-					// Si le bateau a placé est horizontal
+					// Si le bateau à placer est horizontal
 					if (plateau_ordi->liste_bat[bat_encours].direction == 'h') {
 						// On attribue aux cases qui vont être occupées des informations essentielles sur le bateau et que les cases sont désormais occupées
 						for (i = x; i < x + plateau_ordi->liste_bat[bat_encours].taille; i++) {
@@ -245,11 +245,11 @@ void placement_bateaux_ordi(plateau_t * plateau_ordi) {
 						place++;
 					}
 				} else {
-					// Coordonnées aléatoires d'une cas où on essaiera de placer les bateaux
+					// Coordonnées aléatoires d'un cas où on essaie de placer les bateaux
 					x = rand() % (10 + 1 - 1);
 					y = rand() % (10 + 1 - 1);
 				}
-			//Tant qu'un bateau n'a pas été placé.
+			// Tant qu'un bateau n'a pas été placé
 			} while(place == 0);
 			place = 0;
 			bateau_place++;
