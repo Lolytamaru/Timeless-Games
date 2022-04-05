@@ -3,7 +3,7 @@
  * \brief Fichier de prototypes pour le jeu du pendu
  * \author Duclos Christal Brochelard Hugo Thibaut Duchesne
  * \version 1.0
- * \date 02 avril 2022
+ * \date 05 avril 2022
  */
 
 #define OK 1
@@ -17,7 +17,7 @@ typedef struct s_pendu {
  	char *secret; // Mot secret à deviner
  	char secret_ecrit[100]; // Variable pour saisir un mot secret au clavier
  	char alphabet[26]; // Contient les 26 lettres de l'alphabet
- 	int erreurs; // Compteur d'erreurs allant jusqu'à 12
+ 	int erreurs; // Compteur d'erreurs allant jusqu'à 10
  	int etat_partie; // Etat actuel de la partie (création du mot secret(joueur ou générer), déroulement de la partie, fin de partie)
 } t_pendu;
 

@@ -3,7 +3,7 @@
  * \brief Fichier de prototypes pour le jeu de la bataille navale
  * \author Duclos Christal Brochelard Hugo Thibaut Duchesne
  * \version 1.0
- * \date 02 avril 2022
+ * \date 05 avril 2022
  */
 
 #ifndef __BATNAV_H__
@@ -13,7 +13,7 @@
  * \struct bateau_t Structure qui contient les caractéristiques d'un bateau
  */
 typedef struct s_bateau {
-   char * nom; // Immatriculation du bateau si il y en a un placé
+   char * nom; // Immatriculation du bateau s'il y en a un placé
    int taille; // Entre 2 et 5 cases
    int engage; // Ne peut avoir que deux valeurs : 1 pour placé, 0 pour non placé
    char direction; // Ne peut avoir que deux valeurs : h pour horizontal ou v pour vertical
@@ -23,7 +23,7 @@ typedef struct s_bateau {
  * \struct case_t Structure pour chaque case d'un plateau
  */
 typedef struct s_case {
-   char * num_bat; // Immatriculation du bateau si il y en a un placé
+   char * num_bat; // Immatriculation du bateau s'il y en a un placé
    char direction; // Ne peut avoir que deux valeurs : h pour horizontal ou v pour vertical
    int etat; // Ne peut avoir que deux valeurs : 0 = case non touchée ou 1 = case touchée
    int occupe; // Si un bateau occupe la case ou non

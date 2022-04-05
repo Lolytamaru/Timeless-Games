@@ -3,7 +3,7 @@
  * \brief Fichier de prototypes pour jeu du mastermind
  * \author Duclos Christal Brochelard Hugo Thibaut Duchesne
  * \version 1.0
- * \date 02 avril 2022
+ * \date 05 avril 2022
  */
 
 #define OK 1

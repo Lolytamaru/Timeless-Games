@@ -3,7 +3,7 @@
  * \brief Fichier comprenant toutes les fonctions de manipulation de SDL
  * \author Duclos Christal Brochelard Hugo Thibaut Duchesne
  * \version 1.0
- * \date 02 avril 2022
+ * \date 05 avril 2022
  */
 
 #include <all_includes.h>
@@ -79,7 +79,7 @@ void afficher_texte(SDL_Renderer * ren, char * pol, int taille_pol, int pos_x, i
    police = TTF_OpenFont(pol, taille_pol);
    TTF_SetFontStyle(police,TTF_STYLE_BOLD);
    SDL_Color couleur_police = {0, 0, 0};
-   // On créé une surface d'écriture de texte
+   // On crée une surface d'écriture de texte
    SDL_Surface *surface_texte = TTF_RenderText_Blended(police, texte, couleur_police);
    if(surface_texte == NULL){
       SDL_DestroyRenderer(ren);

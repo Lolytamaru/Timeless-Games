@@ -3,7 +3,7 @@
  * \brief Fichier qui gère les paramètres de Timeless Games
  * \author Christal Duclos Hugo Brochelard Thibaut Duchesne
  * \version 1.0
- * \date 02 avril 2022
+ * \date 05 avril 2022
  */
 
 #include <all_includes.h>
@@ -27,7 +27,7 @@ int param_select = PARAMETRES; // Sélection actuelle
 void gestion_event_param(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, t_statut * etat_win, int * mode_de_jeu, int * etat_joueur, t_joueur * joueur1, t_joueur * joueur2) {
    // En fonction des évènements à la souris
    switch(event.type) {
-      case SDL_MOUSEBUTTONUP:
+      case SDL_MOUSEBUTTONUP: // Relâchement du clic pour la non redondance de l'évènement
          // Si on est dans les crédits et que l'on clique sur la fenêtre, on retourne aux paramètres
          if (param_select == CREDITS) {
             if (event.button.x < 750 && event.button.x > 0 && event.button.y < 500 && event.button.y > 0) {

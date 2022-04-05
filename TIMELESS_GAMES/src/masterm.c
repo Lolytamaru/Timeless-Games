@@ -3,7 +3,7 @@
  * \brief Fichier pour le jeu du mastermind
  * \author Duclos ChristaL
  * \version 2.0
- * \date 02 avril 2022
+ * \date 05 avril 2022
  */
 
 #include <all_includes.h>
@@ -21,11 +21,11 @@ void init_partie_masterm(int * mode_de_jeu) {
 	mastermind.propo_couleur = (char*)malloc(sizeof(char)*4); // Contient les propositions qui seront effectuées par le joueur
 	mastermind.code_secret = (char*)malloc(sizeof(char)*4); // Contient le code secret de couleurs
 	mastermind.position = 0; // Contient la position où sera placée la prochaine couleur
-	mastermind.nb_essais = 0; //Contient le nombre d'essais de proposition du joueur
+	mastermind.nb_essais = 0; // Contient le nombre d'essais de proposition du joueur
 	mastermind.etat_partie= MASTERMIND_JCJ_INIT; // On entre dans la phase d'initialisation d'une partie joueur contre joueur par défaut
 	for (i = 0; i < 4; i++)
 		mastermind.code_secret[i] = ' ';
-	// Si l'on est en mode Joueur contre ordi on joue directement
+	// Si l'on est en mode joueur contre ordi, on joue directement
 	if (*mode_de_jeu == JVSO) {
   		saisir_code_ordi(mastermind.code_secret);
 		mastermind.etat_partie = MASTERMINDJEU;
@@ -129,7 +129,7 @@ void init_mastermind_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event even
 	   mastermind.position = 0;
 		mastermind.etat_partie = MASTERMINDJEU;
 	}
-	// Random combinaison
+	// Combinaison aléatoire
 	if (event.button.x < 740 && event.button.x > 564 && event.button.y < 493 && event.button.y > 426) {
 		afficher_image(win, ren, "assets/mastermind/mastermind.png", 0, 0);
 		afficher_texte(ren, "assets/inter.ttf", 19, 19, 110, pseudoJ1);
@@ -143,7 +143,6 @@ void init_mastermind_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event even
 		mastermind.etat_partie = MASTERMINDJEU;
 	}
 }
-
 
 /**
  * \brief L'ordinateur initialise au hasard le code de couleurs à trouver
@@ -309,9 +308,9 @@ void afficher_essai(SDL_Window * win, SDL_Renderer * ren, int bonne_couleur, int
    for (i = 0; i < 4; i++) {
       // Affiche la combinaison de l'essai dans le récapitulatif des essais
       switch(propo_couleur[i]) {
-         case 'R':// Affiche la couleur rouge à la place i à la ligne de l'essai
+         case 'R': // Affiche la couleur rouge à la place i à la ligne de l'essai
             afficher_image(win, ren, "assets/mastermind/essais/rouge_essai.png", 258 + i * 33, 402 - (*nb_essais) * 41); break;
-         case 'V':// Affiche la couleur verte à la place i à la ligne de l'essai
+         case 'V': // Affiche la couleur verte à la place i à la ligne de l'essai
             afficher_image(win, ren, "assets/mastermind/essais/vert_essai.png", 258 + i * 33, 402 - (*nb_essais) * 41); break;
          case 'B': // Affiche la couleur bleue à la place i à la ligne de l'essai
             afficher_image(win, ren, "assets/mastermind/essais/bleu_essai.png", 258 + i * 33, 402 - (*nb_essais) * 41); break;
@@ -328,7 +327,7 @@ void afficher_essai(SDL_Window * win, SDL_Renderer * ren, int bonne_couleur, int
 	char bn_place[255];
 	sprintf(bn_place, "assets/mastermind/points/%ibp.png", bonne_place);
    afficher_image(win, ren, bn_place, 459, 402 - (*nb_essais) * 41);
-   // Affiche le nombre de bonnes couleurs de l'essai
+   // Affiche le nombre de bonnes couleurs mal placées de l'essai
 	char bn_couleur[255];
 	sprintf(bn_couleur, "assets/mastermind/points/%ibc.png", bonne_couleur);
    afficher_image(win, ren, bn_couleur, 498, 402 - (*nb_essais) * 41);
@@ -434,7 +433,6 @@ void mastermind_tour(SDL_Window * win, SDL_Renderer * ren, int mode_de_jeu, int 
 		free(mastermind.propo_couleur);
 		free(mastermind.code_secret);
    }
-
 }
 
 /**

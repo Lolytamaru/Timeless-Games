@@ -1,9 +1,9 @@
 /**
- * \file SDL.projet.h
+ * \file SDL_projet.h
  * \brief Fichier de prototypes pour le fichier contenant les fonctions SDL
  * \author Duclos Christal Brochelard Hugo Thibaut Duchesne
  * \version 1.0
- * \date 02 avril 2022
+ * \date 05 avril 2022
  */
 
 void SDL_ExitWithError(const char * message);

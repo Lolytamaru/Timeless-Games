@@ -3,7 +3,7 @@
  * \brief fichier principal de Timeless Games
  * \author Christal Duclos Hugo Brochelard Thibaut Duchesne
  * \version 2.0
- * \date 02 avril 2022
+ * \date 05 avril 2022
  */
 
 #include <all_includes.h>
@@ -26,7 +26,7 @@
 void gestion_event_accueil(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, t_statut * etat_win, t_joueur * joueur1, t_joueur * joueur2) {
    switch(event.type) {
       case SDL_MOUSEBUTTONUP:
-      // Passage à la gestion des pseudos et mode de jeu.
+      // Passage à la gestion des pseudos et du mode de jeu
          if (event.button.x < 750 && event.button.x > 0 && event.button.y < 500 && event.button.y > 0) {
             afficher_image(win, ren, "assets/parametres/menu_pseudo_JCJ.png", 0, 0);
             afficher_texte(ren, "assets/inter.ttf", 27, 497, 252, joueur1->pseudo);
@@ -46,20 +46,20 @@ int main(int argc, char** argv) {
    // Lancement de la SDL
    if (SDL_Init(SDL_INIT_VIDEO) != 0)
       SDL_ExitWithError("Initialisation SDL");
-   // Création fenêtre + rendu
+   // Création de la fenêtre et du rendu
    if (SDL_CreateWindowAndRenderer(750, 500, 0, &win, &ren) != 0)
       SDL_ExitWithError("Impossible de créer la fenêtre et le rendu SDL.\n");
    // Fonction qui initialise SDL_TTF
    if (TTF_Init() == -1)
 		SDL_ExitWithError("Impossible d'initialiser SDL_TTF.\n");
-   // Fonction qui efface tout sur le rendu
+   // Fonction qui efface tout le rendu
    if (SDL_RenderClear(ren) != 0)
       SDL_ExitWithError("Effacement du rendu échoué.\n");
    // Affichage de l'accueil
    afficher_image(win, ren, "assets/accueil.png", 0, 0);
    SDL_RenderPresent(ren);
    SDL_RenderClear(ren);
-   // L'état de la fenêtre pour savoir sur laquelle on se trouve pour les évênements, les pseudos et scores des joueurs
+   // L'état de la fenêtre pour savoir sur laquelle on se trouve pour les évènements, les pseudos et scores des joueurs
    t_statut etat_win = ACCUEIL;
    int etat_joueur = J1;
    int mode_de_jeu = JVSJ;
@@ -92,7 +92,7 @@ int main(int argc, char** argv) {
             gestion_event_param(win, ren, event, &etat_win, &mode_de_jeu, &etat_joueur, &joueur1, &joueur2);
       }
    }
-   //Fermeture de la fenêtre
+   // Fermeture de la fenêtre
    SDL_DestroyRenderer(ren);
    SDL_DestroyWindow(win);
    TTF_Quit();

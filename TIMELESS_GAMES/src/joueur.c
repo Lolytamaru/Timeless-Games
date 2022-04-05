@@ -3,7 +3,7 @@
  * \brief Fichier pour le choix des pseudos et du mode de jeu
  * \author Duclos Christal Brochelard Hugo Thibaut Duchesne
  * \version 1.0
- * \date 02 avril 2022
+ * \date 05 avril 2022
  */
 
 #include <all_includes.h>
@@ -76,13 +76,13 @@ void gestion_event_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
                   sprintf(joueur2->pseudo, "joueur 2");
                afficher_image(win, ren, "assets/menu_J1.png", 0, 0);
             } else if (*mode_de_jeu == JVSJ && *etat_joueur == J2) {
-               if(strcmp(joueur1->pseudo," ")==0)
+               if (strcmp(joueur1->pseudo," ") == 0)
                   sprintf(joueur1->pseudo,"joueur 1");
-               if(strcmp(joueur2->pseudo," ")==0)
+               if (strcmp(joueur2->pseudo," ") == 0)
                   sprintf(joueur2->pseudo,"joueur 2");
                afficher_image(win, ren, "assets/menu_J2.png", 0, 0);
             } else {
-               if(strcmp(joueur1->pseudo," ")==0)
+               if (strcmp(joueur1->pseudo," ") == 0)
                   sprintf(joueur1->pseudo,"joueur 1");
                afficher_image(win, ren, "assets/menu.png", 0, 0);
             }
@@ -120,13 +120,13 @@ void gestion_event_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
                afficher_image(win, ren, "assets/parametres/menu_pseudo_JCJ.png", 0, 0);
             else
                afficher_image(win, ren, "assets/parametres/menu_pseudo_JCO.png", 0, 0);
-            // Si l'on a modifié le pseudo du joueur 1
+            // Si on a modifié le pseudo du joueur 1
             if (*etat_joueur == J1) {
                texte = TTF_RenderUTF8_Blended(police, joueur1->pseudo, couleur_police);
                afficher_texte(ren, "assets/inter.ttf", 27, 505, 338, joueur2->pseudo);
                txtDestRect.x = 505 ;
                txtDestRect.y = 252;
-            // Si l'on a modifié le pseudo du joueur 2
+            // Si on a modifié le pseudo du joueur 2
             } else {
                texte = TTF_RenderUTF8_Blended(police, joueur2->pseudo, couleur_police);
                afficher_texte(ren, "assets/inter.ttf", 27, 505, 252, joueur1->pseudo);
@@ -144,7 +144,7 @@ void gestion_event_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
          if (event.key.keysym.sym >= SDLK_a && event.key.keysym.sym <= SDLK_z) {
             if (*etat_joueur == J1) {
                l = strlen(joueur1->pseudo);
-               // Si l'on ne dépasse pas la limite de 9 lettres dans le pseudo
+               // Si on ne dépasse pas la limite de 9 lettres dans le pseudo
                if (l <= 8){
                   // On ajoute la lettre au pseudo
                   sprintf(temp, "%s%c", joueur1->pseudo, event.key.keysym.sym);
@@ -172,13 +172,13 @@ void gestion_event_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event event,
             if (*etat_joueur == J1) {
                texte = TTF_RenderUTF8_Blended(police, joueur1->pseudo, couleur_police);
                afficher_texte(ren, "assets/inter.ttf", 27, 505, 338, joueur2->pseudo);
-               txtDestRect.x = 505 ;
+               txtDestRect.x = 505;
                txtDestRect.y = 252;
             // Si l'on a modifié le pseudo du joueur 2
             } else {
                texte = TTF_RenderUTF8_Blended(police, joueur2->pseudo, couleur_police);
                afficher_texte(ren, "assets/inter.ttf", 27, 505, 252, joueur1->pseudo);
-               txtDestRect.x = 505 ;
+               txtDestRect.x = 505;
                txtDestRect.y = 338;
             }
             texte_tex = SDL_CreateTextureFromSurface(ren, texte);
