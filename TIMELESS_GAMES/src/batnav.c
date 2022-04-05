@@ -3,7 +3,7 @@
  * \brief Fichier pour le jeu de la bataille navale
  * \author Duclos Christal Brochelard Hugo Thibaut Duchesne
  * \version 1.0
- * \date 02 avril 2022
+ * \date 05 avril 2022
  */
 
 #include <all_includes.h>
@@ -211,7 +211,7 @@ void placement_bateaux_ordi(plateau_t * plateau_ordi) {
 						for (i = x; i < x + plateau_ordi->liste_bat[bat_encours].taille; i++) {
 						 	plateau_ordi->une_case[i][y].num_bat = plateau_ordi->liste_bat[bat_encours].nom;
 						 	plateau_ordi->une_case[i][y].occupe = 1;
-							 plateau_ordi->une_case[i][y].direction = plateau_ordi->liste_bat[bat_encours].direction;
+							plateau_ordi->une_case[i][y].direction = plateau_ordi->liste_bat[bat_encours].direction;
 					 	}
 						plateau_ordi->liste_bat[bat_encours].engage = 1;
 				     	plateau_ordi->liste_bat[bat_encours + NB_BAT].engage = 1;
@@ -227,8 +227,8 @@ void placement_bateaux_ordi(plateau_t * plateau_ordi) {
 						place++;
 					}
 				} else {
-						x = rand() % (10 + 1 - 1);
-						y = rand() % (10 + 1 - 1);
+					x = rand() % (10 + 1 - 1);
+					y = rand() % (10 + 1 - 1);
 				}
 			} while(place == 0);
 			place = 0;
