@@ -76,7 +76,15 @@ void afficher_texte(SDL_Renderer * ren, char * pol, int taille_pol, int pos_x, i
    TTF_SetFontStyle(police,TTF_STYLE_BOLD);
    SDL_Color couleur_police = {0, 0, 0};
    SDL_Surface *surface_texte = TTF_RenderText_Blended(police, texte, couleur_police);
+   if(surface_texte == NULL){
+      SDL_DestroyRenderer(ren);
+      SDL_ExitWithError("Impossible de crée la surface texte.\n");
+   }
    SDL_Texture *texture_texte = SDL_CreateTextureFromSurface(ren, surface_texte);
+   if(texture_texte == NULL){
+      SDL_DestroyRenderer(ren);
+      SDL_ExitWithError("Impossible de crée la texture texte.\n");
+   }
    SDL_FreeSurface(surface_texte);
    SDL_QueryTexture(texture_texte, NULL, NULL, &position_txt.w, &position_txt.h);
    SDL_RenderCopy(ren, texture_texte, NULL, &position_txt);

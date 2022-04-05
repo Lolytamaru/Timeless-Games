@@ -22,7 +22,7 @@
 #include <SDL_projet.h> // Bibliothèque personnelle de SDL condensée
 
 #define N 26
-// Définitions de valeurs pour chaque statut du programme selon la fenêtre
+// Définitions de valeurs pour chaque statut du programme selon la fenêtre et le mode de jeu
 #define J1 37
 #define J2 38
 enum {JVSJ = 39, JVSO};

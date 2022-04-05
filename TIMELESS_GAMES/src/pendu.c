@@ -75,16 +75,19 @@ void initialiser_mot_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event even
 	switch(event.type) {
 		// Gestion des appuis au clavier
 		case SDL_KEYUP:
-			// Si on appuie sur entrée au clavier
+			// Si on appuie sur la touche retour en arrière au clavier
 			if (event.key.keysym.sym == SDLK_BACKSPACE) {
 				l = strlen(secret_ecrit);
+				// Si le mot n'est pas vide
 				if (l > 0)
+						// On supprime le dernier caractère du mot
 						secret_ecrit[l-1] = '\0';
 				police = TTF_OpenFont("assets/inter.ttf", 27);
 				TTF_SetFontStyle(police,TTF_STYLE_BOLD);
 				SDL_SetRenderDrawColor(ren, 255, 255, 255, 255);
 				SDL_RenderClear(ren);
 				afficher_image(win, ren, "assets/pendu/pendujcj.png", 0, 0);
+				// Affichage selon le joueur qui propose le mot à chercher
 				if (*etat_joueur == J1) {
 					afficher_texte(ren, "assets/inter.ttf", 27, 510, 80, pseudoJ1);
 					afficher_texte(ren, "assets/inter.ttf", 27, 510, 222, pseudoJ2);
@@ -105,7 +108,9 @@ void initialiser_mot_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event even
 			// Si on appuie sur une lettre de l'alphabet avec le clavier
 			if (event.key.keysym.sym >= SDLK_a && event.key.keysym.sym <= SDLK_z) {
 				l = strlen(secret_ecrit);
+				// Si l'on ne dépasse pas la limite de 9 lettres dans le mot
 				if (l < 9) {
+					// On ajoute la lettre au mot
 					sprintf(temp, "%s%c", secret_ecrit, event.key.keysym.sym);
 					sprintf(secret_ecrit, "%s", temp);
 				}
@@ -114,6 +119,7 @@ void initialiser_mot_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event even
 				SDL_SetRenderDrawColor(ren, 255, 255, 255, 255);
 				SDL_RenderClear(ren);
 				afficher_image(win, ren, "assets/pendu/pendujcj.png", 0, 0);
+				// Affichage selon le joueur qui propose le mot à chercher
 				if (*etat_joueur == J1) {
 					afficher_texte(ren, "assets/inter.ttf", 27, 510, 80, pseudoJ1);
 					afficher_texte(ren, "assets/inter.ttf", 27, 510, 222, pseudoJ2);
@@ -131,6 +137,7 @@ void initialiser_mot_joueur(SDL_Window * win, SDL_Renderer * ren, SDL_Event even
 				TTF_CloseFont(police);
 				SDL_RenderPresent(ren);
 			}
+				// Si on appuie sur la touche entrée au clavier
 			if (event.key.keysym.sym == SDLK_RETURN ) {
 				sprintf(secret, "%s", secret_ecrit);
 				for (i = 0; i < secret[i]; i++)
@@ -276,7 +283,7 @@ int valider_mot(char * secret, char * pendu) {
 	int i, j;
    for (i = 0; secret[i] && (secret[i] == pendu[i]); i++) {}
 	for (j = 0; secret[j]; j++) {}
-   if (i == j) // Si les deux mots sont identiques
+   if (i == j) // Si les deux mots sont identiques et de même longueur
       return OK;
    else // Sinon ils ne sont pas identiques
       return PAS_OK;
@@ -361,6 +368,7 @@ void pendu_tour(SDL_Window * win, SDL_Renderer * ren, int mode_de_jeu, int etat_
   	if ((valider_mot(secret, pendu) == 1)) {
    	afficher_image(win, ren, "assets/pendu/gagne_pendu.png", 247, 7);
     	*etat_partie = PENDUFINI;
+		// Incrémentation des scores selon le mode de jeu et de quel joueur joue
 		if(mode_de_jeu == JVSJ) {
 			if (etat_joueur == J1)
 				(*scoreJ2)++;
@@ -373,6 +381,7 @@ void pendu_tour(SDL_Window * win, SDL_Renderer * ren, int mode_de_jeu, int etat_
 				(*scoreJ2)++;
 		}
 		SDL_RenderPresent(ren);
+		// Libération de la mémoire allouée
 		free(pendu);
 	}
 	// Si le joueur est pendu (a perdu)
@@ -381,6 +390,7 @@ void pendu_tour(SDL_Window * win, SDL_Renderer * ren, int mode_de_jeu, int etat_
 		for (i = 0; secret[i]; i++) // Affichage du mot caché
 			affiche_lettre(win, ren, secret[i], i);
 		*etat_partie = PENDUFINI;
+		// Incrémentation des scores selon le mode de jeu et de quel joueur joue
 		if(mode_de_jeu == JVSJ) {
 			if (etat_joueur == J1)
 				(*scoreJ1)++;
@@ -393,6 +403,7 @@ void pendu_tour(SDL_Window * win, SDL_Renderer * ren, int mode_de_jeu, int etat_
 				(*scoreJ1)++;
 		}
 		SDL_RenderPresent(ren);
+		// Libération de la mémoire allouée
 		free(pendu);
 	}
    // Met à jour l'affichage selon les manipulations précédentes
@@ -487,7 +498,7 @@ void gestion_event_pendu(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, 
 					pendu_tour(win, ren, *mode_de_jeu, *etat_joueur, &(pendu.etat_partie), &(joueur1->score),  &(joueur2->score), 'z', pendu.alphabet, pendu.pendu, pendu.secret, &(pendu.erreurs));
 			}
 			break;
-		// Saisies au clavier
+		// Saisies au clavier des lettres
 		case SDL_KEYUP:
          if (pendu.etat_partie == PENDUJEU) {
 				if (event.key.keysym.sym >= SDLK_a && event.key.keysym.sym <= SDLK_z)
@@ -496,6 +507,7 @@ void gestion_event_pendu(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, 
 			break;
 		default: break;
 	}
+	// Si l'on est à la phase de création du mot mystère
 	if (pendu.etat_partie == PENDU_JCJ_INIT) {
 		initialiser_mot_joueur(win, ren, event, etat_joueur, &(pendu.etat_partie), pendu.secret_ecrit, pendu.secret, pendu.pendu, joueur1->pseudo, joueur2->pseudo, &(joueur1->score), &(joueur2->score));
 	}

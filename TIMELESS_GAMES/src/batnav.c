@@ -243,40 +243,49 @@ void placement_bateaux_ordi(plateau_t * plateau_ordi) {
  * \param ren Le rendu qui sera manipulé
  * \param taille_bat Taille du bateau déjà placé
  * \param immatriculation Nom du bateau déjà placé
+ * \return 1 si vider 0 si pas vider
  */
-void vider_cargaison(SDL_Window * win, SDL_Renderer * ren, int taille_bat, char * immatriculation) {
-	// En fonction de la taille du bateau
-	switch(taille_bat) {
-		// On enlève les images des bateaux de taille 2
-		case 2:
-			afficher_image(win, ren, "assets/batnav/bateaux/suppression_cargaison/taille_2_h.png", 535, 96);
-			afficher_image(win, ren, "assets/batnav/bateaux/suppression_cargaison/taille_2_v.png", 535, 286);
-			break;
-		// On enlève les images des bateaux de taille 3
-		case 3:
-			// En fonction de si l'immatriculation est A ou B
-			if (strcmp(immatriculation, "contre_torpilleurA") == 0) {
-				afficher_image(win, ren, "assets/batnav/bateaux/suppression_cargaison/taille_3_h.png", 624, 96);
-				afficher_image(win, ren, "assets/batnav/bateaux/suppression_cargaison/taille_3_v.png", 535, 373);
-			} else {
-				afficher_image(win, ren, "assets/batnav/bateaux/suppression_cargaison/taille_3_h.png", 535, 142);
-				afficher_image(win, ren, "assets/batnav/bateaux/suppression_cargaison/taille_3_v.png", 586, 286);
-			}
-			break;
-		// On enlève les images des bateaux de taille 4
-		case 4:
-			afficher_image(win, ren, "assets/batnav/bateaux/suppression_cargaison/taille_4_h.png", 535, 187);
-			afficher_image(win, ren, "assets/batnav/bateaux/suppression_cargaison/taille_4_v.png", 643, 286);
-			break;
-		// On enlève les images des bateaux de taille 5
-		case 5:
-			afficher_image(win, ren, "assets/batnav/bateaux/suppression_cargaison/taille_5_h.png", 535, 233);
-			afficher_image(win, ren, "assets/batnav/bateaux/suppression_cargaison/taille_5_v.png", 701, 286);
-			break;
-		default: break;
-	}
-	SDL_RenderPresent(ren);
-}
+ int vider_cargaison(SDL_Window * win, SDL_Renderer * ren, int taille_bat, char * immatriculation) {
+ 	// En fonction de la taille du bateau
+ 	switch(taille_bat) {
+ 		// On enlève les images des bateaux de taille 2
+ 		case 2:
+ 			afficher_image(win, ren, "assets/batnav/bateaux/suppression_cargaison/taille_2_h.png", 535, 96);
+ 			afficher_image(win, ren, "assets/batnav/bateaux/suppression_cargaison/taille_2_v.png", 535, 286);
+ 			SDL_RenderPresent(ren);
+ 			return OK;
+ 			break;
+ 		// On enlève les images des bateaux de taille 3
+ 		case 3:
+ 			// En fonction de si l'immatriculation est A ou B
+ 			if (strcmp(immatriculation, "contre_torpilleurA") == 0) {
+ 				afficher_image(win, ren, "assets/batnav/bateaux/suppression_cargaison/taille_3_h.png", 624, 96);
+ 				afficher_image(win, ren, "assets/batnav/bateaux/suppression_cargaison/taille_3_v.png", 535, 373);
+ 			} else {
+ 				afficher_image(win, ren, "assets/batnav/bateaux/suppression_cargaison/taille_3_h.png", 535, 142);
+ 				afficher_image(win, ren, "assets/batnav/bateaux/suppression_cargaison/taille_3_v.png", 586, 286);
+ 			}
+ 			SDL_RenderPresent(ren);
+ 			return OK;
+ 			break;
+ 		// On enlève les images des bateaux de taille 4
+ 		case 4:
+ 			afficher_image(win, ren, "assets/batnav/bateaux/suppression_cargaison/taille_4_h.png", 535, 187);
+ 			afficher_image(win, ren, "assets/batnav/bateaux/suppression_cargaison/taille_4_v.png", 643, 286);
+ 			SDL_RenderPresent(ren);
+ 			return OK;
+ 			break;
+ 		// On enlève les images des bateaux de taille 5
+ 		case 5:
+ 			afficher_image(win, ren, "assets/batnav/bateaux/suppression_cargaison/taille_5_h.png", 535, 233);
+ 			afficher_image(win, ren, "assets/batnav/bateaux/suppression_cargaison/taille_5_v.png", 701, 286);
+ 			SDL_RenderPresent(ren);
+ 			return OK;
+ 			break;
+ 		default: return PAS_OK; break;
+ 	}
+ }
+
 
 /**
  * \brief Fonction qui s'occupe du placement des bateaux si leur placement est valide

@@ -18,7 +18,7 @@ typedef struct s_pendu {
  	char secret_ecrit[100]; // Variable pour saisir un mot secret au clavier
  	char alphabet[26]; // Contient les 26 lettres de l'alphabet
  	int erreurs; // Compteur d'erreurs allant jusqu'à 12
- 	int etat_partie;
+ 	int etat_partie; // Etat actuel de la partie (création du mot secret(joueur ou générer), déroulement de la partie, fin de partie)
 } t_pendu;
 
 void init_partie_pendu(SDL_Window * win, SDL_Renderer * ren, int * mode_de_jeu, char * pseudoJ1, char * pseudoJ2, int * scoreJ1, int * scoreJ2);

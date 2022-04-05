@@ -20,11 +20,12 @@ void init_partie_masterm(int * mode_de_jeu) {
 	int i;
 	mastermind.propo_couleur = (char*)malloc(sizeof(char)*4); // Contient les propositions qui seront effectuées par le joueur
 	mastermind.code_secret = (char*)malloc(sizeof(char)*4); // Contient le code secret de couleurs
-	mastermind.position = 0;
-	mastermind.nb_essais = 0;
-	mastermind.etat_partie= MASTERMIND_JCJ_INIT;
+	mastermind.position = 0; // Contient la position où sera placée la prochaine couleur
+	mastermind.nb_essais = 0; //Contient le nombre d'essais de proposition du joueur
+	mastermind.etat_partie= MASTERMIND_JCJ_INIT; // On entre dans la phase d'initialisation d'une partie joueur contre joueur par défaut
 	for (i = 0; i < 4; i++)
 		mastermind.code_secret[i] = ' ';
+	// Si l'on est en mode Joueur contre ordi on joue directement
 	if (*mode_de_jeu == JVSO) {
   		saisir_code_ordi(mastermind.code_secret);
 		mastermind.etat_partie = MASTERMINDJEU;
@@ -515,6 +516,7 @@ void mastermind_tour(SDL_Window * win, SDL_Renderer * ren, int mode_de_jeu, int 
 		         SDL_RenderPresent(ren);
 		      }
      		}
+			// Si l'on doit permettre au joueur d'entrer la combinaison secrète
 			if (mastermind.etat_partie == MASTERMIND_JCJ_INIT)
 				init_mastermind_joueur(win, ren, event, joueur1->pseudo, joueur2->pseudo, &(joueur1->score), &(joueur2->score));
        	break;

@@ -17,7 +17,7 @@ typedef struct s_master {
 	char *code_secret; // Code secret de couleurs
    int position; // Une des 4 positions possibles
  	int nb_essais; // Compteur de nombre d'essais allant jusqu'à 10
- 	int etat_partie;
+ 	int etat_partie; // Etat actuel de la partie (création de la combinaison, déroulement de la partie, fin de partie)
 } t_master;
 
 void init_partie_masterm(int * mode_de_jeu);

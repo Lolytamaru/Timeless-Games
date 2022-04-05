@@ -26,6 +26,7 @@
 void gestion_event_accueil(SDL_Window * win, SDL_Renderer * ren, SDL_Event event, t_statut * etat_win, t_joueur * joueur1, t_joueur * joueur2) {
    switch(event.type) {
       case SDL_MOUSEBUTTONUP:
+      // Passage à la gestion des pseudos et mode de jeu.
          if (event.button.x < 750 && event.button.x > 0 && event.button.y < 500 && event.button.y > 0) {
             afficher_image(win, ren, "assets/parametres/menu_pseudo_JCJ.png", 0, 0);
             afficher_texte(ren, "assets/inter.ttf", 27, 497, 252, joueur1->pseudo);
@@ -58,7 +59,7 @@ int main(int argc, char** argv) {
    afficher_image(win, ren, "assets/accueil.png", 0, 0);
    SDL_RenderPresent(ren);
    SDL_RenderClear(ren);
-   // L'état de la fenêtre pour savoir sur laquelle on se trouve pour les évênements et les scores des joueurs
+   // L'état de la fenêtre pour savoir sur laquelle on se trouve pour les évênements, les pseudos et scores des joueurs
    t_statut etat_win = ACCUEIL;
    int etat_joueur = J1;
    int mode_de_jeu = JVSJ;
