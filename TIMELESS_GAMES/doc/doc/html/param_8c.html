@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Timeless Games: Référence du fichier /info/etu/l2info/s202604/Timeless-Games/TIMELESS_GAMES/src/menu.c</title>
+<title>Timeless Games: Référence du fichier /info/etu/l2info/s202604/Timeless-Games/TIMELESS_GAMES/src/param.c</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,41 +69,54 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#func-members">Fonctions</a>  </div>
-  <div class="headertitle"><div class="title">Référence du fichier menu.c</div></div>
+<a href="#enum-members">Énumérations</a> &#124;
+<a href="#func-members">Fonctions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">Référence du fichier param.c</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Fichier secondaire qui gère le menu de Timeless Games.  
+<p>Fichier qui gère les paramètres de Timeless Games.  
 <a href="#details">Plus de détails...</a></p>
 <div class="textblock"><code>#include &lt;<a class="el" href="all__includes_8h_source.html">all_includes.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="joueur_8h_source.html">joueur.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="pendu_8h_source.html">pendu.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="param_8h_source.html">param.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="masterm_8h_source.html">masterm.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="menu_8h_source.html">menu.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="batnav_8h_source.html">batnav.h</a>&gt;</code><br />
 </div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Énumérations</h2></td></tr>
+<tr class="memitem:ad7862b38b31079c83f4106e84aaa2461"><td class="memItemLeft" align="right" valign="top"><a id="ad7862b38b31079c83f4106e84aaa2461"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>param_e</b> { <b>PARAMETRES</b> = 1
+, <b>MENU_REGLES</b>
+, <b>REGLES_JEU</b>
+, <b>CREDITS</b>
+ }</td></tr>
+<tr class="separator:ad7862b38b31079c83f4106e84aaa2461"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Fonctions</h2></td></tr>
-<tr class="memitem:a00406864aa50b034e34ca8494d03bd73"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="menu_8c.html#a00406864aa50b034e34ca8494d03bd73">gestion_event_menu</a> (SDL_Window *win, SDL_Renderer *ren, SDL_Event event, t_statut *etat_win, int *mode_de_jeu, int *etat_joueur, <a class="el" href="structs__joueur.html">t_joueur</a> *joueur1, <a class="el" href="structs__joueur.html">t_joueur</a> *joueur2)</td></tr>
-<tr class="memdesc:a00406864aa50b034e34ca8494d03bd73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui permet de gérer les actions à faire sur la fenêtre du menu.  <a href="menu_8c.html#a00406864aa50b034e34ca8494d03bd73">Plus de détails...</a><br /></td></tr>
-<tr class="separator:a00406864aa50b034e34ca8494d03bd73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41e899ba6aaecf0aa2377528fd02a1dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="param_8c.html#a41e899ba6aaecf0aa2377528fd02a1dd">gestion_event_param</a> (SDL_Window *win, SDL_Renderer *ren, SDL_Event event, t_statut *etat_win, int *mode_de_jeu, int *etat_joueur, <a class="el" href="structs__joueur.html">t_joueur</a> *joueur1, <a class="el" href="structs__joueur.html">t_joueur</a> *joueur2)</td></tr>
+<tr class="memdesc:a41e899ba6aaecf0aa2377528fd02a1dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui permet de gérer les actions à faire sur la fenêtre du menu paramètres.  <a href="param_8c.html#a41e899ba6aaecf0aa2377528fd02a1dd">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a41e899ba6aaecf0aa2377528fd02a1dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:af8ee0b8e4937d567e7026c3b6dda74fa"><td class="memItemLeft" align="right" valign="top"><a id="af8ee0b8e4937d567e7026c3b6dda74fa"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>param_select</b> = PARAMETRES</td></tr>
+<tr class="separator:af8ee0b8e4937d567e7026c3b6dda74fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
-<div class="textblock"><p >Fichier secondaire qui gère le menu de Timeless Games. </p>
+<div class="textblock"><p >Fichier qui gère les paramètres de Timeless Games. </p>
 <dl class="section author"><dt>Auteur</dt><dd>Christal Duclos Hugo Brochelard Thibaut Duchesne </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>05 avril 2022 </dd></dl>
 </div><h2 class="groupheader">Documentation des fonctions</h2>
-<a id="a00406864aa50b034e34ca8494d03bd73"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a00406864aa50b034e34ca8494d03bd73">&#9670;&nbsp;</a></span>gestion_event_menu()</h2>
+<a id="a41e899ba6aaecf0aa2377528fd02a1dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41e899ba6aaecf0aa2377528fd02a1dd">&#9670;&nbsp;</a></span>gestion_event_param()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void gestion_event_menu </td>
+          <td class="memname">void gestion_event_param </td>
           <td>(</td>
           <td class="paramtype">SDL_Window *&#160;</td>
           <td class="paramname"><em>win</em>, </td>
@@ -158,13 +171,13 @@ Fonctions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Fonction qui permet de gérer les actions à faire sur la fenêtre du menu. </p>
+<p>Fonction qui permet de gérer les actions à faire sur la fenêtre du menu paramètres. </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">win</td><td>La fenêtre qui sera manipulée </td></tr>
     <tr><td class="paramname">ren</td><td>Le rendu qui sera manipulé </td></tr>
     <tr><td class="paramname">event</td><td>Un détecteur d'évènements </td></tr>
-    <tr><td class="paramname">etat_win</td><td>La fenêtre où l'on se trouve </td></tr>
+    <tr><td class="paramname">etat_win</td><td>La fenêtre où on se trouve </td></tr>
     <tr><td class="paramname">mode_de_jeu</td><td>Soit joueur contre joueur, soit joueur contre ordi </td></tr>
     <tr><td class="paramname">etat_joueur</td><td>Etat du joueur </td></tr>
     <tr><td class="paramname">joueur1</td><td>Structure qui contient les informations du joueur 1 </td></tr>

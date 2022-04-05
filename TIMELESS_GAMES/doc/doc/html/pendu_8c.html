@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Timeless Games: Référence du fichier /info/etu/l2info/s200470/Timeless-Games/TIMELESS_GAMES/src/pendu.c</title>
+<title>Timeless Games: Référence du fichier /info/etu/l2info/s202604/Timeless-Games/TIMELESS_GAMES/src/pendu.c</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -113,9 +113,9 @@ Fonctions</h2></td></tr>
 <tr class="memitem:aaeb88daf555aa2eb5060cc0a073e020e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pendu_8c.html#aaeb88daf555aa2eb5060cc0a073e020e">valider_lettre</a> (SDL_Window *win, SDL_Renderer *ren, char lettre, char *secret, char *pendu, int *erreurs)</td></tr>
 <tr class="memdesc:aaeb88daf555aa2eb5060cc0a073e020e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Regarde si la lettre entrée est dans le mot secret ou non.  <a href="pendu_8c.html#aaeb88daf555aa2eb5060cc0a073e020e">Plus de détails...</a><br /></td></tr>
 <tr class="separator:aaeb88daf555aa2eb5060cc0a073e020e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af0d39d701f59280f671a7d3dbf083796"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pendu_8c.html#af0d39d701f59280f671a7d3dbf083796">pendu_tour</a> (SDL_Window *win, SDL_Renderer *ren, int etat_joueur, int *etat_partie, int *scoreJ1, int *scoreJ2, char lettre, char *alphabet, char *pendu, char *secret, int *erreurs)</td></tr>
-<tr class="memdesc:af0d39d701f59280f671a7d3dbf083796"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui s'occupe d'exécuter un tour de jeu dès que le joueur choisi une lettre en vérifiant si la partie est terminiée.  <a href="pendu_8c.html#af0d39d701f59280f671a7d3dbf083796">Plus de détails...</a><br /></td></tr>
-<tr class="separator:af0d39d701f59280f671a7d3dbf083796"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9863fcaed9ab02ecc52cd886d6c374ad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pendu_8c.html#a9863fcaed9ab02ecc52cd886d6c374ad">pendu_tour</a> (SDL_Window *win, SDL_Renderer *ren, int mode_de_jeu, int etat_joueur, int *etat_partie, int *scoreJ1, int *scoreJ2, char lettre, char *alphabet, char *pendu, char *secret, int *erreurs)</td></tr>
+<tr class="memdesc:a9863fcaed9ab02ecc52cd886d6c374ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui s'occupe d'exécuter un tour de jeu dès que le joueur choisi une lettre en vérifiant si la partie est terminiée.  <a href="pendu_8c.html#a9863fcaed9ab02ecc52cd886d6c374ad">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a9863fcaed9ab02ecc52cd886d6c374ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ba197b567b98c93a1df6c5d295f038e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pendu_8c.html#a4ba197b567b98c93a1df6c5d295f038e">gestion_event_pendu</a> (SDL_Window *win, SDL_Renderer *ren, SDL_Event event, t_statut *etat_win, int *mode_de_jeu, int *etat_joueur, <a class="el" href="structs__joueur.html">t_joueur</a> *joueur1, <a class="el" href="structs__joueur.html">t_joueur</a> *joueur2)</td></tr>
 <tr class="memdesc:a4ba197b567b98c93a1df6c5d295f038e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui s'occupe d'exécuter un tour de jeu dès que le joueur choisit une lettre, en vérifiant si la partie est terminée.  <a href="pendu_8c.html#a4ba197b567b98c93a1df6c5d295f038e">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a4ba197b567b98c93a1df6c5d295f038e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -128,12 +128,15 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>tab_x_lettre</b> [26] 
 <tr class="memitem:a87502a7f22fb3cae1ec2483c37a3c6ee"><td class="memItemLeft" align="right" valign="top"><a id="a87502a7f22fb3cae1ec2483c37a3c6ee"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>tab_y_lettre</b> [26] = {28, 28, 28, 79, 79, 79, 130, 130, 130, 181, 181, 181, 232, 232, 232, 283, 283, 283, 334, 334, 334, 385, 385, 385, 436, 436}</td></tr>
 <tr class="separator:a87502a7f22fb3cae1ec2483c37a3c6ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e4ca4351227da82ad7bff6946402f7a"><td class="memItemLeft" align="right" valign="top"><a id="a7e4ca4351227da82ad7bff6946402f7a"></a>
+<a class="el" href="structt__pendu.html">t_pendu</a>&#160;</td><td class="memItemRight" valign="bottom"><b>pendu</b></td></tr>
+<tr class="separator:a7e4ca4351227da82ad7bff6946402f7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
 <div class="textblock"><p >Fichier pour le jeu du pendu. </p>
 <dl class="section author"><dt>Auteur</dt><dd>Duclos Christal Brochelard Hugo Thibaut Duchesne </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>2.0 </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>28 mars 2022 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>05 avril 2022 </dd></dl>
 </div><h2 class="groupheader">Documentation des fonctions</h2>
 <a id="a5ff68a9d81ec83bf0206916dce0f5c05"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5ff68a9d81ec83bf0206916dce0f5c05">&#9670;&nbsp;</a></span>affiche_lettre()</h2>
@@ -178,7 +181,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>tab_y_lettre</b> [26] 
   <table class="params">
     <tr><td class="paramname">win</td><td>La fenêtre qui sera manipulée </td></tr>
     <tr><td class="paramname">ren</td><td>Le rendu qui sera manipulé </td></tr>
-    <tr><td class="paramname">lettre</td><td>La lettre à afficher </td></tr>
+    <tr><td class="paramname">c</td><td>La lettre à afficher </td></tr>
     <tr><td class="paramname">position</td><td>La position de la lettre qu'on souhaite afficher dans le mot </td></tr>
   </table>
   </dd>
@@ -221,9 +224,9 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>tab_y_lettre</b> [26] 
 <p>Affiche un visuel de l'avancement du pendu selon le nombre d'erreurs. </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
-    <tr><td class="paramname">nb_erreur</td><td>Le nombre d'erreurs actuelles du joueur </td></tr>
     <tr><td class="paramname">win</td><td>La fenêtre qui sera manipulée </td></tr>
     <tr><td class="paramname">ren</td><td>Le rendu qui sera manipulé </td></tr>
+    <tr><td class="paramname">nb_erreur</td><td>Le nombre d'erreurs actuelles du joueur </td></tr>
   </table>
   </dd>
 </dl>
@@ -633,8 +636,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>tab_y_lettre</b> [26] 
 
 </div>
 </div>
-<a id="af0d39d701f59280f671a7d3dbf083796"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af0d39d701f59280f671a7d3dbf083796">&#9670;&nbsp;</a></span>pendu_tour()</h2>
+<a id="a9863fcaed9ab02ecc52cd886d6c374ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9863fcaed9ab02ecc52cd886d6c374ad">&#9670;&nbsp;</a></span>pendu_tour()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -650,6 +653,12 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>tab_y_lettre</b> [26] 
           <td></td>
           <td class="paramtype">SDL_Renderer *&#160;</td>
           <td class="paramname"><em>ren</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>mode_de_jeu</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -878,7 +887,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>tab_y_lettre</b> [26] 
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Généré le Jeudi 31 Mars 2022 12:59:39 pour Timeless Games par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2
+Généré le Mardi 5 Avril 2022 18:49:28 pour Timeless Games par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2
 </small></address>
 </body>
 </html>
